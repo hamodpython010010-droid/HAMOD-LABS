@@ -302,9 +302,16 @@ function render(){
    <h2>${c.title}</h2><div class="sub">${c.condition}</div>
    <div class="price">${money(c.price)}</div>
    <div class="spec">📅 ${c.year} • 🛣️ ${c.mileage.toLocaleString()} كم<br>⚙️ ${c.trans} • ⛽ ${c.fuel}</div>
-   <button>عرض التفاصيل</button></div></article>`).join('');
- startImageLoading();
+   <button>عرض التفاصيل</button><button onclick="event.stopPropagation();shareCar(${c.id})" style="margin-top:8px;background:#25D366;color:#fff">📤 شارك</button></div></article>`).join('');
+startImageLoading();
 }
+
+function shareCar(id){
+  const c=cars.find(x=>x.id===id);
+  const msg=`شايف السيارة دي في Hamod Zone: ${c.title} - ${c.year}\nالسعر: ${money(c.price)}\nشوفها هنا: https://hamodpython010010-droid.github.io/Hamod-Zone/`;
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
 function openModal(id){
  const c=cars.find(x=>x.id===id);
  document.getElementById('modalContent').innerHTML=`<img class="modal-img" src="${c.img||placeholder(c)}" alt="${c.title}">
