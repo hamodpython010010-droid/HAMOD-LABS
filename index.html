@@ -407,7 +407,53 @@ function openModal(id){
   document.getElementById('modal').style.display='flex';
 }
 function closeModal(){document.getElementById('modal').style.display='none';}
+let compareList=new Set();
+const compareBar=document.getElementById('compareBar'),compareCount=document.getElementById('compareCount'),compareGoBtn=document.getElementById('compareGoBtn');
 
+function toggleCompare(id){
+  if(compareList.has(id)){
+    compareList.delete(id);
+  }else{
+    if(compareList.size>=3){alert('تقدر تقارن 3 أجهزة بحد أقصى في المرة الواحدة');return;}
+    compareList.add(id);
+  }
+  updateCompareBar();
+  render();
+}
+function updateCompareBar(){
+  compareBar.classList.toggle('show',compareList.size>0);
+  compareCount.textContent='تم اختيار '+compareList.size+' جهاز للمقارنة';
+  compareGoBtn.disabled=compareList.size<2;
+  compareGoBtn.style.opacity=compareList.size<2?'.5':'1';
+}
+function clearCompare(){compareList.clear();updateCompareBar();render();}
+
+function openCompareModal(){
+  if(compareList.size<2)return;
+  const items=[...compareList].map(id=>laptops.find(c=>c.id===id));
+  const fields=[
+    {key:'price',label:'السعر',fmt:v=>money(v)},
+    {key:'processor',label:'المعالج'},
+    {key:'ram',label:'الرام'},
+    {key:'storage',label:'التخزين'},
+    {key:'gpu',label:'كارت الشاشة'},
+    {key:'screen',label:'الشاشة'},
+    {key:'category',label:'الفئة'},
+    {key:'condition',label:'الحالة'},
+    {key:'year',label:'سنة الإصدار'}
+  ];
+  let html=`<h1>مقارنة الأجهزة</h1><div style="overflow-x:auto"><table class="compare-table"><thead><tr><th></th>`;
+  items.forEach(c=>{html+=`<th><img src="${placeholder(c)}" alt="${c.title}"><br>${c.title}</th>`;});
+  html+=`</tr></thead><tbody>`;
+  fields.forEach(f=>{
+    html+=`<tr><td>${f.label}</td>`;
+    items.forEach(c=>{const val=f.fmt?f.fmt(c[f.key]):c[f.key];html+=`<td>${val}</td>`;});
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  document.getElementById('modalContent').innerHTML=html;
+  document.getElementById('modal').style.display='flex';
+}
 [search,brand,processor,ram,category,minPrice,maxPrice,sort].forEach(el=>el.addEventListener('input',render));
 render();
 </script>
