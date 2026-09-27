@@ -376,6 +376,7 @@ function render(){
   count.textContent='عرض '+list.length+' من '+laptops.length+' جهاز';
   grid.innerHTML=list.map(c=>`<article class="card" onclick="openModal(${c.id})">
     <button class="heart-btn${favorites.has(c.id)?' is-fav':''}" onclick="event.stopPropagation();toggleFav(${c.id})">${favorites.has(c.id)?'♥':'♡'}</button>
+    <button class="compare-btn${compareList.has(c.id)?' is-selected':''}" onclick="event.stopPropagation();toggleCompare(${c.id})" title="أضف للمقارنة">⇄</button>
     <div class="shine"></div>
     <img src="${placeholder(c)}" alt="${c.title}" width="900" height="600">
     <div class="info"><span class="badge">${c.category} • ${c.brand}</span>
