@@ -427,27 +427,50 @@ function updateCompareBar(){
   compareGoBtn.style.opacity=compareList.size<2?'.5':'1';
 }
 function clearCompare(){compareList.clear();updateCompareBar();render();}
-
+function parseNum(v){
+  if(typeof v==='number')return v;
+  const m=String(v).match(/[\d.]+/);
+  return m?parseFloat(m[0]):null;
+}
 function openCompareModal(){
   if(compareList.size<2)return;
   const items=[...compareList].map(id=>laptops.find(c=>c.id===id));
   const fields=[
-    {key:'price',label:'السعر',fmt:v=>money(v)},
+    {key:'price',label:'السعر',fmt:v=>money(v),lowerIsBetter:true},
+    {key:'ram',label:'الرام',compareNumeric:true},
+    {key:'storage',label:'التخزين',compareNumeric:true},
     {key:'processor',label:'المعالج'},
-    {key:'ram',label:'الرام'},
-    {key:'storage',label:'التخزين'},
     {key:'gpu',label:'كارت الشاشة'},
     {key:'screen',label:'الشاشة'},
     {key:'category',label:'الفئة'},
     {key:'condition',label:'الحالة'},
-    {key:'year',label:'سنة الإصدار'}
+    {key:'year',label:'سنة الإصدار',compareNumeric:true}
   ];
   let html=`<h1>مقارنة الأجهزة</h1><div style="overflow-x:auto"><table class="compare-table"><thead><tr><th></th>`;
   items.forEach(c=>{html+=`<th><img src="${placeholder(c)}" alt="${c.title}"><br>${c.title}</th>`;});
   html+=`</tr></thead><tbody>`;
   fields.forEach(f=>{
     html+=`<tr><td>${f.label}</td>`;
-    items.forEach(c=>{const val=f.fmt?f.fmt(c[f.key]):c[f.key];html+=`<td>${val}</td>`;});
+    let best=null,vals=[];
+    if(f.compareNumeric||f.key==='price'){
+      vals=items.map(c=>parseNum(c[f.key]));
+      const valid=vals.filter(v=>v!==null);
+      if(valid.length){
+        best=f.lowerIsBetter?Math.min(...valid):Math.max(...valid);
+      }
+    }
+    items.forEach((c,i)=>{
+      const raw=c[f.key];
+      const displayVal=f.fmt?f.fmt(raw):raw;
+      let mark='';
+      if(best!==null&&vals[i]!==null){
+        const allSame=vals.every(v=>v===vals[0]);
+        if(!allSame){
+          mark=vals[i]===best?' <span style="color:#22c55e">✅</span>':' <span style="color:#ef4444">⭕</span>';
+        }
+      }
+      html+=`<td>${displayVal}${mark}</td>`;
+    });
     html+=`</tr>`;
   });
   html+=`</tbody></table></div>`;
