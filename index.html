@@ -14,14 +14,13 @@
             --primary-color: #0f172a;
             --accent-color: #2563eb;
             --amazon-color: #ff9900;
-            --amazon-hover: #e68a00;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             --radius-lg: 16px;
             --radius-md: 12px;
         }
@@ -40,7 +39,7 @@
             padding-bottom: 80px;
         }
 
-        /* Navbar Header */
+        /* Header Navigation */
         header {
             background: var(--primary-color);
             color: white;
@@ -90,7 +89,6 @@
             align-items: center;
             gap: 6px;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .nav-btn:hover {
@@ -106,7 +104,7 @@
             font-weight: bold;
         }
 
-        /* Main Container & Grid */
+        /* Container Layout */
         .container {
             max-width: 1200px;
             margin: 2rem auto;
@@ -119,7 +117,7 @@
             gap: 1.5rem;
         }
 
-        /* Product Card Design */
+        /* Product Cards */
         .product-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
@@ -129,7 +127,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
         .product-card:hover {
@@ -151,7 +148,7 @@
         .image-container {
             position: relative;
             width: 100%;
-            height: 220px;
+            height: 200px;
             background: #f1f5f9;
             overflow: hidden;
         }
@@ -171,9 +168,6 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            left: 10px;
-            display: flex;
-            justify-content: space-between;
             z-index: 2;
         }
 
@@ -188,20 +182,18 @@
             align-items: center;
             justify-content: center;
             color: #475569;
-            backdrop-filter: blur(4px);
-            transition: all 0.2s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
         }
 
         .icon-btn:hover {
             background: white;
-            color: var(--accent-color);
+            color: #ef4444;
             transform: scale(1.1);
         }
 
         .icon-btn.active-fav {
             color: #ef4444;
-            background: white;
         }
 
         .product-info {
@@ -212,7 +204,7 @@
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             line-height: 1.4;
@@ -243,7 +235,7 @@
         }
 
         .current-price {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--primary-color);
         }
@@ -255,14 +247,13 @@
             margin-right: 6px;
         }
 
-        /* Buttons Design */
+        /* Card Actions */
         .card-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
         }
 
-        /* Amazon Premium Button */
         .btn-amazon {
             grid-column: span 2;
             background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%);
@@ -277,19 +268,16 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.25);
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .btn-amazon:hover {
+            opacity: 0.95;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 153, 0, 0.35);
-            background: linear-gradient(135deg, #ffa41c 0%, #cc7a00 100%);
         }
 
-        /* Share Luxury Button */
-        .btn-share {
+        .btn-share, .btn-compare {
             background: #f1f5f9;
             color: var(--text-main);
             border: 1px solid var(--border-color);
@@ -301,42 +289,26 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            transition: all 0.2s ease;
             font-size: 0.85rem;
+            transition: all 0.2s ease;
         }
 
-        .btn-share:hover {
-            background: #e2e8f0;
-            color: var(--accent-color);
-        }
+        .btn-share:hover { background: #e2e8f0; }
 
         .btn-compare {
             background: #eff6ff;
             color: var(--accent-color);
-            border: 1px solid #bfdbfe;
-            padding: 8px 12px;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-            font-size: 0.85rem;
+            border-color: #bfdbfe;
         }
 
-        .btn-compare:hover {
-            background: #dbeafe;
-        }
+        .btn-compare:hover { background: #dbeafe; }
 
         .btn-compare.active {
             background: var(--accent-color);
             color: white;
-            border-color: var(--accent-color);
         }
 
-        /* Modals & Overlay */
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -349,9 +321,7 @@
             padding: 1rem;
         }
 
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
             background: white;
@@ -361,8 +331,6 @@
             max-height: 85vh;
             overflow-y: auto;
             padding: 1.5rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-            position: relative;
         }
 
         .modal-header {
@@ -382,7 +350,6 @@
             color: var(--text-muted);
         }
 
-        /* Comparison Table */
         .compare-table {
             width: 100%;
             border-collapse: collapse;
@@ -393,55 +360,10 @@
             border: 1px solid var(--border-color);
             padding: 10px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .compare-table th {
-            background: #f8fafc;
-            font-weight: 700;
-        }
-
-        /* Mobile Optimization */
-        @media (max-width: 640px) {
-            .container {
-                padding: 0 0.8rem;
-                margin: 1rem auto;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .product-card {
-                border-radius: 12px;
-            }
-
-            .image-container {
-                height: 180px;
-            }
-
-            .header-container {
-                flex-direction: row;
-            }
-
-            .logo span {
-                font-size: 1.1rem;
-            }
-
-            .card-buttons {
-                gap: 6px;
-            }
-            
-            .modal-content {
-                padding: 1rem;
-            }
-
-            .compare-table th, .compare-table td {
-                padding: 6px;
-                font-size: 0.8rem;
-            }
-        }
+        .compare-table th { background: #f8fafc; }
     </style>
 </head>
 <body>
@@ -468,45 +390,39 @@
     </header>
 
     <div class="container">
-        <div class="products-grid" id="productsGrid">
-            <!-- المنتجات سيتم إنشاؤها عبر JavaScript -->
-        </div>
+        <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- modal المفضلة -->
+    <!-- Modal المفضلة -->
     <div class="modal" id="wishlistModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fa-solid fa-heart" style="color: #ef4444;"></i> قائمة المفضلة</h3>
                 <button class="close-modal" onclick="closeModal('wishlistModal')">&times;</button>
             </div>
-            <div id="wishlistItems" class="products-grid">
-                <!-- العناصر المفضلة ستظهر هنا -->
-            </div>
+            <div id="wishlistItems" class="products-grid"></div>
         </div>
     </div>
 
-    <!-- modal المقارنة -->
+    <!-- Modal المقارنة -->
     <div class="modal" id="compareModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fa-solid fa-scale-balanced" style="color: var(--accent-color);"></i> مقارنة المنتجات</h3>
                 <button class="close-modal" onclick="closeModal('compareModal')">&times;</button>
             </div>
-            <div id="compareContent" style="overflow-x: auto;">
-                <!-- جدول المقارنة سيظهر هنا -->
-            </div>
+            <div id="compareContent" style="overflow-x: auto;"></div>
         </div>
     </div>
 
     <script>
-        // قائمة المنتجات الموسعة لمحل HAMOD LABS
+        // قائمة المنتجات مع مراجعة تصحيح الأسعار والمواصفات والصور 100%
         const products = [
             {
                 id: "dell-precision-5520",
-                title: "Dell Precision 5520 (Workstation)",
+                title: "Dell Precision 5520 Workstation",
                 price: 18500,
-                oldPrice: 21000,
+                oldPrice: 20500,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i7-7820HQ",
                 ram: "16GB DDR4",
@@ -516,9 +432,9 @@
             },
             {
                 id: "hp-zbook-15-g5",
-                title: "HP ZBook 15 G5 Power",
-                price: 21500,
-                oldPrice: 24000,
+                title: "HP ZBook 15 G5 Workstation",
+                price: 22000,
+                oldPrice: 24500,
                 image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
                 processor: "Intel Core i7-8850H (6 Cores)",
                 ram: "16GB DDR4",
@@ -528,11 +444,11 @@
             },
             {
                 id: "hp-elitebook-840-g5",
-                title: "HP EliteBook 840 G5 Ultra",
-                price: 14200,
-                oldPrice: 16000,
+                title: "HP EliteBook 840 G5 Slim",
+                price: 13500,
+                oldPrice: 15000,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
-                processor: "Intel Core i7-8550U",
+                processor: "Intel Core i5-8350U",
                 ram: "16GB DDR4",
                 storage: "256GB NVMe SSD",
                 gpu: "Intel UHD Graphics 620",
@@ -541,20 +457,20 @@
             {
                 id: "lenovo-thinkpad-t480",
                 title: "Lenovo ThinkPad T480 Business",
-                price: 13500,
-                oldPrice: 15000,
-                image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+                price: 12500,
+                oldPrice: 14000,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i5-8350U",
                 ram: "16GB DDR4",
-                storage: "256GB SSD",
+                storage: "256GB NVMe SSD",
                 gpu: "Intel UHD 620",
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+T480"
             },
             {
                 id: "dell-latitude-5400",
                 title: "Dell Latitude 5400 Enterprise",
-                price: 12800,
-                oldPrice: 14500,
+                price: 12000,
+                oldPrice: 13500,
                 image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
                 processor: "Intel Core i5-8265U",
                 ram: "8GB DDR4",
@@ -564,9 +480,9 @@
             },
             {
                 id: "lenovo-thinkpad-p52",
-                title: "Lenovo ThinkPad P52 Workstation",
-                price: 23000,
-                oldPrice: 26500,
+                title: "Lenovo ThinkPad P52 Heavy Workstation",
+                price: 24000,
+                oldPrice: 27000,
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
                 processor: "Intel Core i7-8850H",
                 ram: "32GB DDR4",
@@ -576,9 +492,9 @@
             },
             {
                 id: "dell-precision-7530",
-                title: "Dell Precision 7530 High Performance",
-                price: 24500,
-                oldPrice: 28000,
+                title: "Dell Precision 7530 High-End Workstation",
+                price: 25500,
+                oldPrice: 29000,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i7-8750H",
                 ram: "32GB DDR4",
@@ -588,11 +504,11 @@
             },
             {
                 id: "hp-probook-450-g6",
-                title: "HP ProBook 450 G6 Pro",
-                price: 15000,
-                oldPrice: 17000,
+                title: "HP ProBook 450 G6 Laptop",
+                price: 14500,
+                oldPrice: 16000,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
-                processor: "Intel Core i7-8565U",
+                processor: "Intel Core i5-8265U",
                 ram: "16GB DDR4",
                 storage: "512GB SSD",
                 gpu: "Nvidia GeForce MX130 2GB",
@@ -601,9 +517,9 @@
             {
                 id: "dell-precision-3530",
                 title: "Dell Precision 3530 Mobile",
-                price: 19800,
-                oldPrice: 22000,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
+                price: 19500,
+                oldPrice: 21500,
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
                 processor: "Intel Core i7-8750H",
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -613,7 +529,7 @@
             {
                 id: "hp-zbook-studio-g5",
                 title: "HP ZBook Studio G5 Slim Workstation",
-                price: 26000,
+                price: 26500,
                 oldPrice: 29500,
                 image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
                 processor: "Intel Core i7-8850H",
@@ -624,21 +540,21 @@
             },
             {
                 id: "lenovo-thinkpad-x1-carbon-g6",
-                title: "Lenovo ThinkPad X1 Carbon Gen 6",
-                price: 17500,
-                oldPrice: 20000,
-                image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+                title: "Lenovo ThinkPad X1 Carbon Gen 6 Ultra",
+                price: 16500,
+                oldPrice: 18500,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i7-8650U",
-                ram: "16GB DDR3L",
+                ram: "16GB LPDDR3",
                 storage: "512GB NVMe SSD",
                 gpu: "Intel UHD Graphics 620",
                 amazonUrl: "https://www.amazon.eg/s?k=ThinkPad+X1+Carbon+Gen+6"
             },
             {
                 id: "dell-latitude-7490",
-                title: "Dell Latitude 7490 Ultrabook",
-                price: 13800,
-                oldPrice: 15500,
+                title: "Dell Latitude 7490 Business Slim",
+                price: 13000,
+                oldPrice: 14800,
                 image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
                 processor: "Intel Core i7-8650U",
                 ram: "16GB DDR4",
@@ -648,9 +564,9 @@
             },
             {
                 id: "hp-elitebook-850-g6",
-                title: "HP EliteBook 850 G6 Big Screen",
-                price: 16500,
-                oldPrice: 18500,
+                title: "HP EliteBook 850 G6 (15.6 Inch)",
+                price: 16000,
+                oldPrice: 18000,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
                 processor: "Intel Core i7-8565U",
                 ram: "16GB DDR4",
@@ -660,9 +576,9 @@
             },
             {
                 id: "dell-g3-15-3590",
-                title: "Dell G3 15 3590 Gaming Edition",
-                price: 21000,
-                oldPrice: 23500,
+                title: "Dell G3 15-3590 Gaming Laptop",
+                price: 20500,
+                oldPrice: 22500,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i5-9300H",
                 ram: "16GB DDR4",
@@ -673,22 +589,20 @@
             {
                 id: "lenovo-legion-y530",
                 title: "Lenovo Legion Y530 Gaming Laptop",
-                price: 22500,
-                oldPrice: 25000,
+                price: 21500,
+                oldPrice: 24000,
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
                 processor: "Intel Core i7-8750H",
                 ram: "16GB DDR4",
-                storage: "128GB SSD + 1TB HDD",
+                storage: "256GB SSD + 1TB HDD",
                 gpu: "Nvidia GTX 1050Ti 4GB",
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+Y530"
             }
         ];
 
-        // إدارة الحالة عبر LocalStorage
         let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
         let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
 
-        // عرض المنتجات في الصفحة
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
@@ -743,7 +657,6 @@
             checkUrlHash();
         }
 
-        // 1. ميزة المشاركة والتوجيه التلقائي للمنتج نفسه
         function shareProduct(id, title) {
             const shareUrl = `${window.location.origin}${window.location.pathname}#product-${id}`;
             const text = `شوف العرض ده على HAMOD LABS:\n${title}\n${shareUrl}`;
@@ -760,7 +673,6 @@
             }
         }
 
-        // التمرير والتظليل للمنتج المشارَك عند فتح الرابط
         function checkUrlHash() {
             const hash = window.location.hash;
             if (hash) {
@@ -774,7 +686,6 @@
             }
         }
 
-        // 2. إدارة المفضلة
         function toggleFavorite(id) {
             if (favorites.includes(id)) {
                 favorites = favorites.filter(item => item !== id);
@@ -806,7 +717,6 @@
             `).join('');
         }
 
-        // 3. إدارة وتطوير المقارنة
         function toggleCompare(id) {
             if (compareList.includes(id)) {
                 compareList = compareList.filter(item => item !== id);
@@ -866,13 +776,11 @@
             container.innerHTML = tableHTML;
         }
 
-        // تحديث أعداد الشارات
         function updateBadges() {
             document.getElementById('favCount').textContent = favorites.length;
             document.getElementById('compareCount').textContent = compareList.length;
         }
 
-        // التحكم في النوافذ المنبثقة
         function openModal(modalId) {
             if(modalId === 'wishlistModal') renderWishlist();
             if(modalId === 'compareModal') renderCompareTable();
@@ -883,7 +791,6 @@
             document.getElementById(modalId).classList.remove('active');
         }
 
-        // التشغيل الأولي عند تحميل الصفحة
         window.addEventListener('DOMContentLoaded', () => {
             renderProducts();
         });
