@@ -483,4 +483,22 @@ render();
  <script>
 fetch("https://script.google.com/macros/s/AKfycbzePpl6BJXa0Gx3q73sjGPdTUQNEI1oXkrjAAYjM2fCHlwXRCKJDSyBvfLCFDAyFsir/exec?ua=" + encodeURIComponent(navigator.userAgent), {mode: "no-cors"});
 </script>
+ <div id="onlineBadge" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(0,0,0,.75);color:#fff;padding:6px 12px;border-radius:20px;font:14px sans-serif;display:flex;align-items:center;gap:6px;">
+  <span>👁</span><span id="onlineCount">...</span>
+</div>
+<script>
+(function(){
+  var URL = "https://script.google.com/macros/s/AKfycbzePpl6BJXa0Gx3q73sjGPdTUQNEI1oXkrjAAYjM2fCHlwXRCKJDSyBvfLCFDAyFsir/exec";
+  var id = sessionStorage.getItem("vid");
+  if (!id) { id = Math.random().toString(36).slice(2); sessionStorage.setItem("vid", id); }
+  function ping(){
+    fetch(URL + "?online=1&id=" + id)
+      .then(function(r){ return r.text(); })
+      .then(function(t){ document.getElementById("onlineCount").textContent = t; })
+      .catch(function(){});
+  }
+  ping();
+  setInterval(ping, 20000);
+})();
+</script>
 </body></html>
