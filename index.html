@@ -387,6 +387,8 @@ function render(){
     let text=(c.title+' '+c.brand+' '+c.model).toLowerCase();
     return text.includes(q)&&(!br||c.brand===br)&&(!pr||c.processor===pr)&&(!rm||c.ram===rm)&&(!cat||c.category===cat)&&c.price>=min&&c.price<=max&&(!showFavOnly||favorites.has(c.id));
   });
+ if(!window.curType)window.curType='laptops';
+list=list.filter(c=>curType==='all'||(curType==='acc'?c.category==='إكسسوارات':c.category!=='إكسسوارات'));
   if(sort.value==='priceLow')list.sort((a,b)=>a.price-b.price);
   if(sort.value==='priceHigh')list.sort((a,b)=>b.price-a.price);
   if(sort.value==='name')list.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
@@ -522,4 +524,16 @@ fetch("https://script.google.com/macros/s/AKfycbzePpl6BJXa0Gx3q73sjGPdTUQNEI1oXk
  <p style="text-align:center;margin:20px;">
   <a href="https://amzn.to/3VCAbvk" target="_blank">اشتري من Amazon</a>
 </p>
+ <script>
+window.curType='laptops';
+document.querySelectorAll('.tt').forEach(function(b){
+  if(b.dataset.t==='laptops')b.classList.add('on');
+  b.onclick=function(){
+    window.curType=b.dataset.t;
+    document.querySelectorAll('.tt').forEach(function(x){x.classList.toggle('on',x===b)});
+    render();
+  };
+});
+render();
+</script>
 </body></html>
