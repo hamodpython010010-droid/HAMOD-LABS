@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Vanilla Tilt 3D Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <style>
         :root {
@@ -25,12 +27,23 @@
             --radius-md: 12px;
         }
 
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --primary-color: #030712;
+            --bg-color: #0b0f17;
+            --card-bg: #111827;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #1f2937;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Cairo', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
@@ -47,7 +60,8 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .header-container {
@@ -74,7 +88,8 @@
 
         .header-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
+            align-items: center;
         }
 
         .nav-btn {
@@ -92,7 +107,8 @@
         }
 
         .nav-btn:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
         }
 
         .badge {
@@ -134,7 +150,8 @@
             border: 1px solid var(--border-color);
             outline: none;
             font-size: 0.9rem;
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-main);
             box-shadow: var(--shadow-sm);
         }
 
@@ -152,7 +169,8 @@
         }
 
         .tag-btn {
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-main);
             border: 1px solid var(--border-color);
             padding: 6px 14px;
             border-radius: 20px;
@@ -170,25 +188,21 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
             gap: 1.5rem;
         }
 
-        /* Product Cards */
+        /* Product Cards & 3D Tilt */
         .product-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .product-card.highlighted {
@@ -202,16 +216,17 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
 
-        /* التصميم الجديد البديل للصور - فخم ومودرن */
+        /* الهيدر الرسومي الفخم لكل كارت */
         .card-graphic-header {
             position: relative;
             width: 100%;
-            height: 160px;
+            height: 165px;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            transform: translateZ(20px);
         }
 
         .card-graphic-header::before {
@@ -219,20 +234,16 @@
             position: absolute;
             width: 180px;
             height: 180px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, rgba(0,0,0,0) 70%);
             border-radius: 50%;
         }
 
         .card-graphic-icon {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: #ffffff;
             z-index: 1;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
             transition: transform 0.4s ease;
-        }
-
-        .product-card:hover .card-graphic-icon {
-            transform: scale(1.1) rotate(-3deg);
         }
 
         .brand-pill {
@@ -247,7 +258,6 @@
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
             z-index: 2;
         }
 
@@ -279,15 +289,14 @@
             transform: scale(1.1);
         }
 
-        .icon-btn.active-fav {
-            color: #ef4444;
-        }
+        .icon-btn.active-fav { color: #ef4444; }
 
         .product-info {
             padding: 1.25rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            transform: translateZ(10px);
         }
 
         .product-title {
@@ -300,7 +309,7 @@
         .product-specs {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             list-style: none;
         }
 
@@ -311,6 +320,37 @@
             gap: 6px;
         }
 
+        /* مؤشرات الأداء الفخمة */
+        .perf-indicators {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 1rem;
+            background: rgba(0,0,0,0.03);
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        body.dark-mode .perf-indicators {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .perf-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .perf-dev { background: #dbeafe; color: #1e40af; }
+        .perf-gpu { background: #fce7f3; color: #9d174d; }
+        body.dark-mode .perf-dev { background: #1e3a8a; color: #93c5fd; }
+        body.dark-mode .perf-gpu { background: #831843; color: #fbcfe8; }
+
         .price-section {
             margin-top: auto;
             padding-top: 0.8rem;
@@ -318,23 +358,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .current-price {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 800;
-            color: var(--primary-color);
+            color: var(--accent-color);
+        }
+
+        .installment-text {
+            font-size: 0.75rem;
+            color: #10b981;
+            font-weight: 700;
+            display: block;
         }
 
         .old-price {
             font-size: 0.85rem;
             color: #94a3b8;
             text-decoration: line-through;
-            margin-right: 6px;
         }
 
-        /* Card Actions */
+        /* Card Actions Grid */
         .card-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -359,40 +405,56 @@
             font-size: 0.9rem;
         }
 
-        .btn-amazon:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-        }
+        .btn-amazon:hover { opacity: 0.95; transform: translateY(-2px); }
 
-        .btn-share, .btn-compare {
-            background: #f1f5f9;
+        .btn-action {
+            background: var(--bg-color);
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            padding: 8px 12px;
+            padding: 8px;
             border-radius: var(--radius-md);
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            gap: 5px;
+            font-size: 0.8rem;
             transition: all 0.2s ease;
         }
 
-        .btn-share:hover { background: #e2e8f0; }
-
-        .btn-compare {
-            background: #eff6ff;
-            color: var(--accent-color);
-            border-color: #bfdbfe;
-        }
-
-        .btn-compare:hover { background: #dbeafe; }
+        .btn-action:hover { background: var(--border-color); }
 
         .btn-compare.active {
             background: var(--accent-color);
             color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Floating Wizard Button (المساعد الذكي) */
+        .wizard-float-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1500;
+            animation: bounceBtn 3s infinite;
+        }
+
+        @keyframes bounceBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         /* Toast Notifications */
@@ -406,22 +468,21 @@
             padding: 12px 24px;
             border-radius: 30px;
             font-size: 0.9rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             transition: transform 0.3s ease;
             z-index: 3000;
+            border: 1px solid var(--border-color);
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
 
         /* Modals */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(6px);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -431,13 +492,15 @@
         .modal.active { display: flex; }
 
         .modal-content {
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-main);
             border-radius: var(--radius-lg);
             width: 100%;
-            max-width: 800px;
+            max-width: 750px;
             max-height: 85vh;
             overflow-y: auto;
             padding: 1.5rem;
+            border: 1px solid var(--border-color);
         }
 
         .modal-header {
@@ -457,6 +520,24 @@
             color: var(--text-muted);
         }
 
+        /* Wizard Modal Questions */
+        .wizard-step { display: none; }
+        .wizard-step.active { display: block; }
+        .wizard-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+        .wizard-opt-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 15px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .wizard-opt-btn:hover { border-color: var(--accent-color); background: var(--card-bg); }
+
+        /* Compare Table */
         .compare-table {
             width: 100%;
             border-collapse: collapse;
@@ -465,12 +546,12 @@
 
         .compare-table th, .compare-table td {
             border: 1px solid var(--border-color);
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             font-size: 0.85rem;
         }
 
-        .compare-table th { background: #f8fafc; }
+        .compare-table th { background: var(--bg-color); }
     </style>
 </head>
 <body>
@@ -482,14 +563,15 @@
                 <span>HAMOD LABS</span>
             </a>
             <div class="header-actions">
+                <button class="nav-btn" onclick="toggleDarkMode()" title="تغيير الثيم">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
                 <button class="nav-btn" onclick="openModal('wishlistModal')">
                     <i class="fa-solid fa-heart"></i>
-                    <span>المفضلة</span>
                     <span class="badge" id="favCount">0</span>
                 </button>
                 <button class="nav-btn" onclick="openModal('compareModal')">
                     <i class="fa-solid fa-scale-balanced"></i>
-                    <span>المقارنة</span>
                     <span class="badge" id="compareCount">0</span>
                 </button>
             </div>
@@ -501,7 +583,7 @@
         <div class="controls-bar">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="ابحث باسم اللابتوب أو المواصفات..." oninput="filterProducts()">
+                <input type="text" id="searchInput" placeholder="ابحث بالمواصفات، المعالج، الرام..." oninput="filterProducts()">
             </div>
             <div class="filter-tags">
                 <button class="tag-btn active" onclick="setBrandFilter('all', this)">الكل</button>
@@ -514,8 +596,47 @@
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
+    <!-- زرار المساعد الذكي العائم -->
+    <button class="wizard-float-btn" onclick="openWizard()">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>ساعدني أختار اللابتوب</span>
+    </button>
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">تمت العملية بنجاح!</div>
+
+    <!-- Modal المساعد الذكي -->
+    <div class="modal" id="wizardModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-robot" style="color: var(--accent-color);"></i> المساعد الذكي لاختيار اللابتوب</h3>
+                <button class="close-modal" onclick="closeModal('wizardModal')">&times;</button>
+            </div>
+            
+            <div id="wizardStep1" class="wizard-step active">
+                <h4>1. ما هو مجال استخدامه الأساسي؟</h4>
+                <div class="wizard-options">
+                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'dev')">💻 برمجة وأمن سيبراني & VMs</button>
+                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'gpu')">🎮 ألعاب وجرافيك وتصميم</button>
+                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'office')">📚 تصفح وشغل مكتبي وحاسة</button>
+                </div>
+            </div>
+
+            <div id="wizardStep2" class="wizard-step">
+                <h4>2. ما هي ميزانيتك المتوقعة؟</h4>
+                <div class="wizard-options">
+                    <button class="wizard-opt-btn" onclick="wizardSelect('budget', 'low')">أقل من 15,000 ج.م</button>
+                    <button class="wizard-opt-btn" onclick="wizardSelect('budget', 'mid')">من 15,000 إلى 22,000 ج.م</button>
+                    <button class="wizard-opt-btn" onclick="wizardSelect('budget', 'high')">أكثر من 22,000 ج.م</button>
+                </div>
+            </div>
+
+            <div id="wizardResult" class="wizard-step">
+                <h4 style="color: #10b981; margin-bottom: 1rem;"><i class="fa-solid fa-circle-check"></i> ترشيحاتنا المثالية لك:</h4>
+                <div id="wizardProducts" class="products-grid"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal المفضلة -->
     <div class="modal" id="wishlistModal">
@@ -532,7 +653,7 @@
     <div class="modal" id="compareModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-scale-balanced" style="color: var(--accent-color);"></i> مقارنة المنتجات</h3>
+                <h3><i class="fa-solid fa-scale-balanced" style="color: var(--accent-color);"></i> مقارنة المواصفات</h3>
                 <button class="close-modal" onclick="closeModal('compareModal')">&times;</button>
             </div>
             <div id="compareContent" style="overflow-x: auto;"></div>
@@ -551,6 +672,8 @@
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
                 gpu: "Nvidia Quadro M1200 4GB",
+                devScore: "قوي جداً",
+                gpuScore: "ممتاز",
                 amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
             },
             {
@@ -563,6 +686,8 @@
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
                 gpu: "Nvidia Quadro P1000 4GB",
+                devScore: "خارق",
+                gpuScore: "ممتاز",
                 amazonUrl: "https://www.amazon.eg/s?k=HP+ZBook+15+G5"
             },
             {
@@ -575,6 +700,8 @@
                 ram: "16GB DDR4",
                 storage: "256GB NVMe SSD",
                 gpu: "Intel UHD Graphics 620",
+                devScore: "جيد جداً",
+                gpuScore: "متوسط",
                 amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G5"
             },
             {
@@ -587,6 +714,8 @@
                 ram: "16GB DDR4",
                 storage: "256GB NVMe SSD",
                 gpu: "Intel UHD 620",
+                devScore: "جيد جداً",
+                gpuScore: "متوسط",
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+T480"
             },
             {
@@ -599,6 +728,8 @@
                 ram: "8GB DDR4",
                 storage: "256GB NVMe SSD",
                 gpu: "Intel UHD 620",
+                devScore: "جيد",
+                gpuScore: "متوسط",
                 amazonUrl: "https://www.amazon.eg/s?k=Dell+Latitude+5400"
             },
             {
@@ -611,6 +742,8 @@
                 ram: "32GB DDR4",
                 storage: "512GB NVMe SSD",
                 gpu: "Nvidia Quadro P2000 4GB",
+                devScore: "خارق",
+                gpuScore: "خارق",
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+P52"
             },
             {
@@ -623,79 +756,9 @@
                 ram: "32GB DDR4",
                 storage: "512GB NVMe SSD",
                 gpu: "Nvidia Quadro P3200 6GB",
+                devScore: "خارق",
+                gpuScore: "وحش جرافيك",
                 amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530"
-            },
-            {
-                id: "hp-probook-450-g6",
-                brand: "HP",
-                title: "HP ProBook 450 G6 Laptop",
-                price: 14500,
-                oldPrice: 16000,
-                processor: "Intel Core i5-8265U",
-                ram: "16GB DDR4",
-                storage: "512GB SSD",
-                gpu: "Nvidia GeForce MX130 2GB",
-                amazonUrl: "https://www.amazon.eg/s?k=HP+ProBook+450+G6"
-            },
-            {
-                id: "dell-precision-3530",
-                brand: "Dell",
-                title: "Dell Precision 3530 Mobile",
-                price: 19500,
-                oldPrice: 21500,
-                processor: "Intel Core i7-8750H",
-                ram: "16GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia Quadro P600 2GB",
-                amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+3530"
-            },
-            {
-                id: "hp-zbook-studio-g5",
-                brand: "HP",
-                title: "HP ZBook Studio G5 Slim",
-                price: 26500,
-                oldPrice: 29500,
-                processor: "Intel Core i7-8850H",
-                ram: "32GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia Quadro P1000 4GB",
-                amazonUrl: "https://www.amazon.eg/s?k=HP+ZBook+Studio+G5"
-            },
-            {
-                id: "lenovo-thinkpad-x1-carbon-g6",
-                brand: "Lenovo",
-                title: "Lenovo ThinkPad X1 Carbon Gen 6",
-                price: 16500,
-                oldPrice: 18500,
-                processor: "Intel Core i7-8650U",
-                ram: "16GB LPDDR3",
-                storage: "512GB NVMe SSD",
-                gpu: "Intel UHD Graphics 620",
-                amazonUrl: "https://www.amazon.eg/s?k=ThinkPad+X1+Carbon+Gen+6"
-            },
-            {
-                id: "dell-latitude-7490",
-                brand: "Dell",
-                title: "Dell Latitude 7490 Slim",
-                price: 13000,
-                oldPrice: 14800,
-                processor: "Intel Core i7-8650U",
-                ram: "16GB DDR4",
-                storage: "256GB NVMe SSD",
-                gpu: "Intel UHD Graphics 620",
-                amazonUrl: "https://www.amazon.eg/s?k=Dell+Latitude+7490"
-            },
-            {
-                id: "hp-elitebook-850-g6",
-                brand: "HP",
-                title: "HP EliteBook 850 G6 Laptop",
-                price: 16000,
-                oldPrice: 18000,
-                processor: "Intel Core i7-8565U",
-                ram: "16GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "AMD Radeon RX 550X 2GB",
-                amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+850+G6"
             },
             {
                 id: "dell-g3-15-3590",
@@ -707,36 +770,22 @@
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
                 gpu: "Nvidia GTX 1650 4GB",
+                devScore: "ممتاز",
+                gpuScore: "وحش ألعاب",
                 amazonUrl: "https://www.amazon.eg/s?k=Dell+G3+15+3590"
-            },
-            {
-                id: "lenovo-legion-y530",
-                brand: "Lenovo",
-                title: "Lenovo Legion Y530 Gaming",
-                price: 21500,
-                oldPrice: 24000,
-                processor: "Intel Core i7-8750H",
-                ram: "16GB DDR4",
-                storage: "256GB SSD + 1TB HDD",
-                gpu: "Nvidia GTX 1050Ti 4GB",
-                amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+Y530"
             }
         ];
 
         let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
         let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
         let selectedBrand = 'all';
+        let wizardSelection = {};
 
-        // دالة لاختيار الأيقونة المناسبة لنوع الجهاز
         function getProductIcon(title) {
             const t = title.toLowerCase();
-            if (t.includes('workstation') || t.includes('precision') || t.includes('zbook') || t.includes('p52')) {
-                return 'fa-laptop-code';
-            } else if (t.includes('gaming') || t.includes('legion') || t.includes('g3')) {
-                return 'fa-gamepad';
-            } else {
-                return 'fa-laptop';
-            }
+            if (t.includes('workstation') || t.includes('precision') || t.includes('zbook') || t.includes('p52')) return 'fa-laptop-code';
+            if (t.includes('gaming') || t.includes('g3')) return 'fa-gamepad';
+            return 'fa-laptop';
         }
 
         function renderProducts() {
@@ -761,10 +810,16 @@
                 const isFav = favorites.includes(p.id);
                 const isComp = compareList.includes(p.id);
                 const iconClass = getProductIcon(p.title);
+                const monthlyInstallment = Math.round(p.price / 12);
 
                 const card = document.createElement('div');
                 card.className = `product-card`;
                 card.id = `product-${p.id}`;
+                card.setAttribute('data-tilt', '');
+                card.setAttribute('data-tilt-max', '8');
+                card.setAttribute('data-tilt-speed', '400');
+                card.setAttribute('data-tilt-glare', 'true');
+                card.setAttribute('data-tilt-max-glare', '0.15');
 
                 card.innerHTML = `
                     <div class="card-graphic-header">
@@ -783,21 +838,28 @@
                             <li><i class="fa-solid fa-memory"></i> ${p.ram} | ${p.storage}</li>
                             <li><i class="fa-solid fa-desktop"></i> ${p.gpu}</li>
                         </ul>
+                        <div class="perf-indicators">
+                            <span class="perf-tag perf-dev"><i class="fa-solid fa-code"></i> البرمجة: ${p.devScore}</span>
+                            <span class="perf-tag perf-gpu"><i class="fa-solid fa-wand-magic-sparkles"></i> الجرافيك: ${p.gpuScore}</span>
+                        </div>
                         <div class="price-section">
                             <div>
                                 <span class="current-price">${p.price.toLocaleString()} ج.م</span>
                                 <span class="old-price">${p.oldPrice.toLocaleString()} ج.م</span>
+                            </div>
+                            <div style="text-align: left;">
+                                <span class="installment-text"><i class="fa-solid fa-bolt"></i> قسط/ ${monthlyInstallment.toLocaleString()} ج.م</span>
                             </div>
                         </div>
                         <div class="card-buttons">
                             <a href="${p.amazonUrl}" target="_blank" class="btn-amazon">
                                 <i class="fa-brands fa-amazon"></i> شراء من أمازون
                             </a>
-                            <button class="btn-share" onclick="shareProduct('${p.id}', '${p.title}')">
-                                <i class="fa-solid fa-share-nodes"></i> مشاركة
+                            <button class="btn-action" onclick="copySpecs('${p.title}', '${p.processor}', '${p.ram}', '${p.storage}', '${p.gpu}', '${p.price}')">
+                                <i class="fa-solid fa-copy"></i> نسخ
                             </button>
-                            <button class="btn-compare ${isComp ? 'active' : ''}" onclick="toggleCompare('${p.id}')">
-                                <i class="fa-solid fa-scale-balanced"></i> ${isComp ? 'تمت الإضافة' : 'مقارنة'}
+                            <button class="btn-action btn-compare ${isComp ? 'active' : ''}" onclick="toggleCompare('${p.id}')">
+                                <i class="fa-solid fa-scale-balanced"></i> ${isComp ? 'مُضاف' : 'مقارنة'}
                             </button>
                         </div>
                     </div>
@@ -805,13 +867,71 @@
                 grid.appendChild(card);
             });
 
+            // تفعيل تأثير Tilt 3D
+            VanillaTilt.init(document.querySelectorAll(".product-card"));
             updateBadges();
-            checkUrlHash();
         }
 
-        function filterProducts() {
-            renderProducts();
+        function copySpecs(title, proc, ram, storage, gpu, price) {
+            const text = `💻 *${title}*\n• المعالج: ${proc}\n• الرام: ${ram}\n• الهارد: ${storage}\n• كارت الشاشة: ${gpu}\n💰 السعر: ${Number(price).toLocaleString()} ج.م\nمن متجر HAMOD LABS`;
+            navigator.clipboard.writeText(text);
+            showToast('تم نسخ مواصفات الجهاز للحافظة! 📋');
         }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+                showToast('تم تفعيل الوضع الليلي 🌙');
+            } else {
+                icon.className = 'fa-solid fa-moon';
+                showToast('تم تفعيل الوضع الفاتح ☀️');
+            }
+        }
+
+        /* المساعد الذكي Wizard */
+        function openWizard() {
+            wizardSelection = {};
+            document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('wizardStep1').classList.add('active');
+            openModal('wizardModal');
+        }
+
+        function wizardSelect(key, val) {
+            wizardSelection[key] = val;
+            if (key === 'use') {
+                document.getElementById('wizardStep1').classList.remove('active');
+                document.getElementById('wizardStep2').classList.add('active');
+            } else if (key === 'budget') {
+                document.getElementById('wizardStep2').classList.remove('active');
+                document.getElementById('wizardResult').classList.add('active');
+                renderWizardResults();
+            }
+        }
+
+        function renderWizardResults() {
+            const resContainer = document.getElementById('wizardProducts');
+            let matched = products;
+
+            if (wizardSelection.budget === 'low') matched = matched.filter(p => p.price <= 15000);
+            else if (wizardSelection.budget === 'mid') matched = matched.filter(p => p.price > 15000 && p.price <= 22000);
+            else if (wizardSelection.budget === 'high') matched = matched.filter(p => p.price > 22000);
+
+            if (matched.length === 0) matched = products.slice(0, 2);
+
+            resContainer.innerHTML = matched.map(p => `
+                <div class="product-card" style="margin-bottom:10px;">
+                    <div class="product-info">
+                        <h4>${p.title}</h4>
+                        <p style="font-size:0.85rem; color:var(--text-muted);">${p.processor} | ${p.ram}</p>
+                        <p style="font-weight:bold; color:var(--accent-color); margin-top:5px;">${p.price.toLocaleString()} ج.م</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts() { renderProducts(); }
 
         function setBrandFilter(brand, btn) {
             selectedBrand = brand;
@@ -827,30 +947,6 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        function shareProduct(id, title) {
-            const shareUrl = `${window.location.origin}${window.location.pathname}#product-${id}`;
-            const text = `شوف العرض ده على HAMOD LABS:\n${title}\n${shareUrl}`;
-            
-            if (navigator.share) {
-                navigator.share({ title: title, text: text, url: shareUrl }).catch(() => {});
-            } else {
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-            }
-        }
-
-        function checkUrlHash() {
-            const hash = window.location.hash;
-            if (hash) {
-                const targetCard = document.querySelector(hash);
-                if (targetCard) {
-                    setTimeout(() => {
-                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        targetCard.classList.add('highlighted');
-                    }, 300);
-                }
-            }
-        }
-
         function toggleFavorite(id) {
             if (favorites.includes(id)) {
                 favorites = favorites.filter(item => item !== id);
@@ -861,27 +957,6 @@
             }
             localStorage.setItem('fav_products', JSON.stringify(favorites));
             renderProducts();
-            renderWishlist();
-        }
-
-        function renderWishlist() {
-            const container = document.getElementById('wishlistItems');
-            const favItems = products.filter(p => favorites.includes(p.id));
-            
-            if (favItems.length === 0) {
-                container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-muted);">لا توجد منتجات في المفضلة حالياً.</p>';
-                return;
-            }
-
-            container.innerHTML = favItems.map(p => `
-                <div class="product-card">
-                    <div class="product-info">
-                        <h4>${p.title}</h4>
-                        <p style="font-weight:bold; color:var(--accent-color); margin:5px 0;">${p.price.toLocaleString()} ج.م</p>
-                        <button class="btn-share" onclick="toggleFavorite('${p.id}')">إزالة</button>
-                    </div>
-                </div>
-            `).join('');
         }
 
         function toggleCompare(id) {
@@ -898,7 +973,6 @@
             }
             localStorage.setItem('compare_products', JSON.stringify(compareList));
             renderProducts();
-            renderCompareTable();
         }
 
         function renderCompareTable() {
@@ -951,7 +1025,6 @@
         }
 
         function openModal(modalId) {
-            if(modalId === 'wishlistModal') renderWishlist();
             if(modalId === 'compareModal') renderCompareTable();
             document.getElementById(modalId).classList.add('active');
         }
