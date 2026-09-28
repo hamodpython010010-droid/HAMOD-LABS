@@ -111,6 +111,63 @@
             padding: 0 1rem;
         }
 
+        /* Filter & Search Bar - إضافة فخمة بدون تغيير الهوية */
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            font-size: 0.9rem;
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tag-btn {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .tag-btn.active, .tag-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -308,6 +365,26 @@
             color: white;
         }
 
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
         /* Modals */
         .modal {
             display: none;
@@ -390,8 +467,25 @@
     </header>
 
     <div class="container">
+        <!-- شريط بحث وفلترة بأسلوب احترافي -->
+        <div class="controls-bar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="ابحث باسم اللابتوب أو المواصفات..." oninput="filterProducts()">
+            </div>
+            <div class="filter-tags">
+                <button class="tag-btn active" onclick="setBrandFilter('all', this)">الكل</button>
+                <button class="tag-btn" onclick="setBrandFilter('Dell', this)">Dell</button>
+                <button class="tag-btn" onclick="setBrandFilter('HP', this)">HP</button>
+                <button class="tag-btn" onclick="setBrandFilter('Lenovo', this)">Lenovo</button>
+            </div>
+        </div>
+
         <div class="products-grid" id="productsGrid"></div>
     </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">تمت العملية بنجاح!</div>
 
     <!-- Modal المفضلة -->
     <div class="modal" id="wishlistModal">
@@ -416,10 +510,10 @@
     </div>
 
     <script>
-        // قائمة المنتجات مع مراجعة تصحيح الأسعار والمواصفات والصور 100%
         const products = [
             {
                 id: "dell-precision-5520",
+                brand: "Dell",
                 title: "Dell Precision 5520 Workstation",
                 price: 18500,
                 oldPrice: 20500,
@@ -432,6 +526,7 @@
             },
             {
                 id: "hp-zbook-15-g5",
+                brand: "HP",
                 title: "HP ZBook 15 G5 Workstation",
                 price: 22000,
                 oldPrice: 24500,
@@ -444,6 +539,7 @@
             },
             {
                 id: "hp-elitebook-840-g5",
+                brand: "HP",
                 title: "HP EliteBook 840 G5 Slim",
                 price: 13500,
                 oldPrice: 15000,
@@ -456,6 +552,7 @@
             },
             {
                 id: "lenovo-thinkpad-t480",
+                brand: "Lenovo",
                 title: "Lenovo ThinkPad T480 Business",
                 price: 12500,
                 oldPrice: 14000,
@@ -468,6 +565,7 @@
             },
             {
                 id: "dell-latitude-5400",
+                brand: "Dell",
                 title: "Dell Latitude 5400 Enterprise",
                 price: 12000,
                 oldPrice: 13500,
@@ -480,7 +578,8 @@
             },
             {
                 id: "lenovo-thinkpad-p52",
-                title: "Lenovo ThinkPad P52 Heavy Workstation",
+                brand: "Lenovo",
+                title: "Lenovo ThinkPad P52 Workstation",
                 price: 24000,
                 oldPrice: 27000,
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
@@ -492,7 +591,8 @@
             },
             {
                 id: "dell-precision-7530",
-                title: "Dell Precision 7530 High-End Workstation",
+                brand: "Dell",
+                title: "Dell Precision 7530 Workstation",
                 price: 25500,
                 oldPrice: 29000,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
@@ -504,6 +604,7 @@
             },
             {
                 id: "hp-probook-450-g6",
+                brand: "HP",
                 title: "HP ProBook 450 G6 Laptop",
                 price: 14500,
                 oldPrice: 16000,
@@ -516,6 +617,7 @@
             },
             {
                 id: "dell-precision-3530",
+                brand: "Dell",
                 title: "Dell Precision 3530 Mobile",
                 price: 19500,
                 oldPrice: 21500,
@@ -528,7 +630,8 @@
             },
             {
                 id: "hp-zbook-studio-g5",
-                title: "HP ZBook Studio G5 Slim Workstation",
+                brand: "HP",
+                title: "HP ZBook Studio G5 Slim",
                 price: 26500,
                 oldPrice: 29500,
                 image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
@@ -540,7 +643,8 @@
             },
             {
                 id: "lenovo-thinkpad-x1-carbon-g6",
-                title: "Lenovo ThinkPad X1 Carbon Gen 6 Ultra",
+                brand: "Lenovo",
+                title: "Lenovo ThinkPad X1 Carbon Gen 6",
                 price: 16500,
                 oldPrice: 18500,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
@@ -552,7 +656,8 @@
             },
             {
                 id: "dell-latitude-7490",
-                title: "Dell Latitude 7490 Business Slim",
+                brand: "Dell",
+                title: "Dell Latitude 7490 Slim",
                 price: 13000,
                 oldPrice: 14800,
                 image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
@@ -564,7 +669,8 @@
             },
             {
                 id: "hp-elitebook-850-g6",
-                title: "HP EliteBook 850 G6 (15.6 Inch)",
+                brand: "HP",
+                title: "HP EliteBook 850 G6 Laptop",
                 price: 16000,
                 oldPrice: 18000,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
@@ -576,7 +682,8 @@
             },
             {
                 id: "dell-g3-15-3590",
-                title: "Dell G3 15-3590 Gaming Laptop",
+                brand: "Dell",
+                title: "Dell G3 15-3590 Gaming",
                 price: 20500,
                 oldPrice: 22500,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
@@ -588,7 +695,8 @@
             },
             {
                 id: "lenovo-legion-y530",
-                title: "Lenovo Legion Y530 Gaming Laptop",
+                brand: "Lenovo",
+                title: "Lenovo Legion Y530 Gaming",
                 price: 21500,
                 oldPrice: 24000,
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
@@ -602,12 +710,27 @@
 
         let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
         let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
+        let selectedBrand = 'all';
 
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
             grid.innerHTML = '';
 
-            products.forEach(p => {
+            const filtered = products.filter(p => {
+                const matchesBrand = selectedBrand === 'all' || p.brand === selectedBrand;
+                const matchesSearch = p.title.toLowerCase().includes(searchVal) || 
+                                     p.processor.toLowerCase().includes(searchVal) ||
+                                     p.gpu.toLowerCase().includes(searchVal);
+                return matchesBrand && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">لا توجد أجهزة تطابق البحث.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
                 const isFav = favorites.includes(p.id);
                 const isComp = compareList.includes(p.id);
 
@@ -657,19 +780,32 @@
             checkUrlHash();
         }
 
+        function filterProducts() {
+            renderProducts();
+        }
+
+        function setBrandFilter(brand, btn) {
+            selectedBrand = brand;
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
         function shareProduct(id, title) {
             const shareUrl = `${window.location.origin}${window.location.pathname}#product-${id}`;
             const text = `شوف العرض ده على HAMOD LABS:\n${title}\n${shareUrl}`;
             
             if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    text: text,
-                    url: shareUrl,
-                }).catch(() => {});
+                navigator.share({ title: title, text: text, url: shareUrl }).catch(() => {});
             } else {
-                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-                window.open(whatsappUrl, '_blank');
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
             }
         }
 
@@ -689,8 +825,10 @@
         function toggleFavorite(id) {
             if (favorites.includes(id)) {
                 favorites = favorites.filter(item => item !== id);
+                showToast('تمت الإزالة من المفضلة');
             } else {
                 favorites.push(id);
+                showToast('تمت الإضافة للمفضلة ❤️');
             }
             localStorage.setItem('fav_products', JSON.stringify(favorites));
             renderProducts();
@@ -720,12 +858,14 @@
         function toggleCompare(id) {
             if (compareList.includes(id)) {
                 compareList = compareList.filter(item => item !== id);
+                showToast('تمت الإزالة من المقارنة');
             } else {
                 if (compareList.length >= 3) {
-                    alert('يمكنك مقارنة 3 منتجات كحد أقصى في وقت واحد.');
+                    showToast('الحد الأقصى للمقارنة هو 3 أجهزة');
                     return;
                 }
                 compareList.push(id);
+                showToast('تمت الإضافة للمقارنة ⚖️');
             }
             localStorage.setItem('compare_products', JSON.stringify(compareList));
             renderProducts();
