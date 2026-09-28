@@ -1,1089 +1,579 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAMOD LABS | متجر اللابتوبات والإكسسوارات</title>
-    <!-- Font Awesome الأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Vanilla Tilt 3D Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-    
-    <style>
-        :root {
-            --primary-color: #0f172a;
-            --accent-color: #2563eb;
-            --amazon-color: #ff9900;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            --radius-lg: 16px;
-            --radius-md: 12px;
-        }
-
-        /* Dark Mode Variables */
-        body.dark-mode {
-            --primary-color: #030712;
-            --bg-color: #0b0f17;
-            --card-bg: #111827;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1f2937;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding-bottom: 80px;
-        }
-
-        /* Header Navigation */
-        header {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 1.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            color: var(--accent-color);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .nav-btn {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-2px);
-        }
-
-        .badge {
-            background: #ef4444;
-            color: white;
-            font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        /* Container Layout */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Filter & Search Bar */
-        .controls-bar {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 2rem;
-        }
-
-        .search-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            position: relative;
-            flex-grow: 1;
-            max-width: 450px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 45px 12px 18px;
-            border-radius: 30px;
-            border: 1px solid var(--border-color);
-            outline: none;
-            font-size: 0.95rem;
-            background: var(--card-bg);
-            color: var(--text-main);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .search-box i {
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .filter-group-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .filter-tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .tag-btn {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.88rem;
-            cursor: pointer;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.25s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .tag-btn:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .tag-btn.active {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        .tag-btn-acc {
-            border-color: rgba(16, 185, 129, 0.4);
-        }
-
-        .tag-btn-acc.active {
-            background: #10b981;
-            border-color: #10b981;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* Product Cards & 3D Tilt */
-        .product-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            flex-direction: column;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        /* الهيدر الرسومي لكل كارت */
-        .card-graphic-header {
-            position: relative;
-            width: 100%;
-            height: 165px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transform: translateZ(20px);
-        }
-
-        .card-graphic-header.acc-bg {
-            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
-        }
-
-        .card-graphic-header::before {
-            content: '';
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-        }
-
-        .card-graphic-icon {
-            font-size: 3.8rem;
-            color: #ffffff;
-            z-index: 1;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
-            transition: transform 0.4s ease;
-        }
-
-        .brand-pill {
-            position: absolute;
-            bottom: 12px;
-            left: 12px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            z-index: 2;
-        }
-
-        .top-actions {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 2;
-        }
-
-        .icon-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #475569;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
-        }
-
-        .icon-btn:hover {
-            background: white;
-            color: #ef4444;
-            transform: scale(1.1);
-        }
-
-        .icon-btn.active-fav { color: #ef4444; }
-
-        .product-info {
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            transform: translateZ(10px);
-        }
-
-        .product-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-
-        .product-specs {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            list-style: none;
-        }
-
-        .product-specs li {
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* مؤشرات الأداء */
-        .perf-indicators {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 1rem;
-            background: rgba(0,0,0,0.03);
-            padding: 6px;
-            border-radius: 8px;
-        }
-
-        body.dark-mode .perf-indicators {
-            background: rgba(255,255,255,0.03);
-        }
-
-        .perf-tag {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .perf-dev { background: #dbeafe; color: #1e40af; }
-        .perf-gpu { background: #fce7f3; color: #9d174d; }
-        body.dark-mode .perf-dev { background: #1e3a8a; color: #93c5fd; }
-        body.dark-mode .perf-gpu { background: #831843; color: #fbcfe8; }
-
-        .price-section {
-            margin-top: auto;
-            padding-top: 0.8rem;
-            border-top: 1px dashed var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-        }
-
-        .current-price {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--accent-color);
-        }
-
-        .installment-text {
-            font-size: 0.75rem;
-            color: #10b981;
-            font-weight: 700;
-            display: block;
-        }
-
-        .old-price {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            text-decoration: line-through;
-        }
-
-        /* Card Actions Grid */
-        .card-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .btn-amazon {
-            grid-column: span 2;
-            background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%);
-            color: #111;
-            font-weight: 700;
-            border: none;
-            padding: 10px 16px;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .btn-amazon:hover { opacity: 0.95; transform: translateY(-2px); }
-
-        .btn-action {
-            background: var(--bg-color);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            font-size: 0.8rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action:hover { background: var(--border-color); }
-
-        .btn-compare.active {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
-        }
-
-        /* Floating Wizard Button */
-        .wizard-float-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-            border: none;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1500;
-            animation: bounceBtn 3s infinite;
-        }
-
-        @keyframes bounceBtn {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        /* Toast Notifications */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-            z-index: 3000;
-            border: 1px solid var(--border-color);
-        }
-
-        .toast.show { transform: translateX(-50%) translateY(0); }
-
-        /* Modals */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(6px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .modal.active { display: flex; }
-
-        .modal-content {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border-radius: var(--radius-lg);
-            width: 100%;
-            max-width: 750px;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-
-        /* Wizard Modal Questions */
-        .wizard-step { display: none; }
-        .wizard-step.active { display: block; }
-        .wizard-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
-        .wizard-opt-btn {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 15px;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-weight: 700;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        .wizard-opt-btn:hover { border-color: var(--accent-color); background: var(--card-bg); }
-
-        /* Compare Table */
-        .compare-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .compare-table th, .compare-table td {
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        .compare-table th { background: var(--bg-color); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAMOD LABS | العصر الجديد للابتوبات</title>
+  
+  <!-- Font Awesome Icons & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Three.js Library for 3D Viewer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #0a0b10;
+      --bg-card: rgba(18, 22, 36, 0.65);
+      --primary-cyan: #00f2fe;
+      --primary-purple: #4facfe;
+      --accent-neon: #7f00ff;
+      --text-main: #f0f4f8;
+      --text-muted: #8c9ba5;
+      --border-glow: rgba(0, 242, 254, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(127, 0, 255, 0.08) 0%, transparent 40%);
+    }
+
+    /* --- Navbar --- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background: rgba(10, 11, 16, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-cyan);
+      text-shadow: 0 0 10px var(--primary-cyan);
+    }
+
+    /* --- Hero Section with 3D Canvas --- */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 5%;
+      min-height: 80vh;
+      position: relative;
+    }
+
+    .hero-text {
+      max-width: 50%;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #a1c4fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .badge-ultra {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--primary-cyan);
+      border-radius: 20px;
+      color: var(--primary-cyan);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .canvas-container {
+      width: 45%;
+      height: 400px;
+      position: relative;
+    }
+
+    #3d-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* --- Filter & Products Section --- */
+    .products-section {
+      padding: 4rem 5%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      color: var(--text-main);
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
+      border-color: transparent;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Glassmorphism Product Card */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary-cyan);
+      box-shadow: 0 15px 30px rgba(0, 242, 254, 0.15);
+    }
+
+    .stock-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 75, 75, 0.2);
+      border: 1px solid #ff4b4b;
+      color: #ff4b4b;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .rating {
+      color: #ffd700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .specs-list {
+      list-style: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .specs-list li {
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .specs-list i {
+      color: var(--primary-cyan);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-cyan);
+    }
+
+    /* --- HAMOD AI Assistant Chat Window --- */
+    .ai-chat-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+      z-index: 2000;
+      transition: 0.3s;
+    }
+
+    .ai-chat-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .ai-chat-window {
+      position: fixed;
+      bottom: 100px;
+      left: 30px;
+      width: 350px;
+      height: 450px;
+      background: rgba(18, 22, 36, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      display: none;
+      flex-direction: column;
+      z-index: 2000;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .chat-header {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-msg {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      max-width: 80%;
+      line-height: 1.4;
+    }
+
+    .chat-msg.bot {
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--primary-cyan);
+      align-self: flex-start;
+    }
+
+    .chat-msg.user {
+      background: var(--accent-neon);
+      align-self: flex-end;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      color: white;
+      outline: none;
+    }
+
+    .chat-input button {
+      background: var(--primary-cyan);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text {
+        max-width: 100%;
+      }
+      .canvas-container {
+        width: 100%;
+        height: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <i class="fa-solid fa-laptop-code"></i>
-                <span>HAMOD LABS</span>
-            </a>
-            <div class="header-actions">
-                <button class="nav-btn" onclick="toggleDarkMode()" title="تغيير الثيم">
-                    <i class="fa-solid fa-moon" id="themeIcon"></i>
-                </button>
-                <button class="nav-btn" onclick="openModal('wishlistModal')">
-                    <i class="fa-solid fa-heart"></i>
-                    <span class="badge" id="favCount">0</span>
-                </button>
-                <button class="nav-btn" onclick="openModal('compareModal')">
-                    <i class="fa-solid fa-scale-balanced"></i>
-                    <span class="badge" id="compareCount">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <i class="fa-solid fa-laptop-code"></i> HAMOD LABS
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">الرئيسية</a></li>
+      <li><a href="#products">الأجهزة</a></li>
+      <li><a href="#">الخدمات</a></li>
+    </ul>
+  </nav>
 
-    <div class="container">
-        <!-- شريط بحث وفلترة مطور -->
-        <div class="controls-bar">
-            <div class="search-row">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="ابحث بالاسم، المعالج، أو الإكسسوار..." oninput="filterProducts()">
-                </div>
-            </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="badge-ultra">حمـودي لابـس • Ultra Performance</span>
+      <h1>الأداء الأقصى لأعتى المهام والألعاب</h1>
+      <p>اكتشف أقوى تشكيلة أجهزة لاب توب مجهزة للشبكات، البرمجة، والـ Virtualization مع ضمان الأداء الاحترافي.</p>
+    </div>
+    
+    <!-- 3D Interactive Canvas -->
+    <div class="canvas-container">
+      <div id="3d-canvas"></div>
+    </div>
+  </section>
 
-            <!-- أزرار الأقسام والماركات والإكسسوارات -->
-            <div>
-                <div class="filter-group-title"><i class="fa-solid fa-laptop"></i> أقسام اللابتوبات:</div>
-                <div class="filter-tags-container" style="margin-bottom: 12px;">
-                    <button class="tag-btn active" onclick="setCategoryFilter('all', this)">الكل</button>
-                    <button class="tag-btn" onclick="setCategoryFilter('Dell', this)">Dell</button>
-                    <button class="tag-btn" onclick="setCategoryFilter('HP', this)">HP</button>
-                    <button class="tag-btn" onclick="setCategoryFilter('Lenovo', this)">Lenovo</button>
-                </div>
-
-                <div class="filter-group-title"><i class="fa-solid fa-plug"></i> قسم الإكسسوارات الفخمة:</div>
-                <div class="filter-tags-container">
-                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('accessories_all', this)"><i class="fa-solid fa-boxes-packing"></i> كل الإكسسوارات</button>
-                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('headphones', this)"><i class="fa-solid fa-headphones"></i> سماعات</button>
-                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('powerbanks', this)"><i class="fa-solid fa-car-battery"></i> باور بانك</button>
-                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('bags', this)"><i class="fa-solid fa-bag-shopping"></i> شنط لابتوب</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="products-grid" id="productsGrid"></div>
+  <!-- Products Section -->
+  <section class="products-section" id="products">
+    <h2 class="section-title">الأجهزة المتاحة</h2>
+    
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterData('all')">الكل</button>
+      <button class="filter-btn" onclick="filterData('workstation')">Workstations</button>
+      <button class="filter-btn" onclick="filterData('gaming')">Gaming & Performance</button>
     </div>
 
-    <!-- زرار المساعد الذكي العائم -->
-    <button class="wizard-float-btn" onclick="openWizard()">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-        <span>ساعدني أختار اللابتوب</span>
-    </button>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">تمت العملية بنجاح!</div>
-
-    <!-- Modal المساعد الذكي -->
-    <div class="modal" id="wizardModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-robot" style="color: var(--accent-color);"></i> المساعد الذكي لاختيار اللابتوب</h3>
-                <button class="close-modal" onclick="closeModal('wizardModal')">&times;</button>
-            </div>
-            
-            <div id="wizardStep1" class="wizard-step active">
-                <h4>1. ما هو مجال استخدامه الأساسي؟</h4>
-                <div class="wizard-options">
-                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'dev')">💻 برمجة وأمن سيبراني & VMs</button>
-                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'gpu')">🎮 ألعاب وجرافيك وتصميم</button>
-                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'office')">📚 تصفح وشغل مكتبي</button>
-                </div>
-            </div>
-
-            <div id="wizardStep2" class="wizard-step">
-                <h4>2. ما هي ميزانيتك المتوقعة؟</h4>
-                <div class="wizard-options">
-                    <button class="wizard-opt-btn" onclick="wizardSelect('budget', 'low')">أقل من 15,000 ج.م</button>
-                    <button class="wizard-opt-btn" onclick="wizardSelect('budget', 'mid')">من 15,000 إلى 22,000 ج.م</button>
-                    <button class="wizard-opt-btn" onclick="wizardSelect('budget', 'high')">أكثر من 22,000 ج.م</button>
-                </div>
-            </div>
-
-            <div id="wizardResult" class="wizard-step">
-                <h4 style="color: #10b981; margin-bottom: 1rem;"><i class="fa-solid fa-circle-check"></i> ترشيحاتنا المثالية لك:</h4>
-                <div id="wizardProducts" class="products-grid"></div>
-            </div>
-        </div>
+    <div class="products-grid" id="grid">
+      <!-- Product Cards dynamically loaded below -->
     </div>
+  </section>
 
-    <!-- Modal المفضلة -->
-    <div class="modal" id="wishlistModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-heart" style="color: #ef4444;"></i> قائمة المفضلة</h3>
-                <button class="close-modal" onclick="closeModal('wishlistModal')">&times;</button>
-            </div>
-            <div id="wishlistItems" class="products-grid"></div>
-        </div>
+  <!-- AI Assistant Chat Trigger & Window -->
+  <div class="ai-chat-btn" onclick="toggleChat()">
+    <i class="fa-solid fa-robot"></i>
+  </div>
+
+  <div class="ai-chat-window" id="chatWindow">
+    <div class="chat-header">
+      <span><i class="fa-solid fa-brain" style="color:var(--primary-cyan)"></i> HAMOD AI Assistant</span>
+      <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
-
-    <!-- Modal المقارنة -->
-    <div class="modal" id="compareModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-scale-balanced" style="color: var(--accent-color);"></i> مقارنة المواصفات</h3>
-                <button class="close-modal" onclick="closeModal('compareModal')">&times;</button>
-            </div>
-            <div id="compareContent" style="overflow-x: auto;"></div>
-        </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">أهلاً بك! أنا مساعد HAMOD الذكي. أخبرني بميزانيتك أو استخدامك وسأقترح عليك الجهاز المثالي!</div>
     </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKey(event)">
+      <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
 
-    <script>
-        const products = [
-            // اللابتوبات
-            {
-                id: "dell-precision-5520",
-                type: "laptop",
-                category: "Dell",
-                title: "Dell Precision 5520 Workstation",
-                price: 18500,
-                oldPrice: 20500,
-                processor: "Intel Core i7-7820HQ",
-                ram: "16GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia Quadro M1200 4GB",
-                devScore: "قوي جداً",
-                gpuScore: "ممتاز",
-                amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
-            },
-            {
-                id: "hp-zbook-15-g5",
-                type: "laptop",
-                category: "HP",
-                title: "HP ZBook 15 G5 Workstation",
-                price: 22000,
-                oldPrice: 24500,
-                processor: "Intel Core i7-8850H (6 Cores)",
-                ram: "16GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia Quadro P1000 4GB",
-                devScore: "خارق",
-                gpuScore: "ممتاز",
-                amazonUrl: "https://www.amazon.eg/s?k=HP+ZBook+15+G5"
-            },
-            {
-                id: "hp-elitebook-840-g5",
-                type: "laptop",
-                category: "HP",
-                title: "HP EliteBook 840 G5 Slim",
-                price: 13500,
-                oldPrice: 15000,
-                processor: "Intel Core i5-8350U",
-                ram: "16GB DDR4",
-                storage: "256GB NVMe SSD",
-                gpu: "Intel UHD Graphics 620",
-                devScore: "جيد جداً",
-                gpuScore: "متوسط",
-                amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G5"
-            },
-            {
-                id: "lenovo-thinkpad-t480",
-                type: "laptop",
-                category: "Lenovo",
-                title: "Lenovo ThinkPad T480 Business",
-                price: 12500,
-                oldPrice: 14000,
-                processor: "Intel Core i5-8350U",
-                ram: "16GB DDR4",
-                storage: "256GB NVMe SSD",
-                gpu: "Intel UHD 620",
-                devScore: "جيد جداً",
-                gpuScore: "متوسط",
-                amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+T480"
-            },
-            {
-                id: "lenovo-thinkpad-p52",
-                type: "laptop",
-                category: "Lenovo",
-                title: "Lenovo ThinkPad P52 Workstation",
-                price: 24000,
-                oldPrice: 27000,
-                processor: "Intel Core i7-8850H",
-                ram: "32GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia Quadro P2000 4GB",
-                devScore: "خارق",
-                gpuScore: "خارق",
-                amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+P52"
-            },
-            // الإكسسوارات الفخمة
-            {
-                id: "headphone-pro-gaming",
-                type: "accessory",
-                category: "headphones",
-                title: "سماعة محيطية احترافية HyperX Cloud II",
-                price: 2800,
-                oldPrice: 3200,
-                processor: "صوت محيطي 7.1 Virtual",
-                ram: "مايك بعزل ضوضاء احترافي",
-                storage: "وسائد أذن جلد مريحة",
-                gpu: "وصلة USB + 3.5mm",
-                devScore: "عزل ممتاز",
-                gpuScore: "صوت جيمنج 10/10",
-                amazonUrl: "https://www.amazon.eg/s?k=HyperX+Cloud+II"
-            },
-            {
-                id: "powerbank-anker-65w",
-                type: "accessory",
-                category: "powerbanks",
-                title: "باور بانك أنكر Anker 87W للابتوب والـ Power",
-                price: 3400,
-                oldPrice: 3900,
-                processor: "سعة 24,000mAh عالية",
-                ram: "شحن سريع PD 65W للابتوب",
-                storage: "شاشة LED رقمية لنسبة الشحن",
-                gpu: "3 منافذ شحن سريعة",
-                devScore: "شحن للابتوب",
-                gpuScore: "اعتمادية عالية",
-                amazonUrl: "https://www.amazon.eg/s?k=Anker+Power+Bank+Laptop"
-            },
-            {
-                id: "bag-swissgear-waterproof",
-                type: "accessory",
-                category: "bags",
-                title: "شنطة ظهر للابتوب SwissGear مقاومة للماء",
-                price: 1250,
-                oldPrice: 1500,
-                processor: "تتسع للابتوب حتى 15.6 - 17 بوصة",
-                ram: "خامات ممتازة مقاومة للماء والقطع",
-                storage: "مخرج USB خارجي لشحن الموبايل",
-                gpu: "جيوب متعددة مع حماية مبطنة",
-                devScore: "سعة ضخمة",
-                gpuScore: "ضد الصدمات",
-                amazonUrl: "https://www.amazon.eg/s?k=Laptop+Bag+Waterproof"
-            }
-        ];
+  <script>
+    /* --- 1. Product Data --- */
+    const products = [
+      {
+        id: 1,
+        title: "Dell Precision 5520",
+        category: "workstation",
+        price: "22,500 ج.م",
+        stock: "متبقي 2 فقط!",
+        rating: 5,
+        specs: ["Intel Core i7-7820HQ", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro M1200 4GB"],
+        img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500"
+      },
+      {
+        id: 2,
+        title: "HP EliteBook 840 G6",
+        category: "workstation",
+        price: "18,000 ج.م",
+        stock: "متوفر",
+        rating: 4.8,
+        specs: ["Intel Core i7-8665U", "16GB RAM DDR4", "256GB NVMe SSD", "Intel UHD Graphics 620"],
+        img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500"
+      },
+      {
+        id: 3,
+        title: "Lenovo Legion 5 Ultra",
+        category: "gaming",
+        price: "34,500 ج.م",
+        stock: "متبقي 1 فقط!",
+        rating: 5,
+        specs: ["AMD Ryzen 7 5800H", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3060 6GB"],
+        img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500"
+      }
+    ];
 
-        let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
-        let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
-        let activeCategory = 'all';
+    /* --- 2. Render Products --- */
+    function renderProducts(items) {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = items.map(p => `
+        <div class="card">
+          <span class="stock-tag">${p.stock}</span>
+          <img src="${p.img}" class="card-img" alt="${p.title}">
+          <h3 class="card-title">${p.title}</h3>
+          <div class="rating">
+            ${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))}
+            <span>(${p.rating})</span>
+          </div>
+          <ul class="specs-list">
+            ${p.specs.map(s => `<li><i class="fa-solid fa-microchip"></i> ${s}</li>`).join('')}
+          </ul>
+          <div class="card-footer">
+            <span class="price">${p.price}</span>
+          </div>
+        </div>
+      `).join('');
+    }
 
-        function getProductIcon(item) {
-            if(item.type === 'accessory') {
-                if(item.category === 'headphones') return 'fa-headphones';
-                if(item.category === 'powerbanks') return 'fa-car-battery';
-                if(item.category === 'bags') return 'fa-bag-shopping';
-                return 'fa-plug';
-            }
-            const t = item.title.toLowerCase();
-            if (t.includes('workstation') || t.includes('precision') || t.includes('zbook') || t.includes('p52')) return 'fa-laptop-code';
-            if (t.includes('gaming') || t.includes('g3')) return 'fa-gamepad';
-            return 'fa-laptop';
+    renderProducts(products);
+
+    function filterData(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      if (cat === 'all') renderProducts(products);
+      else renderProducts(products.filter(p => p.category === cat));
+    }
+
+    /* --- 3. HAMOD AI Chatbot Logic --- */
+    function toggleChat() {
+      const win = document.getElementById('chatWindow');
+      win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function sendMsg() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const body = document.getElementById('chatBody');
+      body.innerHTML += `<div class="chat-msg user">${text}</div>`;
+      input.value = '';
+
+      setTimeout(() => {
+        let reply = "يمكنك تصفح تشكيلتنا الممتازة! Dell Precision رائع جداً لعمل الـ Virtual Machines والمهام الثقيلة.";
+        if (text.includes("ميزانية") || text.includes("سعر") || text.includes("رخيص")) {
+          reply = "أنصحك بـ HP EliteBook 840 G6، يقدم أفضل قيمة مقابل سعر مع أداء سلس ممتاز!";
+        } else if (text.includes("العاب") || text.includes("ألعاب") || text.includes("كارت")) {
+          reply = "جهاز Lenovo Legion 5 بكرت RTX 3060 هو الاختيار الأقوى للألعاب والبرامج الثقيلة!";
         }
+        body.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
+        body.scrollTop = body.scrollHeight;
+      }, 600);
+    }
 
-        function renderProducts() {
-            const grid = document.getElementById('productsGrid');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
-            grid.innerHTML = '';
+    function handleKey(e) {
+      if (e.key === 'Enter') sendMsg();
+    }
 
-            const filtered = products.filter(p => {
-                let matchesCategory = false;
-                if (activeCategory === 'all') matchesCategory = true;
-                else if (activeCategory === 'accessories_all') matchesCategory = (p.type === 'accessory');
-                else if (['Dell', 'HP', 'Lenovo'].includes(activeCategory)) matchesCategory = (p.category === activeCategory);
-                else matchesCategory = (p.category === activeCategory);
+    /* --- 4. Three.js 3D Laptop Cube Viewer --- */
+    const container = document.getElementById('3d-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
-                const matchesSearch = p.title.toLowerCase().includes(searchVal) || 
-                                     p.processor.toLowerCase().includes(searchVal);
-                return matchesCategory && matchesSearch;
-            });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
 
-            if (filtered.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem; font-size:1.1rem;">لا توجد منتجات تطابق هذا القسم أو البحث حالياً.</p>';
-                return;
-            }
+    // Create Futuristic Wireframe Box/Laptop Metaphor
+    const geometry = new THREE.BoxGeometry(2.8, 0.15, 2);
+    const material = new THREE.MeshStandardMaterial({ 
+      color: 0x00f2fe, 
+      wireframe: true,
+      emissive: 0x00f2fe,
+      emissiveIntensity: 0.5
+    });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-            filtered.forEach(p => {
-                const isFav = favorites.includes(p.id);
-                const isComp = compareList.includes(p.id);
-                const iconClass = getProductIcon(p);
-                const monthlyInstallment = Math.round(p.price / 12);
-                const isAcc = p.type === 'accessory';
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
 
-                const card = document.createElement('div');
-                card.className = `product-card`;
-                card.id = `product-${p.id}`;
-                card.setAttribute('data-tilt', '');
-                card.setAttribute('data-tilt-max', '8');
-                card.setAttribute('data-tilt-speed', '400');
+    camera.position.z = 3.5;
 
-                card.innerHTML = `
-                    <div class="card-graphic-header ${isAcc ? 'acc-bg' : ''}">
-                        <div class="top-actions">
-                            <button class="icon-btn ${isFav ? 'active-fav' : ''}" onclick="toggleFavorite('${p.id}')">
-                                <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
-                            </button>
-                        </div>
-                        <i class="fa-solid ${iconClass} card-graphic-icon"></i>
-                        <span class="brand-pill">${isAcc ? 'إكسسوار فخم' : p.category + ' Original'}</span>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${p.title}</h3>
-                        <ul class="product-specs">
-                            <li><i class="fa-solid fa-circle-info"></i> ${p.processor}</li>
-                            <li><i class="fa-solid fa-sliders"></i> ${p.ram}</li>
-                            <li><i class="fa-solid fa-shield-halved"></i> ${p.storage}</li>
-                        </ul>
-                        <div class="perf-indicators">
-                            <span class="perf-tag perf-dev"><i class="fa-solid fa-star"></i> ${p.devScore}</span>
-                            <span class="perf-tag perf-gpu"><i class="fa-solid fa-thumbs-up"></i> ${p.gpuScore}</span>
-                        </div>
-                        <div class="price-section">
-                            <div>
-                                <span class="current-price">${p.price.toLocaleString()} ج.م</span>
-                                <span class="old-price">${p.oldPrice.toLocaleString()} ج.م</span>
-                            </div>
-                            <div style="text-align: left;">
-                                <span class="installment-text"><i class="fa-solid fa-bolt"></i> قسط/ ${monthlyInstallment.toLocaleString()} ج.م</span>
-                            </div>
-                        </div>
-                        <div class="card-buttons">
-                            <a href="${p.amazonUrl}" target="_blank" class="btn-amazon">
-                                <i class="fa-brands fa-amazon"></i> شراء عبر أمازون
-                            </a>
-                            <button class="btn-action" onclick="copySpecs('${p.title}', '${p.processor}', '${p.ram}', '${p.price}')">
-                                <i class="fa-solid fa-copy"></i> نسخ
-                            </button>
-                            <button class="btn-action btn-compare ${isComp ? 'active' : ''}" onclick="toggleCompare('${p.id}')">
-                                <i class="fa-solid fa-scale-balanced"></i> ${isComp ? 'مُضاف' : 'مقارنة'}
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.005;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
 
-            VanillaTilt.init(document.querySelectorAll(".product-card"));
-            updateBadges();
-        }
-
-        function copySpecs(title, proc, ram, price) {
-            const text = `🛒 *${title}*\n• ${proc}\n• ${ram}\n💰 السعر: ${Number(price).toLocaleString()} ج.م\nمتوفر في HAMOD LABS`;
-            navigator.clipboard.writeText(text);
-            showToast('تم نسخ المواصفات للحافظة! 📋');
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const icon = document.getElementById('themeIcon');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.className = 'fa-solid fa-sun';
-                showToast('تم تفعيل الوضع الليلي 🌙');
-            } else {
-                icon.className = 'fa-solid fa-moon';
-                showToast('تم تفعيل الوضع الفاتح ☀️');
-            }
-        }
-
-        /* المساعد الذكي Wizard */
-        function openWizard() {
-            wizardSelection = {};
-            document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
-            document.getElementById('wizardStep1').classList.add('active');
-            openModal('wizardModal');
-        }
-
-        function wizardSelect(key, val) {
-            if (key === 'use') {
-                document.getElementById('wizardStep1').classList.remove('active');
-                document.getElementById('wizardStep2').classList.add('active');
-            } else if (key === 'budget') {
-                document.getElementById('wizardStep2').classList.remove('active');
-                document.getElementById('wizardResult').classList.add('active');
-                renderWizardResults();
-            }
-        }
-
-        function renderWizardResults() {
-            const resContainer = document.getElementById('wizardProducts');
-            let matched = products.filter(p => p.type === 'laptop');
-            resContainer.innerHTML = matched.slice(0, 2).map(p => `
-                <div class="product-card" style="margin-bottom:10px;">
-                    <div class="product-info">
-                        <h4>${p.title}</h4>
-                        <p style="font-size:0.85rem; color:var(--text-muted);">${p.processor} | ${p.ram}</p>
-                        <p style="font-weight:bold; color:var(--accent-color); margin-top:5px;">${p.price.toLocaleString()} ج.م</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterProducts() { renderProducts(); }
-
-        function setCategoryFilter(cat, btn) {
-            activeCategory = cat;
-            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderProducts();
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-        function toggleFavorite(id) {
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(item => item !== id);
-                showToast('تمت الإزالة من المفضلة');
-            } else {
-                favorites.push(id);
-                showToast('تمت الإضافة للمفضلة ❤️');
-            }
-            localStorage.setItem('fav_products', JSON.stringify(favorites));
-            renderProducts();
-        }
-
-        function toggleCompare(id) {
-            if (compareList.includes(id)) {
-                compareList = compareList.filter(item => item !== id);
-                showToast('تمت الإزالة من المقارنة');
-            } else {
-                if (compareList.length >= 3) {
-                    showToast('الحد الأقصى للمقارنة هو 3 منتجات');
-                    return;
-                }
-                compareList.push(id);
-                showToast('تمت الإضافة للمقارنة ⚖️');
-            }
-            localStorage.setItem('compare_products', JSON.stringify(compareList));
-            renderProducts();
-        }
-
-        function renderCompareTable() {
-            const container = document.getElementById('compareContent');
-            const compareItems = products.filter(p => compareList.includes(p.id));
-
-            if (compareItems.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">قم بإضافة منتجات للمقارنة بينها.</p>';
-                return;
-            }
-
-            let tableHTML = `
-                <table class="compare-table">
-                    <thead>
-                        <tr>
-                            <th>المنتج</th>
-                            ${compareItems.map(p => `<th>${p.title}</th>`).join('')}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>السعر</strong></td>
-                            ${compareItems.map(p => `<td style="color:var(--accent-color); font-weight:bold;">${p.price.toLocaleString()} ج.م</td>`).join('')}
-                        </tr>
-                        <tr>
-                            <td><strong>المواصفة الأولى</strong></td>
-                            ${compareItems.map(p => `<td>${p.processor}</td>`).join('')}
-                        </tr>
-                        <tr>
-                            <td><strong>المواصفة الثانية</strong></td>
-                            ${compareItems.map(p => `<td>${p.ram}</td>`).join('')}
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-            container.innerHTML = tableHTML;
-        }
-
-        function updateBadges() {
-            document.getElementById('favCount').textContent = favorites.length;
-            document.getElementById('compareCount').textContent = compareList.length;
-        }
-
-        function openModal(modalId) {
-            if(modalId === 'compareModal') renderCompareTable();
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-        });
-    </script>
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+  </script>
 </body>
 </html>
