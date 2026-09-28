@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | العصر الجديد للابتوبات</title>
+  <title>HAMOD LABS | العصر الجديد للابتوبات والأكسسوارات</title>
   
   <!-- Font Awesome Icons & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,10 +15,11 @@
   <style>
     :root {
       --bg-dark: #0a0b10;
-      --bg-card: rgba(18, 22, 36, 0.65);
+      --bg-card: rgba(18, 22, 36, 0.7);
       --primary-cyan: #00f2fe;
       --primary-purple: #4facfe;
       --accent-neon: #7f00ff;
+      --amazon-gold: #ff9900;
       --text-main: #f0f4f8;
       --text-muted: #8c9ba5;
       --border-glow: rgba(0, 242, 254, 0.25);
@@ -40,13 +41,32 @@
         radial-gradient(circle at 85% 80%, rgba(127, 0, 255, 0.08) 0%, transparent 40%);
     }
 
-    /* --- Navbar --- */
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--primary-cyan);
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+      transition: 0.4s ease;
+      z-index: 3000;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Navbar */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 5%;
-      background: rgba(10, 11, 16, 0.8);
+      background: rgba(10, 11, 16, 0.85);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
@@ -60,7 +80,6 @@
       background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 1px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -84,14 +103,13 @@
       text-shadow: 0 0 10px var(--primary-cyan);
     }
 
-    /* --- Hero Section with 3D Canvas --- */
+    /* Hero Section */
     .hero {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 4rem 5%;
-      min-height: 80vh;
-      position: relative;
+      padding: 3rem 5%;
+      min-height: 70vh;
     }
 
     .hero-text {
@@ -99,7 +117,7 @@
     }
 
     .hero-text h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       font-weight: 900;
       line-height: 1.2;
       margin-bottom: 1.5rem;
@@ -109,7 +127,7 @@
     }
 
     .hero-text p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
       margin-bottom: 2rem;
       line-height: 1.6;
@@ -128,8 +146,7 @@
 
     .canvas-container {
       width: 45%;
-      height: 400px;
-      position: relative;
+      height: 380px;
     }
 
     #3d-canvas {
@@ -137,15 +154,15 @@
       height: 100%;
     }
 
-    /* --- Filter & Products Section --- */
+    /* Filter & Products */
     .products-section {
-      padding: 4rem 5%;
+      padding: 3rem 5%;
     }
 
     .section-title {
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-size: 2.3rem;
+      margin-bottom: 1.5rem;
     }
 
     .filter-bar {
@@ -157,7 +174,7 @@
     }
 
     .filter-btn {
-      padding: 10px 24px;
+      padding: 10px 22px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 30px;
@@ -179,7 +196,7 @@
       gap: 2rem;
     }
 
-    /* Glassmorphism Product Card */
+    /* Product Card */
     .card {
       background: var(--bg-card);
       backdrop-filter: blur(16px);
@@ -187,12 +204,14 @@
       border-radius: 20px;
       padding: 1.5rem;
       position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.4s ease;
     }
 
     .card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
       border-color: var(--primary-cyan);
       box-shadow: 0 15px 30px rgba(0, 242, 254, 0.15);
     }
@@ -211,27 +230,28 @@
 
     .card-img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: contain;
       margin-bottom: 1rem;
+      border-radius: 10px;
     }
 
     .card-title {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
     }
 
     .rating {
       color: #ffd700;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
     }
 
     .specs-list {
       list-style: none;
       color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.2rem;
     }
 
     .specs-list li {
@@ -247,19 +267,72 @@
 
     .card-footer {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 12px;
       padding-top: 1rem;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .price {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--primary-cyan);
     }
 
-    /* --- HAMOD AI Assistant Chat Window --- */
+    /* Action Buttons Inside Card */
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-amazon {
+      flex: 2;
+      background: linear-gradient(45deg, #ff9900, #ffb700);
+      color: #111;
+      border: none;
+      padding: 10px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-amazon:hover {
+      box-shadow: 0 0 12px rgba(255, 153, 0, 0.6);
+      transform: scale(1.02);
+    }
+
+    .btn-icon {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .btn-icon:hover {
+      background: var(--primary-cyan);
+      color: #000;
+    }
+
+    /* AI Chat Window */
     .ai-chat-btn {
       position: fixed;
       bottom: 30px;
@@ -279,16 +352,12 @@
       transition: 0.3s;
     }
 
-    .ai-chat-btn:hover {
-      transform: scale(1.1);
-    }
-
     .ai-chat-window {
       position: fixed;
       bottom: 100px;
       left: 30px;
-      width: 350px;
-      height: 450px;
+      width: 340px;
+      height: 420px;
       background: rgba(18, 22, 36, 0.95);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-glow);
@@ -321,7 +390,7 @@
     .chat-msg {
       padding: 10px 14px;
       border-radius: 12px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       max-width: 80%;
       line-height: 1.4;
     }
@@ -345,7 +414,7 @@
 
     .chat-input input {
       flex: 1;
-      padding: 10px;
+      padding: 8px;
       border: none;
       background: transparent;
       color: white;
@@ -355,12 +424,11 @@
     .chat-input button {
       background: var(--primary-cyan);
       border: none;
-      padding: 8px 15px;
+      padding: 8px 14px;
       border-radius: 10px;
       cursor: pointer;
     }
 
-    /* Responsive Design */
     @media (max-width: 900px) {
       .hero {
         flex-direction: column;
@@ -371,12 +439,15 @@
       }
       .canvas-container {
         width: 100%;
-        height: 300px;
+        height: 280px;
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">تم النسخ بنجاح! 📋</div>
 
   <!-- Navbar -->
   <nav>
@@ -385,17 +456,16 @@
     </div>
     <ul class="nav-links">
       <li><a href="#">الرئيسية</a></li>
-      <li><a href="#products">الأجهزة</a></li>
-      <li><a href="#">الخدمات</a></li>
+      <li><a href="#products">الأجهزة والأكسسوارات</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <span class="badge-ultra">حمـودي لابـس • Ultra Performance</span>
-      <h1>الأداء الأقصى لأعتى المهام والألعاب</h1>
-      <p>اكتشف أقوى تشكيلة أجهزة لاب توب مجهزة للشبكات، البرمجة، والـ Virtualization مع ضمان الأداء الاحترافي.</p>
+      <span class="badge-ultra">حمـودي لابـس • Ultra Gaming & Workstations</span>
+      <h1>الأداء الأقصى للتطوير، الألعاب والأكسسوارات</h1>
+      <p>تصفح أكبر تشكيلة لابتوبات مجهزة للـ Virtualization والألعاب الثقيلة بالإضافة لأفخم الملحقات والأكسسوارات الاحترافية.</p>
     </div>
     
     <!-- 3D Interactive Canvas -->
@@ -404,18 +474,19 @@
     </div>
   </section>
 
-  <!-- Products Section -->
+  <!-- Products & Accessories Section -->
   <section class="products-section" id="products">
-    <h2 class="section-title">الأجهزة المتاحة</h2>
+    <h2 class="section-title">المعرض الكامل</h2>
     
     <div class="filter-bar">
       <button class="filter-btn active" onclick="filterData('all')">الكل</button>
       <button class="filter-btn" onclick="filterData('workstation')">Workstations</button>
-      <button class="filter-btn" onclick="filterData('gaming')">Gaming & Performance</button>
+      <button class="filter-btn" onclick="filterData('gaming')">Gaming & Power</button>
+      <button class="filter-btn" onclick="filterData('accessory')">الأكسسوارات 🎧</button>
     </div>
 
     <div class="products-grid" id="grid">
-      <!-- Product Cards dynamically loaded below -->
+      <!-- Cards dynamically generated via JavaScript -->
     </div>
   </section>
 
@@ -430,7 +501,7 @@
       <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً بك! أنا مساعد HAMOD الذكي. أخبرني بميزانيتك أو استخدامك وسأقترح عليك الجهاز المثالي!</div>
+      <div class="chat-msg bot">أهلاً بك يا حمودي! أنا مساعدك الذكي، أخبرني بالميزانية أو الاستخدام وسأرشح لك اللابتوب أو الأكسسوار المناسب فوراً!</div>
     </div>
     <div class="chat-input">
       <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKey(event)">
@@ -439,57 +510,133 @@
   </div>
 
   <script>
-    /* --- 1. Product Data --- */
+    /* --- Full Product & Accessories List --- */
     const products = [
+      // Laptops - Workstations
       {
         id: 1,
         title: "Dell Precision 5520",
         category: "workstation",
         price: "22,500 ج.م",
-        stock: "متبقي 2 فقط!",
+        stock: "متبقي 2 قطع!",
         rating: 5,
         specs: ["Intel Core i7-7820HQ", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro M1200 4GB"],
-        img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500"
+        img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
       },
       {
         id: 2,
         title: "HP EliteBook 840 G6",
         category: "workstation",
         price: "18,000 ج.م",
-        stock: "متوفر",
+        stock: "متوفر بالمخزن",
         rating: 4.8,
         specs: ["Intel Core i7-8665U", "16GB RAM DDR4", "256GB NVMe SSD", "Intel UHD Graphics 620"],
-        img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500"
+        img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G6"
       },
       {
         id: 3,
-        title: "Lenovo Legion 5 Ultra",
+        title: "Dell Precision 7530 Workstation",
+        category: "workstation",
+        price: "27,000 ج.م",
+        stock: "متبقي 1 قطعة!",
+        rating: 5,
+        specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"],
+        img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530"
+      },
+      // Laptops - Gaming & Power
+      {
+        id: 4,
+        title: "Lenovo Legion 5 Pro",
         category: "gaming",
         price: "34,500 ج.م",
-        stock: "متبقي 1 فقط!",
+        stock: "متبقي 1 قطعة!",
         rating: 5,
         specs: ["AMD Ryzen 7 5800H", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3060 6GB"],
-        img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500"
+        img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+5"
+      },
+      {
+        id: 5,
+        title: "ASUS ROG Strix G15",
+        category: "gaming",
+        price: "38,000 ج.م",
+        stock: "متوفر",
+        rating: 4.9,
+        specs: ["AMD Ryzen 9 5900HX", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3070 8GB"],
+        img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=ASUS+ROG+Strix+G15"
+      },
+      // Accessories Section
+      {
+        id: 6,
+        title: "حقيبة لابتوب مضادة للماء مقاومة للصدمات",
+        category: "accessory",
+        price: "850 ج.م",
+        stock: "متوفر بكثرة",
+        rating: 4.9,
+        specs: ["حجم يناسب 15.6 بوصة", "تبطين داخلي ناعم وحماية زوايا", "منفذ USB خارجي للشحن"],
+        img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Bag+15.6"
+      },
+      {
+        id: 7,
+        title: "ماوس جيمنج احترافي RGB Gaming Mouse",
+        category: "accessory",
+        price: "650 ج.م",
+        stock: "متوفر",
+        rating: 4.7,
+        specs: ["حساسية حتى 12000 DPI", "إضاءة RGB تفاعلية", "أزرار قابلة للبرمجة"],
+        img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=RGB+Gaming+Mouse"
+      },
+      {
+        id: 8,
+        title: "قاعدة تبريد لابتوب مزودة بـ 6 مروحات (Cooling Pad)",
+        category: "accessory",
+        price: "1,100 ج.م",
+        stock: "متبقي 3 قطع!",
+        rating: 4.8,
+        specs: ["تحكم في سرعة المراوح", "إضاءة LED زرقاء", "مستويات إمالة متعددة"],
+        img: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500",
+        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Cooling+Pad"
       }
     ];
 
-    /* --- 2. Render Products --- */
+    /* --- Render Products dynamically --- */
     function renderProducts(items) {
       const grid = document.getElementById('grid');
       grid.innerHTML = items.map(p => `
         <div class="card">
           <span class="stock-tag">${p.stock}</span>
           <img src="${p.img}" class="card-img" alt="${p.title}">
-          <h3 class="card-title">${p.title}</h3>
-          <div class="rating">
-            ${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))}
-            <span>(${p.rating})</span>
+          <div>
+            <h3 class="card-title">${p.title}</h3>
+            <div class="rating">
+              ${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))}
+              <span>(${p.rating})</span>
+            </div>
+            <ul class="specs-list">
+              ${p.specs.map(s => `<li><i class="fa-solid fa-check-circle"></i> ${s}</li>`).join('')}
+            </ul>
           </div>
-          <ul class="specs-list">
-            ${p.specs.map(s => `<li><i class="fa-solid fa-microchip"></i> ${s}</li>`).join('')}
-          </ul>
           <div class="card-footer">
-            <span class="price">${p.price}</span>
+            <div class="price-row">
+              <span class="price">${p.price}</span>
+            </div>
+            <div class="action-buttons">
+              <a href="${p.amazonUrl}" target="_blank" class="btn-amazon">
+                <i class="fa-brands fa-amazon"></i> شراء من أمازون
+              </a>
+              <button class="btn-icon" onclick="copySpecs('${p.title}', '${p.specs.join(', ')}')" title="نسخ المواصفات">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+              <button class="btn-icon" onclick="shareProduct('${p.title}', '${p.amazonUrl}')" title="مشاركة">
+                <i class="fa-solid fa-share-nodes"></i>
+              </button>
+            </div>
           </div>
         </div>
       `).join('');
@@ -497,6 +644,7 @@
 
     renderProducts(products);
 
+    /* Filter Logic */
     function filterData(cat) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
@@ -504,7 +652,35 @@
       else renderProducts(products.filter(p => p.category === cat));
     }
 
-    /* --- 3. HAMOD AI Chatbot Logic --- */
+    /* Interactive Copy & Share Buttons Logic */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function copySpecs(title, specs) {
+      const fullText = `${title}\nالمواصفات: ${specs}`;
+      navigator.clipboard.writeText(fullText).then(() => {
+        showToast("تم نسخ مواصفات الجهاز بنجاح! 📋");
+      });
+    }
+
+    function shareProduct(title, url) {
+      if (navigator.share) {
+        navigator.share({
+          title: title,
+          text: `شاهد هذا المنتج الممتاز من HAMOD LABS: ${title}`,
+          url: url,
+        });
+      } else {
+        navigator.clipboard.writeText(url);
+        showToast("تم نسخ رابط المنتج للمشاركة! 🔗");
+      }
+    }
+
+    /* AI Chatbot Logic */
     function toggleChat() {
       const win = document.getElementById('chatWindow');
       win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
@@ -520,11 +696,11 @@
       input.value = '';
 
       setTimeout(() => {
-        let reply = "يمكنك تصفح تشكيلتنا الممتازة! Dell Precision رائع جداً لعمل الـ Virtual Machines والمهام الثقيلة.";
-        if (text.includes("ميزانية") || text.includes("سعر") || text.includes("رخيص")) {
-          reply = "أنصحك بـ HP EliteBook 840 G6، يقدم أفضل قيمة مقابل سعر مع أداء سلس ممتاز!";
-        } else if (text.includes("العاب") || text.includes("ألعاب") || text.includes("كارت")) {
-          reply = "جهاز Lenovo Legion 5 بكرت RTX 3060 هو الاختيار الأقوى للألعاب والبرامج الثقيلة!";
+        let reply = "يمكنك تصفح تشكيلتنا الممتازة! Dell Precision رائع جداً للشبكات والـ Virtual Machines.";
+        if (text.includes("شنطة") || text.includes("حقيبة") || text.includes("ماوس") || text.includes("مروحة") || text.includes("اكسسوار")) {
+          reply = "لدينا قسم أكسسوارات رائع شامل حقائب مضادة للماء، ماوسات جيمنج وقواعد تبريد احترافية!";
+        } else if (text.includes("ميزانية") || text.includes("سعر") || text.includes("رخيص")) {
+          reply = "أنصحك بـ HP EliteBook 840 G6 بسعر 18,000 ج.م يقدم أداءً ممتازاً وقيمة عالية.";
         }
         body.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
         body.scrollTop = body.scrollHeight;
@@ -535,7 +711,7 @@
       if (e.key === 'Enter') sendMsg();
     }
 
-    /* --- 4. Three.js 3D Laptop Cube Viewer --- */
+    /* Three.js 3D Viewer */
     const container = document.getElementById('3d-canvas');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -544,7 +720,6 @@
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Create Futuristic Wireframe Box/Laptop Metaphor
     const geometry = new THREE.BoxGeometry(2.8, 0.15, 2);
     const material = new THREE.MeshStandardMaterial({ 
       color: 0x00f2fe, 
