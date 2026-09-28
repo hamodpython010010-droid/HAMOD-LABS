@@ -383,7 +383,7 @@ function render(){
     <h2>${c.title}</h2><div class="sub">${c.condition}</div>
     <div class="price">${money(c.price)}</div>
     <div class="spec">🖥️ ${c.screen}<br>⚙️ ${c.processor} • ${c.ram} • ${c.storage}</div>
-    <button>عرض التفاصيل</button><button onclick="event.stopPropagation();shareLaptop(${c.id})" style="margin-top:8px;background:#25D366">📤 شارك</button></div></article>`).join('');
+    <button>عرض التفاصيل</button><button onclick="event.stopPropagation();shareLaptop(${c.id})" style="margin-top:8px;background:#25D366">📤 شارك</button></div><a href="https://www.amazon.com/s?k=${encodeURIComponent(c.title)}&tag=mohamed005cb-20" target="_blank" rel="sponsored noopener" onclick="event.stopPropagation()" style="display:block;margin-top:8px;padding:10px;text-align:center;background:#FF9900;color:#000;border-radius:8px;font-weight:bold;text-decoration:none;">🛒 اشتري من Amazon</a></article>`).join('');
 }
 
 function shareLaptop(id){
