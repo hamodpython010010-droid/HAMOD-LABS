@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | العصر الجديد للابتوبات والأكسسوارات</title>
+  <title>HAMOD LABS | المعرض الشامل للابتوبات والأكسسوارات</title>
   
   <!-- Font Awesome Icons & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +15,7 @@
   <style>
     :root {
       --bg-dark: #0a0b10;
-      --bg-card: rgba(18, 22, 36, 0.7);
+      --bg-card: rgba(18, 22, 36, 0.75);
       --primary-cyan: #00f2fe;
       --primary-purple: #4facfe;
       --accent-neon: #7f00ff;
@@ -54,7 +54,7 @@
       font-weight: bold;
       box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
       transition: 0.4s ease;
-      z-index: 3000;
+      z-index: 4000;
     }
     .toast.show {
       transform: translateX(-50%) translateY(0);
@@ -109,7 +109,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 3rem 5%;
-      min-height: 70vh;
+      min-height: 65vh;
     }
 
     .hero-text {
@@ -146,7 +146,7 @@
 
     .canvas-container {
       width: 45%;
-      height: 380px;
+      height: 350px;
     }
 
     #3d-canvas {
@@ -154,7 +154,7 @@
       height: 100%;
     }
 
-    /* Filter & Products */
+    /* Products Section */
     .products-section {
       padding: 3rem 5%;
     }
@@ -196,13 +196,13 @@
       gap: 2rem;
     }
 
-    /* Product Card */
+    /* Product Card (Without Images, Icon Focus) */
     .card {
       background: var(--bg-card);
       backdrop-filter: blur(16px);
       border: 1px solid var(--border-glow);
       border-radius: 20px;
-      padding: 1.5rem;
+      padding: 1.8rem;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -228,16 +228,30 @@
       font-size: 0.8rem;
     }
 
-    .card-img {
+    /* Icon Box replacing image */
+    .icon-box {
       width: 100%;
-      height: 180px;
-      object-fit: contain;
-      margin-bottom: 1rem;
-      border-radius: 10px;
+      height: 140px;
+      background: rgba(0, 242, 254, 0.05);
+      border: 1px dashed var(--border-glow);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      color: var(--primary-cyan);
+      font-size: 3.5rem;
+      transition: 0.3s;
+    }
+
+    .card:hover .icon-box {
+      background: rgba(0, 242, 254, 0.15);
+      color: #fff;
+      text-shadow: 0 0 15px var(--primary-cyan);
     }
 
     .card-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       margin-bottom: 0.4rem;
     }
 
@@ -285,7 +299,7 @@
       color: var(--primary-cyan);
     }
 
-    /* Action Buttons Inside Card */
+    /* Action Buttons */
     .action-buttons {
       display: flex;
       gap: 8px;
@@ -332,6 +346,93 @@
       color: #000;
     }
 
+    /* Exit Rating Modal */
+    .exit-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 5000;
+    }
+
+    .exit-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--primary-cyan);
+      padding: 2.5rem;
+      border-radius: 25px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+      position: relative;
+    }
+
+    .exit-modal h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+
+    .exit-modal p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .star-rating {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-size: 2rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+
+    .star-rating i.active, .star-rating i:hover {
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700;
+    }
+
+    .review-textarea {
+      width: 100%;
+      height: 90px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 10px;
+      color: #fff;
+      outline: none;
+      resize: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .submit-btn {
+      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
     /* AI Chat Window */
     .ai-chat-btn {
       position: fixed;
@@ -349,7 +450,6 @@
       cursor: pointer;
       box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
       z-index: 2000;
-      transition: 0.3s;
     }
 
     .ai-chat-window {
@@ -366,7 +466,6 @@
       flex-direction: column;
       z-index: 2000;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
     .chat-header {
@@ -375,7 +474,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .chat-body {
@@ -463,12 +561,12 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <span class="badge-ultra">حمـودي لابـس • Ultra Gaming & Workstations</span>
-      <h1>الأداء الأقصى للتطوير، الألعاب والأكسسوارات</h1>
-      <p>تصفح أكبر تشكيلة لابتوبات مجهزة للـ Virtualization والألعاب الثقيلة بالإضافة لأفخم الملحقات والأكسسوارات الاحترافية.</p>
+      <span class="badge-ultra">حمـودي لابـس • Ultra Performance Hub</span>
+      <h1>الأداء الأقصى للابتوبات والأكسسوارات</h1>
+      <p>تصفح أكبر تشكيلة لابتوبات مجهزة للشبكات والألعاب بالإضافة للسماعات، الباور بنك، ووصلات الشاحن السريع.</p>
     </div>
     
-    <!-- 3D Interactive Canvas -->
+    <!-- 3D Canvas -->
     <div class="canvas-container">
       <div id="3d-canvas"></div>
     </div>
@@ -482,15 +580,35 @@
       <button class="filter-btn active" onclick="filterData('all')">الكل</button>
       <button class="filter-btn" onclick="filterData('workstation')">Workstations</button>
       <button class="filter-btn" onclick="filterData('gaming')">Gaming & Power</button>
-      <button class="filter-btn" onclick="filterData('accessory')">الأكسسوارات 🎧</button>
+      <button class="filter-btn" onclick="filterData('accessory')">الأكسسوارات 🎧🔋</button>
     </div>
 
     <div class="products-grid" id="grid">
-      <!-- Cards dynamically generated via JavaScript -->
+      <!-- Cards generated via JS -->
     </div>
   </section>
 
-  <!-- AI Assistant Chat Trigger & Window -->
+  <!-- Exit Intent Rating Modal Popup -->
+  <div class="exit-modal-overlay" id="exitModal">
+    <div class="exit-modal">
+      <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
+      <h2>قبل أن تغادر حمودي لابس! ⭐</h2>
+      <p>يهمنا رأيك جداً، كيف كانت تجربتك في تصفح المعرض اليوم؟</p>
+      
+      <div class="star-rating" id="starContainer">
+        <i class="fa-solid fa-star" onclick="setRating(1)"></i>
+        <i class="fa-solid fa-star" onclick="setRating(2)"></i>
+        <i class="fa-solid fa-star" onclick="setRating(3)"></i>
+        <i class="fa-solid fa-star" onclick="setRating(4)"></i>
+        <i class="fa-solid fa-star" onclick="setRating(5)"></i>
+      </div>
+
+      <textarea class="review-textarea" id="reviewMsg" placeholder="اكتب ملاحظاتك أو اقتراحاتك هنا..."></textarea>
+      <button class="submit-btn" onclick="submitRating()">إرسال التقييم</button>
+    </div>
+  </div>
+
+  <!-- AI Chatbot -->
   <div class="ai-chat-btn" onclick="toggleChat()">
     <i class="fa-solid fa-robot"></i>
   </div>
@@ -501,7 +619,7 @@
       <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً بك يا حمودي! أنا مساعدك الذكي، أخبرني بالميزانية أو الاستخدام وسأرشح لك اللابتوب أو الأكسسوار المناسب فوراً!</div>
+      <div class="chat-msg bot">أهلاً بك يا حمودي! أنا مساعدك الذكي. أخبرني باحتياجك أو الميزانية وسأرشح لك الجهاز أو الأكسسوار المناسب فوراً!</div>
     </div>
     <div class="chat-input">
       <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKey(event)">
@@ -510,18 +628,18 @@
   </div>
 
   <script>
-    /* --- Full Product & Accessories List --- */
+    /* Full Products & Accessories List (Without Images, Icon Focused) */
     const products = [
-      // Laptops - Workstations
+      // Workstation Laptops
       {
         id: 1,
         title: "Dell Precision 5520",
         category: "workstation",
         price: "22,500 ج.م",
-        stock: "متبقي 2 قطع!",
+        stock: "متبقي 2 فقط!",
         rating: 5,
+        icon: "fa-laptop-code",
         specs: ["Intel Core i7-7820HQ", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro M1200 4GB"],
-        img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500",
         amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
       },
       {
@@ -529,10 +647,10 @@
         title: "HP EliteBook 840 G6",
         category: "workstation",
         price: "18,000 ج.م",
-        stock: "متوفر بالمخزن",
+        stock: "متوفر",
         rating: 4.8,
+        icon: "fa-laptop",
         specs: ["Intel Core i7-8665U", "16GB RAM DDR4", "256GB NVMe SSD", "Intel UHD Graphics 620"],
-        img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500",
         amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G6"
       },
       {
@@ -540,78 +658,124 @@
         title: "Dell Precision 7530 Workstation",
         category: "workstation",
         price: "27,000 ج.م",
-        stock: "متبقي 1 قطعة!",
+        stock: "متبقي 1 فقط!",
         rating: 5,
+        icon: "fa-microchip",
         specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"],
-        img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500",
         amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530"
       },
-      // Laptops - Gaming & Power
       {
         id: 4,
+        title: "Lenovo ThinkPad P52",
+        category: "workstation",
+        price: "24,000 ج.م",
+        stock: "متوفر",
+        rating: 4.9,
+        icon: "fa-laptop-medical",
+        specs: ["Intel Core i7-8750H", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro P1000 4GB"],
+        amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Thinkpad+P52"
+      },
+      // Gaming Laptops
+      {
+        id: 5,
         title: "Lenovo Legion 5 Pro",
         category: "gaming",
         price: "34,500 ج.م",
-        stock: "متبقي 1 قطعة!",
+        stock: "متبقي 1 فقط!",
         rating: 5,
+        icon: "fa-gamepad",
         specs: ["AMD Ryzen 7 5800H", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3060 6GB"],
-        img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
         amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+5"
       },
       {
-        id: 5,
+        id: 6,
         title: "ASUS ROG Strix G15",
         category: "gaming",
         price: "38,000 ج.م",
         stock: "متوفر",
         rating: 4.9,
+        icon: "fa-dragon",
         specs: ["AMD Ryzen 9 5900HX", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3070 8GB"],
-        img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500",
         amazonUrl: "https://www.amazon.eg/s?k=ASUS+ROG+Strix+G15"
-      },
-      // Accessories Section
-      {
-        id: 6,
-        title: "حقيبة لابتوب مضادة للماء مقاومة للصدمات",
-        category: "accessory",
-        price: "850 ج.م",
-        stock: "متوفر بكثرة",
-        rating: 4.9,
-        specs: ["حجم يناسب 15.6 بوصة", "تبطين داخلي ناعم وحماية زوايا", "منفذ USB خارجي للشحن"],
-        img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500",
-        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Bag+15.6"
       },
       {
         id: 7,
+        title: "Acer Nitro 5 Gaming",
+        category: "gaming",
+        price: "29,500 ج.م",
+        stock: "متوفر",
+        rating: 4.7,
+        icon: "fa-fire",
+        specs: ["Intel Core i5-11400H", "16GB RAM DDR4", "512GB NVMe SSD", "Nvidia RTX 3050 4GB"],
+        amazonUrl: "https://www.amazon.eg/s?k=Acer+Nitro+5"
+      },
+      // Accessories
+      {
+        id: 8,
+        title: "سماعة جيمنج محيطية 7.1 RGB Headset",
+        category: "accessory",
+        price: "1,250 ج.م",
+        stock: "متوفر",
+        rating: 4.9,
+        icon: "fa-headphones-simple",
+        specs: ["صوت محيطي 7.1 للالعاب", "مايك عازل للضوضاء", "إضاءة RGB ونعومة على الأذن"],
+        amazonUrl: "https://www.amazon.eg/s?k=Gaming+Headset+7.1"
+      },
+      {
+        id: 9,
+        title: "باور بنك Anker Fast Charging 20,000mAh",
+        category: "accessory",
+        price: "1,800 ج.م",
+        stock: "متبقي 3 فقط!",
+        rating: 5,
+        icon: "fa-battery-full",
+        specs: ["سعة 20000 مللي أمبير", "شحن سريع PD 22.5W", "يدعم شحن الهواتف واللابتوب"],
+        amazonUrl: "https://www.amazon.eg/s?k=Anker+Powerbank+20000"
+      },
+      {
+        id: 10,
+        title: "وصلة كابل شاحن Type-C مضفر سريع 100W",
+        category: "accessory",
+        price: "350 ج.م",
+        stock: "متوفر بكثرة",
+        rating: 4.8,
+        icon: "fa-plug",
+        specs: ["طول 2 متر قماش مضفر", "يدعم نقل البيانات للشاشات Fast Charge", "مقاوم للقطع والقطع الحراري"],
+        amazonUrl: "https://www.amazon.eg/s?k=Type+C+Cable+100W"
+      },
+      {
+        id: 11,
+        title: "حقيبة لابتوب مضادة للماء مقاومة للصدمات",
+        category: "accessory",
+        price: "850 ج.م",
+        stock: "متوفر",
+        rating: 4.9,
+        icon: "fa-bag-shopping",
+        specs: ["يناسب لابتوب حتى 15.6 بوصة", "تبطين داخلي ناعم وحماية زوايا", "منفذ USB خارجي للشحن"],
+        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Bag+15.6"
+      },
+      {
+        id: 12,
         title: "ماوس جيمنج احترافي RGB Gaming Mouse",
         category: "accessory",
         price: "650 ج.م",
         stock: "متوفر",
         rating: 4.7,
+        icon: "fa-computer-mouse",
         specs: ["حساسية حتى 12000 DPI", "إضاءة RGB تفاعلية", "أزرار قابلة للبرمجة"],
-        img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500",
         amazonUrl: "https://www.amazon.eg/s?k=RGB+Gaming+Mouse"
-      },
-      {
-        id: 8,
-        title: "قاعدة تبريد لابتوب مزودة بـ 6 مروحات (Cooling Pad)",
-        category: "accessory",
-        price: "1,100 ج.م",
-        stock: "متبقي 3 قطع!",
-        rating: 4.8,
-        specs: ["تحكم في سرعة المراوح", "إضاءة LED زرقاء", "مستويات إمالة متعددة"],
-        img: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500",
-        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Cooling+Pad"
       }
     ];
 
-    /* --- Render Products dynamically --- */
+    /* Render Products Function */
     function renderProducts(items) {
       const grid = document.getElementById('grid');
       grid.innerHTML = items.map(p => `
         <div class="card">
           <span class="stock-tag">${p.stock}</span>
-          <img src="${p.img}" class="card-img" alt="${p.title}">
+          <div class="icon-box">
+            <i class="fa-solid ${p.icon}"></i>
+          </div>
           <div>
             <h3 class="card-title">${p.title}</h3>
             <div class="rating">
@@ -644,7 +808,7 @@
 
     renderProducts(products);
 
-    /* Filter Logic */
+    /* Filter Data */
     function filterData(cat) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
@@ -652,7 +816,7 @@
       else renderProducts(products.filter(p => p.category === cat));
     }
 
-    /* Interactive Copy & Share Buttons Logic */
+    /* Toast & Action Handlers */
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.innerText = msg;
@@ -669,15 +833,43 @@
 
     function shareProduct(title, url) {
       if (navigator.share) {
-        navigator.share({
-          title: title,
-          text: `شاهد هذا المنتج الممتاز من HAMOD LABS: ${title}`,
-          url: url,
-        });
+        navigator.share({ title: title, text: `شاهد هذا المنتج من HAMOD LABS: ${title}`, url: url });
       } else {
         navigator.clipboard.writeText(url);
         showToast("تم نسخ رابط المنتج للمشاركة! 🔗");
       }
+    }
+
+    /* Exit Intent Modal Popup Logic */
+    let hasShownModal = false;
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0 && !hasShownModal) {
+        document.getElementById('exitModal').style.display = 'flex';
+        hasShownModal = true;
+      }
+    });
+
+    function closeModal() {
+      document.getElementById('exitModal').style.display = 'none';
+    }
+
+    let selectedRating = 0;
+    function setRating(stars) {
+      selectedRating = stars;
+      const icons = document.querySelectorAll('#starContainer i');
+      icons.forEach((icon, idx) => {
+        if (idx < stars) icon.classList.add('active');
+        else icon.classList.remove('active');
+      });
+    }
+
+    function submitRating() {
+      if (selectedRating === 0) {
+        alert("يرجى اختيار عدد النجوم أولاً!");
+        return;
+      }
+      closeModal();
+      showToast("شكراً جزيلاً لك على تقييمك يا حمودي! ⭐");
     }
 
     /* AI Chatbot Logic */
@@ -697,8 +889,8 @@
 
       setTimeout(() => {
         let reply = "يمكنك تصفح تشكيلتنا الممتازة! Dell Precision رائع جداً للشبكات والـ Virtual Machines.";
-        if (text.includes("شنطة") || text.includes("حقيبة") || text.includes("ماوس") || text.includes("مروحة") || text.includes("اكسسوار")) {
-          reply = "لدينا قسم أكسسوارات رائع شامل حقائب مضادة للماء، ماوسات جيمنج وقواعد تبريد احترافية!";
+        if (text.includes("سماعة") || text.includes("باور") || text.includes("وصلة") || text.includes("شاحن") || text.includes("كابل")) {
+          reply = "لدينا قسم أكسسوارات متكامل يضم سماعات جيمنج 7.1، باور بنك Anker، وكابلات شحن سريعة Type-C 100W!";
         } else if (text.includes("ميزانية") || text.includes("سعر") || text.includes("رخيص")) {
           reply = "أنصحك بـ HP EliteBook 840 G6 بسعر 18,000 ج.م يقدم أداءً ممتازاً وقيمة عالية.";
         }
