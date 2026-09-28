@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAMOD LABS | متجر اللابتوبات والاستيراد</title>
+    <title>HAMOD LABS | متجر اللابتوبات والإكسسوارات</title>
     <!-- Font Awesome الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -130,26 +130,32 @@
         /* Filter & Search Bar */
         .controls-bar {
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 1.5rem;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .search-row {
+            display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .search-box {
             position: relative;
             flex-grow: 1;
-            max-width: 400px;
+            max-width: 450px;
         }
 
         .search-box input {
             width: 100%;
-            padding: 10px 40px 10px 15px;
+            padding: 12px 45px 12px 18px;
             border-radius: 30px;
             border: 1px solid var(--border-color);
             outline: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             background: var(--card-bg);
             color: var(--text-main);
             box-shadow: var(--shadow-sm);
@@ -157,33 +163,66 @@
 
         .search-box i {
             position: absolute;
-            right: 15px;
+            right: 18px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
         }
 
-        .filter-tags {
+        .filter-group-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 6px;
             display: flex;
-            gap: 8px;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
         }
 
         .tag-btn {
             background: var(--card-bg);
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-sm);
         }
 
-        .tag-btn.active, .tag-btn:hover {
+        .tag-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .tag-btn.active {
             background: var(--accent-color);
             color: white;
             border-color: var(--accent-color);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .tag-btn-acc {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .tag-btn-acc.active {
+            background: #10b981;
+            border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .products-grid {
@@ -205,18 +244,7 @@
             perspective: 1000px;
         }
 
-        .product-card.highlighted {
-            border: 2px solid var(--accent-color);
-            animation: pulseHighlight 2s infinite;
-        }
-
-        @keyframes pulseHighlight {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
-        }
-
-        /* الهيدر الرسومي الفخم لكل كارت */
+        /* الهيدر الرسومي لكل كارت */
         .card-graphic-header {
             position: relative;
             width: 100%;
@@ -227,6 +255,10 @@
             justify-content: center;
             overflow: hidden;
             transform: translateZ(20px);
+        }
+
+        .card-graphic-header.acc-bg {
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
         }
 
         .card-graphic-header::before {
@@ -320,7 +352,7 @@
             gap: 6px;
         }
 
-        /* مؤشرات الأداء الفخمة */
+        /* مؤشرات الأداء */
         .perf-indicators {
             display: flex;
             gap: 6px;
@@ -431,7 +463,7 @@
             border-color: var(--accent-color);
         }
 
-        /* Floating Wizard Button (المساعد الذكي) */
+        /* Floating Wizard Button */
         .wizard-float-btn {
             position: fixed;
             bottom: 25px;
@@ -579,17 +611,32 @@
     </header>
 
     <div class="container">
-        <!-- شريط بحث وفلترة -->
+        <!-- شريط بحث وفلترة مطور -->
         <div class="controls-bar">
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="ابحث بالمواصفات، المعالج، الرام..." oninput="filterProducts()">
+            <div class="search-row">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="ابحث بالاسم، المعالج، أو الإكسسوار..." oninput="filterProducts()">
+                </div>
             </div>
-            <div class="filter-tags">
-                <button class="tag-btn active" onclick="setBrandFilter('all', this)">الكل</button>
-                <button class="tag-btn" onclick="setBrandFilter('Dell', this)">Dell</button>
-                <button class="tag-btn" onclick="setBrandFilter('HP', this)">HP</button>
-                <button class="tag-btn" onclick="setBrandFilter('Lenovo', this)">Lenovo</button>
+
+            <!-- أزرار الأقسام والماركات والإكسسوارات -->
+            <div>
+                <div class="filter-group-title"><i class="fa-solid fa-laptop"></i> أقسام اللابتوبات:</div>
+                <div class="filter-tags-container" style="margin-bottom: 12px;">
+                    <button class="tag-btn active" onclick="setCategoryFilter('all', this)">الكل</button>
+                    <button class="tag-btn" onclick="setCategoryFilter('Dell', this)">Dell</button>
+                    <button class="tag-btn" onclick="setCategoryFilter('HP', this)">HP</button>
+                    <button class="tag-btn" onclick="setCategoryFilter('Lenovo', this)">Lenovo</button>
+                </div>
+
+                <div class="filter-group-title"><i class="fa-solid fa-plug"></i> قسم الإكسسوارات الفخمة:</div>
+                <div class="filter-tags-container">
+                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('accessories_all', this)"><i class="fa-solid fa-boxes-packing"></i> كل الإكسسوارات</button>
+                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('headphones', this)"><i class="fa-solid fa-headphones"></i> سماعات</button>
+                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('powerbanks', this)"><i class="fa-solid fa-car-battery"></i> باور بانك</button>
+                    <button class="tag-btn tag-btn-acc" onclick="setCategoryFilter('bags', this)"><i class="fa-solid fa-bag-shopping"></i> شنط لابتوب</button>
+                </div>
             </div>
         </div>
 
@@ -618,7 +665,7 @@
                 <div class="wizard-options">
                     <button class="wizard-opt-btn" onclick="wizardSelect('use', 'dev')">💻 برمجة وأمن سيبراني & VMs</button>
                     <button class="wizard-opt-btn" onclick="wizardSelect('use', 'gpu')">🎮 ألعاب وجرافيك وتصميم</button>
-                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'office')">📚 تصفح وشغل مكتبي وحاسة</button>
+                    <button class="wizard-opt-btn" onclick="wizardSelect('use', 'office')">📚 تصفح وشغل مكتبي</button>
                 </div>
             </div>
 
@@ -662,9 +709,11 @@
 
     <script>
         const products = [
+            // اللابتوبات
             {
                 id: "dell-precision-5520",
-                brand: "Dell",
+                type: "laptop",
+                category: "Dell",
                 title: "Dell Precision 5520 Workstation",
                 price: 18500,
                 oldPrice: 20500,
@@ -678,7 +727,8 @@
             },
             {
                 id: "hp-zbook-15-g5",
-                brand: "HP",
+                type: "laptop",
+                category: "HP",
                 title: "HP ZBook 15 G5 Workstation",
                 price: 22000,
                 oldPrice: 24500,
@@ -692,7 +742,8 @@
             },
             {
                 id: "hp-elitebook-840-g5",
-                brand: "HP",
+                type: "laptop",
+                category: "HP",
                 title: "HP EliteBook 840 G5 Slim",
                 price: 13500,
                 oldPrice: 15000,
@@ -706,7 +757,8 @@
             },
             {
                 id: "lenovo-thinkpad-t480",
-                brand: "Lenovo",
+                type: "laptop",
+                category: "Lenovo",
                 title: "Lenovo ThinkPad T480 Business",
                 price: 12500,
                 oldPrice: 14000,
@@ -719,22 +771,9 @@
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+T480"
             },
             {
-                id: "dell-latitude-5400",
-                brand: "Dell",
-                title: "Dell Latitude 5400 Enterprise",
-                price: 12000,
-                oldPrice: 13500,
-                processor: "Intel Core i5-8265U",
-                ram: "8GB DDR4",
-                storage: "256GB NVMe SSD",
-                gpu: "Intel UHD 620",
-                devScore: "جيد",
-                gpuScore: "متوسط",
-                amazonUrl: "https://www.amazon.eg/s?k=Dell+Latitude+5400"
-            },
-            {
                 id: "lenovo-thinkpad-p52",
-                brand: "Lenovo",
+                type: "laptop",
+                category: "Lenovo",
                 title: "Lenovo ThinkPad P52 Workstation",
                 price: 24000,
                 oldPrice: 27000,
@@ -746,43 +785,66 @@
                 gpuScore: "خارق",
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+P52"
             },
+            // الإكسسوارات الفخمة
             {
-                id: "dell-precision-7530",
-                brand: "Dell",
-                title: "Dell Precision 7530 Workstation",
-                price: 25500,
-                oldPrice: 29000,
-                processor: "Intel Core i7-8750H",
-                ram: "32GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia Quadro P3200 6GB",
-                devScore: "خارق",
-                gpuScore: "وحش جرافيك",
-                amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530"
+                id: "headphone-pro-gaming",
+                type: "accessory",
+                category: "headphones",
+                title: "سماعة محيطية احترافية HyperX Cloud II",
+                price: 2800,
+                oldPrice: 3200,
+                processor: "صوت محيطي 7.1 Virtual",
+                ram: "مايك بعزل ضوضاء احترافي",
+                storage: "وسائد أذن جلد مريحة",
+                gpu: "وصلة USB + 3.5mm",
+                devScore: "عزل ممتاز",
+                gpuScore: "صوت جيمنج 10/10",
+                amazonUrl: "https://www.amazon.eg/s?k=HyperX+Cloud+II"
             },
             {
-                id: "dell-g3-15-3590",
-                brand: "Dell",
-                title: "Dell G3 15-3590 Gaming",
-                price: 20500,
-                oldPrice: 22500,
-                processor: "Intel Core i5-9300H",
-                ram: "16GB DDR4",
-                storage: "512GB NVMe SSD",
-                gpu: "Nvidia GTX 1650 4GB",
-                devScore: "ممتاز",
-                gpuScore: "وحش ألعاب",
-                amazonUrl: "https://www.amazon.eg/s?k=Dell+G3+15+3590"
+                id: "powerbank-anker-65w",
+                type: "accessory",
+                category: "powerbanks",
+                title: "باور بانك أنكر Anker 87W للابتوب والـ Power",
+                price: 3400,
+                oldPrice: 3900,
+                processor: "سعة 24,000mAh عالية",
+                ram: "شحن سريع PD 65W للابتوب",
+                storage: "شاشة LED رقمية لنسبة الشحن",
+                gpu: "3 منافذ شحن سريعة",
+                devScore: "شحن للابتوب",
+                gpuScore: "اعتمادية عالية",
+                amazonUrl: "https://www.amazon.eg/s?k=Anker+Power+Bank+Laptop"
+            },
+            {
+                id: "bag-swissgear-waterproof",
+                type: "accessory",
+                category: "bags",
+                title: "شنطة ظهر للابتوب SwissGear مقاومة للماء",
+                price: 1250,
+                oldPrice: 1500,
+                processor: "تتسع للابتوب حتى 15.6 - 17 بوصة",
+                ram: "خامات ممتازة مقاومة للماء والقطع",
+                storage: "مخرج USB خارجي لشحن الموبايل",
+                gpu: "جيوب متعددة مع حماية مبطنة",
+                devScore: "سعة ضخمة",
+                gpuScore: "ضد الصدمات",
+                amazonUrl: "https://www.amazon.eg/s?k=Laptop+Bag+Waterproof"
             }
         ];
 
         let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
         let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
-        let selectedBrand = 'all';
-        let wizardSelection = {};
+        let activeCategory = 'all';
 
-        function getProductIcon(title) {
-            const t = title.toLowerCase();
+        function getProductIcon(item) {
+            if(item.type === 'accessory') {
+                if(item.category === 'headphones') return 'fa-headphones';
+                if(item.category === 'powerbanks') return 'fa-car-battery';
+                if(item.category === 'bags') return 'fa-bag-shopping';
+                return 'fa-plug';
+            }
+            const t = item.title.toLowerCase();
             if (t.includes('workstation') || t.includes('precision') || t.includes('zbook') || t.includes('p52')) return 'fa-laptop-code';
             if (t.includes('gaming') || t.includes('g3')) return 'fa-gamepad';
             return 'fa-laptop';
@@ -794,23 +856,28 @@
             grid.innerHTML = '';
 
             const filtered = products.filter(p => {
-                const matchesBrand = selectedBrand === 'all' || p.brand === selectedBrand;
+                let matchesCategory = false;
+                if (activeCategory === 'all') matchesCategory = true;
+                else if (activeCategory === 'accessories_all') matchesCategory = (p.type === 'accessory');
+                else if (['Dell', 'HP', 'Lenovo'].includes(activeCategory)) matchesCategory = (p.category === activeCategory);
+                else matchesCategory = (p.category === activeCategory);
+
                 const matchesSearch = p.title.toLowerCase().includes(searchVal) || 
-                                     p.processor.toLowerCase().includes(searchVal) ||
-                                     p.gpu.toLowerCase().includes(searchVal);
-                return matchesBrand && matchesSearch;
+                                     p.processor.toLowerCase().includes(searchVal);
+                return matchesCategory && matchesSearch;
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">لا توجد أجهزة تطابق البحث.</p>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem; font-size:1.1rem;">لا توجد منتجات تطابق هذا القسم أو البحث حالياً.</p>';
                 return;
             }
 
             filtered.forEach(p => {
                 const isFav = favorites.includes(p.id);
                 const isComp = compareList.includes(p.id);
-                const iconClass = getProductIcon(p.title);
+                const iconClass = getProductIcon(p);
                 const monthlyInstallment = Math.round(p.price / 12);
+                const isAcc = p.type === 'accessory';
 
                 const card = document.createElement('div');
                 card.className = `product-card`;
@@ -818,29 +885,27 @@
                 card.setAttribute('data-tilt', '');
                 card.setAttribute('data-tilt-max', '8');
                 card.setAttribute('data-tilt-speed', '400');
-                card.setAttribute('data-tilt-glare', 'true');
-                card.setAttribute('data-tilt-max-glare', '0.15');
 
                 card.innerHTML = `
-                    <div class="card-graphic-header">
+                    <div class="card-graphic-header ${isAcc ? 'acc-bg' : ''}">
                         <div class="top-actions">
                             <button class="icon-btn ${isFav ? 'active-fav' : ''}" onclick="toggleFavorite('${p.id}')">
                                 <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
                             </button>
                         </div>
                         <i class="fa-solid ${iconClass} card-graphic-icon"></i>
-                        <span class="brand-pill">${p.brand} Original</span>
+                        <span class="brand-pill">${isAcc ? 'إكسسوار فخم' : p.category + ' Original'}</span>
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">${p.title}</h3>
                         <ul class="product-specs">
-                            <li><i class="fa-solid fa-microchip"></i> ${p.processor}</li>
-                            <li><i class="fa-solid fa-memory"></i> ${p.ram} | ${p.storage}</li>
-                            <li><i class="fa-solid fa-desktop"></i> ${p.gpu}</li>
+                            <li><i class="fa-solid fa-circle-info"></i> ${p.processor}</li>
+                            <li><i class="fa-solid fa-sliders"></i> ${p.ram}</li>
+                            <li><i class="fa-solid fa-shield-halved"></i> ${p.storage}</li>
                         </ul>
                         <div class="perf-indicators">
-                            <span class="perf-tag perf-dev"><i class="fa-solid fa-code"></i> البرمجة: ${p.devScore}</span>
-                            <span class="perf-tag perf-gpu"><i class="fa-solid fa-wand-magic-sparkles"></i> الجرافيك: ${p.gpuScore}</span>
+                            <span class="perf-tag perf-dev"><i class="fa-solid fa-star"></i> ${p.devScore}</span>
+                            <span class="perf-tag perf-gpu"><i class="fa-solid fa-thumbs-up"></i> ${p.gpuScore}</span>
                         </div>
                         <div class="price-section">
                             <div>
@@ -853,9 +918,9 @@
                         </div>
                         <div class="card-buttons">
                             <a href="${p.amazonUrl}" target="_blank" class="btn-amazon">
-                                <i class="fa-brands fa-amazon"></i> شراء من أمازون
+                                <i class="fa-brands fa-amazon"></i> شراء عبر أمازون
                             </a>
-                            <button class="btn-action" onclick="copySpecs('${p.title}', '${p.processor}', '${p.ram}', '${p.storage}', '${p.gpu}', '${p.price}')">
+                            <button class="btn-action" onclick="copySpecs('${p.title}', '${p.processor}', '${p.ram}', '${p.price}')">
                                 <i class="fa-solid fa-copy"></i> نسخ
                             </button>
                             <button class="btn-action btn-compare ${isComp ? 'active' : ''}" onclick="toggleCompare('${p.id}')">
@@ -867,15 +932,14 @@
                 grid.appendChild(card);
             });
 
-            // تفعيل تأثير Tilt 3D
             VanillaTilt.init(document.querySelectorAll(".product-card"));
             updateBadges();
         }
 
-        function copySpecs(title, proc, ram, storage, gpu, price) {
-            const text = `💻 *${title}*\n• المعالج: ${proc}\n• الرام: ${ram}\n• الهارد: ${storage}\n• كارت الشاشة: ${gpu}\n💰 السعر: ${Number(price).toLocaleString()} ج.م\nمن متجر HAMOD LABS`;
+        function copySpecs(title, proc, ram, price) {
+            const text = `🛒 *${title}*\n• ${proc}\n• ${ram}\n💰 السعر: ${Number(price).toLocaleString()} ج.م\nمتوفر في HAMOD LABS`;
             navigator.clipboard.writeText(text);
-            showToast('تم نسخ مواصفات الجهاز للحافظة! 📋');
+            showToast('تم نسخ المواصفات للحافظة! 📋');
         }
 
         function toggleDarkMode() {
@@ -899,7 +963,6 @@
         }
 
         function wizardSelect(key, val) {
-            wizardSelection[key] = val;
             if (key === 'use') {
                 document.getElementById('wizardStep1').classList.remove('active');
                 document.getElementById('wizardStep2').classList.add('active');
@@ -912,15 +975,8 @@
 
         function renderWizardResults() {
             const resContainer = document.getElementById('wizardProducts');
-            let matched = products;
-
-            if (wizardSelection.budget === 'low') matched = matched.filter(p => p.price <= 15000);
-            else if (wizardSelection.budget === 'mid') matched = matched.filter(p => p.price > 15000 && p.price <= 22000);
-            else if (wizardSelection.budget === 'high') matched = matched.filter(p => p.price > 22000);
-
-            if (matched.length === 0) matched = products.slice(0, 2);
-
-            resContainer.innerHTML = matched.map(p => `
+            let matched = products.filter(p => p.type === 'laptop');
+            resContainer.innerHTML = matched.slice(0, 2).map(p => `
                 <div class="product-card" style="margin-bottom:10px;">
                     <div class="product-info">
                         <h4>${p.title}</h4>
@@ -933,8 +989,8 @@
 
         function filterProducts() { renderProducts(); }
 
-        function setBrandFilter(brand, btn) {
-            selectedBrand = brand;
+        function setCategoryFilter(cat, btn) {
+            activeCategory = cat;
             document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderProducts();
@@ -965,7 +1021,7 @@
                 showToast('تمت الإزالة من المقارنة');
             } else {
                 if (compareList.length >= 3) {
-                    showToast('الحد الأقصى للمقارنة هو 3 أجهزة');
+                    showToast('الحد الأقصى للمقارنة هو 3 منتجات');
                     return;
                 }
                 compareList.push(id);
@@ -988,7 +1044,7 @@
                 <table class="compare-table">
                     <thead>
                         <tr>
-                            <th>المواصفة</th>
+                            <th>المنتج</th>
                             ${compareItems.map(p => `<th>${p.title}</th>`).join('')}
                         </tr>
                     </thead>
@@ -998,20 +1054,12 @@
                             ${compareItems.map(p => `<td style="color:var(--accent-color); font-weight:bold;">${p.price.toLocaleString()} ج.م</td>`).join('')}
                         </tr>
                         <tr>
-                            <td><strong>المعالج</strong></td>
+                            <td><strong>المواصفة الأولى</strong></td>
                             ${compareItems.map(p => `<td>${p.processor}</td>`).join('')}
                         </tr>
                         <tr>
-                            <td><strong>الرامات</strong></td>
+                            <td><strong>المواصفة الثانية</strong></td>
                             ${compareItems.map(p => `<td>${p.ram}</td>`).join('')}
-                        </tr>
-                        <tr>
-                            <td><strong>التخزين</strong></td>
-                            ${compareItems.map(p => `<td>${p.storage}</td>`).join('')}
-                        </tr>
-                        <tr>
-                            <td><strong>كارت الشاشة</strong></td>
-                            ${compareItems.map(p => `<td>${p.gpu}</td>`).join('')}
                         </tr>
                     </tbody>
                 </table>
