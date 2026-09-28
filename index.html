@@ -202,23 +202,53 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
 
-        .image-container {
+        /* التصميم الجديد البديل للصور - فخم ومودرن */
+        .card-graphic-header {
             position: relative;
             width: 100%;
-            height: 200px;
-            background: #f1f5f9;
+            height: 160px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
-        .product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .card-graphic-header::before {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
         }
 
-        .product-card:hover .product-img {
-            transform: scale(1.05);
+        .card-graphic-icon {
+            font-size: 3.5rem;
+            color: #ffffff;
+            z-index: 1;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .card-graphic-icon {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .brand-pill {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            z-index: 2;
         }
 
         .top-actions {
@@ -467,7 +497,7 @@
     </header>
 
     <div class="container">
-        <!-- شريط بحث وفلترة بأسلوب احترافي -->
+        <!-- شريط بحث وفلترة -->
         <div class="controls-bar">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -517,7 +547,6 @@
                 title: "Dell Precision 5520 Workstation",
                 price: 18500,
                 oldPrice: 20500,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i7-7820HQ",
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -530,7 +559,6 @@
                 title: "HP ZBook 15 G5 Workstation",
                 price: 22000,
                 oldPrice: 24500,
-                image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
                 processor: "Intel Core i7-8850H (6 Cores)",
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -543,7 +571,6 @@
                 title: "HP EliteBook 840 G5 Slim",
                 price: 13500,
                 oldPrice: 15000,
-                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
                 processor: "Intel Core i5-8350U",
                 ram: "16GB DDR4",
                 storage: "256GB NVMe SSD",
@@ -556,7 +583,6 @@
                 title: "Lenovo ThinkPad T480 Business",
                 price: 12500,
                 oldPrice: 14000,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i5-8350U",
                 ram: "16GB DDR4",
                 storage: "256GB NVMe SSD",
@@ -569,7 +595,6 @@
                 title: "Dell Latitude 5400 Enterprise",
                 price: 12000,
                 oldPrice: 13500,
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
                 processor: "Intel Core i5-8265U",
                 ram: "8GB DDR4",
                 storage: "256GB NVMe SSD",
@@ -582,7 +607,6 @@
                 title: "Lenovo ThinkPad P52 Workstation",
                 price: 24000,
                 oldPrice: 27000,
-                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
                 processor: "Intel Core i7-8850H",
                 ram: "32GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -595,7 +619,6 @@
                 title: "Dell Precision 7530 Workstation",
                 price: 25500,
                 oldPrice: 29000,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i7-8750H",
                 ram: "32GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -608,7 +631,6 @@
                 title: "HP ProBook 450 G6 Laptop",
                 price: 14500,
                 oldPrice: 16000,
-                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
                 processor: "Intel Core i5-8265U",
                 ram: "16GB DDR4",
                 storage: "512GB SSD",
@@ -621,7 +643,6 @@
                 title: "Dell Precision 3530 Mobile",
                 price: 19500,
                 oldPrice: 21500,
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
                 processor: "Intel Core i7-8750H",
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -634,7 +655,6 @@
                 title: "HP ZBook Studio G5 Slim",
                 price: 26500,
                 oldPrice: 29500,
-                image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
                 processor: "Intel Core i7-8850H",
                 ram: "32GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -647,7 +667,6 @@
                 title: "Lenovo ThinkPad X1 Carbon Gen 6",
                 price: 16500,
                 oldPrice: 18500,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i7-8650U",
                 ram: "16GB LPDDR3",
                 storage: "512GB NVMe SSD",
@@ -660,7 +679,6 @@
                 title: "Dell Latitude 7490 Slim",
                 price: 13000,
                 oldPrice: 14800,
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
                 processor: "Intel Core i7-8650U",
                 ram: "16GB DDR4",
                 storage: "256GB NVMe SSD",
@@ -673,7 +691,6 @@
                 title: "HP EliteBook 850 G6 Laptop",
                 price: 16000,
                 oldPrice: 18000,
-                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
                 processor: "Intel Core i7-8565U",
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -686,7 +703,6 @@
                 title: "Dell G3 15-3590 Gaming",
                 price: 20500,
                 oldPrice: 22500,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
                 processor: "Intel Core i5-9300H",
                 ram: "16GB DDR4",
                 storage: "512GB NVMe SSD",
@@ -699,7 +715,6 @@
                 title: "Lenovo Legion Y530 Gaming",
                 price: 21500,
                 oldPrice: 24000,
-                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
                 processor: "Intel Core i7-8750H",
                 ram: "16GB DDR4",
                 storage: "256GB SSD + 1TB HDD",
@@ -711,6 +726,18 @@
         let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
         let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
         let selectedBrand = 'all';
+
+        // دالة لاختيار الأيقونة المناسبة لنوع الجهاز
+        function getProductIcon(title) {
+            const t = title.toLowerCase();
+            if (t.includes('workstation') || t.includes('precision') || t.includes('zbook') || t.includes('p52')) {
+                return 'fa-laptop-code';
+            } else if (t.includes('gaming') || t.includes('legion') || t.includes('g3')) {
+                return 'fa-gamepad';
+            } else {
+                return 'fa-laptop';
+            }
+        }
 
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
@@ -733,19 +760,21 @@
             filtered.forEach(p => {
                 const isFav = favorites.includes(p.id);
                 const isComp = compareList.includes(p.id);
+                const iconClass = getProductIcon(p.title);
 
                 const card = document.createElement('div');
                 card.className = `product-card`;
                 card.id = `product-${p.id}`;
 
                 card.innerHTML = `
-                    <div class="image-container">
+                    <div class="card-graphic-header">
                         <div class="top-actions">
                             <button class="icon-btn ${isFav ? 'active-fav' : ''}" onclick="toggleFavorite('${p.id}')">
                                 <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
                             </button>
                         </div>
-                        <img src="${p.image}" alt="${p.title}" class="product-img" loading="lazy">
+                        <i class="fa-solid ${iconClass} card-graphic-icon"></i>
+                        <span class="brand-pill">${p.brand} Original</span>
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">${p.title}</h3>
