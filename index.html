@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الأجهزة الإلكترونية | أفضل العروض والاستيراد</title>
+    <title>HAMOD LABS | متجر اللابتوبات والاستيراد</title>
     <!-- Font Awesome الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -67,6 +67,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent-color);
         }
 
         .header-actions {
@@ -446,7 +450,7 @@
         <div class="header-container">
             <a href="#" class="logo">
                 <i class="fa-solid fa-laptop-code"></i>
-                <span>تيك ستور الاستيراد</span>
+                <span>HAMOD LABS</span>
             </a>
             <div class="header-actions">
                 <button class="nav-btn" onclick="openModal('wishlistModal')">
@@ -465,7 +469,7 @@
 
     <div class="container">
         <div class="products-grid" id="productsGrid">
-            <!-- المنتجات سينم إنشاؤها عبر JavaScript -->
+            <!-- المنتجات سيتم إنشاؤها عبر JavaScript -->
         </div>
     </div>
 
@@ -496,7 +500,7 @@
     </div>
 
     <script>
-        // بيانات المنتجات الحقيقية المستوردة (Real Market Data)
+        // قائمة المنتجات الشاملة باسم HAMOD LABS وببيانات حقيقية
         const products = [
             {
                 id: "dell-precision-5520",
@@ -509,6 +513,18 @@
                 storage: "512GB NVMe SSD",
                 gpu: "Nvidia Quadro M1200 4GB",
                 amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
+            },
+            {
+                id: "hp-zbook-15-g5",
+                title: "HP ZBook 15 G5 Workstation",
+                price: 21500,
+                oldPrice: 24000,
+                image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
+                processor: "Intel Core i7-8850H (6 Cores)",
+                ram: "16GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia Quadro P1000 4GB",
+                amazonUrl: "https://www.amazon.eg/s?k=HP+ZBook+15+G5"
             },
             {
                 id: "hp-elitebook-840-g5",
@@ -535,16 +551,52 @@
                 amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+T480"
             },
             {
-                id: "macbook-pro-2017",
-                title: "Apple MacBook Pro 2017 (شاشة Retina)",
-                price: 22000,
-                oldPrice: 25000,
+                id: "dell-latitude-5400",
+                title: "Dell Latitude 5400 Slim",
+                price: 12800,
+                oldPrice: 14500,
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
+                processor: "Intel Core i5-8265U",
+                ram: "8GB DDR4",
+                storage: "256GB NVMe SSD",
+                gpu: "Intel UHD 620",
+                amazonUrl: "https://www.amazon.eg/s?k=Dell+Latitude+5400"
+            },
+            {
+                id: "lenovo-thinkpad-p52",
+                title: "Lenovo ThinkPad P52 Heavy Duty",
+                price: 23000,
+                oldPrice: 26500,
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
-                processor: "Intel Core i5 2.3GHz",
-                ram: "8GB LPDDR3",
-                storage: "256GB SSD",
-                gpu: "Intel Iris Plus 640",
-                amazonUrl: "https://www.amazon.eg/s?k=MacBook+Pro+2017"
+                processor: "Intel Core i7-8850H",
+                ram: "32GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia Quadro P2000 4GB",
+                amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+P52"
+            },
+            {
+                id: "dell-precision-7530",
+                title: "Dell Precision 7530 High-End",
+                price: 24500,
+                oldPrice: 28000,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
+                processor: "Intel Core i7-8750H",
+                ram: "32GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia Quadro P3200 6GB",
+                amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530"
+            },
+            {
+                id: "hp-probook-450-g6",
+                title: "HP ProBook 450 G6 (شاشة 15.6 بوصة)",
+                price: 15000,
+                oldPrice: 17000,
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
+                processor: "Intel Core i7-8565U",
+                ram: "16GB DDR4",
+                storage: "512GB SSD",
+                gpu: "Nvidia GeForce MX130 2GB",
+                amazonUrl: "https://www.amazon.eg/s?k=HP+ProBook+450+G6"
             }
         ];
 
@@ -604,14 +656,13 @@
             });
 
             updateBadges();
-            checkUrlHash(); // التوجيه الفوري للرابط المشارَك
+            checkUrlHash();
         }
 
         // 1. ميزة المشاركة والتوجيه التلقائي للمنتج نفسه
         function shareProduct(id, title) {
-            // إنشاء رابط مباشر يحتوي على الـ Hash الخاص بالمنتج
             const shareUrl = `${window.location.origin}${window.location.pathname}#product-${id}`;
-            const text = `شوف العرض ده على ${title}:\n${shareUrl}`;
+            const text = `شوف العرض ده على HAMOD LABS:\n${title}\n${shareUrl}`;
             
             if (navigator.share) {
                 navigator.share({
@@ -620,7 +671,6 @@
                     url: shareUrl,
                 }).catch(() => {});
             } else {
-                // فتح واتساب مباشرة بالرابط الدقيق
                 const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
                 window.open(whatsappUrl, '_blank');
             }
