@@ -401,7 +401,7 @@
             font-weight: 700;
         }
 
-        /* Mobile Optimization Improvements */
+        /* Mobile Optimization */
         @media (max-width: 640px) {
             .container {
                 padding: 0 0.8rem;
@@ -500,11 +500,11 @@
     </div>
 
     <script>
-        // قائمة المنتجات الشاملة باسم HAMOD LABS وببيانات حقيقية
+        // قائمة المنتجات الموسعة لمحل HAMOD LABS
         const products = [
             {
                 id: "dell-precision-5520",
-                title: "Dell Precision 5520 (استيراد فرز أول)",
+                title: "Dell Precision 5520 (Workstation)",
                 price: 18500,
                 oldPrice: 21000,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
@@ -516,7 +516,7 @@
             },
             {
                 id: "hp-zbook-15-g5",
-                title: "HP ZBook 15 G5 Workstation",
+                title: "HP ZBook 15 G5 Power",
                 price: 21500,
                 oldPrice: 24000,
                 image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
@@ -528,7 +528,7 @@
             },
             {
                 id: "hp-elitebook-840-g5",
-                title: "HP EliteBook 840 G5 (استيراد الخارج)",
+                title: "HP EliteBook 840 G5 Ultra",
                 price: 14200,
                 oldPrice: 16000,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
@@ -540,7 +540,7 @@
             },
             {
                 id: "lenovo-thinkpad-t480",
-                title: "Lenovo ThinkPad T480 الجيل الثامن",
+                title: "Lenovo ThinkPad T480 Business",
                 price: 13500,
                 oldPrice: 15000,
                 image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
@@ -552,7 +552,7 @@
             },
             {
                 id: "dell-latitude-5400",
-                title: "Dell Latitude 5400 Slim",
+                title: "Dell Latitude 5400 Enterprise",
                 price: 12800,
                 oldPrice: 14500,
                 image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
@@ -564,7 +564,7 @@
             },
             {
                 id: "lenovo-thinkpad-p52",
-                title: "Lenovo ThinkPad P52 Heavy Duty",
+                title: "Lenovo ThinkPad P52 Workstation",
                 price: 23000,
                 oldPrice: 26500,
                 image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
@@ -576,7 +576,7 @@
             },
             {
                 id: "dell-precision-7530",
-                title: "Dell Precision 7530 High-End",
+                title: "Dell Precision 7530 High Performance",
                 price: 24500,
                 oldPrice: 28000,
                 image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
@@ -588,7 +588,7 @@
             },
             {
                 id: "hp-probook-450-g6",
-                title: "HP ProBook 450 G6 (شاشة 15.6 بوصة)",
+                title: "HP ProBook 450 G6 Pro",
                 price: 15000,
                 oldPrice: 17000,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
@@ -597,6 +597,90 @@
                 storage: "512GB SSD",
                 gpu: "Nvidia GeForce MX130 2GB",
                 amazonUrl: "https://www.amazon.eg/s?k=HP+ProBook+450+G6"
+            },
+            {
+                id: "dell-precision-3530",
+                title: "Dell Precision 3530 Mobile",
+                price: 19800,
+                oldPrice: 22000,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
+                processor: "Intel Core i7-8750H",
+                ram: "16GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia Quadro P600 2GB",
+                amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+3530"
+            },
+            {
+                id: "hp-zbook-studio-g5",
+                title: "HP ZBook Studio G5 Slim Workstation",
+                price: 26000,
+                oldPrice: 29500,
+                image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
+                processor: "Intel Core i7-8850H",
+                ram: "32GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia Quadro P1000 4GB",
+                amazonUrl: "https://www.amazon.eg/s?k=HP+ZBook+Studio+G5"
+            },
+            {
+                id: "lenovo-thinkpad-x1-carbon-g6",
+                title: "Lenovo ThinkPad X1 Carbon Gen 6",
+                price: 17500,
+                oldPrice: 20000,
+                image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+                processor: "Intel Core i7-8650U",
+                ram: "16GB DDR3L",
+                storage: "512GB NVMe SSD",
+                gpu: "Intel UHD Graphics 620",
+                amazonUrl: "https://www.amazon.eg/s?k=ThinkPad+X1+Carbon+Gen+6"
+            },
+            {
+                id: "dell-latitude-7490",
+                title: "Dell Latitude 7490 Ultrabook",
+                price: 13800,
+                oldPrice: 15500,
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
+                processor: "Intel Core i7-8650U",
+                ram: "16GB DDR4",
+                storage: "256GB NVMe SSD",
+                gpu: "Intel UHD Graphics 620",
+                amazonUrl: "https://www.amazon.eg/s?k=Dell+Latitude+7490"
+            },
+            {
+                id: "hp-elitebook-850-g6",
+                title: "HP EliteBook 850 G6 Big Screen",
+                price: 16500,
+                oldPrice: 18500,
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
+                processor: "Intel Core i7-8565U",
+                ram: "16GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "AMD Radeon RX 550X 2GB",
+                amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+850+G6"
+            },
+            {
+                id: "dell-g3-15-3590",
+                title: "Dell G3 15 3590 Gaming Edition",
+                price: 21000,
+                oldPrice: 23500,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
+                processor: "Intel Core i5-9300H",
+                ram: "16GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia GTX 1650 4GB",
+                amazonUrl: "https://www.amazon.eg/s?k=Dell+G3+15+3590"
+            },
+            {
+                id: "lenovo-legion-y530",
+                title: "Lenovo Legion Y530 Gaming Laptop",
+                price: 22500,
+                oldPrice: 25000,
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+                processor: "Intel Core i7-8750H",
+                ram: "16GB DDR4",
+                storage: "128GB SSD + 1TB HDD",
+                gpu: "Nvidia GTX 1050Ti 4GB",
+                amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+Y530"
             }
         ];
 
