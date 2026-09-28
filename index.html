@@ -85,6 +85,15 @@ footer{text-align:center;padding:30px;background:#05090f;border-top:1px solid #f
 </section>
 <div class="toolbar"><div class="count" id="count"></div><div style="display:flex;gap:10px"><button id="favToggle" class="fav-toggle">♡ المفضلة (<span id="favCount">0</span>)</button><select id="sort" class="sort"><option value="new">الأحدث أولًا</option><option value="priceLow">السعر: من الأقل</option><option value="priceHigh">السعر: من الأعلى</option><option value="name">الاسم أبجديًا</option></select></div></div>
 <h2 class="section-title" id="laptops">اللابتوبات <span>المتوفرة</span></h2>
+ <div id="typeTabs" style="display:flex;gap:10px;justify-content:center;margin:15px 0;flex-wrap:wrap">
+  <button data-t="laptops" class="tt">💻 لابتوبات</button>
+  <button data-t="acc" class="tt">🎧 إكسسوارات</button>
+  <button data-t="all" class="tt">الكل</button>
+</div>
+<style>
+.tt{padding:10px 22px;border-radius:25px;border:1px solid #00c8ff;background:transparent;color:#00c8ff;font-weight:bold;cursor:pointer;font-size:15px}
+.tt.on{background:#00c8ff;color:#000}
+</style>
 <section class="grid" id="grid"></section>
 
 <footer>© 2026 Hamod LABS — تصميم Premium. الأسعار هنا استرشادية للتصميم وليست عروض بيع حقيقية.</footer>
