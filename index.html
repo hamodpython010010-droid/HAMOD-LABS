@@ -1,532 +1,758 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Hamod LABS | متجر لابتوبات وأجهزة كمبيوتر</title><meta name="description" content="Hamod LABS - متجر لابتوبات وأجهزة كمبيوتر، أفضل الماركات Dell وHP وLenovo وAsus وApple وMSI بأسعار متنوعة."><style>
-:root{
- --bg:#060b14;--panel:#0d1420;--panel2:#111a28;--text:#eef3fb;--muted:#93a1b8;
- --accent:#3b82f6;--accent2:#60cfff;--red:#ff5470;--line:#1e293b;
-}[data-theme="light"]{--bg:#f2f6fb;--panel:#ffffff;--panel2:#eef2f7;--text:#131a24;--muted:#5c6b80;--line:#dde4ec}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Tahoma,Arial,sans-serif;background:
- radial-gradient(circle at 15% 5%,#0c2540 0,transparent 28%),
- radial-gradient(circle at 90% 10%,#0a1a33 0,transparent 25%),var(--bg);color:var(--text)}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:60px 60px}
-header{position:sticky;top:0;z-index:50;padding:17px 6%;display:flex;justify-content:space-between;align-items:center;background:#060b14e8;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}
-.logo{font-size:28px;font-weight:900;letter-spacing:.4px;color:var(--accent2)}
-.logo span{color:#fff}
-.nav a{color:#dce1e9;text-decoration:none;margin-right:25px;font-size:15px}
-.nav a:hover{color:var(--accent2)}
-.hero{position:relative;overflow:hidden;text-align:center;padding:90px 20px 95px;background:
- linear-gradient(180deg,#0a1220aa,#060b14),radial-gradient(circle at 50% 0,#3b82f633,transparent 55%)}
-.hero .eyebrow{display:inline-block;color:var(--accent2);border:1px solid #3b82f655;background:#3b82f610;padding:8px 15px;border-radius:999px;font-size:13px;margin-bottom:18px}
-.hero h1{font-size:clamp(38px,6vw,72px);line-height:1.05;margin:0 0 18px;font-weight:900}
-.hero h1 em{font-style:normal;color:var(--accent2)}
-.hero p{color:var(--muted);font-size:18px;max-width:760px;margin:auto;line-height:1.8}
-.stats{width:88%;max-width:1000px;margin:-34px auto 34px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:2}
-.stat{background:#0d1420e8;border:1px solid #ffffff12;border-radius:18px;padding:20px;text-align:center;box-shadow:0 20px 50px #0008;backdrop-filter:blur(14px)}
-.stat b{display:block;font-size:27px;color:var(--accent2);margin-bottom:5px}.stat span{color:var(--muted);font-size:13px}
-.filters{width:90%;max-width:1250px;margin:0 auto 25px;background:linear-gradient(145deg,#111a28,#0b1220);border:1px solid #ffffff12;padding:18px;border-radius:22px;box-shadow:0 20px 55px #0009;display:grid;grid-template-columns:2fr repeat(6,1fr);gap:10px}
-input,select{background:#0a0e16;color:#fff;border:1px solid #253244;padding:14px;border-radius:12px;font-size:14px;outline:none}
-input:focus,select:focus{border-color:#3b82f699;box-shadow:0 0 0 3px #3b82f614}
-.toolbar{width:90%;max-width:1250px;margin:0 auto 18px;display:flex;justify-content:space-between;gap:15px;align-items:center}.count{color:#aeb7c5}.sort{width:220px}
-.grid{width:90%;max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;padding-bottom:70px}
-.card{position:relative;background:linear-gradient(150deg,#131c2a,#0a121d);border:1px solid #ffffff10;border-radius:22px;overflow:hidden;box-shadow:0 15px 40px #0008;transition:.28s;cursor:pointer}
-.card:hover{transform:translateY(-8px);border-color:#3b82f655;box-shadow:0 22px 55px #000b,0 0 0 1px #3b82f622}
-.card img{width:100%;height:220px;object-fit:cover;background:#0d1219;display:block}
-.card .shine{position:absolute;left:0;right:0;top:0;height:220px;background:linear-gradient(120deg,transparent 35%,#fff2 50%,transparent 65%);transform:translateX(-120%);transition:.5s;pointer-events:none}
-.card:hover .shine{transform:translateX(120%)}
-.info{padding:18px}.badge{display:inline-block;padding:6px 10px;background:#3b82f612;border:1px solid #3b82f635;border-radius:999px;color:#9fc4ff;font-size:11px}
-.info h2{font-size:21px;margin:12px 0 6px}.sub{color:#8994a4;font-size:13px}.price{color:var(--accent2);font-size:22px;font-weight:900;margin:13px 0}.spec{color:#aeb7c5;line-height:1.9;font-size:13px}
-button{width:100%;margin-top:14px;padding:13px;border:1px solid #ffffff14;border-radius:12px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;font-weight:900;font-size:15px;cursor:pointer}
-button:hover{filter:brightness(1.08)}
-.modal{display:none;position:fixed;inset:0;background:#000d;z-index:100;align-items:center;justify-content:center;padding:18px}
-.modal-box{background:linear-gradient(145deg,#131c2a,#0a121d);border:1px solid #ffffff18;width:min(900px,96vw);max-height:92vh;overflow:auto;border-radius:25px;padding:20px;position:relative;box-shadow:0 30px 100px #000}
-.modal-img{width:100%;height:390px;object-fit:cover;border-radius:18px;background:#0c1118}.close{position:absolute;left:18px;top:18px;width:42px;margin:0;background:#1e293b;color:#fff;border:0;z-index:2}
-.details{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:18px}.detail{background:#0d1219;border:1px solid #ffffff0d;padding:14px;border-radius:13px;color:#b9c2cf}.detail b{display:block;color:#fff;margin-bottom:6px}
-.section-title{width:90%;max-width:1250px;margin:18px auto 18px;font-size:25px}.section-title span{color:var(--accent2)}
-footer{text-align:center;padding:30px;background:#05090f;border-top:1px solid #ffffff0c;color:#778292;line-height:1.8}
-.fav-toggle{width:auto;margin:0;padding:12px 18px;background:#111a28;border:1px solid #253244;color:#dce1e9;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
-.fav-toggle.active{background:linear-gradient(135deg,#ff5470,#c73a4e);border-color:#ff5470;color:#fff}
-.heart-btn{position:absolute;top:12px;left:12px;z-index:3;width:38px;height:38px;border-radius:50%;background:#060b14b0;border:1px solid #ffffff22;backdrop-filter:blur(6px);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
-.heart-btn:hover{transform:scale(1.1)}
-.heart-btn.is-fav{color:#ff4d45;border-color:#ff4d4566;background:#1a0d0db0}
-@media(max-width:1100px){.filters{grid-template-columns:1fr 1fr 1fr}.stats{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:650px){header{padding:15px 4%}.nav a{margin-right:10px}.hero{padding:65px 15px 75px}.filters{grid-template-columns:1fr}.stats{width:92%;grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.toolbar{width:92%;flex-direction:column;align-items:stretch}.sort{width:100%}.modal-img{height:250px}}
-.compare-btn{position:absolute;top:12px;right:12px;z-index:3;width:38px;height:38px;border-radius:50%;background:#060b14b0;border:1px solid #ffffff22;backdrop-filter:blur(6px);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
-.compare-btn:hover{transform:scale(1.1)}
-.compare-btn.is-selected{color:#3b82f6;border-color:#3b82f666;background:#0d1a30b0}
-.compare-bar{position:fixed;bottom:0;left:0;right:0;background:#0d1420f5;backdrop-filter:blur(14px);border-top:1px solid #ffffff18;padding:14px 6%;display:none;justify-content:space-between;align-items:center;z-index:150;box-shadow:0 -10px 30px #0008}
-.compare-bar.show{display:flex}
-.compare-bar button{width:auto;padding:12px 22px}
-.compare-table{width:100%;border-collapse:collapse;margin-top:15px}
-.compare-table th,.compare-table td{padding:12px 14px;text-align:center;border-bottom:1px solid #ffffff12;font-size:14px}
-.compare-table th{background:#0d1420;color:var(--accent2);position:sticky;top:0}
-.compare-table td:first-child,.compare-table th:first-child{text-align:right;color:#8994a4;font-weight:700}
-.compare-table img{width:100%;max-width:140px;border-radius:10px}</style>
-</head><body>
-<header><div class="logo">HAMOD <span>LABS</span> 💻</div><div class="nav"><a href="#">الرئيسية</a><a href="#laptops">اللابتوبات</a><button id="themeBtn" onclick="toggleTheme()" style="background:none;border:1px solid var(--accent2);color:var(--accent2);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;margin-right:15px">⚙️ الإضاءة</button></div></header>
-<section class="hero">
- <div class="eyebrow">HAMOD LABS • PREMIUM LAPTOPS</div>
- <h1>لابتوبات <em>بأداء</em> بشكل جديد</h1>
- <p>أفضل الماركات في مكان واحد — Dell وHP وLenovo وAsus وApple وMSI، مع بحث وفلاتر وتفاصيل كل جهاز.</p>
-</section>
-<section class="stats">
- <div class="stat"><b id="totalCount">0+</b><span>جهاز في الموقع</span></div>
- <div class="stat"><b>7</b><span>ماركات عالمية</span></div>
- <div class="stat"><b>2026</b><span>أحدث الموديلات</span></div>
- <div class="stat"><b>2026</b><span>تحديث تصميم الموقع</span></div>
-</section>
-<section class="filters">
- <input id="search" placeholder="🔎 ابحث بالماركة أو الموديل...">
- <select id="brand"><option value="">كل الماركات</option><option>Dell</option><option>HP</option><option>Lenovo</option><option>Asus</option><option>Apple</option><option>MSI</option><option>Acer</option></select>
- <select id="processor"><option value="">كل المعالجات</option><option>Intel i3</option><option>Intel i5</option><option>Intel i7</option><option>Intel i9</option><option>AMD Ryzen 5</option><option>AMD Ryzen 7</option><option>AMD Ryzen 9</option><option>Apple M</option></select>
- <select id="ram"><option value="">كل أحجام الرام</option><option>8GB</option><option>16GB</option><option>32GB</option><option>64GB</option></select>
- <input id="minPrice" type="number" placeholder="أقل سعر">
- <input id="maxPrice" type="number" placeholder="أعلى سعر">
- <select id="category"><option value="">كل الفئات</option><option>أساسي</option><option>للألعاب</option><option>احترافي</option><option>الترا بوك</option></select>
-</section>
-<div class="toolbar"><div class="count" id="count"></div><div style="display:flex;gap:10px"><button id="favToggle" class="fav-toggle">♡ المفضلة (<span id="favCount">0</span>)</button><select id="sort" class="sort"><option value="new">الأحدث أولًا</option><option value="priceLow">السعر: من الأقل</option><option value="priceHigh">السعر: من الأعلى</option><option value="name">الاسم أبجديًا</option></select></div></div>
-<h2 class="section-title" id="laptops">اللابتوبات <span>المتوفرة</span></h2>
- <div id="typeTabs" style="display:flex;gap:10px;justify-content:center;margin:15px 0;flex-wrap:wrap">
-  <button data-t="laptops" class="tt">💻 لابتوبات</button>
-  <button data-t="acc" class="tt">🎧 إكسسوارات</button>
-  <button data-t="all" class="tt">الكل</button>
-</div>
-<style>
-.tt{padding:10px 22px;border-radius:25px;border:1px solid #00c8ff;background:transparent;color:#00c8ff;font-weight:bold;cursor:pointer;font-size:15px}
-.tt.on{background:#00c8ff;color:#000}
-</style>
-<section class="grid" id="grid"></section>
-
-<footer>© 2026 Hamod LABS — تصميم Premium. الأسعار هنا استرشادية للتصميم وليست عروض بيع حقيقية.</footer>
-<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="closeModal()">✕</button><div id="modalContent"></div></div></div>
- <div class="compare-bar" id="compareBar">
-  <div id="compareCount">تم اختيار 0 جهاز للمقارنة</div>
-  <div style="display:flex;gap:10px">
-    <button onclick="clearCompare()" style="background:#1e293b">مسح</button>
-    <button onclick="openCompareModal()" id="compareGoBtn">قارن الآن</button>
-  </div>
-</div>
-<a href="https://wa.me/201202836147" target="_blank" style="position:fixed;bottom:25px;left:25px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:200;text-decoration:none">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.93-9.92-9.93zM12.04 20.15h-.01a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.4c0-4.56 3.71-8.27 8.27-8.27a8.2 8.2 0 0 1 5.85 2.42 8.21 8.21 0 0 1 2.42 5.85c0 4.56-3.71 8.26-8.28 8.26zm4.53-6.19c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-</a>
-
-<script>
-function toggleTheme(){
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-}
-(function(){
-  const saved = localStorage.getItem('theme');
-  if(saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-</script>
-<script>
-const laptops=[
-{"id":1,"title":"Dell XPS 13","brand":"Dell","model":"XPS 13","year":2026,"price":45000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"13.4 FHD+","category":"الترا بوك","condition":"جديد"},
-{"id":2,"title":"Dell Inspiron 15","brand":"Dell","model":"Inspiron 15","year":2025,"price":22000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":3,"title":"Dell Alienware m16","brand":"Dell","model":"Alienware m16","year":2026,"price":95000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 QHD+","category":"للألعاب","condition":"جديد"},
-{"id":4,"title":"HP Pavilion 14","brand":"HP","model":"Pavilion 14","year":2025,"price":25000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":5,"title":"HP Omen 16","brand":"HP","model":"Omen 16","year":2026,"price":68000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16.1 QHD","category":"للألعاب","condition":"جديد"},
-{"id":6,"title":"HP Envy x360","brand":"HP","model":"Envy x360","year":2025,"price":38000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"15.6 FHD Touch","category":"احترافي","condition":"مستعملة - حالة ممتازة"},
-{"id":7,"title":"Lenovo ThinkPad X1","brand":"Lenovo","model":"ThinkPad X1 Carbon","year":2026,"price":58000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"14 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":8,"title":"Lenovo Legion 5","brand":"Lenovo","model":"Legion 5","year":2026,"price":52000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4060","screen":"15.6 QHD 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":9,"title":"Lenovo IdeaPad 3","brand":"Lenovo","model":"IdeaPad 3","year":2024,"price":18000,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 FHD","category":"أساسي","condition":"مستعملة - حالة جيدة جدًا"},
-{"id":10,"title":"Lenovo Yoga 9i","brand":"Lenovo","model":"Yoga 9i","year":2026,"price":62000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"14 OLED Touch","category":"الترا بوك","condition":"جديد"},
-{"id":11,"title":"Asus ROG Strix G16","brand":"Asus","model":"ROG Strix G16","year":2026,"price":78000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 QHD 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":12,"title":"Asus Vivobook 15","brand":"Asus","model":"Vivobook 15","year":2025,"price":20000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":13,"title":"Asus Zenbook 14","brand":"Asus","model":"Zenbook 14 OLED","year":2026,"price":48000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"14 OLED","category":"الترا بوك","condition":"جديد"},
-{"id":14,"title":"Apple MacBook Air M2","brand":"Apple","model":"MacBook Air M2","year":2025,"price":55000,"processor":"Apple M","ram":"8GB","storage":"256GB SSD","gpu":"Apple GPU 8-core","screen":"13.6 Liquid Retina","category":"الترا بوك","condition":"جديد"},
-{"id":15,"title":"Apple MacBook Pro M3","brand":"Apple","model":"MacBook Pro 14 M3","year":2026,"price":95000,"processor":"Apple M","ram":"16GB","storage":"512GB SSD","gpu":"Apple GPU 10-core","screen":"14.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-{"id":16,"title":"Apple MacBook Air M3","brand":"Apple","model":"MacBook Air 15 M3","year":2026,"price":72000,"processor":"Apple M","ram":"16GB","storage":"512GB SSD","gpu":"Apple GPU 10-core","screen":"15.3 Liquid Retina","category":"الترا بوك","condition":"جديد"},
-{"id":17,"title":"MSI Katana 15","brand":"MSI","model":"Katana 15","year":2026,"price":45000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":18,"title":"MSI Prestige 14","brand":"MSI","model":"Prestige 14 Evo","year":2025,"price":42000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD+","category":"احترافي","condition":"جديد"},
-{"id":19,"title":"Acer Nitro 5","brand":"Acer","model":"Nitro 5","year":2025,"price":35000,"processor":"AMD Ryzen 5","ram":"16GB","storage":"512GB SSD","gpu":"RTX 3050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":20,"title":"Acer Swift 3","brand":"Acer","model":"Swift 3","year":2024,"price":16000,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 FHD","category":"أساسي","condition":"مستعملة - حالة ممتازة"},
-{"id":21,"title":"HP Spectre x360 14","brand":"HP","model":"Spectre x360 14","year":2026,"price":75000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":22,"title":"HP EliteBook 840","brand":"HP","model":"EliteBook 840 G11","year":2026,"price":65000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":23,"title":"HP ProBook 450","brand":"HP","model":"ProBook 450 G10","year":2025,"price":30000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD"},
-{"id":24,"title":"HP Victus 15","brand":"HP","model":"Victus 15","year":2025,"price":32000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD"},
-{"id":25,"title":"HP Victus 16","brand":"HP","model":"Victus 16","year":2026,"price":48000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":26,"title":"HP Omen 17","brand":"HP","model":"Omen 17","year":2026,"price":85000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD"},
-{"id":27,"title":"HP Pavilion x360","brand":"HP","model":"Pavilion x360 14","year":2025,"price":28000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD"},
-{"id":28,"title":"HP Pavilion Plus 14","brand":"HP","model":"Pavilion Plus 14","year":2026,"price":34000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD"},
-{"id":29,"title":"HP Envy 16","brand":"HP","model":"Envy 16","year":2026,"price":55000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":30,"title":"HP Envy x360 15","brand":"HP","model":"Envy x360 15","year":2025,"price":42000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD"},
-{"id":31,"title":"HP ZBook Firefly 14","brand":"HP","model":"ZBook Firefly 14 G11","year":2026,"price":70000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD"},
-{"id":32,"title":"HP ZBook Studio","brand":"HP","model":"ZBook Studio G11","year":2026,"price":110000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD"},
-{"id":33,"title":"HP EliteBook X G1","brand":"HP","model":"EliteBook X G1a","year":2026,"price":72000,"processor":"AMD Ryzen AI 9","ram":"32GB","storage":"1TB SSD"},
-{"id":34,"title":"HP 15 Laptop","brand":"HP","model":"HP 15","year":2024,"price":15000,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD"},
-{"id":35,"title":"HP 17 Laptop","brand":"HP","model":"HP 17","year":2024,"price":19000,"processor":"AMD Ryzen 3","ram":"8GB","storage":"512GB SSD"},{"id":36,"title":"HP Spectre x360 16","brand":"HP","model":"Spectre x360 16","year":2026,"price":88000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":37,"title":"HP Spectre Fold","brand":"HP","model":"Spectre Fold 17","year":2026,"price":150000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":38,"title":"HP EliteBook 640","brand":"HP","model":"EliteBook 640 G11","year":2025,"price":42000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD"},
-{"id":39,"title":"HP EliteBook 1040","brand":"HP","model":"EliteBook 1040 G11","year":2026,"price":80000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD"},
-{"id":40,"title":"HP EliteBook 860","brand":"HP","model":"EliteBook 860 G11","year":2026,"price":68000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":41,"title":"HP ProBook 440","brand":"HP","model":"ProBook 440 G11","year":2025,"price":27000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD"},
-{"id":42,"title":"HP ProBook 460","brand":"HP","model":"ProBook 460 G11","year":2026,"price":38000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":43,"title":"HP Omen Transcend 14","brand":"HP","model":"Omen Transcend 14","year":2026,"price":62000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":44,"title":"HP Omen Max 16","brand":"HP","model":"Omen Max 16","year":2026,"price":95000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD"},
-{"id":45,"title":"HP Victus 15 Ryzen","brand":"HP","model":"Victus 15 (Ryzen Edition)","year":2026,"price":36000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD"},
-{"id":46,"title":"HP Pavilion 15","brand":"HP","model":"Pavilion 15","year":2025,"price":24000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD"},
-{"id":47,"title":"HP Pavilion Aero 13","brand":"HP","model":"Pavilion Aero 13","year":2025,"price":26000,"processor":"AMD Ryzen 5","ram":"16GB","storage":"512GB SSD"},
-{"id":48,"title":"HP Envy 15","brand":"HP","model":"Envy 15","year":2025,"price":45000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":49,"title":"HP ZBook Power","brand":"HP","model":"ZBook Power G11","year":2026,"price":58000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":50,"title":"HP ZBook Fury 16","brand":"HP","model":"ZBook Fury 16 G11","year":2026,"price":130000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD"},
-{"id":51,"title":"HP EliteBook X360","brand":"HP","model":"EliteBook X360 1040 G11","year":2026,"price":82000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD"},
-{"id":52,"title":"HP 14 Laptop","brand":"HP","model":"HP 14","year":2024,"price":13500,"processor":"Intel Celeron","ram":"4GB","storage":"128GB SSD"},
-{"id":53,"title":"HP Chromebook 14","brand":"HP","model":"Chromebook 14","year":2024,"price":9000,"processor":"Intel Celeron","ram":"4GB","storage":"64GB eMMC"},
-{"id":54,"title":"HP Dragonfly G4","brand":"HP","model":"Dragonfly G4","year":2026,"price":78000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},{"id":55,"title":"HP EliteBook 845","brand":"HP","model":"EliteBook 845 G11","year":2026,"price":58000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD"},{"id":56,"title":"HP Spectre x360 13","brand":"HP","model":"Spectre x360 13","year":2025,"price":62000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":57,"title":"HP Envy 17","brand":"HP","model":"Envy 17","year":2025,"price":50000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":58,"title":"HP Omen 15","brand":"HP","model":"Omen 15","year":2025,"price":55000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},
-{"id":59,"title":"HP EliteBook 645","brand":"HP","model":"EliteBook 645 G11","year":2025,"price":40000,"processor":"AMD Ryzen 5","ram":"16GB","storage":"512GB SSD"},
-{"id":60,"title":"HP EliteBook 665","brand":"HP","model":"EliteBook 665 G11","year":2026,"price":50000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD"},
-{"id":61,"title":"HP EliteBook 655","brand":"HP","model":"EliteBook 655 G11","year":2025,"price":45000,"processor":"AMD Ryzen 5","ram":"16GB","storage":"512GB SSD"},
-{"id":62,"title":"HP OmniBook X","brand":"HP","model":"OmniBook X 14","year":2026,"price":60000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD"},
-{"id":63,"title":"HP OmniBook Ultra","brand":"HP","model":"OmniBook Ultra Flip 14","year":2026,"price":73000,"processor":"AMD Ryzen AI 9","ram":"32GB","storage":"1TB SSD"},
-{"id":64,"title":"HP ZBook Ultra","brand":"HP","model":"ZBook Ultra G1a","year":2026,"price":100000,"processor":"AMD Ryzen AI Max","ram":"32GB","storage":"1TB SSD"},
-{"id":65,"title":"HP Stream 14","brand":"HP","model":"Stream 14","year":2024,"price":11000,"processor":"Intel Celeron","ram":"4GB","storage":"128GB eMMC"},
-{"id":66,"title":"HP Chromebook x360","brand":"HP","model":"Chromebook x360 14","year":2025,"price":14000,"processor":"Intel i3","ram":"8GB","storage":"128GB SSD"},
-{"id":67,"title":"HP Pavilion Gaming 15","brand":"HP","model":"Pavilion Gaming 15","year":2025,"price":33000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD"},
-{"id":68,"title":"HP EliteBook 630","brand":"HP","model":"EliteBook 630 G11","year":2025,"price":35000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD"},
-{"id":69,"title":"HP Envy x360 14","brand":"HP","model":"Envy x360 14","year":2026,"price":40000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD"},
-{"id":70,"title":"HP ProBook 470","brand":"HP","model":"ProBook 470 G11","year":2025,"price":40000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD"},{"id":71,"title":"HP 250 G10","brand":"HP","model":"250 G10","year":2024,"price":10500,"processor":"Intel Celeron","ram":"4GB","storage":"128GB SSD","gpu":"Intel UHD","screen":"15.6 HD","category":"أساسي","condition":"جديد"},
-{"id":72,"title":"HP 255 G10","brand":"HP","model":"255 G10","year":2024,"price":12500,"processor":"AMD Ryzen 3","ram":"8GB","storage":"256GB SSD","gpu":"AMD Radeon","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":73,"title":"HP Laptop 15s","brand":"HP","model":"15s-fq","year":2024,"price":13000,"processor":"Intel i3","ram":"4GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 HD","category":"أساسي","condition":"جديد"},
-{"id":74,"title":"HP Fortis 14","brand":"HP","model":"Fortis 14 G11","year":2025,"price":21000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 HD","category":"أساسي","condition":"جديد"},
-{"id":75,"title":"HP Pro c640","brand":"HP","model":"Pro c640 G3","year":2025,"price":23000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":76,"title":"HP Pavilion 14 Ryzen","brand":"HP","model":"Pavilion 14 (Ryzen)","year":2025,"price":24500,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":77,"title":"HP Pavilion 16","brand":"HP","model":"Pavilion 16","year":2025,"price":29000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"16 FHD+","category":"أساسي","condition":"جديد"},
-{"id":78,"title":"HP EliteBook 620","brand":"HP","model":"EliteBook 620 G11","year":2025,"price":31000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel UHD","screen":"12.4 FHD","category":"احترافي","condition":"جديد"},
-{"id":79,"title":"HP ProBook 445","brand":"HP","model":"ProBook 445 G11","year":2025,"price":31500,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":80,"title":"HP ProBook 465","brand":"HP","model":"ProBook 465 G11","year":2025,"price":36000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"16 FHD","category":"احترافي","condition":"جديد"},
-{"id":81,"title":"HP Victus 15 Intel","brand":"HP","model":"Victus 15 (Intel Edition)","year":2025,"price":34000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"RTX 3050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":82,"title":"HP Omen 16 Ryzen","brand":"HP","model":"Omen 16 (Ryzen Edition)","year":2026,"price":64000,"processor":"AMD Ryzen 9","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16.1 QHD 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":83,"title":"HP Envy 14","brand":"HP","model":"Envy 14","year":2025,"price":39000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 OLED","category":"احترافي","condition":"جديد"},
-{"id":84,"title":"HP Spectre x360 14 Ultra","brand":"HP","model":"Spectre x360 14 (Ultra)","year":2026,"price":92000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"Intel Arc","screen":"14 OLED Touch","category":"الترا بوك","condition":"جديد"},
-{"id":85,"title":"HP ZBook Firefly 16","brand":"HP","model":"ZBook Firefly 16 G11","year":2026,"price":76000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"16 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":86,"title":"HP ZBook Power 16","brand":"HP","model":"ZBook Power 16 G11","year":2026,"price":63000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 2000 Ada","screen":"16 FHD","category":"احترافي","condition":"جديد"},
-{"id":87,"title":"HP ZBook X G1","brand":"HP","model":"ZBook X G1a","year":2026,"price":140000,"processor":"AMD Ryzen AI Max Pro","ram":"64GB","storage":"2TB SSD","gpu":"AMD Radeon 8060S","screen":"16 OLED","category":"احترافي","condition":"جديد"},
-{"id":88,"title":"HP EliteBook Ultra G1","brand":"HP","model":"EliteBook Ultra G1a","year":2026,"price":90000,"processor":"AMD Ryzen AI 9 HX","ram":"32GB","storage":"1TB SSD","gpu":"AMD Radeon 890M","screen":"14 OLED Touch","category":"الترا بوك","condition":"جديد"},
-{"id":89,"title":"HP OmniBook 5","brand":"HP","model":"OmniBook 5","year":2026,"price":29000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel UHD","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":90,"title":"HP OmniBook 7","brand":"HP","model":"OmniBook 7","year":2026,"price":37000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":91,"title":"HP Elite Dragonfly G4","brand":"HP","model":"Elite Dragonfly G4 (High Spec)","year":2026,"price":98000,"processor":"Intel i7","ram":"32GB","storage":"2TB SSD","gpu":"Intel Iris Xe","screen":"13.5 3:2 Touch","category":"الترا بوك","condition":"جديد"},
-{"id":92,"title":"HP Omen 16 Max","brand":"HP","model":"Omen 16 Max","year":2026,"price":105000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"RTX 4080","screen":"16 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":93,"title":"HP Omen 17 Max","brand":"HP","model":"Omen 17 Max","year":2026,"price":120000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"17.3 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":94,"title":"HP ZBook Fury 17","brand":"HP","model":"ZBook Fury 17 G11","year":2026,"price":145000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 5000 Ada","screen":"17.3 QHD+","category":"احترافي","condition":"جديد"},{"id":95,"title":"Dell Vostro 15","brand":"Dell","model":"Vostro 15 3520","year":2024,"price":14000,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":96,"title":"Dell Latitude 5440","brand":"Dell","model":"Latitude 5440","year":2025,"price":32000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":97,"title":"Dell Latitude 7440","brand":"Dell","model":"Latitude 7440","year":2026,"price":54000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD+","category":"احترافي","condition":"جديد"},
-{"id":98,"title":"Dell Inspiron 14 2-in-1","brand":"Dell","model":"Inspiron 14 2-in-1","year":2025,"price":26000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"14 FHD Touch","category":"أساسي","condition":"جديد"},
-{"id":99,"title":"Dell G15 Gaming","brand":"Dell","model":"G15 5530","year":2025,"price":42000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4050","screen":"15.6 FHD 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":100,"title":"Dell XPS 15","brand":"Dell","model":"XPS 15","year":2026,"price":85000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"15.6 OLED 3.5K","category":"الترا بوك","condition":"جديد"},
-{"id":101,"title":"Dell XPS 17","brand":"Dell","model":"XPS 17","year":2026,"price":105000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"17 UHD+","category":"الترا بوك","condition":"جديد"},
-{"id":102,"title":"Dell Precision 5680","brand":"Dell","model":"Precision 5680","year":2026,"price":115000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 4000 Ada","screen":"16 UHD+","category":"احترافي","condition":"جديد"},
-
-{"id":103,"title":"Lenovo IdeaPad 5","brand":"Lenovo","model":"IdeaPad 5","year":2025,"price":23000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":104,"title":"Lenovo IdeaPad Slim 3","brand":"Lenovo","model":"IdeaPad Slim 3","year":2024,"price":15500,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":105,"title":"Lenovo ThinkPad E14","brand":"Lenovo","model":"ThinkPad E14","year":2025,"price":29000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":106,"title":"Lenovo ThinkPad T14","brand":"Lenovo","model":"ThinkPad T14","year":2026,"price":47000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":107,"title":"Lenovo Legion Pro 7","brand":"Lenovo","model":"Legion Pro 7","year":2026,"price":98000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4080","screen":"16 WQXGA 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":108,"title":"Lenovo Legion Slim 5","brand":"Lenovo","model":"Legion Slim 5","year":2025,"price":56000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16 WQXGA 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":109,"title":"Lenovo Yoga Slim 7","brand":"Lenovo","model":"Yoga Slim 7","year":2025,"price":41000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"14 OLED","category":"الترا بوك","condition":"جديد"},
-{"id":110,"title":"Lenovo ThinkBook 16","brand":"Lenovo","model":"ThinkBook 16","year":2025,"price":27000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"16 FHD+","category":"أساسي","condition":"جديد"},
-
-{"id":111,"title":"Asus TUF Gaming A15","brand":"Asus","model":"TUF Gaming A15","year":2025,"price":33000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 3050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":112,"title":"Asus TUF Gaming F15","brand":"Asus","model":"TUF Gaming F15","year":2025,"price":36000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":113,"title":"Asus ROG Zephyrus G14","brand":"Asus","model":"ROG Zephyrus G14","year":2026,"price":88000,"processor":"AMD Ryzen 9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"14 QHD+ 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":114,"title":"Asus ROG Strix G18","brand":"Asus","model":"ROG Strix G18","year":2026,"price":112000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4080","screen":"18 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":115,"title":"Asus Vivobook Pro 15","brand":"Asus","model":"Vivobook Pro 15 OLED","year":2025,"price":34000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"15.6 OLED","category":"احترافي","condition":"جديد"},
-{"id":116,"title":"Asus ExpertBook B9","brand":"Asus","model":"ExpertBook B9","year":2026,"price":69000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":117,"title":"Asus Zenbook Duo","brand":"Asus","model":"Zenbook Duo 14","year":2026,"price":80000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"14 OLED (Dual)","category":"الترا بوك","condition":"جديد"},
-{"id":118,"title":"Asus Vivobook 14","brand":"Asus","model":"Vivobook 14","year":2024,"price":17000,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-
-{"id":119,"title":"Apple MacBook Air M1","brand":"Apple","model":"MacBook Air M1","year":2024,"price":38000,"processor":"Apple M","ram":"8GB","storage":"256GB SSD","gpu":"Apple GPU 7-core","screen":"13.3 Retina","category":"الترا بوك","condition":"مستعملة - حالة ممتازة"},
-{"id":120,"title":"Apple MacBook Pro M4","brand":"Apple","model":"MacBook Pro 14 M4","year":2026,"price":105000,"processor":"Apple M","ram":"24GB","storage":"512GB SSD","gpu":"Apple GPU 10-core","screen":"14.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-{"id":121,"title":"Apple MacBook Pro 16 M4","brand":"Apple","model":"MacBook Pro 16 M4 Pro","year":2026,"price":145000,"processor":"Apple M","ram":"32GB","storage":"1TB SSD","gpu":"Apple GPU 16-core","screen":"16.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-
-{"id":122,"title":"MSI Modern 14","brand":"MSI","model":"Modern 14","year":2025,"price":19000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":123,"title":"MSI Cyborg 15","brand":"MSI","model":"Cyborg 15","year":2025,"price":31000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 3050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":124,"title":"MSI Raider GE78","brand":"MSI","model":"Raider GE78 HX","year":2026,"price":125000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"17.3 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":125,"title":"MSI Stealth 16","brand":"MSI","model":"Stealth 16","year":2026,"price":78000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":126,"title":"MSI Summit 13","brand":"MSI","model":"Summit E13 Flip","year":2025,"price":52000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"13.4 FHD+ Touch","category":"احترافي","condition":"جديد"},
-
-{"id":127,"title":"Acer Aspire 5","brand":"Acer","model":"Aspire 5","year":2025,"price":16500,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":128,"title":"Acer Aspire 7","brand":"Acer","model":"Aspire 7","year":2025,"price":24000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 2050","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":129,"title":"Acer Predator Helios Neo 16","brand":"Acer","model":"Predator Helios Neo 16","year":2026,"price":68000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16 WQXGA 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":130,"title":"Acer Predator Triton 14","brand":"Acer","model":"Predator Triton 14","year":2026,"price":92000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"14 QHD+ 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":131,"title":"Acer Swift Go 14","brand":"Acer","model":"Swift Go 14","year":2025,"price":30000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 OLED","category":"الترا بوك","condition":"جديد"},
-{"id":132,"title":"Acer Spin 5","brand":"Acer","model":"Spin 5","year":2025,"price":37000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 WQXGA Touch","category":"احترافي","condition":"جديد"},{"id":133,"title":"Apple MacBook Air 13 M2","brand":"Apple","model":"MacBook Air 13 M2","year":2025,"price":48000,"processor":"Apple M","ram":"8GB","storage":"512GB SSD","gpu":"Apple GPU 10-core","screen":"13.6 Liquid Retina","category":"الترا بوك","condition":"جديد"},
-{"id":134,"title":"Apple MacBook Air 15 M2","brand":"Apple","model":"MacBook Air 15 M2","year":2025,"price":58000,"processor":"Apple M","ram":"8GB","storage":"256GB SSD","gpu":"Apple GPU 10-core","screen":"15.3 Liquid Retina","category":"الترا بوك","condition":"جديد"},
-{"id":135,"title":"Apple MacBook Air 13 M3","brand":"Apple","model":"MacBook Air 13 M3","year":2026,"price":62000,"processor":"Apple M","ram":"16GB","storage":"512GB SSD","gpu":"Apple GPU 10-core","screen":"13.6 Liquid Retina","category":"الترا بوك","condition":"جديد"},
-{"id":136,"title":"Apple MacBook Pro 13 M2","brand":"Apple","model":"MacBook Pro 13 M2","year":2024,"price":50000,"processor":"Apple M","ram":"8GB","storage":"256GB SSD","gpu":"Apple GPU 10-core","screen":"13.3 Retina","category":"احترافي","condition":"مستعملة - حالة ممتازة"},
-{"id":137,"title":"Apple MacBook Pro 14 M3 Pro","brand":"Apple","model":"MacBook Pro 14 M3 Pro","year":2026,"price":120000,"processor":"Apple M","ram":"18GB","storage":"512GB SSD","gpu":"Apple GPU 14-core","screen":"14.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-{"id":138,"title":"Apple MacBook Pro 16 M3 Max","brand":"Apple","model":"MacBook Pro 16 M3 Max","year":2026,"price":175000,"processor":"Apple M","ram":"36GB","storage":"1TB SSD","gpu":"Apple GPU 30-core","screen":"16.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-{"id":139,"title":"Apple MacBook Pro 16 M4 Max","brand":"Apple","model":"MacBook Pro 16 M4 Max","year":2026,"price":210000,"processor":"Apple M","ram":"48GB","storage":"1TB SSD","gpu":"Apple GPU 40-core","screen":"16.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-{"id":140,"title":"Apple MacBook Air M4","brand":"Apple","model":"MacBook Air 13 M4","year":2026,"price":68000,"processor":"Apple M","ram":"16GB","storage":"256GB SSD","gpu":"Apple GPU 10-core","screen":"13.6 Liquid Retina","category":"الترا بوك","condition":"جديد"},
-{"id":141,"title":"Apple MacBook Air 15 M4","brand":"Apple","model":"MacBook Air 15 M4","year":2026,"price":78000,"processor":"Apple M","ram":"16GB","storage":"256GB SSD","gpu":"Apple GPU 10-core","screen":"15.3 Liquid Retina","category":"الترا بوك","condition":"جديد"},{"id":142,"title":"Dell Latitude 3440","brand":"Dell","model":"Latitude 3440","year":2024,"price":19000,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":143,"title":"Dell Latitude 5540","brand":"Dell","model":"Latitude 5540","year":2025,"price":34000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"15.6 FHD","category":"احترافي","condition":"جديد"},
-{"id":144,"title":"Dell Latitude 9440","brand":"Dell","model":"Latitude 9440 2-in-1","year":2026,"price":72000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD+ Touch","category":"احترافي","condition":"جديد"},
-{"id":145,"title":"Dell Inspiron 16 Plus","brand":"Dell","model":"Inspiron 16 Plus","year":2025,"price":38000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 3050","screen":"16 QHD+","category":"احترافي","condition":"جديد"},
-{"id":146,"title":"Dell Inspiron 13 2-in-1","brand":"Dell","model":"Inspiron 13 7000","year":2024,"price":29000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel Iris Xe","screen":"13.3 FHD Touch","category":"الترا بوك","condition":"جديد"},
-{"id":147,"title":"Dell G16 Gaming","brand":"Dell","model":"G16 7630","year":2025,"price":52000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16 QHD+ 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":148,"title":"Dell Alienware x14","brand":"Dell","model":"Alienware x14 R2","year":2026,"price":98000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"14 QHD+ 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":149,"title":"Dell Alienware m18","brand":"Dell","model":"Alienware m18 R2","year":2026,"price":135000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"18 QHD+ 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":150,"title":"Dell XPS 13 Plus","brand":"Dell","model":"XPS 13 Plus","year":2025,"price":62000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"13.4 OLED","category":"الترا بوك","condition":"جديد"},
-{"id":151,"title":"Dell Precision 3580","brand":"Dell","model":"Precision 3580","year":2025,"price":48000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Nvidia RTX A500","screen":"15.6 FHD","category":"احترافي","condition":"جديد"},
-{"id":152,"title":"Dell Vostro 14","brand":"Dell","model":"Vostro 14 5000","year":2024,"price":21000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":153,"title":"Dell Latitude 7350","brand":"Dell","model":"Latitude 7350 Detachable","year":2026,"price":80000,"processor":"Snapdragon X Elite","ram":"16GB","storage":"512GB SSD","gpu":"Qualcomm Adreno","screen":"13.4 FHD+ Touch","category":"الترا بوك","condition":"جديد"},
-{"id":154,"title":"Dell Inspiron 15 3000","brand":"Dell","model":"Inspiron 15 3520","year":2024,"price":15500,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 HD","category":"أساسي","condition":"جديد"},
-{"id":155,"title":"Dell G15 5535 Ryzen","brand":"Dell","model":"G15 5535","year":2025,"price":40000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4050","screen":"15.6 FHD 120Hz","category":"للألعاب","condition":"جديد"},
-{"id":156,"title":"Dell Latitude 5450","brand":"Dell","model":"Latitude 5450","year":2026,"price":37000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-
-{"id":157,"title":"HP EliteBook 835","brand":"HP","model":"EliteBook 835 G11","year":2026,"price":50000,"processor":"AMD Ryzen 5","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"13.3 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":158,"title":"HP EliteBook 1045","brand":"HP","model":"EliteBook 1045 G11","year":2026,"price":85000,"processor":"AMD Ryzen 7 PRO","ram":"32GB","storage":"1TB SSD","gpu":"AMD Radeon 780M","screen":"14 OLED","category":"احترافي","condition":"جديد"},
-{"id":159,"title":"HP ProBook 435","brand":"HP","model":"ProBook 435 G10","year":2025,"price":25000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"256GB SSD","gpu":"AMD Radeon","screen":"13.3 FHD","category":"أساسي","condition":"جديد"},
-{"id":160,"title":"HP ProBook 455","brand":"HP","model":"ProBook 455 G10","year":2025,"price":29000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":161,"title":"HP Omen 14","brand":"HP","model":"Omen 14","year":2025,"price":58000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"14 QHD+ 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":162,"title":"HP Victus 15 Fox","brand":"HP","model":"Victus 15-fb","year":2025,"price":30000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 2050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":163,"title":"HP Spectre x360 14 Eu","brand":"HP","model":"Spectre x360 14 EU0000","year":2025,"price":68000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"14 3K2K OLED Touch","category":"الترا بوك","condition":"جديد"},
-{"id":164,"title":"HP Envy 13","brand":"HP","model":"Envy 13","year":2024,"price":32000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"13.3 FHD","category":"احترافي","condition":"مستعملة - حالة ممتازة"},
-{"id":165,"title":"HP ZBook Firefly 14 G10","brand":"HP","model":"ZBook Firefly 14 G10","year":2025,"price":56000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":166,"title":"HP EliteBook 835 Aero","brand":"HP","model":"EliteBook 835 Aero G10","year":2024,"price":46000,"processor":"AMD Ryzen 7 PRO","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"13.3 FHD","category":"احترافي","condition":"جديد"},
-
-{"id":167,"title":"Lenovo ThinkPad X13","brand":"Lenovo","model":"ThinkPad X13 Gen 5","year":2025,"price":42000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"13.3 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":168,"title":"Lenovo ThinkPad L14","brand":"Lenovo","model":"ThinkPad L14 Gen 5","year":2025,"price":33000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":169,"title":"Lenovo ThinkPad P16","brand":"Lenovo","model":"ThinkPad P16 Gen 2","year":2026,"price":135000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 4000 Ada","screen":"16 UHD+","category":"احترافي","condition":"جديد"},
-{"id":170,"title":"Lenovo Legion 9i","brand":"Lenovo","model":"Legion 9i","year":2026,"price":155000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"16 WQXGA 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":171,"title":"Lenovo Legion 5i","brand":"Lenovo","model":"Legion 5i","year":2025,"price":50000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":172,"title":"Lenovo Yoga 7i","brand":"Lenovo","model":"Yoga 7i","year":2025,"price":39000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 WUXGA Touch","category":"الترا بوك","condition":"جديد"},
-{"id":173,"title":"Lenovo Yoga Book 9i","brand":"Lenovo","model":"Yoga Book 9i","year":2026,"price":95000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"13.3 OLED (Dual)","category":"الترا بوك","condition":"جديد"},
-{"id":174,"title":"Lenovo IdeaPad Gaming 3","brand":"Lenovo","model":"IdeaPad Gaming 3","year":2024,"price":24000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 2050","screen":"15.6 FHD 120Hz","category":"للألعاب","condition":"جديد"},
-{"id":175,"title":"Lenovo ThinkBook 14 G6","brand":"Lenovo","model":"ThinkBook 14 G6","year":2025,"price":25000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-{"id":176,"title":"Lenovo ThinkPad Z13","brand":"Lenovo","model":"ThinkPad Z13","year":2025,"price":58000,"processor":"AMD Ryzen 7 PRO","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"13.3 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":177,"title":"Lenovo IdeaPad Flex 5","brand":"Lenovo","model":"IdeaPad Flex 5","year":2024,"price":22000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"256GB SSD","gpu":"AMD Radeon","screen":"14 FHD Touch","category":"أساسي","condition":"جديد"},
-
-{"id":178,"title":"Asus ROG Flow X13","brand":"Asus","model":"ROG Flow X13","year":2025,"price":64000,"processor":"AMD Ryzen 9","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"13.4 QHD 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":179,"title":"Asus ROG Strix Scar 18","brand":"Asus","model":"ROG Strix Scar 18","year":2026,"price":150000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"18 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":180,"title":"Asus TUF Dash F15","brand":"Asus","model":"TUF Dash F15","year":2025,"price":41000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":181,"title":"Asus Zenbook S13","brand":"Asus","model":"Zenbook S13 OLED","year":2025,"price":45000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"13.3 OLED","category":"الترا بوك","condition":"جديد"},
-{"id":182,"title":"Asus Zenbook Pro 16X","brand":"Asus","model":"Zenbook Pro 16X OLED","year":2026,"price":90000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16 4K OLED Touch","category":"احترافي","condition":"جديد"},
-{"id":183,"title":"Asus Vivobook S15","brand":"Asus","model":"Vivobook S15","year":2025,"price":28000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":184,"title":"Asus ExpertBook B5","brand":"Asus","model":"ExpertBook B5","year":2025,"price":36000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":185,"title":"Asus ROG Zephyrus G16","brand":"Asus","model":"ROG Zephyrus G16","year":2026,"price":102000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4080","screen":"16 OLED 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":186,"title":"Asus Vivobook Go 15","brand":"Asus","model":"Vivobook Go 15","year":2024,"price":16000,"processor":"AMD Ryzen 3","ram":"8GB","storage":"256GB SSD","gpu":"AMD Radeon","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":187,"title":"Asus ProArt Studiobook 16","brand":"Asus","model":"ProArt Studiobook 16 OLED","year":2026,"price":115000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 4K OLED","category":"احترافي","condition":"جديد"},
-
-{"id":188,"title":"Apple MacBook Air M1 (8GB/256GB)","brand":"Apple","model":"MacBook Air M1","year":2023,"price":32000,"processor":"Apple M","ram":"8GB","storage":"256GB SSD","gpu":"Apple GPU 7-core","screen":"13.3 Retina","category":"الترا بوك","condition":"مستعملة - حالة جيدة جدًا"},
-{"id":189,"title":"Apple MacBook Pro 13 M1","brand":"Apple","model":"MacBook Pro 13 M1","year":2023,"price":36000,"processor":"Apple M","ram":"8GB","storage":"256GB SSD","gpu":"Apple GPU 8-core","screen":"13.3 Retina","category":"احترافي","condition":"مستعملة - حالة ممتازة"},
-{"id":190,"title":"Apple MacBook Pro 14 M3","brand":"Apple","model":"MacBook Pro 14 M3","year":2025,"price":85000,"processor":"Apple M","ram":"8GB","storage":"1TB SSD","gpu":"Apple GPU 10-core","screen":"14.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-{"id":191,"title":"Apple MacBook Pro 16 M3 Pro","brand":"Apple","model":"MacBook Pro 16 M3 Pro","year":2026,"price":140000,"processor":"Apple M","ram":"18GB","storage":"512GB SSD","gpu":"Apple GPU 14-core","screen":"16.2 Liquid Retina XDR","category":"احترافي","condition":"جديد"},
-
-{"id":192,"title":"MSI Bravo 15","brand":"MSI","model":"Bravo 15","year":2024,"price":27000,"processor":"AMD Ryzen 5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 2050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":193,"title":"MSI Sword 16","brand":"MSI","model":"Sword 16 HX","year":2025,"price":52000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"16 FHD+ 144Hz","category":"للألعاب","condition":"جديد"},
-{"id":194,"title":"MSI Vector GP68","brand":"MSI","model":"Vector GP68 HX","year":2026,"price":98000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"RTX 4080","screen":"16 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":195,"title":"MSI Titan 18","brand":"MSI","model":"Titan 18 HX","year":2026,"price":175000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"18 4K 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":196,"title":"MSI Prestige 16","brand":"MSI","model":"Prestige 16 Evo","year":2025,"price":48000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"Intel Iris Xe","screen":"16 QHD+","category":"احترافي","condition":"جديد"},
-{"id":197,"title":"MSI Summit 14 Flip","brand":"MSI","model":"Summit E14 Flip Evo","year":2025,"price":49000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD+ Touch","category":"احترافي","condition":"جديد"},
-{"id":198,"title":"MSI Thin GF63","brand":"MSI","model":"Thin GF63","year":2024,"price":26000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"RTX 2050","screen":"15.6 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-
-{"id":199,"title":"Acer Predator Helios 18","brand":"Acer","model":"Predator Helios 18","year":2026,"price":115000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"RTX 4080","screen":"18 QHD+ 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":200,"title":"Acer Nitro 16","brand":"Acer","model":"Nitro 16","year":2025,"price":44000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 4060","screen":"16 WUXGA 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":201,"title":"Acer Aspire Vero","brand":"Acer","model":"Aspire Vero","year":2025,"price":23000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":202,"title":"Acer Swift Edge 16","brand":"Acer","model":"Swift Edge 16","year":2025,"price":42000,"processor":"AMD Ryzen 7","ram":"16GB","storage":"512GB SSD","gpu":"AMD Radeon","screen":"16 WQXGA OLED","category":"الترا بوك","condition":"جديد"},
-{"id":203,"title":"Acer TravelMate P4","brand":"Acer","model":"TravelMate P414","year":2025,"price":31000,"processor":"Intel i5","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"احترافي","condition":"جديد"},
-{"id":204,"title":"Acer ConceptD 7","brand":"Acer","model":"ConceptD 7","year":2025,"price":88000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 4K UHD","category":"احترافي","condition":"جديد"},
-{"id":205,"title":"Acer Chromebook Spin 714","brand":"Acer","model":"Chromebook Spin 714","year":2024,"price":18000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"14 FHD Touch","category":"أساسي","condition":"جديد"},
-{"id":206,"title":"Acer Predator Triton 17X","brand":"Acer","model":"Predator Triton 17X","year":2026,"price":132000,"processor":"Intel i9","ram":"32GB","storage":"2TB SSD","gpu":"RTX 4090","screen":"17.3 QHD+ 250Hz","category":"للألعاب","condition":"جديد"},
-{"id":207,"title":"Acer Extensa 15","brand":"Acer","model":"Extensa 15","year":2024,"price":13500,"processor":"Intel i3","ram":"8GB","storage":"256GB SSD","gpu":"Intel UHD","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-
-{"id":208,"title":"Dell Latitude 3540","brand":"Dell","model":"Latitude 3540","year":2024,"price":22000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":209,"title":"Dell Inspiron 15 5000","brand":"Dell","model":"Inspiron 15 5530","year":2025,"price":27000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"15.6 FHD","category":"أساسي","condition":"جديد"},
-{"id":210,"title":"Dell Precision 7680","brand":"Dell","model":"Precision 7680","year":2026,"price":165000,"processor":"Intel i9","ram":"64GB","storage":"2TB SSD","gpu":"RTX 5000 Ada","screen":"16 UHD+","category":"احترافي","condition":"جديد"},
-{"id":211,"title":"Dell Latitude 7640","brand":"Dell","model":"Latitude 7640","year":2026,"price":58000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"16 FHD+","category":"احترافي","condition":"جديد"},
-{"id":212,"title":"Dell Inspiron 14 5000","brand":"Dell","model":"Inspiron 14 5440","year":2025,"price":24500,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"14 FHD","category":"أساسي","condition":"جديد"},
-
-{"id":213,"title":"HP EliteBook 1050","brand":"HP","model":"EliteBook 1050 G1","year":2026,"price":78000,"processor":"Intel i7","ram":"32GB","storage":"1TB SSD","gpu":"RTX 500 Ada","screen":"15.6 FHD","category":"احترافي","condition":"جديد"},
-{"id":214,"title":"HP Pavilion 13","brand":"HP","model":"Pavilion 13","year":2024,"price":22000,"processor":"Intel i5","ram":"8GB","storage":"256GB SSD","gpu":"Intel Iris Xe","screen":"13.3 FHD","category":"أساسي","condition":"مستعملة - حالة جيدة جدًا"},
-{"id":215,"title":"HP Envy 17","brand":"HP","model":"Envy 17-cw","year":2024,"price":48000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"RTX 2050","screen":"17.3 FHD","category":"احترافي","condition":"جديد"},
-
-{"id":216,"title":"Lenovo Legion Slim 7i","brand":"Lenovo","model":"Legion Slim 7i","year":2026,"price":85000,"processor":"Intel i9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 WQXGA 165Hz","category":"للألعاب","condition":"جديد"},
-{"id":217,"title":"Lenovo ThinkPad T16","brand":"Lenovo","model":"ThinkPad T16","year":2026,"price":55000,"processor":"Intel i7","ram":"16GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"16 WUXGA","category":"احترافي","condition":"جديد"},
-{"id":218,"title":"Lenovo IdeaPad Duet 5","brand":"Lenovo","model":"IdeaPad Duet 5","year":2024,"price":19000,"processor":"Snapdragon 7c","ram":"8GB","storage":"128GB SSD","gpu":"Qualcomm Adreno","screen":"13.3 OLED Touch","category":"أساسي","condition":"جديد"},
-
-{"id":219,"title":"Asus ROG Strix G16 Ryzen","brand":"Asus","model":"ROG Strix G16 (Ryzen)","year":2026,"price":82000,"processor":"AMD Ryzen 9","ram":"32GB","storage":"1TB SSD","gpu":"RTX 4070","screen":"16 QHD 240Hz","category":"للألعاب","condition":"جديد"},
-{"id":220,"title":"Asus Vivobook 16","brand":"Asus","model":"Vivobook 16","year":2025,"price":24000,"processor":"Intel i5","ram":"8GB","storage":"512GB SSD","gpu":"Intel Iris Xe","screen":"16 FHD+","category":"أساسي","condition":"جديد"},
-
-{"id":221,"title":"MSI Katana 17","brand":"MSI","model":"Katana 17","year":2026,"price":54000,"processor":"Intel i7","ram":"16GB","storage":"1TB SSD","gpu":"RTX 4060","screen":"17.3 FHD 144Hz","category":"للألعاب","condition":"جديد"},
-
-{"id":222,"title":"Acer Aspire 3","brand":"Acer","model":"Aspire 3","year":2024,"price":12000,"processor":"AMD Ryzen 3","ram":"8GB","storage":"256GB SSD","gpu":"AMD Radeon","screen":"15.6 HD","category":"أساسي","condition":"جديد"},{"id":223,"title":"HP EliteBook 845","brand":"HP","model":"EliteBook 845 G8","year":2025,"price":38000,"processor":"AMD Ryzen 7 PRO","ram":"16GB","storage":"512GB SSD"},];
-
- laptops.push({"id":403,"title":"Noise Cancelling Bluetooth Headphones, Lightweight","brand":"Generic","model":"Noise Cancelling","year":2026,"price":390,"category":"إكسسوارات","condition":"جديد","processor":"بلوتوث + عزل ضوضاء","ram":"-","storage":"-","screen":"سماعة هيدفون بلوتوث","image":"","url":"https://www.amazon.eg/dp/رقم-المنتج?tag=YOUR-TAG-21"});
- 
-let favorites=new Set(JSON.parse(localStorage.getItem('favs')||'[]'));
-let showFavOnly=false;
-const grid=document.getElementById('grid'),count=document.getElementById('count'),brand=document.getElementById('brand'),processor=document.getElementById('processor'),ram=document.getElementById('ram'),category=document.getElementById('category'),search=document.getElementById('search'),minPrice=document.getElementById('minPrice'),maxPrice=document.getElementById('maxPrice'),sort=document.getElementById('sort'),favToggle=document.getElementById('favToggle'),favCount=document.getElementById('favCount');
-document.getElementById('totalCount').textContent=laptops.length+'+';
-
-function money(n){return n.toLocaleString('ar-EG')+' ج.م';}
-function placeholder(c){return 'https://placehold.co/900x600/0d1420/60cfff?text='+encodeURIComponent(c.brand+' '+c.model);}
-
-function toggleFav(id){
-  if(favorites.has(id))favorites.delete(id);else favorites.add(id);
-  localStorage.setItem('favs',JSON.stringify([...favorites]));
-  favCount.textContent=favorites.size;
-  render();
-}
-favToggle.onclick=()=>{showFavOnly=!showFavOnly;favToggle.classList.toggle('active',showFavOnly);favToggle.innerHTML=(showFavOnly?'♥':'♡')+' المفضلة (<span id="favCount">'+favorites.size+'</span>)';render();};
-
-function render(){
-  let q=search.value.toLowerCase().trim(),br=brand.value,pr=processor.value,rm=ram.value,cat=category.value,min=+minPrice.value||0,max=+maxPrice.value||Infinity;
-  let list=laptops.filter(c=>{
-    let text=(c.title+' '+c.brand+' '+c.model).toLowerCase();
-    return text.includes(q)&&(!br||c.brand===br)&&(!pr||c.processor===pr)&&(!rm||c.ram===rm)&&(!cat||c.category===cat)&&c.price>=min&&c.price<=max&&(!showFavOnly||favorites.has(c.id));
-  });
- if(!window.curType)window.curType='laptops';
-list=list.filter(c=>curType==='all'||(curType==='acc'?c.category==='إكسسوارات':c.category!=='إكسسوارات'));
-  if(sort.value==='priceLow')list.sort((a,b)=>a.price-b.price);
-  if(sort.value==='priceHigh')list.sort((a,b)=>b.price-a.price);
-  if(sort.value==='name')list.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
-  if(sort.value==='new')list.sort((a,b)=>b.year-a.year||a.id-b.id);
-  count.textContent='عرض '+list.length+' من '+laptops.length+' جهاز';
-  grid.innerHTML=list.map(c=>`<article class="card" onclick="openModal(${c.id})">
-    <button class="heart-btn${favorites.has(c.id)?' is-fav':''}" onclick="event.stopPropagation();toggleFav(${c.id})">${favorites.has(c.id)?'♥':'♡'}</button>
-    <button class="compare-btn${compareList.has(c.id)?' is-selected':''}" onclick="event.stopPropagation();toggleCompare(${c.id})" title="أضف للمقارنة">⇄</button>
-    <div class="shine"></div>
-    <img src="${placeholder(c)}" alt="${c.title}" width="900" height="600">
-    <div class="info"><span class="badge">${c.category} • ${c.brand}</span>
-    <h2>${c.title}</h2><div class="sub">${c.condition}</div>
-    <div class="price">${money(c.price)}</div>
-    <div class="spec">🖥️ ${c.screen}<br>⚙️ ${c.processor} • ${c.ram} • ${c.storage}</div>
-    <button>عرض التفاصيل</button><button onclick="event.stopPropagation();shareLaptop(${c.id})" style="margin-top:8px;background:#25D366">📤 شارك</button></div><a href="https://www.amazon.com/s?k=${encodeURIComponent(c.title)}&tag=mohamed005cb-20" target="_blank" rel="sponsored noopener" onclick="event.stopPropagation()" style="display:block;margin-top:8px;padding:10px;text-align:center;background:#FF9900;color:#000;border-radius:8px;font-weight:bold;text-decoration:none;">🛒 اشتري من Amazon</a></article>`).join('');
-}
-
-function shareLaptop(id){
-  const c=laptops.find(x=>x.id===id);
-  const msg=`شايف الجهاز المووت ده في Hamod LABS: ${c.title}\nالسعر: ${money(c.price)}\nشوفه هنا: https://hamodpython010010-droid.github.io/HAMOD-LABS/`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
-}
-
-function openModal(id){
-  const c=laptops.find(x=>x.id===id);
-  document.getElementById('modalContent').innerHTML=`<img class="modal-img" src="${placeholder(c)}" alt="${c.title}">
-  <span class="badge">${c.category} • ${c.brand}</span><h1>${c.title}</h1><div class="price">${money(c.price)}</div>
-  <div class="details">
-  <div class="detail"><b>المعالج</b>${c.processor}</div>
-  <div class="detail"><b>الرام</b>${c.ram}</div>
-  <div class="detail"><b>التخزين</b>${c.storage}</div>
-  <div class="detail"><b>كارت الشاشة</b>${c.gpu}</div>
-  <div class="detail"><b>الشاشة</b>${c.screen}</div>
-  <div class="detail"><b>الحالة</b>${c.condition}</div>
-  </div>`;
-  document.getElementById('modal').style.display='flex';
-}
-function closeModal(){document.getElementById('modal').style.display='none';}
-let compareList=new Set();
-const compareBar=document.getElementById('compareBar'),compareCount=document.getElementById('compareCount'),compareGoBtn=document.getElementById('compareGoBtn');
-
-function toggleCompare(id){
-  if(compareList.has(id)){
-    compareList.delete(id);
-  }else{
-    if(compareList.size>=3){alert('تقدر تقارن 3 أجهزة بحد أقصى في المرة الواحدة');return;}
-    compareList.add(id);
-  }
-  updateCompareBar();
-  render();
-}
-function updateCompareBar(){
-  compareBar.classList.toggle('show',compareList.size>0);
-  compareCount.textContent='تم اختيار '+compareList.size+' جهاز للمقارنة';
-  compareGoBtn.disabled=compareList.size<2;
-  compareGoBtn.style.opacity=compareList.size<2?'.5':'1';
-}
-function clearCompare(){compareList.clear();updateCompareBar();render();}
-function parseNum(v){
-  if(typeof v==='number')return v;
-  const m=String(v).match(/[\d.]+/);
-  return m?parseFloat(m[0]):null;
-}
-function openCompareModal(){
-  if(compareList.size<2)return;
-  const items=[...compareList].map(id=>laptops.find(c=>c.id===id));
-  const fields=[
-    {key:'price',label:'السعر',fmt:v=>money(v),lowerIsBetter:true},
-    {key:'ram',label:'الرام',compareNumeric:true},
-    {key:'storage',label:'التخزين',compareNumeric:true},
-    {key:'processor',label:'المعالج'},
-    {key:'gpu',label:'كارت الشاشة'},
-    {key:'screen',label:'الشاشة'},
-    {key:'category',label:'الفئة'},
-    {key:'condition',label:'الحالة'},
-    {key:'year',label:'سنة الإصدار',compareNumeric:true}
-  ];
-  let html=`<h1>مقارنة الأجهزة</h1><div style="overflow-x:auto"><table class="compare-table"><thead><tr><th></th>`;
-  items.forEach(c=>{html+=`<th><img src="${placeholder(c)}" alt="${c.title}"><br>${c.title}</th>`;});
-  html+=`</tr></thead><tbody>`;
-  fields.forEach(f=>{
-    html+=`<tr><td>${f.label}</td>`;
-    let best=null,vals=[];
-    if(f.compareNumeric||f.key==='price'){
-      vals=items.map(c=>parseNum(c[f.key]));
-      const valid=vals.filter(v=>v!==null);
-      if(valid.length){
-        best=f.lowerIsBetter?Math.min(...valid):Math.max(...valid);
-      }
-    }
-    items.forEach((c,i)=>{
-      const raw=c[f.key];
-      const displayVal=f.fmt?f.fmt(raw):raw;
-      let mark='';
-      if(best!==null&&vals[i]!==null){
-        const allSame=vals.every(v=>v===vals[0]);
-        if(!allSame){
-          mark=vals[i]===best?' <span style="color:#22c55e">✅</span>':' <span style="color:#ef4444">⭕</span>';
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الأجهزة الإلكترونية | أفضل العروض والاستيراد</title>
+    <!-- Font Awesome الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #2563eb;
+            --amazon-color: #ff9900;
+            --amazon-hover: #e68a00;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --radius-lg: 16px;
+            --radius-md: 12px;
         }
-      }
-      html+=`<td>${displayVal}${mark}</td>`;
-    });
-    html+=`</tr>`;
-  });
-  html+=`</tbody></table></div>`;
-  document.getElementById('modalContent').innerHTML=html;
-  document.getElementById('modal').style.display='flex';
-}
-[search,brand,processor,ram,category,minPrice,maxPrice,sort].forEach(el=>el.addEventListener('input',render));
-render();
-</script>
- <script>
-fetch("https://script.google.com/macros/s/AKfycbzePpl6BJXa0Gx3q73sjGPdTUQNEI1oXkrjAAYjM2fCHlwXRCKJDSyBvfLCFDAyFsir/exec?ua=" + encodeURIComponent(navigator.userAgent), {mode: "no-cors"});
-</script>
- <div id="onlineBadge" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(0,0,0,.75);color:#fff;padding:6px 12px;border-radius:20px;font:14px sans-serif;display:flex;align-items:center;gap:6px;">
-  <span>👁</span><span id="onlineCount">...</span>
-</div>
-<script>
-(function(){
-  var URL = "https://script.google.com/macros/s/AKfycbzePpl6BJXa0Gx3q73sjGPdTUQNEI1oXkrjAAYjM2fCHlwXRCKJDSyBvfLCFDAyFsir/exec";
-  var id = sessionStorage.getItem("vid");
-  if (!id) { id = Math.random().toString(36).slice(2); sessionStorage.setItem("vid", id); }
-  function ping(){
-    fetch(URL + "?online=1&id=" + id)
-      .then(function(r){ return r.text(); })
-      .then(function(t){ document.getElementById("onlineCount").textContent = t; })
-      .catch(function(){});
-  }
-  ping();
-  setInterval(ping, 20000);
-})();
-</script>
- <p style="text-align:center;margin:20px;">
-  <a href="https://amzn.to/3VCAbvk" target="_blank">اشتري من Amazon</a>
-</p>
- <script>
-window.curType='laptops';
-document.querySelectorAll('.tt').forEach(function(b){
-  if(b.dataset.t==='laptops')b.classList.add('on');
-  b.onclick=function(){
-    window.curType=b.dataset.t;
-    document.querySelectorAll('.tt').forEach(function(x){x.classList.toggle('on',x===b)});
-    render();
-  };
-});
-render();
-</script>
-</body></html>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        /* Navbar Header */
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .badge {
+            background: #ef4444;
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* Main Container & Grid */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Product Card Design */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-card.highlighted {
+            border: 2px solid var(--accent-color);
+            animation: pulseHighlight 2s infinite;
+        }
+
+        @keyframes pulseHighlight {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: #f1f5f9;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .top-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            left: 10px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .icon-btn:hover {
+            background: white;
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .icon-btn.active-fav {
+            color: #ef4444;
+            background: white;
+        }
+
+        .product-info {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .product-specs {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            list-style: none;
+        }
+
+        .product-specs li {
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .price-section {
+            margin-top: auto;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .old-price {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-right: 6px;
+        }
+
+        /* Buttons Design */
+        .card-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        /* Amazon Premium Button */
+        .btn-amazon {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%);
+            color: #111;
+            font-weight: 700;
+            border: none;
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.25);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 153, 0, 0.35);
+            background: linear-gradient(135deg, #ffa41c 0%, #cc7a00 100%);
+        }
+
+        /* Share Luxury Button */
+        .btn-share {
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .btn-share:hover {
+            background: #e2e8f0;
+            color: var(--accent-color);
+        }
+
+        .btn-compare {
+            background: #eff6ff;
+            color: var(--accent-color);
+            border: 1px solid #bfdbfe;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .btn-compare:hover {
+            background: #dbeafe;
+        }
+
+        .btn-compare.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Modals & Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Comparison Table */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .compare-table th, .compare-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .compare-table th {
+            background: #f8fafc;
+            font-weight: 700;
+        }
+
+        /* Mobile Optimization Improvements */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 0.8rem;
+                margin: 1rem auto;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .product-card {
+                border-radius: 12px;
+            }
+
+            .image-container {
+                height: 180px;
+            }
+
+            .header-container {
+                flex-direction: row;
+            }
+
+            .logo span {
+                font-size: 1.1rem;
+            }
+
+            .card-buttons {
+                gap: 6px;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+            }
+
+            .compare-table th, .compare-table td {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>تيك ستور الاستيراد</span>
+            </a>
+            <div class="header-actions">
+                <button class="nav-btn" onclick="openModal('wishlistModal')">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>المفضلة</span>
+                    <span class="badge" id="favCount">0</span>
+                </button>
+                <button class="nav-btn" onclick="openModal('compareModal')">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>المقارنة</span>
+                    <span class="badge" id="compareCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="products-grid" id="productsGrid">
+            <!-- المنتجات سينم إنشاؤها عبر JavaScript -->
+        </div>
+    </div>
+
+    <!-- modal المفضلة -->
+    <div class="modal" id="wishlistModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-heart" style="color: #ef4444;"></i> قائمة المفضلة</h3>
+                <button class="close-modal" onclick="closeModal('wishlistModal')">&times;</button>
+            </div>
+            <div id="wishlistItems" class="products-grid">
+                <!-- العناصر المفضلة ستظهر هنا -->
+            </div>
+        </div>
+    </div>
+
+    <!-- modal المقارنة -->
+    <div class="modal" id="compareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-scale-balanced" style="color: var(--accent-color);"></i> مقارنة المنتجات</h3>
+                <button class="close-modal" onclick="closeModal('compareModal')">&times;</button>
+            </div>
+            <div id="compareContent" style="overflow-x: auto;">
+                <!-- جدول المقارنة سيظهر هنا -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات المنتجات الحقيقية المستوردة (Real Market Data)
+        const products = [
+            {
+                id: "dell-precision-5520",
+                title: "Dell Precision 5520 (استيراد فرز أول)",
+                price: 18500,
+                oldPrice: 21000,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&q=80",
+                processor: "Intel Core i7-7820HQ",
+                ram: "16GB DDR4",
+                storage: "512GB NVMe SSD",
+                gpu: "Nvidia Quadro M1200 4GB",
+                amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
+            },
+            {
+                id: "hp-elitebook-840-g5",
+                title: "HP EliteBook 840 G5 (استيراد الخارج)",
+                price: 14200,
+                oldPrice: 16000,
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
+                processor: "Intel Core i7-8550U",
+                ram: "16GB DDR4",
+                storage: "256GB NVMe SSD",
+                gpu: "Intel UHD Graphics 620",
+                amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G5"
+            },
+            {
+                id: "lenovo-thinkpad-t480",
+                title: "Lenovo ThinkPad T480 الجيل الثامن",
+                price: 13500,
+                oldPrice: 15000,
+                image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+                processor: "Intel Core i5-8350U",
+                ram: "16GB DDR4",
+                storage: "256GB SSD",
+                gpu: "Intel UHD 620",
+                amazonUrl: "https://www.amazon.eg/s?k=Lenovo+ThinkPad+T480"
+            },
+            {
+                id: "macbook-pro-2017",
+                title: "Apple MacBook Pro 2017 (شاشة Retina)",
+                price: 22000,
+                oldPrice: 25000,
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+                processor: "Intel Core i5 2.3GHz",
+                ram: "8GB LPDDR3",
+                storage: "256GB SSD",
+                gpu: "Intel Iris Plus 640",
+                amazonUrl: "https://www.amazon.eg/s?k=MacBook+Pro+2017"
+            }
+        ];
+
+        // إدارة الحالة عبر LocalStorage
+        let favorites = JSON.parse(localStorage.getItem('fav_products')) || [];
+        let compareList = JSON.parse(localStorage.getItem('compare_products')) || [];
+
+        // عرض المنتجات في الصفحة
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            products.forEach(p => {
+                const isFav = favorites.includes(p.id);
+                const isComp = compareList.includes(p.id);
+
+                const card = document.createElement('div');
+                card.className = `product-card`;
+                card.id = `product-${p.id}`;
+
+                card.innerHTML = `
+                    <div class="image-container">
+                        <div class="top-actions">
+                            <button class="icon-btn ${isFav ? 'active-fav' : ''}" onclick="toggleFavorite('${p.id}')">
+                                <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
+                            </button>
+                        </div>
+                        <img src="${p.image}" alt="${p.title}" class="product-img" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${p.title}</h3>
+                        <ul class="product-specs">
+                            <li><i class="fa-solid fa-microchip"></i> ${p.processor}</li>
+                            <li><i class="fa-solid fa-memory"></i> ${p.ram} | ${p.storage}</li>
+                            <li><i class="fa-solid fa-desktop"></i> ${p.gpu}</li>
+                        </ul>
+                        <div class="price-section">
+                            <div>
+                                <span class="current-price">${p.price.toLocaleString()} ج.م</span>
+                                <span class="old-price">${p.oldPrice.toLocaleString()} ج.م</span>
+                            </div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="${p.amazonUrl}" target="_blank" class="btn-amazon">
+                                <i class="fa-brands fa-amazon"></i> شراء من أمازون
+                            </a>
+                            <button class="btn-share" onclick="shareProduct('${p.id}', '${p.title}')">
+                                <i class="fa-solid fa-share-nodes"></i> مشاركة
+                            </button>
+                            <button class="btn-compare ${isComp ? 'active' : ''}" onclick="toggleCompare('${p.id}')">
+                                <i class="fa-solid fa-scale-balanced"></i> ${isComp ? 'تمت الإضافة' : 'مقارنة'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            updateBadges();
+            checkUrlHash(); // التوجيه الفوري للرابط المشارَك
+        }
+
+        // 1. ميزة المشاركة والتوجيه التلقائي للمنتج نفسه
+        function shareProduct(id, title) {
+            // إنشاء رابط مباشر يحتوي على الـ Hash الخاص بالمنتج
+            const shareUrl = `${window.location.origin}${window.location.pathname}#product-${id}`;
+            const text = `شوف العرض ده على ${title}:\n${shareUrl}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: text,
+                    url: shareUrl,
+                }).catch(() => {});
+            } else {
+                // فتح واتساب مباشرة بالرابط الدقيق
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+
+        // التمرير والتظليل للمنتج المشارَك عند فتح الرابط
+        function checkUrlHash() {
+            const hash = window.location.hash;
+            if (hash) {
+                const targetCard = document.querySelector(hash);
+                if (targetCard) {
+                    setTimeout(() => {
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        targetCard.classList.add('highlighted');
+                    }, 300);
+                }
+            }
+        }
+
+        // 2. إدارة المفضلة
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(item => item !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('fav_products', JSON.stringify(favorites));
+            renderProducts();
+            renderWishlist();
+        }
+
+        function renderWishlist() {
+            const container = document.getElementById('wishlistItems');
+            const favItems = products.filter(p => favorites.includes(p.id));
+            
+            if (favItems.length === 0) {
+                container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-muted);">لا توجد منتجات في المفضلة حالياً.</p>';
+                return;
+            }
+
+            container.innerHTML = favItems.map(p => `
+                <div class="product-card">
+                    <div class="product-info">
+                        <h4>${p.title}</h4>
+                        <p style="font-weight:bold; color:var(--accent-color); margin:5px 0;">${p.price.toLocaleString()} ج.م</p>
+                        <button class="btn-share" onclick="toggleFavorite('${p.id}')">إزالة</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 3. إدارة وتطوير المقارنة
+        function toggleCompare(id) {
+            if (compareList.includes(id)) {
+                compareList = compareList.filter(item => item !== id);
+            } else {
+                if (compareList.length >= 3) {
+                    alert('يمكنك مقارنة 3 منتجات كحد أقصى في وقت واحد.');
+                    return;
+                }
+                compareList.push(id);
+            }
+            localStorage.setItem('compare_products', JSON.stringify(compareList));
+            renderProducts();
+            renderCompareTable();
+        }
+
+        function renderCompareTable() {
+            const container = document.getElementById('compareContent');
+            const compareItems = products.filter(p => compareList.includes(p.id));
+
+            if (compareItems.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">قم بإضافة منتجات للمقارنة بينها.</p>';
+                return;
+            }
+
+            let tableHTML = `
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>المواصفة</th>
+                            ${compareItems.map(p => `<th>${p.title}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>السعر</strong></td>
+                            ${compareItems.map(p => `<td style="color:var(--accent-color); font-weight:bold;">${p.price.toLocaleString()} ج.م</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>المعالج</strong></td>
+                            ${compareItems.map(p => `<td>${p.processor}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>الرامات</strong></td>
+                            ${compareItems.map(p => `<td>${p.ram}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>التخزين</strong></td>
+                            ${compareItems.map(p => `<td>${p.storage}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td><strong>كارت الشاشة</strong></td>
+                            ${compareItems.map(p => `<td>${p.gpu}</td>`).join('')}
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            container.innerHTML = tableHTML;
+        }
+
+        // تحديث أعداد الشارات
+        function updateBadges() {
+            document.getElementById('favCount').textContent = favorites.length;
+            document.getElementById('compareCount').textContent = compareList.length;
+        }
+
+        // التحكم في النوافذ المنبثقة
+        function openModal(modalId) {
+            if(modalId === 'wishlistModal') renderWishlist();
+            if(modalId === 'compareModal') renderCompareTable();
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // التشغيل الأولي عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+    </script>
+</body>
+</html>
