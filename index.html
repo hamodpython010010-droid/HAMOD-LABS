@@ -3,1153 +3,306 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | القمة في أجهزة الحاسوب والأكسسوارات</title>
+  <title>HAMOD LABS | Next-Gen Cyber Architecture</title>
   
-  <!-- Font Awesome Icons & Google Fonts -->
+  <!-- Font Awesome, Google Fonts & Three.js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  
-  <!-- Three.js Library for 3D Background & Viewer -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     :root {
-      --bg-dark: #05060a;
-      --bg-card: rgba(15, 20, 32, 0.7);
+      --bg-dark: #02040a;
+      --bg-card: rgba(10, 16, 30, 0.85);
       --primary-cyan: #00f2fe;
-      --primary-purple: #4facfe;
-      --accent-neon: #7f00ff;
-      --gold-glow: #ffd700;
+      --primary-purple: #7f00ff;
       --amazon-gold: #ff9900;
-      --text-main: #f0f4f8;
+      --neon-green: #00ff66;
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --border-glow: rgba(0, 242, 254, 0.25);
+      --border-glow: rgba(0, 242, 254, 0.3);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Tajawal', sans-serif;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+    
     body {
       background-color: var(--bg-dark);
       color: var(--text-main);
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 90% 90%, rgba(127, 0, 255, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 60%);
+        radial-gradient(at 0% 0%, rgba(127, 0, 255, 0.18) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 242, 254, 0.18) 0px, transparent 50%);
+      background-attachment: fixed;
     }
 
     /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary-cyan);
-      border-radius: 10px;
-    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--primary-cyan), var(--primary-purple)); border-radius: 10px; }
 
-    /* Toast Notification */
+    /* Toast */
     .toast {
-      position: fixed;
-      top: 25px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100px);
-      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
-      color: #ffffff;
-      padding: 14px 28px;
-      border-radius: 40px;
-      font-weight: 700;
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
-      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 9999;
+      position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px);
+      background: linear-gradient(135deg, var(--amazon-gold), #ff5500);
+      color: #000; padding: 14px 28px; border-radius: 40px; font-weight: 900;
+      box-shadow: 0 0 30px rgba(255, 153, 0, 0.8); transition: 0.5s ease; z-index: 9999;
     }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
 
     /* Navbar */
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 6%;
-      background: rgba(5, 6, 10, 0.85);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(0, 242, 254, 0.15);
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    .logo {
-      font-size: 2rem;
-      font-weight: 900;
-      background: linear-gradient(45deg, var(--primary-cyan), #ffffff, var(--accent-neon));
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shine 4s linear infinite;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    @keyframes shine {
-      to { background-position: 200% center; }
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--primary-cyan);
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Top Promo Banner */
-    .promo-banner {
-      background: linear-gradient(90deg, rgba(127, 0, 255, 0.3), rgba(0, 242, 254, 0.3));
+      display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 6%;
+      background: rgba(2, 4, 10, 0.88); backdrop-filter: blur(25px); position: sticky; top: 0; z-index: 1000;
       border-bottom: 1px solid var(--border-glow);
-      text-align: center;
-      padding: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
+    }
+    .logo {
+      font-size: 2.2rem; font-weight: 900;
+      background: linear-gradient(45deg, var(--primary-cyan), #fff, var(--primary-purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 12px;
     }
 
-    .timer {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 3px 10px;
-      border-radius: 8px;
-      color: var(--gold-glow);
-      font-family: monospace;
-      letter-spacing: 1px;
+    /* Search & Filters */
+    .controls-bar {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      padding: 2rem 6% 0 6%; gap: 1.5rem;
     }
-
-    /* Hero Section */
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 4rem 6%;
-      min-height: 70vh;
-      position: relative;
+    .search-box {
+      position: relative; flex: 1; max-width: 400px;
     }
-
-    .hero-text {
-      max-width: 52%;
+    .search-box input {
+      width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border-glow);
+      padding: 12px 45px 12px 18px; border-radius: 20px; color: #fff; font-size: 1rem;
+      outline: none; transition: 0.3s;
     }
-
-    .hero-text h1 {
-      font-size: 3.6rem;
-      font-weight: 900;
-      line-height: 1.25;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #00f2fe 50%, #a1c4fd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
-    }
-
-    .hero-text p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-bottom: 2.2rem;
-      line-height: 1.8;
-    }
-
-    .badge-ultra {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 20px;
-      background: rgba(0, 242, 254, 0.08);
-      border: 1px solid var(--primary-cyan);
-      border-radius: 30px;
-      color: var(--primary-cyan);
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-    }
-
-    .stats-container {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .stat-item {
-      border-right: 3px solid var(--primary-cyan);
-      padding-right: 15px;
-    }
-
-    .stat-item h3 {
-      font-size: 1.8rem;
-      color: #fff;
-    }
-
-    .stat-item p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin: 0;
-    }
-
-    .canvas-container {
-      width: 42%;
-      height: 380px;
-      position: relative;
-    }
-
-    #3d-canvas {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* Products Section */
-    .products-section {
-      padding: 4rem 6%;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-size: 2.6rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(45deg, #fff, var(--primary-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .search-bar-container {
-      max-width: 550px;
-      margin: 1.5rem auto 2rem auto;
-      position: relative;
-    }
-
-    .search-bar-container input {
-      width: 100%;
-      padding: 14px 20px 14px 45px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-glow);
-      border-radius: 30px;
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-      transition: 0.3s;
-    }
-
-    .search-bar-container input:focus {
-      border-color: var(--primary-cyan);
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-    }
-
-    .search-bar-container i {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--primary-cyan);
-    }
-
-    .filter-bar {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3.5rem;
-      flex-wrap: wrap;
-    }
+    .search-box input:focus { border-color: var(--primary-cyan); box-shadow: 0 0 15px var(--border-glow); }
+    .search-box i { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
     .filter-btn {
-      padding: 12px 26px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 30px;
-      color: var(--text-main);
-      cursor: pointer;
-      font-weight: 700;
-      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow); color: var(--text-muted);
+      padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 700; transition: 0.3s;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary-cyan); color: #000; border-color: var(--primary-cyan); }
+
+    /* Hero Section */
+    .hero { display: flex; align-items: center; justify-content: space-between; padding: 3rem 6%; min-height: 55vh; }
+    .hero-text { max-width: 55%; }
+    .hero-text h1 {
+      font-size: 3.8rem; font-weight: 900; line-height: 1.2; margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-cyan) 50%, var(--primary-purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    .filter-btn.active, .filter-btn:hover {
-      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
-      border-color: transparent;
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
-      color: #fff;
-    }
+    /* Canvas 3D */
+    .canvas-container { width: 40%; height: 350px; }
+    #3d-canvas { width: 100%; height: 100%; }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-      gap: 2.2rem;
-    }
+    /* Products Grid */
+    .products-section { padding: 2rem 6% 5rem 6%; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.2rem; }
 
-    /* Premium Product Card */
+    /* Ultimate Hologram Card */
     .card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-glow);
-      border-radius: 24px;
-      padding: 2rem;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid var(--border-glow);
+      border-radius: 28px; padding: 1.8rem; position: relative; display: flex; flex-direction: column;
+      justify-content: space-between; transition: all 0.4s ease; overflow: hidden;
     }
+    .card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--primary-cyan); box-shadow: 0 20px 40px rgba(0, 242, 254, 0.25); }
 
-    .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      border-color: var(--primary-cyan);
-      box-shadow: 0 20px 40px rgba(0, 242, 254, 0.2);
-    }
-
-    .stock-tag {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      background: rgba(255, 75, 75, 0.15);
-      border: 1px solid #ff4b4b;
-      color: #ff6b6b;
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .badge-tag {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      background: rgba(255, 215, 0, 0.15);
-      border: 1px solid var(--gold-glow);
-      color: var(--gold-glow);
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    /* Icon Box replacing image */
     .icon-box {
-      width: 100%;
-      height: 150px;
-      background: radial-gradient(circle, rgba(0, 242, 254, 0.1) 0%, rgba(0,0,0,0.2) 100%);
-      border: 1px dashed var(--border-glow);
-      border-radius: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 1.4rem;
-      color: var(--primary-cyan);
-      font-size: 3.8rem;
-      transition: 0.4s;
+      width: 100%; height: 150px; background: rgba(0, 242, 254, 0.03); border: 1px dashed var(--border-glow);
+      border-radius: 20px; display: flex; justify-content: center; align-items: center; color: var(--primary-cyan);
+      font-size: 3.8rem; margin-bottom: 1.2rem; transition: 0.4s;
     }
+    .card:hover .icon-box { background: rgba(0, 242, 254, 0.12); color: #fff; transform: rotate(-3deg); }
 
-    .card:hover .icon-box {
-      background: radial-gradient(circle, rgba(127, 0, 255, 0.25) 0%, rgba(0, 242, 254, 0.1) 100%);
-      color: #ffffff;
-      text-shadow: 0 0 20px var(--primary-cyan);
-      border-style: solid;
-    }
+    .card-title { font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .price { font-size: 1.5rem; font-weight: 900; color: var(--primary-cyan); }
 
-    .card-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
+    .specs-list { list-style: none; color: var(--text-muted); font-size: 0.9rem; margin: 1rem 0; }
+    .specs-list li { margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px; }
 
-    .rating {
-      color: var(--gold-glow);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .specs-list {
-      list-style: none;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .specs-list li {
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .specs-list i {
-      color: var(--primary-cyan);
-      font-size: 0.8rem;
-    }
-
-    .card-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .price {
-      font-size: 1.45rem;
-      font-weight: 900;
-      color: var(--primary-cyan);
-      text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
-    }
-
-    /* Action Buttons */
-    .action-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
+    /* 3D Amazon Button */
     .btn-amazon {
-      flex: 2;
-      background: linear-gradient(45deg, #ff9900, #ffb700);
-      color: #111;
-      border: none;
-      padding: 12px;
-      border-radius: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: 0.3s;
+      background: linear-gradient(45deg, #ff9900, #ff5500);
+      color: #000; font-weight: 900; border: none; padding: 13px; border-radius: 16px;
+      cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+      font-size: 1rem; text-decoration: none; transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4);
     }
-
     .btn-amazon:hover {
-      box-shadow: 0 0 18px rgba(255, 153, 0, 0.7);
-      transform: scale(1.02);
+      background: linear-gradient(45deg, #ffaa22, #ff6611);
+      transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 153, 0, 0.7);
     }
 
-    .btn-icon {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-main);
-      padding: 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
+    /* Cyber AI Chat Bot Widget */
+    .ai-bot-toggle {
+      position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+      border-radius: 50%; display: flex; justify-content: center; align-items: center;
+      font-size: 1.6rem; color: #fff; cursor: pointer; box-shadow: 0 0 25px var(--primary-cyan);
+      z-index: 3000; transition: 0.3s;
     }
-
-    .btn-icon:hover {
-      background: var(--primary-cyan);
-      color: #000;
-      border-color: var(--primary-cyan);
-    }
-
-    /* Exit Rating Modal */
-    .exit-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(12px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 5000;
-    }
-
-    .exit-modal {
-      background: var(--bg-card);
-      border: 1px solid var(--primary-cyan);
-      padding: 3rem;
-      border-radius: 30px;
-      max-width: 480px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(0, 242, 254, 0.3);
-      position: relative;
-    }
-
-    .exit-modal h2 {
-      font-size: 2rem;
-      margin-bottom: 0.8rem;
-      color: #fff;
-    }
-
-    .exit-modal p {
-      color: var(--text-muted);
-      margin-bottom: 1.8rem;
-      line-height: 1.6;
-    }
-
-    .star-rating {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      font-size: 2.2rem;
-      color: #333;
-      margin-bottom: 1.8rem;
-      cursor: pointer;
-    }
-
-    .star-rating i.active, .star-rating i:hover {
-      color: var(--gold-glow);
-      text-shadow: 0 0 15px var(--gold-glow);
-    }
-
-    .review-textarea {
-      width: 100%;
-      height: 100px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border-glow);
-      border-radius: 14px;
-      padding: 12px;
-      color: #fff;
-      outline: none;
-      resize: none;
-      margin-bottom: 1.8rem;
-    }
-
-    .submit-btn {
-      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
-      border: none;
-      color: white;
-      padding: 14px 30px;
-      border-radius: 25px;
-      font-weight: 800;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1.05rem;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 1.4rem;
-    }
-
-    /* AI Chat Window */
-    .ai-chat-btn {
-      position: fixed;
-      bottom: 35px;
-      left: 35px;
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-neon));
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 1.7rem;
-      cursor: pointer;
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
-      z-index: 2000;
-      transition: 0.3s;
-    }
-
-    .ai-chat-btn:hover {
-      transform: scale(1.1);
-    }
+    .ai-bot-toggle:hover { transform: scale(1.1) rotate(10deg); }
 
     .ai-chat-window {
-      position: fixed;
-      bottom: 110px;
-      left: 35px;
-      width: 360px;
-      height: 460px;
-      background: rgba(10, 14, 26, 0.95);
-      backdrop-filter: blur(25px);
-      border: 1px solid var(--border-glow);
-      border-radius: 24px;
-      display: none;
-      flex-direction: column;
-      z-index: 2000;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      position: fixed; bottom: 95px; left: 25px; width: 360px; height: 460px;
+      background: #090e1a; border: 1px solid var(--primary-cyan); border-radius: 24px;
+      display: none; flex-direction: column; z-index: 3000; overflow: hidden;
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.3);
     }
-
+    .ai-chat-window.open { display: flex; }
     .chat-header {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0, 242, 254, 0.1); padding: 15px; display: flex;
+      justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glow);
     }
+    .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+    .chat-msg { padding: 10px 14px; border-radius: 16px; max-width: 80%; }
+    .chat-msg.bot { background: rgba(0, 242, 254, 0.15); border: 1px solid var(--border-glow); align-self: flex-start; }
+    .chat-msg.user { background: var(--primary-purple); align-self: flex-end; }
+    
+    .chat-input-area { display: flex; padding: 10px; background: #040711; border-top: 1px solid var(--border-glow); }
+    .chat-input-area input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; outline: none; }
+    .chat-input-area button { background: var(--primary-cyan); border: none; padding: 8px 15px; border-radius: 12px; cursor: pointer; font-weight: bold; }
 
-    .chat-body {
-      flex: 1;
-      padding: 1.2rem;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .chat-msg {
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 0.9rem;
-      max-width: 82%;
-      line-height: 1.5;
-    }
-
-    .chat-msg.bot {
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid var(--primary-cyan);
-      align-self: flex-start;
-    }
-
-    .chat-msg.user {
-      background: var(--accent-neon);
-      align-self: flex-end;
-      color: #fff;
-    }
-
-    .chat-input {
-      display: flex;
-      padding: 12px;
-      background: rgba(0,0,0,0.3);
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background: transparent;
-      color: white;
-      outline: none;
-      font-size: 0.95rem;
-    }
-
-    .chat-input button {
-      background: var(--primary-cyan);
-      border: none;
-      padding: 10px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      color: #000;
-      font-weight: bold;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-text {
-        max-width: 100%;
-      }
-      .stats-container {
-        justify-content: center;
-      }
-      .canvas-container {
-        width: 100%;
-        height: 300px;
-        margin-top: 2rem;
-      }
+    @media(max-width: 900px) {
+      .hero { flex-direction: column; text-align: center; }
+      .hero-text { max-width: 100%; }
+      .canvas-container { width: 100%; height: 250px; margin-top: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">تم النسخ بنجاح! 📋</div>
-
-  <!-- Promo Banner -->
-  <div class="promo-banner">
-    <span>🔥 عروض حمودي لابس الحصرية لفترة محدودة - خصومات تصل إلى 25%</span>
-    <span class="timer" id="countdown">05:42:19</span>
-  </div>
+  <div id="toast" class="toast">جاري تحويلك لـ Amazon! 🛍️</div>
 
   <!-- Navbar -->
   <nav>
     <div class="logo">
       <i class="fa-solid fa-laptop-code"></i> HAMOD LABS
     </div>
-    <ul class="nav-links">
-      <li><a href="#">الرئيسية</a></li>
-      <li><a href="#products">المعرض الشامل</a></li>
-      <li><a href="#ai">المساعد الذكي</a></li>
-    </ul>
+    <div style="color:var(--text-muted); font-size:0.95rem; font-weight:bold;">
+      <i class="fa-solid fa-shield-halved" style="color:var(--neon-green)"></i> متجر تقني موثوق
+    </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <span class="badge-ultra"><i class="fa-solid fa-bolt"></i> HAMOD LABS • Ultra Performance Hub</span>
-      <h1>عالم الأداء الأقصى للابتوبات والأكسسوارات</h1>
-      <p>تصفح أكبر تشكيلة معتمدة للابتوبات الجيمينج والوركسبيس، بالإضافة للسماعات المحيطية، الباور بنك السريع، الشواحن والوصلات المقواة.</p>
-      
-      <div class="stats-container">
-        <div class="stat-item">
-          <h3>+15</h3>
-          <p>أجهزة وأكسسوارات</p>
-        </div>
-        <div class="stat-item">
-          <h3>100%</h3>
-          <p>ضمان وتأكيد جودة</p>
-        </div>
-        <div class="stat-item">
-          <h3>24/7</h3>
-          <p>دعم فني ذكي</p>
-        </div>
-      </div>
+      <h1>قمة التكنولوجيا والجمال</h1>
+      <p>تصفح أحدث أقسام HAMOD LABS واقتنِ لابتوب الأحلام والإكسسوارات الفاخرة مباشرة عبر Amazon بنقرة واحدة!</p>
     </div>
-    
-    <!-- 3D Canvas -->
     <div class="canvas-container">
       <div id="3d-canvas"></div>
     </div>
   </section>
 
-  <!-- Products & Accessories Section -->
-  <section class="products-section" id="products">
-    <div class="section-header">
-      <h2 class="section-title">المعرض الشامل والفاخر</h2>
-      <p style="color:var(--text-muted)">اختر الفئة المناسبة أو ابحث عن الجهاز والمواصفات التي تحتاجها</p>
-      
-      <div class="search-bar-container">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="ابحث باسم الجهاز، الرام، كارت الشاشة أو الأكسسوار...">
-      </div>
+  <!-- Search & Category Filters -->
+  <div class="controls-bar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث باسم اللابتوب أو الماركة..." onkeyup="filterProducts()">
+      <i class="fa-solid fa-magnifying-glass"></i>
     </div>
-    
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterData('all')">الكل ✨</button>
-      <button class="filter-btn" onclick="filterData('workstation')">Workstations 💻</button>
-      <button class="filter-btn" onclick="filterData('gaming')">Gaming & Power ⚡</button>
-      <button class="filter-btn" onclick="filterData('accessory')">الأكسسوارات 🎧🔋</button>
+    <div style="display:flex; gap:10px;">
+      <button class="filter-btn active" onclick="setCategory('all', this)">الكل</button>
+      <button class="filter-btn" onclick="setCategory('laptop', this)">اللابتوبات</button>
+      <button class="filter-btn" onclick="setCategory('accessory', this)">الإكسسوارات</button>
     </div>
+  </div>
 
-    <div class="products-grid" id="grid">
-      <!-- Dynamic Product Cards -->
+  <!-- Products Grid -->
+  <section class="products-section">
+    <div class="products-grid" id="productsGrid">
+      <!-- Generated via JS -->
     </div>
   </section>
 
-  <!-- Exit Intent Rating Modal Popup -->
-  <div class="exit-modal-overlay" id="exitModal">
-    <div class="exit-modal">
-      <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
-      <h2>قبل أن تغادر حمودي لابس! ⭐</h2>
-      <p>يهمنا رأيك جداً لتطوير المعرض، كيف كانت تجربتك اليوم؟</p>
-      
-      <div class="star-rating" id="starContainer">
-        <i class="fa-solid fa-star" onclick="setRating(1)"></i>
-        <i class="fa-solid fa-star" onclick="setRating(2)"></i>
-        <i class="fa-solid fa-star" onclick="setRating(3)"></i>
-        <i class="fa-solid fa-star" onclick="setRating(4)"></i>
-        <i class="fa-solid fa-star" onclick="setRating(5)"></i>
-      </div>
-
-      <textarea class="review-textarea" id="reviewMsg" placeholder="اكتب اقتراحاتك أو رأيك هنا..."></textarea>
-      <button class="submit-btn" onclick="submitRating()">إرسال التقييم 🚀</button>
-    </div>
-  </div>
-
-  <!-- AI Chatbot -->
-  <div class="ai-chat-btn" onclick="toggleChat()">
+  <!-- AI Chatbot Floating Trigger -->
+  <div class="ai-bot-toggle" onclick="toggleAIChat()">
     <i class="fa-solid fa-robot"></i>
   </div>
 
-  <div class="ai-chat-window" id="chatWindow">
+  <!-- AI Chat Window -->
+  <div class="ai-chat-window" id="aiChatWindow">
     <div class="chat-header">
-      <span><i class="fa-solid fa-brain" style="color:var(--primary-cyan)"></i> HAMOD AI Assistant</span>
-      <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-brain" style="color:var(--primary-cyan)"></i>
+        <strong>مساعد HAMOD الذكي</strong>
+      </div>
+      <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="toggleAIChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً بك يا حمودي! أنا مساعدك الذكي. أخبرني باحتياجك أو الميزانية وسأرشح لك الجهاز أو الأكسسوار المناسب فوراً!</div>
+      <div class="chat-msg bot">أهلاً بك! أنا المساعد الذكي لـ HAMOD LABS 🤖. اكتب لي ميزانيتك أو استخدامك وسأقترح عليك الجهاز المثالي!</div>
     </div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKey(event)">
-      <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا..." onkeydown="if(event.key==='Enter') sendAIMessage()">
+      <button onclick="sendAIMessage()">إرسال</button>
     </div>
   </div>
 
   <script>
-    /* Full Expanded Products & Accessories Database (Retained All Old + Added New Ultra Items) */
     const products = [
-      // Workstation Laptops
-      {
-        id: 1,
-        title: "Dell Precision 5520",
-        category: "workstation",
-        price: "22,500 ج.م",
-        stock: "متبقي 2 فقط!",
-        badge: "الأكثر طلباً 🔥",
-        rating: 5,
-        icon: "fa-laptop-code",
-        specs: ["Intel Core i7-7820HQ", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro M1200 4GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520"
-      },
-      {
-        id: 2,
-        title: "HP EliteBook 840 G6",
-        category: "workstation",
-        price: "18,000 ج.م",
-        stock: "متوفر",
-        badge: "قيمة ممتازة 💡",
-        rating: 4.8,
-        icon: "fa-laptop",
-        specs: ["Intel Core i7-8665U", "16GB RAM DDR4", "256GB NVMe SSD", "Intel UHD Graphics 620"],
-        amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G6"
-      },
-      {
-        id: 3,
-        title: "Dell Precision 7530 Workstation",
-        category: "workstation",
-        price: "27,000 ج.م",
-        stock: "متبقي 1 فقط!",
-        badge: "أداء شاق 🏋️",
-        rating: 5,
-        icon: "fa-microchip",
-        specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530"
-      },
-      {
-        id: 4,
-        title: "Lenovo ThinkPad P52",
-        category: "workstation",
-        price: "24,000 ج.م",
-        stock: "متوفر",
-        badge: "صلابة عالية 🛡️",
-        rating: 4.9,
-        icon: "fa-laptop-medical",
-        specs: ["Intel Core i7-8750H", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro P1000 4GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Thinkpad+P52"
-      },
-      {
-        id: 5,
-        title: "Apple MacBook Pro M2 Max",
-        category: "workstation",
-        price: "85,000 ج.م",
-        stock: "جديد 🌟",
-        badge: "القمة 👑",
-        rating: 5,
-        icon: "fa-apple",
-        specs: ["Apple M2 Max Chip 12-Core", "32GB Unified Memory", "1TB SSD SuperFast", "Liquid Retina XDR Display 16\""],
-        amazonUrl: "https://www.amazon.eg/s?k=MacBook+Pro+M2+Max"
-      },
-
-      // Gaming Laptops
-      {
-        id: 6,
-        title: "Lenovo Legion 5 Pro",
-        category: "gaming",
-        price: "34,500 ج.م",
-        stock: "متبقي 1 فقط!",
-        badge: "جيمنج محترف 🎮",
-        rating: 5,
-        icon: "fa-gamepad",
-        specs: ["AMD Ryzen 7 5800H", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3060 6GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+5"
-      },
-      {
-        id: 7,
-        title: "ASUS ROG Strix G15",
-        category: "gaming",
-        price: "38,000 ج.م",
-        stock: "متوفر",
-        badge: "RGB أسطوري 🌈",
-        rating: 4.9,
-        icon: "fa-dragon",
-        specs: ["AMD Ryzen 9 5900HX", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3070 8GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=ASUS+ROG+Strix+G15"
-      },
-      {
-        id: 8,
-        title: "Acer Nitro 5 Gaming",
-        category: "gaming",
-        price: "29,500 ج.م",
-        stock: "متوفر",
-        badge: "اقتصادي وقوي ⚡",
-        rating: 4.7,
-        icon: "fa-fire",
-        specs: ["Intel Core i5-11400H", "16GB RAM DDR4", "512GB NVMe SSD", "Nvidia RTX 3050 4GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=Acer+Nitro+5"
-      },
-      {
-        id: 9,
-        title: "MSI Raider GE76 Ultimate",
-        category: "gaming",
-        price: "68,000 ج.م",
-        stock: "إصدار خاص 🚀",
-        badge: "وحش الشاشة 🖥️",
-        rating: 5,
-        icon: "fa-shield-halved",
-        specs: ["Intel Core i9-12900HK", "32GB DDR5 RAM", "2TB NVMe Gen4 SSD", "Nvidia RTX 3080 Ti 16GB"],
-        amazonUrl: "https://www.amazon.eg/s?k=MSI+Raider+GE76"
-      },
-
-      // Accessories
-      {
-        id: 10,
-        title: "سماعة جيمنج محيطية 7.1 RGB Headset",
-        category: "accessory",
-        price: "1,250 ج.م",
-        stock: "متوفر",
-        badge: "صوت محيطي 🎧",
-        rating: 4.9,
-        icon: "fa-headphones-simple",
-        specs: ["صوت محيطي 7.1 للالعاب", "مايك عازل للضوضاء", "إضاءة RGB ونعومة على الأذن"],
-        amazonUrl: "https://www.amazon.eg/s?k=Gaming+Headset+7.1"
-      },
-      {
-        id: 11,
-        title: "باور بنك Anker Fast Charging 20,000mAh",
-        category: "accessory",
-        price: "1,800 ج.م",
-        stock: "متبقي 3 فقط!",
-        badge: "شحن سريع 🔋",
-        rating: 5,
-        icon: "fa-battery-full",
-        specs: ["سعة 20000 مللي أمبير", "شحن سريع PD 22.5W", "يدعم شحن الهواتف واللابتوب"],
-        amazonUrl: "https://www.amazon.eg/s?k=Anker+Powerbank+20000"
-      },
-      {
-        id: 12,
-        title: "وصلة كابل شاحن Type-C مضفر سريع 100W",
-        category: "accessory",
-        price: "350 ج.م",
-        stock: "متوفر بكثرة",
-        badge: "مقاوم للقطع 🔌",
-        rating: 4.8,
-        icon: "fa-plug",
-        specs: ["طول 2 متر قماش مضفر", "يدعم نقل البيانات للشاشات Fast Charge", "مقاوم للقطع والحرارة"],
-        amazonUrl: "https://www.amazon.eg/s?k=Type+C+Cable+100W"
-      },
-      {
-        id: 13,
-        title: "حقيبة لابتوب مضادة للماء مقاومة للصدمات",
-        category: "accessory",
-        price: "850 ج.م",
-        stock: "متوفر",
-        badge: "حماية كاملة 💼",
-        rating: 4.9,
-        icon: "fa-bag-shopping",
-        specs: ["يناسب لابتوب حتى 15.6 بوصة", "تبطين داخلي ناعم وحماية زوايا", "منفذ USB خارجي للشحن"],
-        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Bag+15.6"
-      },
-      {
-        id: 14,
-        title: "ماوس جيمنج احترافي RGB Gaming Mouse",
-        category: "accessory",
-        price: "650 ج.م",
-        stock: "متوفر",
-        badge: "دقة عالية 🎯",
-        rating: 4.7,
-        icon: "fa-computer-mouse",
-        specs: ["حساسية حتى 12000 DPI", "إضاءة RGB تفاعلية", "أزرار قابلة للبرمجة"],
-        amazonUrl: "https://www.amazon.eg/s?k=RGB+Gaming+Mouse"
-      },
-      {
-        id: 15,
-        title: "كيبورد ميكانيكي RGB Mechanical Keyboard",
-        category: "accessory",
-        price: "1,950 ج.م",
-        stock: "جديد ✨",
-        badge: "سويتشات زرقاء ⌨️",
-        rating: 4.9,
-        icon: "fa-keyboard",
-        specs: ["سويتشات ميكانيكية استجابة فائقة", "إضاءة RGB لكل مفتاح", "هيكل ألومنيوم قوي"],
-        amazonUrl: "https://www.amazon.eg/s?k=RGB+Mechanical+Keyboard"
-      },
-      {
-        id: 16,
-        title: "حامل لابتوب ألومنيوم مع مروحة تبريد Turbo",
-        category: "accessory",
-        price: "1,100 ج.م",
-        stock: "متوفر",
-        badge: "تبريد قوي ❄️",
-        rating: 4.8,
-        icon: "fa-fan",
-        specs: ["مروحتين تبريد هادئة جداً", "زوايا ارتفاع قابلة للتعديل", "خامات ألومنيوم طيران عالية الجودة"],
-        amazonUrl: "https://www.amazon.eg/s?k=Laptop+Cooling+Stand"
-      }
+      { id: 1, title: "Dell Precision 5520 Workstation", category: "laptop", price: 22500, icon: "fa-laptop-code", amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520", specs: ["Intel i7-7820HQ", "32GB RAM", "512GB SSD", "Quadro M1200 4GB"] },
+      { id: 2, title: "HP EliteBook 840 G6", category: "laptop", price: 18000, icon: "fa-laptop", amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G6", specs: ["Intel i7-8665U", "16GB RAM", "256GB SSD", "Full HD IPS Screen"] },
+      { id: 3, title: "Lenovo Legion 5 Pro Gaming", category: "laptop", price: 34500, icon: "fa-gamepad", amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+5+Pro", specs: ["Ryzen 7 5800H", "16GB RAM", "1TB SSD", "RTX 3060 6GB"] },
+      { id: 4, title: "سماعة جيمنج محيطية RGB 7.1", category: "accessory", price: 1250, icon: "fa-headphones-simple", amazonUrl: "https://www.amazon.eg/s?k=Gaming+Headset+7.1", specs: ["صوت محيطي 7.1", "مايك عازل للضوضاء", "إضاءة نيون RGB"] },
+      { id: 5, title: "باور بنك Anker 20,000mAh PD", category: "accessory", price: 1800, icon: "fa-battery-full", amazonUrl: "https://www.amazon.eg/s?k=Anker+PowerBank+20000", specs: ["20000mAh Capacity", "شحن سريع PD 22.5W", "حماية متكاملة للأجهزة"] }
     ];
 
-    /* Render Products Function */
+    let activeCategory = 'all';
+
     function renderProducts(items) {
-      const grid = document.getElementById('grid');
+      const grid = document.getElementById('productsGrid');
       if(items.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-muted)">لم نجد أي منتجات تطابق بحثك يا حمودي! جرب البحث بكلمات أخرى. 🔍</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-size:1.2rem; padding:3rem;">لا توجد منتجات تطابق بحثك حالياً 🔍</div>`;
         return;
       }
       grid.innerHTML = items.map(p => `
         <div class="card">
-          <span class="stock-tag">${p.stock}</span>
-          <span class="badge-tag">${p.badge}</span>
-          <div class="icon-box">
-            <i class="fa-solid ${p.icon}"></i>
-          </div>
           <div>
+            <div class="icon-box"><i class="fa-solid ${p.icon}"></i></div>
             <h3 class="card-title">${p.title}</h3>
-            <div class="rating">
-              ${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))}
-              <span style="color:var(--text-muted); font-size:0.8rem">(${p.rating})</span>
-            </div>
+            <div class="price">${p.price.toLocaleString()} ج.م</div>
             <ul class="specs-list">
-              ${p.specs.map(s => `<li><i class="fa-solid fa-circle-check"></i> ${s}</li>`).join('')}
+              ${p.specs.map(s => `<li><i class="fa-solid fa-check" style="color:var(--primary-cyan)"></i> ${s}</li>`).join('')}
             </ul>
           </div>
-          <div class="card-footer">
-            <div class="price-row">
-              <span class="price">${p.price}</span>
-            </div>
-            <div class="action-buttons">
-              <a href="${p.amazonUrl}" target="_blank" class="btn-amazon">
-                <i class="fa-brands fa-amazon"></i> شراء من أمازون
-              </a>
-              <button class="btn-icon" onclick="copySpecs('${p.title}', '${p.specs.join(', ')}')" title="نسخ المواصفات">
-                <i class="fa-regular fa-copy"></i>
-              </button>
-              <button class="btn-icon" onclick="shareProduct('${p.title}', '${p.amazonUrl}')" title="مشاركة">
-                <i class="fa-solid fa-share-nodes"></i>
-              </button>
-            </div>
-          </div>
+          <a href="${p.amazonUrl}" target="_blank" class="btn-amazon" onclick="showToast()">
+            <i class="fa-brands fa-amazon"></i> شراء فوري من Amazon
+          </a>
         </div>
       `).join('');
     }
 
-    renderProducts(products);
-
-    /* Search & Filter Data */
-    function filterData(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      if (cat === 'all') renderProducts(products);
-      else renderProducts(products.filter(p => p.category === cat));
-    }
-
-    function searchProducts() {
+    function filterProducts() {
       const query = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = products.filter(p => 
-        p.title.toLowerCase().includes(query) || 
-        p.specs.some(s => s.toLowerCase().includes(query))
-      );
+      const filtered = products.filter(p => {
+        const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+        const matchesQuery = p.title.toLowerCase().includes(query) || p.specs.some(s => s.toLowerCase().includes(query));
+        return matchesCat && matchesQuery;
+      });
       renderProducts(filtered);
     }
 
-    /* Toast Notification */
-    function showToast(msg) {
+    function setCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterProducts();
+    }
+
+    function showToast() {
       const toast = document.getElementById('toast');
-      toast.innerText = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+      setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    function copySpecs(title, specs) {
-      const fullText = `${title}\nالمواصفات: ${specs}`;
-      navigator.clipboard.writeText(fullText).then(() => {
-        showToast("تم نسخ مواصفات الجهاز بنجاح! 📋");
-      });
+    /* AI Bot Interaction */
+    function toggleAIChat() {
+      document.getElementById('aiChatWindow').classList.toggle('open');
     }
 
-    function shareProduct(title, url) {
-      if (navigator.share) {
-        navigator.share({ title: title, text: `شاهد هذا المنتج الفاخر من HAMOD LABS: ${title}`, url: url });
-      } else {
-        navigator.clipboard.writeText(url);
-        showToast("تم نسخ رابط المنتج للمشاركة! 🔗");
-      }
-    }
-
-    /* Exit Intent Modal Popup Logic */
-    let hasShownModal = false;
-    document.addEventListener('mouseleave', (e) => {
-      if (e.clientY <= 0 && !hasShownModal) {
-        document.getElementById('exitModal').style.display = 'flex';
-        hasShownModal = true;
-      }
-    });
-
-    function closeModal() {
-      document.getElementById('exitModal').style.display = 'none';
-    }
-
-    let selectedRating = 0;
-    function setRating(stars) {
-      selectedRating = stars;
-      const icons = document.querySelectorAll('#starContainer i');
-      icons.forEach((icon, idx) => {
-        if (idx < stars) icon.classList.add('active');
-        else icon.classList.remove('active');
-      });
-    }
-
-    function submitRating() {
-      if (selectedRating === 0) {
-        alert("يرجى اختيار عدد النجوم أولاً!");
-        return;
-      }
-      closeModal();
-      showToast("شكراً جزيلاً لك على تقييمك يا حمودي! ⭐");
-    }
-
-    /* AI Chatbot Logic */
-    function toggleChat() {
-      const win = document.getElementById('chatWindow');
-      win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
-    }
-
-    function sendMsg() {
-      const input = document.getElementById('userInput');
+    function sendAIMessage() {
+      const input = document.getElementById('chatInput');
       const text = input.value.trim();
       if (!text) return;
 
@@ -1158,61 +311,40 @@
       input.value = '';
 
       setTimeout(() => {
-        let reply = "يمكنك تصفح تشكيلتنا الممتازة! Dell Precision رائع جداً للشبكات والـ Virtual Machines.";
-        if (text.includes("سماعة") || text.includes("باور") || text.includes("وصلة") || text.includes("شاحن") || text.includes("كابل") || text.includes("كيبورد")) {
-          reply = "لدينا قسم أكسسوارات متكامل يضم سماعات جيمنج 7.1، باور بنك Anker، وكابلات شحن سريعة Type-C 100W مع كيبوردات RGB ميكانيكية!";
-        } else if (text.includes("ميزانية") || text.includes("سعر") || text.includes("رخيص")) {
-          reply = "أنصحك بـ HP EliteBook 840 G6 بسعر 18,000 ج.م أو Dell Precision 5520 أداء ممتاز وقيمة عالية.";
-        } else if (text.includes("ماك") || text.includes("ابل") || text.includes("mac")) {
-          reply = "قمنا بإضافة Apple MacBook Pro M2 Max الجديد كلياً للإنتاجية العالية والمونتاج الاحترافي!";
-        }
+        let reply = "بناءً على طلبك، أنصحك بجهاز Dell Precision 5520 إذا كنت تبحث عن القوة في البرمجة والعمل، أو Legion 5 للجيمنج!";
+        if(text.includes("أرخص") || text.includes("سعر")) reply = "أقل اللابتوبات سعراً حالياً هو HP EliteBook 840 G6 بسعر 18,000 ج.م ويتميز بأداء سلس جداً!";
         body.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
         body.scrollTop = body.scrollHeight;
-      }, 500);
+      }, 700);
     }
 
-    function handleKey(e) {
-      if (e.key === 'Enter') sendMsg();
-    }
-
-    /* Three.js 3D Interactive Model */
+    /* Three.js 3D Torus Animation */
     const container = document.getElementById('3d-canvas');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    const geometry = new THREE.IcosahedronGeometry(1.6, 1);
-    const material = new THREE.MeshStandardMaterial({ 
-      color: 0x00f2fe, 
-      wireframe: true,
-      emissive: 0x7f00ff,
-      emissiveIntensity: 0.6
-    });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    const geometry = new THREE.TorusGeometry(1.5, 0.4, 16, 100);
+    const material = new THREE.MeshStandardMaterial({ color: 0x00f2fe, wireframe: true });
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
-    const light = new THREE.PointLight(0xffffff, 1.5, 100);
+    const light = new THREE.PointLight(0xff9900, 2, 100);
     light.position.set(10, 10, 10);
     scene.add(light);
-
-    camera.position.z = 3.5;
+    camera.position.z = 3.8;
 
     function animate() {
       requestAnimationFrame(animate);
-      cube.rotation.x += 0.006;
-      cube.rotation.y += 0.008;
+      mesh.rotation.x += 0.006;
+      mesh.rotation.y += 0.009;
       renderer.render(scene, camera);
     }
     animate();
 
-    window.addEventListener('resize', () => {
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    });
+    renderProducts(products);
   </script>
 </body>
 </html>
