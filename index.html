@@ -214,12 +214,14 @@
     }
 
     /* ================= DATABASE ================= */
+    /* ضع الـ Tracking ID بتاعك هنا (من Associates Central) */
+    const AFFILIATE_TAG = 'YOUR-TAG-21';
     const products = [];
     /* add(category, title, price, stock, badge, rating, icon, specs[], amazonSearchWords) */
     function add(category, title, price, stock, badge, rating, icon, specs, q) {
       products.push({
         id: products.length + 1, title, category, price, stock, badge, rating, icon, specs,
-        amazonUrl: 'https://www.amazon.eg/s?k=' + encodeURIComponent(q || title)
+        amazonUrl: 'https://www.amazon.eg/s?k=' + encodeURIComponent(q || title) + '&tag=' + AFFILIATE_TAG
       });
     }
 
