@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | Hyper-Warp Cyber Universe</title>
+  <title>HAMOD LABS | Hyper-Overdrive Engine v6.0</title>
 
-  <!-- Font Awesome & Google Fonts -->
+  <!-- Google Fonts & Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   
-  <!-- Three.js Engine for Space Visuals -->
+  <!-- Three.js Engine for 3D Cyber Graphics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     :root {
-      --bg-dark: #010206;
-      --bg-card: rgba(6, 11, 25, 0.8);
+      --bg-dark: #00030a;
+      --bg-card: rgba(8, 15, 30, 0.85);
       --primary-cyan: #00f2fe;
       --primary-purple: #7f00ff;
       --neon-pink: #ff007f;
@@ -23,13 +23,13 @@
       --gold-glow: #ffd700;
       --text-main: #ffffff;
       --text-muted: #8a99ad;
-      --border-glow: rgba(0, 242, 254, 0.4);
+      --border-glow: rgba(0, 242, 254, 0.5);
     }
 
     body.matrix-mode {
       --primary-cyan: #00ff66;
       --neon-pink: #003311;
-      --border-glow: rgba(0, 255, 102, 0.6);
+      --border-glow: rgba(0, 255, 102, 0.7);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
@@ -37,57 +37,52 @@
     body {
       background-color: var(--bg-dark);
       color: var(--text-main);
-      overflow-x: hidden; position: relative;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* Custom Cyber Cursor */
+    /* Custom Cursor */
     .cursor-dot {
-      width: 8px; height: 8px; background-color: var(--primary-cyan);
+      width: 10px; height: 10px; background-color: var(--primary-cyan);
       position: fixed; top: 0; left: 0; border-radius: 50%;
-      pointer-events: none; z-index: 99999; box-shadow: 0 0 15px var(--primary-cyan);
+      pointer-events: none; z-index: 99999; box-shadow: 0 0 20px var(--primary-cyan);
     }
     .cursor-outline {
-      width: 38px; height: 38px; border: 2px solid var(--neon-pink);
+      width: 45px; height: 45px; border: 2px solid var(--neon-pink);
       position: fixed; top: 0; left: 0; border-radius: 50%;
       pointer-events: none; z-index: 99998; transition: transform 0.08s ease-out;
     }
 
-    /* Canvas Overlays */
+    /* Background Canvas Overlays */
     #space-canvas, #matrix-canvas {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: -1; pointer-events: none;
     }
-    #matrix-canvas { opacity: 0.15; }
+    #matrix-canvas { opacity: 0.18; }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(var(--primary-cyan), var(--neon-pink));
-      border-radius: 10px;
-    }
-
-    /* System Telemetry HUD Bar */
+    /* Telemetry HUD Bar */
     .telemetry-bar {
-      background: rgba(0, 0, 0, 0.92); border-bottom: 1px solid var(--border-glow);
-      padding: 8px 6%; display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.8rem; font-family: monospace; color: var(--primary-cyan);
-      z-index: 1001; position: relative; backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.95); border-bottom: 2px solid var(--border-glow);
+      padding: 10px 6%; display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; font-family: 'Orbitron', monospace; color: var(--primary-cyan);
+      z-index: 1001; position: relative; backdrop-filter: blur(15px);
     }
-    .hud-controls { display: flex; gap: 10px; }
+    .hud-controls { display: flex; gap: 12px; }
     .hud-btn {
-      background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan);
-      color: #fff; padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; transition: 0.3s;
+      background: rgba(0, 242, 254, 0.12); border: 1px solid var(--primary-cyan);
+      color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+      font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 6px;
     }
-    .hud-btn:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 15px var(--primary-cyan); }
+    .hud-btn:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 20px var(--primary-cyan); }
+    .hud-btn.active { background: var(--neon-pink); border-color: var(--neon-pink); color: #fff; box-shadow: 0 0 20px var(--neon-pink); }
 
     /* Toast Notification */
     .toast {
       position: fixed; top: 25px; left: 50%;
       transform: translateX(-50%) translateY(-100px);
       background: linear-gradient(45deg, var(--neon-pink), var(--primary-purple));
-      color: #fff; padding: 14px 32px; border-radius: 40px; font-weight: 800;
-      box-shadow: 0 0 35px rgba(255, 0, 127, 0.8);
+      color: #fff; padding: 14px 35px; border-radius: 40px; font-weight: 800;
+      box-shadow: 0 0 40px rgba(255, 0, 127, 0.9);
       transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99999;
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
@@ -95,11 +90,11 @@
     /* Navbar */
     nav {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 6%; background: rgba(1, 2, 6, 0.85); backdrop-filter: blur(25px);
-      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      padding: 1.2rem 6%; background: rgba(1, 3, 10, 0.85); backdrop-filter: blur(25px);
+      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0, 242, 254, 0.25);
     }
     .logo {
-      font-size: 2.3rem; font-weight: 900;
+      font-size: 2.4rem; font-weight: 900; font-family: 'Orbitron', sans-serif;
       background: linear-gradient(45deg, var(--primary-cyan), #fff, var(--neon-pink));
       background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: shine 4s linear infinite; display: flex; align-items: center; gap: 12px;
@@ -108,77 +103,88 @@
 
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 700; transition: 0.3s; }
-    .nav-links a:hover { color: var(--primary-cyan); text-shadow: 0 0 10px var(--primary-cyan); }
+    .nav-links a:hover { color: var(--primary-cyan); text-shadow: 0 0 12px var(--primary-cyan); }
 
     /* Hero Section */
     .hero {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 3rem 6%; min-height: 80vh; position: relative;
+      padding: 4rem 6%; min-height: 85vh; position: relative;
     }
     .hero-text { max-width: 52%; }
     .hero-text h1 {
-      font-size: 4rem; font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, var(--primary-cyan) 40%, var(--neon-pink) 100%);
+      font-size: 4.2rem; font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-cyan) 45%, var(--neon-pink) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 40px rgba(0, 242, 254, 0.4);
+      text-shadow: 0 0 45px rgba(0, 242, 254, 0.4);
     }
-    .hero-text p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.2rem; line-height: 1.8; }
+    .hero-text p { font-size: 1.3rem; color: var(--text-muted); margin-bottom: 2.2rem; line-height: 1.8; }
 
     .badge-space {
       display: inline-flex; align-items: center; gap: 8px; padding: 8px 24px;
       background: rgba(255, 0, 127, 0.15); border: 1px solid var(--neon-pink);
       border-radius: 30px; color: var(--neon-pink); font-size: 0.95rem; font-weight: 800;
-      margin-bottom: 1.2rem; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+      margin-bottom: 1.2rem; box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
     }
 
-    .planet-container { width: 45%; height: 480px; position: relative; }
+    .planet-container { width: 45%; height: 500px; position: relative; }
     #planet-3d-canvas { width: 100%; height: 100%; }
 
+    /* Live Specs Comparison Hologram Panel */
+    .compare-bar {
+      background: rgba(8, 15, 30, 0.9); border: 2px dashed var(--primary-cyan);
+      border-radius: 20px; padding: 1.5rem; margin: 2rem 6%; display: none;
+      box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); backdrop-filter: blur(20px);
+    }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+    .compare-box {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+      padding: 1.2rem; border-radius: 16px; position: relative;
+    }
+
     /* Products Section */
-    .products-section { padding: 4rem 6%; }
+    .products-section { padding: 3rem 6%; }
     .section-title {
-      text-align: center; font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;
+      text-align: center; font-size: 3.2rem; font-weight: 900; margin-bottom: 0.5rem;
       background: linear-gradient(45deg, #fff, var(--primary-cyan));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    .search-bar-container { max-width: 600px; margin: 2rem auto 2.5rem auto; position: relative; }
+    .search-bar-container { max-width: 650px; margin: 2rem auto 2.5rem auto; position: relative; }
     .search-bar-container input {
-      width: 100%; padding: 18px 24px 18px 55px; background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-glow); border-radius: 35px; color: #fff; font-size: 1.1rem;
+      width: 100%; padding: 20px 24px 20px 60px; background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-glow); border-radius: 40px; color: #fff; font-size: 1.15rem;
       outline: none; transition: 0.4s; backdrop-filter: blur(15px);
     }
-    .search-bar-container input:focus { border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 0, 127, 0.5); }
-    .search-bar-container i { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--primary-cyan); font-size: 1.3rem; }
+    .search-bar-container input:focus { border-color: var(--neon-pink); box-shadow: 0 0 35px rgba(255, 0, 127, 0.6); }
+    .search-bar-container i { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); color: var(--primary-cyan); font-size: 1.4rem; }
 
     .filter-bar { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
     .filter-btn {
-      padding: 12px 30px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 32px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 30px; color: var(--text-main); cursor: pointer; font-weight: 700; transition: all 0.3s ease;
     }
     .filter-btn.active, .filter-btn:hover {
       background: linear-gradient(45deg, var(--primary-cyan), var(--neon-pink));
-      border-color: transparent; box-shadow: 0 0 30px rgba(0, 242, 254, 0.7); color: #fff;
+      border-color: transparent; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8); color: #fff;
     }
 
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 2.5rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; }
 
-    /* Product Card with Laser Scanner Bar */
+    /* Product Card */
     .card {
       background: var(--bg-card); backdrop-filter: blur(25px); border: 1px solid var(--border-glow);
-      border-radius: 28px; padding: 2rem; position: relative; display: flex; flex-direction: column;
-      justify-content: space-between; overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 28px; padding: 2.2rem; position: relative; display: flex; flex-direction: column;
+      justify-content: space-between; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .card::before {
       content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to bottom, transparent, rgba(0, 242, 254, 0.25), transparent);
+      background: linear-gradient(to bottom, transparent, rgba(0, 242, 254, 0.3), transparent);
       transition: 0.6s; pointer-events: none;
     }
     .card:hover::before { top: 100%; }
     .card:hover {
       transform: translateY(-12px) scale(1.02); border-color: var(--neon-pink);
-      box-shadow: 0 20px 50px rgba(255, 0, 127, 0.35);
+      box-shadow: 0 20px 50px rgba(255, 0, 127, 0.4);
     }
 
     .stock-tag {
@@ -191,24 +197,24 @@
     }
 
     .icon-box {
-      width: 100%; height: 160px; background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0,0,0,0.4) 100%);
-      border: 1px dashed var(--border-glow); border-radius: 20px; display: flex; justify-content: center; align-items: center;
-      margin-bottom: 1.5rem; color: var(--primary-cyan); font-size: 4rem; transition: 0.4s;
+      width: 100%; height: 170px; background: radial-gradient(circle, rgba(0, 242, 254, 0.18) 0%, rgba(0,0,0,0.5) 100%);
+      border: 1px dashed var(--border-glow); border-radius: 22px; display: flex; justify-content: center; align-items: center;
+      margin-bottom: 1.5rem; color: var(--primary-cyan); font-size: 4.2rem; transition: 0.4s;
     }
     .card:hover .icon-box {
-      background: radial-gradient(circle, rgba(255, 0, 127, 0.3) 0%, rgba(0, 242, 254, 0.2) 100%);
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.35) 0%, rgba(0, 242, 254, 0.25) 100%);
       color: #fff; text-shadow: 0 0 30px var(--neon-pink); border-style: solid;
     }
 
-    .card-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .card-title { font-size: 1.45rem; font-weight: 800; margin-bottom: 0.5rem; }
     .rating { color: var(--gold-glow); font-size: 0.95rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 6px; }
 
-    .specs-list { list-style: none; color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; }
+    .specs-list { list-style: none; color: var(--text-muted); font-size: 0.93rem; margin-bottom: 1.5rem; }
     .specs-list li { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 10px; }
     .specs-list i { color: var(--primary-cyan); }
 
     .card-footer { display: flex; flex-direction: column; gap: 12px; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); }
-    .price { font-size: 1.6rem; font-weight: 900; color: var(--primary-cyan); text-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+    .price { font-size: 1.7rem; font-weight: 900; color: var(--primary-cyan); text-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
 
     .btn-group-holo { display: flex; gap: 8px; }
     .btn-holo {
@@ -234,33 +240,33 @@
 
     /* Hologram Modal */
     .holo-modal {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 2, 8, 0.92); backdrop-filter: blur(20px);
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 2, 8, 0.94); backdrop-filter: blur(25px);
       display: none; justify-content: center; align-items: center; z-index: 99999;
     }
     .holo-content {
-      background: rgba(8, 14, 28, 0.95); border: 2px solid var(--primary-cyan); border-radius: 30px;
-      padding: 3rem; max-width: 650px; width: 90%; box-shadow: 0 0 60px rgba(0, 242, 254, 0.6); position: relative; animation: holoFade 0.4s ease-out;
+      background: rgba(8, 15, 30, 0.95); border: 2px solid var(--primary-cyan); border-radius: 30px;
+      padding: 3rem; max-width: 680px; width: 90%; box-shadow: 0 0 70px rgba(0, 242, 254, 0.6); position: relative; animation: holoFade 0.4s ease-out;
     }
     @keyframes holoFade { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-    .close-holo { position: absolute; top: 20px; left: 20px; color: #fff; font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+    .close-holo { position: absolute; top: 20px; left: 20px; color: #fff; font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
     .close-holo:hover { color: var(--neon-pink); }
 
     /* AI Chat Window */
     .ai-chat-btn {
-      position: fixed; bottom: 35px; left: 35px; width: 65px; height: 65px; border-radius: 50%;
+      position: fixed; bottom: 35px; left: 35px; width: 70px; height: 70px; border-radius: 50%;
       background: linear-gradient(45deg, var(--primary-cyan), var(--neon-pink)); display: flex; justify-content: center; align-items: center;
-      color: white; font-size: 1.8rem; cursor: pointer; box-shadow: 0 0 35px rgba(0, 242, 254, 0.8); z-index: 2000; transition: 0.3s;
+      color: white; font-size: 2rem; cursor: pointer; box-shadow: 0 0 40px rgba(0, 242, 254, 0.8); z-index: 2000; transition: 0.3s;
     }
     .ai-chat-btn:hover { transform: scale(1.12); }
 
     .ai-chat-window {
-      position: fixed; bottom: 115px; left: 35px; width: 380px; height: 480px; background: rgba(8, 14, 28, 0.95); backdrop-filter: blur(25px);
-      border: 1px solid var(--border-glow); border-radius: 26px; display: none; flex-direction: column; z-index: 2000; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      position: fixed; bottom: 120px; left: 35px; width: 400px; height: 500px; background: rgba(8, 15, 30, 0.95); backdrop-filter: blur(25px);
+      border: 1px solid var(--border-glow); border-radius: 28px; display: none; flex-direction: column; z-index: 2000; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     }
     .chat-header { background: rgba(255, 255, 255, 0.05); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .chat-body { flex: 1; padding: 1.2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-    .chat-msg { padding: 12px 16px; border-radius: 16px; font-size: 0.92rem; max-width: 85%; line-height: 1.5; }
+    .chat-msg { padding: 12px 16px; border-radius: 16px; font-size: 0.93rem; max-width: 85%; line-height: 1.5; }
     .chat-msg.bot { background: rgba(0, 242, 254, 0.15); border: 1px solid var(--primary-cyan); align-self: flex-start; }
     .chat-msg.user { background: var(--neon-pink); align-self: flex-end; color: #fff; }
     .chat-input { display: flex; padding: 12px; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); }
@@ -271,6 +277,7 @@
       .hero { flex-direction: column; text-align: center; }
       .hero-text { max-width: 100%; }
       .planet-container { width: 100%; height: 350px; margin-top: 2rem; }
+      .compare-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -289,11 +296,11 @@
 
   <!-- Telemetry Bar -->
   <div class="telemetry-bar">
-    <div><i class="fa-solid fa-server"></i> CORE: HAMOD-HYPER-CORE v5.0</div>
+    <div><i class="fa-solid fa-server"></i> HAMOD ULTRA-CORE v6.0 OVERLOAD</div>
     <div id="tempHUD"><i class="fa-solid fa-microchip"></i> CPU TEMP: 37°C</div>
     <div class="hud-controls">
-      <button class="hud-btn" onclick="toggleWarpSpeed()"><i class="fa-solid fa-shuttle-space"></i> وضع الـ Warp Speed 🚀</button>
-      <button class="hud-btn" onclick="toggleMatrixTheme()"><i class="fa-solid fa-terminal"></i> وضع الماتريكس 🟩</button>
+      <button class="hud-btn" id="warpBtn" onclick="toggleWarpSpeed()"><i class="fa-solid fa-shuttle-space"></i> Warp Speed 🚀</button>
+      <button class="hud-btn" id="matrixBtn" onclick="toggleMatrixTheme()"><i class="fa-solid fa-terminal"></i> Matrix Mode 🟩</button>
     </div>
   </div>
 
@@ -305,16 +312,17 @@
     <ul class="nav-links">
       <li><a href="#" onclick="playBeep(600,0.05)">المجرة الرئيسية</a></li>
       <li><a href="#products" onclick="playBeep(600,0.05)">معرض العتاد</a></li>
-      <li><a href="#ai" onclick="playBeep(600,0.05)">المساعد السيبراني</a></li>
+      <li><a href="#compare" onclick="toggleCompareBar()">المقارنة ⚖️</a></li>
+      <li><a href="#ai" onclick="toggleChat()">المساعد السيبراني</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <span class="badge-space"><i class="fa-solid fa-bolt"></i> WARP SPEED ENGINE ACTIVE • FULL POWER</span>
+      <span class="badge-space"><i class="fa-solid fa-bolt"></i> HYPER-OVERDRIVE v6.0 • UNLIMITED POWER</span>
       <h1>عالم الأداء الخارق والأجهزة السيبرانية</h1>
-      <p>منصة حمودي المتطورة لتصفح واقتناء أحدث Workstations وأقوى أجهزة الجيمينج وأكسسوارات الأداء الأسطورية.</p>
+      <p>منصة حمودي المتطورة لتصفح واقتناء أحدث Workstations وأقوى أجهزة الجيمينج مع خاصية المقارنة المباشرة والهولوجرام.</p>
     </div>
     
     <!-- 3D Cyber Planet Canvas -->
@@ -322,6 +330,18 @@
       <div id="planet-3d-canvas"></div>
     </div>
   </section>
+
+  <!-- Comparison Bar Panel -->
+  <div class="compare-bar" id="comparePanel">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="color:var(--primary-cyan); font-size:1.5rem"><i class="fa-solid fa-scale-balanced"></i> لوحة المقارنة الهولوجرام المباشرة</h3>
+      <button class="hud-btn" onclick="clearCompare()"><i class="fa-solid fa-trash"></i> تفريغ المقارنة</button>
+    </div>
+    <div class="compare-grid" id="compareGrid">
+      <div class="compare-box" style="text-align:center; color:var(--text-muted)">اختر الجهاز الأول من القائمة أدناه 💻</div>
+      <div class="compare-box" style="text-align:center; color:var(--text-muted)">اختر الجهاز الثاني للمقارنة ⚡</div>
+    </div>
+  </div>
 
   <!-- Products Section -->
   <section class="products-section" id="products">
@@ -370,7 +390,7 @@
   </div>
 
   <script>
-    /* Web Audio Synthesizer */
+    /* Audio Synthesizer */
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playBeep(freq = 440, duration = 0.08) {
       if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -388,10 +408,10 @@
     const cursorOutline = document.getElementById('cursorOutline');
     window.addEventListener('mousemove', (e) => {
       cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-      cursorOutline.style.left = `${e.clientX - 19}px`; cursorOutline.style.top = `${e.clientY - 19}px`;
+      cursorOutline.style.left = `${e.clientX - 22}px`; cursorOutline.style.top = `${e.clientY - 22}px`;
     });
 
-    /* Live HUD Update */
+    /* Live HUD Temperature update */
     setInterval(() => {
       const temp = 35 + Math.floor(Math.random() * 8);
       document.getElementById('tempHUD').innerHTML = `<i class="fa-solid fa-microchip"></i> CPU TEMP: ${temp}°C`;
@@ -401,11 +421,13 @@
     let isWarpSpeed = false;
     function toggleWarpSpeed() {
       isWarpSpeed = !isWarpSpeed;
+      document.getElementById('warpBtn').classList.toggle('active');
       playBeep(1400, 0.2);
       showToast(isWarpSpeed ? "تم تفعيل سرعة الـ Warp Speed! 🚀" : "عاد النظام للسرعة العادية 🛸");
     }
     function toggleMatrixTheme() {
       document.body.classList.toggle('matrix-mode');
+      document.getElementById('matrixBtn').classList.toggle('active');
       playBeep(1000, 0.15);
       showToast("تم تغيير طابع النظام السيبراني! 🟩");
     }
@@ -425,6 +447,8 @@
       { id: 11, title: "وصلة كابل شاحن Type-C مضفر سريع 100W", category: "accessory", price: "350 ج.م", stock: "متوفر بكثرة", badge: "مقاوم للقطع 🔌", rating: 4.8, icon: "fa-plug", specs: ["طول 2 متر قماش مضفر", "يدعم نقل البيانات Fast Charge", "مقاوم للقطع والحرارة"], amazonUrl: "https://www.amazon.eg/s?k=Type+C+Cable+100W" }
     ];
 
+    let compareList = [];
+
     /* Render Cards */
     function renderProducts(items) {
       const grid = document.getElementById('grid');
@@ -443,6 +467,9 @@
             <div class="btn-group-holo">
               <button class="btn-holo" onclick="openHolo('${p.title}', '${p.specs.join('<br>')}', '${p.price}')">
                 <i class="fa-solid fa-eye"></i> الهولوجرام 🔮
+              </button>
+              <button class="btn-holo" style="border-color:var(--neon-pink); color:var(--neon-pink);" onclick="addToCompare(${p.id})">
+                <i class="fa-solid fa-scale-balanced"></i> مقارنة ⚖️
               </button>
             </div>
             <div class="action-buttons">
@@ -467,6 +494,7 @@
       renderProducts(products.filter(p => p.title.toLowerCase().includes(q)));
     }
 
+    /* Hologram Modal */
     function openHolo(title, specs, price) {
       playBeep(1200, 0.15);
       document.getElementById('holoBody').innerHTML = `
@@ -477,6 +505,50 @@
       document.getElementById('holoModal').style.display = 'flex';
     }
     function closeHolo() { playBeep(300, 0.1); document.getElementById('holoModal').style.display = 'none'; }
+
+    /* Comparison System */
+    function toggleCompareBar() {
+      playBeep(800, 0.1);
+      const p = document.getElementById('comparePanel');
+      p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function addToCompare(id) {
+      playBeep(1100, 0.1);
+      const item = products.find(p => p.id === id);
+      if (compareList.length >= 2) compareList.shift();
+      if (!compareList.some(p => p.id === id)) compareList.push(item);
+
+      renderCompare();
+      document.getElementById('comparePanel').style.display = 'block';
+      showToast(`تم إضافة ${item.title} للوحة المقارنة! ⚖️`);
+    }
+
+    function renderCompare() {
+      const grid = document.getElementById('compareGrid');
+      if (compareList.length === 0) {
+        grid.innerHTML = `
+          <div class="compare-box" style="text-align:center; color:var(--text-muted)">اختر الجهاز الأول من القائمة أدناه 💻</div>
+          <div class="compare-box" style="text-align:center; color:var(--text-muted)">اختر الجهاز الثاني للمقارنة ⚡</div>
+        `;
+        return;
+      }
+      grid.innerHTML = compareList.map(item => `
+        <div class="compare-box">
+          <h4 style="color:var(--primary-cyan); font-size:1.2rem; margin-bottom:0.5rem"><i class="fa-solid ${item.icon}"></i> ${item.title}</h4>
+          <p style="color:var(--neon-pink); font-weight:bold; margin-bottom:1rem">${item.price}</p>
+          <ul style="list-style:none; line-height:1.8; font-size:0.9rem; color:var(--text-muted)">
+            ${item.specs.map(s => `<li>• ${s}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    function clearCompare() {
+      playBeep(400, 0.1);
+      compareList = [];
+      renderCompare();
+    }
 
     function copySpecs(title) {
       playBeep(1000, 0.1); navigator.clipboard.writeText(title); showToast("تم نسخ الاسم بنجاح! 🚀");
@@ -537,9 +609,9 @@
 
     spaceRenderer.setSize(window.innerWidth, window.innerHeight); spaceCam.position.z = 40;
 
-    const starsGeo = new THREE.BufferGeometry(); const starCount = 1800;
+    const starsGeo = new THREE.BufferGeometry(); const starCount = 2000;
     const starPos = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 140;
+    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 150;
     starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
     const starMesh = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.6, color: 0x00f2fe, transparent: true, opacity: 0.85 }));
     spaceScene.add(starMesh);
@@ -571,10 +643,10 @@
 
     function animateSpace() {
       requestAnimationFrame(animateSpace);
-      const speed = isWarpSpeed ? 0.015 : 0.0008;
+      const speed = isWarpSpeed ? 0.02 : 0.0008;
       starMesh.rotation.y += speed;
-      planet.rotation.y += isWarpSpeed ? 0.03 : 0.006;
-      ring.rotation.z += isWarpSpeed ? 0.04 : 0.009;
+      planet.rotation.y += isWarpSpeed ? 0.04 : 0.006;
+      ring.rotation.z += isWarpSpeed ? 0.05 : 0.009;
       spaceRenderer.render(spaceScene, spaceCam);
       planetRenderer.render(planetScene, planetCam);
     }
