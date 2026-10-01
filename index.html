@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | Cyber-Space Hardware Universe</title>
-  
+  <title>HAMOD LABS | Hyper-Space Ultimate Cyber Universe</title>
+
   <!-- Font Awesome & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -14,23 +14,26 @@
 
   <style>
     :root {
-      --bg-dark: #020208;
-      --bg-card: rgba(8, 14, 28, 0.7);
+      --bg-dark: #010206;
+      --bg-card: rgba(6, 11, 25, 0.75);
       --primary-cyan: #00f2fe;
       --primary-purple: #7f00ff;
       --neon-pink: #ff007f;
+      --neon-green: #00ff66;
       --gold-glow: #ffd700;
       --text-main: #ffffff;
       --text-muted: #8a99ad;
       --border-glow: rgba(0, 242, 254, 0.35);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Tajawal', sans-serif;
+    /* Matrix Theme Overrides */
+    body.matrix-mode {
+      --primary-cyan: #00ff66;
+      --neon-pink: #003311;
+      --border-glow: rgba(0, 255, 102, 0.5);
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
 
     body {
       background-color: var(--bg-dark);
@@ -39,28 +42,24 @@
       position: relative;
     }
 
-    /* Cyber Cursor */
+    /* Custom Cyber Cursor */
     .cursor-dot {
-      width: 8px; height: 8px;
-      background-color: var(--primary-cyan);
-      position: fixed; top: 0; left: 0;
-      border-radius: 50%; pointer-events: none;
-      z-index: 99999; box-shadow: 0 0 15px var(--primary-cyan);
+      width: 8px; height: 8px; background-color: var(--primary-cyan);
+      position: fixed; top: 0; left: 0; border-radius: 50%;
+      pointer-events: none; z-index: 99999; box-shadow: 0 0 15px var(--primary-cyan);
     }
     .cursor-outline {
-      width: 36px; height: 36px;
-      border: 2px solid rgba(255, 0, 127, 0.6);
-      position: fixed; top: 0; left: 0;
-      border-radius: 50%; pointer-events: none;
-      z-index: 99998; transition: transform 0.08s ease-out;
+      width: 38px; height: 38px; border: 2px solid var(--neon-pink);
+      position: fixed; top: 0; left: 0; border-radius: 50%;
+      pointer-events: none; z-index: 99998; transition: transform 0.08s ease-out;
     }
 
-    /* Background Space Canvas */
-    #space-canvas {
-      position: fixed; top: 0; left: 0;
-      width: 100vw; height: 100vh;
+    /* Canvas Overlays */
+    #space-canvas, #matrix-canvas {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: -1; pointer-events: none;
     }
+    #matrix-canvas { opacity: 0.15; }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
@@ -70,52 +69,47 @@
       border-radius: 10px;
     }
 
-    /* System Telemetry Bar */
+    /* System Telemetry HUD Bar */
     .telemetry-bar {
-      background: rgba(0, 0, 0, 0.85);
-      border-bottom: 1px solid var(--border-glow);
-      padding: 6px 6%;
-      display: flex; justify-content: space-between;
-      font-size: 0.8rem; font-family: monospace;
-      color: var(--primary-cyan); z-index: 1001;
-      position: relative; backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--border-glow);
+      padding: 8px 6%; display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; font-family: monospace; color: var(--primary-cyan);
+      z-index: 1001; position: relative; backdrop-filter: blur(12px);
     }
-    .telemetry-item { display: flex; align-items: center; gap: 8px; }
+    .hud-controls { display: flex; gap: 12px; }
+    .hud-btn {
+      background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan);
+      color: #fff; padding: 3px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: 0.3s;
+    }
+    .hud-btn:hover { background: var(--primary-cyan); color: #000; }
 
     /* Toast */
     .toast {
       position: fixed; top: 25px; left: 50%;
       transform: translateX(-50%) translateY(-100px);
       background: linear-gradient(45deg, var(--neon-pink), var(--primary-purple));
-      color: #fff; padding: 14px 32px; border-radius: 40px;
-      font-weight: 800; box-shadow: 0 0 35px rgba(255, 0, 127, 0.8);
-      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 9999;
+      color: #fff; padding: 14px 32px; border-radius: 40px; font-weight: 800;
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.8);
+      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99999;
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
 
     /* Navbar */
     nav {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 6%; background: rgba(2, 2, 8, 0.8);
-      backdrop-filter: blur(25px); position: sticky; top: 0; z-index: 1000;
-      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      padding: 1.2rem 6%; background: rgba(1, 2, 6, 0.85); backdrop-filter: blur(25px);
+      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0, 242, 254, 0.2);
     }
-
     .logo {
       font-size: 2.3rem; font-weight: 900;
       background: linear-gradient(45deg, var(--primary-cyan), #fff, var(--neon-pink));
-      background-size: 200% auto; -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; animation: shine 4s linear infinite;
-      display: flex; align-items: center; gap: 12px;
+      background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite; display: flex; align-items: center; gap: 12px;
     }
     @keyframes shine { to { background-position: 200% center; } }
 
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      color: var(--text-main); text-decoration: none; font-weight: 700;
-      transition: 0.3s; position: relative;
-    }
+    .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 700; transition: 0.3s; }
     .nav-links a:hover { color: var(--primary-cyan); text-shadow: 0 0 10px var(--primary-cyan); }
 
     /* Hero Section */
@@ -123,29 +117,23 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 3rem 6%; min-height: 80vh; position: relative;
     }
-
     .hero-text { max-width: 52%; }
     .hero-text h1 {
       font-size: 4rem; font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #00f2fe 40%, var(--neon-pink) 100%);
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-cyan) 40%, var(--neon-pink) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       text-shadow: 0 0 40px rgba(0, 242, 254, 0.4);
     }
-    .hero-text p {
-      font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.2rem; line-height: 1.8;
-    }
+    .hero-text p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.2rem; line-height: 1.8; }
 
     .badge-space {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 24px; background: rgba(255, 0, 127, 0.15);
-      border: 1px solid var(--neon-pink); border-radius: 30px;
-      color: var(--neon-pink); font-size: 0.95rem; font-weight: 800;
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 24px;
+      background: rgba(255, 0, 127, 0.15); border: 1px solid var(--neon-pink);
+      border-radius: 30px; color: var(--neon-pink); font-size: 0.95rem; font-weight: 800;
       margin-bottom: 1.2rem; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
     }
 
-    .planet-container {
-      width: 45%; height: 480px; position: relative;
-    }
+    .planet-container { width: 45%; height: 480px; position: relative; }
     #planet-3d-canvas { width: 100%; height: 100%; }
 
     /* Products Section */
@@ -156,68 +144,50 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    .search-bar-container {
-      max-width: 600px; margin: 2rem auto 2.5rem auto; position: relative;
-    }
+    .search-bar-container { max-width: 600px; margin: 2rem auto 2.5rem auto; position: relative; }
     .search-bar-container input {
-      width: 100%; padding: 18px 24px 18px 55px;
-      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glow);
-      border-radius: 35px; color: #fff; font-size: 1.1rem; outline: none;
-      transition: 0.4s; backdrop-filter: blur(15px);
+      width: 100%; padding: 18px 24px 18px 55px; background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-glow); border-radius: 35px; color: #fff; font-size: 1.1rem;
+      outline: none; transition: 0.4s; backdrop-filter: blur(15px);
     }
-    .search-bar-container input:focus {
-      border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 0, 127, 0.5);
-    }
-    .search-bar-container i {
-      position: absolute; left: 22px; top: 50%; transform: translateY(-50%);
-      color: var(--primary-cyan); font-size: 1.3rem;
-    }
+    .search-bar-container input:focus { border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 0, 127, 0.5); }
+    .search-bar-container i { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--primary-cyan); font-size: 1.3rem; }
 
-    .filter-bar {
-      display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 3.5rem; flex-wrap: wrap;
-    }
+    .filter-bar { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
     .filter-btn {
-      padding: 12px 30px; background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px;
-      color: var(--text-main); cursor: pointer; font-weight: 700; transition: all 0.3s ease;
+      padding: 12px 30px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px; color: var(--text-main); cursor: pointer; font-weight: 700; transition: all 0.3s ease;
     }
     .filter-btn.active, .filter-btn:hover {
       background: linear-gradient(45deg, var(--primary-cyan), var(--neon-pink));
       border-color: transparent; box-shadow: 0 0 30px rgba(0, 242, 254, 0.7); color: #fff;
     }
 
-    .products-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 2.5rem;
-    }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 2.5rem; }
 
     /* Product Card */
     .card {
-      background: var(--bg-card); backdrop-filter: blur(25px);
-      border: 1px solid var(--border-glow); border-radius: 28px; padding: 2rem;
-      position: relative; display: flex; flex-direction: column; justify-content: space-between;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: var(--bg-card); backdrop-filter: blur(25px); border: 1px solid var(--border-glow);
+      border-radius: 28px; padding: 2rem; position: relative; display: flex; flex-direction: column;
+      justify-content: space-between; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .card:hover {
-      transform: translateY(-12px) scale(1.02);
-      border-color: var(--neon-pink); box-shadow: 0 20px 50px rgba(255, 0, 127, 0.35);
+      transform: translateY(-12px) scale(1.02); border-color: var(--neon-pink);
+      box-shadow: 0 20px 50px rgba(255, 0, 127, 0.35);
     }
 
     .stock-tag {
-      position: absolute; top: 20px; right: 20px;
-      background: rgba(255, 0, 127, 0.2); border: 1px solid var(--neon-pink);
-      color: var(--neon-pink); padding: 5px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 800;
+      position: absolute; top: 20px; right: 20px; background: rgba(255, 0, 127, 0.2);
+      border: 1px solid var(--neon-pink); color: var(--neon-pink); padding: 5px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 800;
     }
     .badge-tag {
-      position: absolute; top: 20px; left: 20px;
-      background: rgba(255, 215, 0, 0.15); border: 1px solid var(--gold-glow);
-      color: var(--gold-glow); padding: 5px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 800;
+      position: absolute; top: 20px; left: 20px; background: rgba(255, 215, 0, 0.15);
+      border: 1px solid var(--gold-glow); color: var(--gold-glow); padding: 5px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 800;
     }
 
     .icon-box {
-      width: 100%; height: 160px;
-      background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0,0,0,0.4) 100%);
-      border: 1px dashed var(--border-glow); border-radius: 20px;
-      display: flex; justify-content: center; align-items: center;
+      width: 100%; height: 160px; background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0,0,0,0.4) 100%);
+      border: 1px dashed var(--border-glow); border-radius: 20px; display: flex; justify-content: center; align-items: center;
       margin-bottom: 1.5rem; color: var(--primary-cyan); font-size: 4rem; transition: 0.4s;
     }
     .card:hover .icon-box {
@@ -232,76 +202,57 @@
     .specs-list li { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 10px; }
     .specs-list i { color: var(--primary-cyan); }
 
-    .card-footer {
-      display: flex; flex-direction: column; gap: 14px; padding-top: 1.2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
+    .card-footer { display: flex; flex-direction: column; gap: 14px; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); }
     .price { font-size: 1.6rem; font-weight: 900; color: var(--primary-cyan); text-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
 
     .btn-holo {
-      background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan);
-      color: var(--primary-cyan); padding: 10px; border-radius: 12px; font-weight: 800;
-      cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan); color: var(--primary-cyan);
+      padding: 10px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .btn-holo:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 20px var(--primary-cyan); }
 
     .action-buttons { display: flex; gap: 10px; }
     .btn-amazon {
-      flex: 2; background: linear-gradient(45deg, #ff9900, #ffb700);
-      color: #111; border: none; padding: 12px; border-radius: 14px; font-weight: 800;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-      text-decoration: none; transition: 0.3s;
+      flex: 2; background: linear-gradient(45deg, #ff9900, #ffb700); color: #111; border: none; padding: 12px;
+      border-radius: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 8px; text-decoration: none; transition: 0.3s;
     }
     .btn-amazon:hover { box-shadow: 0 0 25px rgba(255, 153, 0, 0.8); transform: scale(1.02); }
 
     .btn-icon {
-      flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-main); padding: 12px; border-radius: 14px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; transition: 0.3s;
+      flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main);
+      padding: 12px; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s;
     }
     .btn-icon:hover { background: var(--neon-pink); color: #fff; border-color: var(--neon-pink); }
 
     /* Hologram Modal */
     .holo-modal {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(2, 2, 8, 0.9); backdrop-filter: blur(20px);
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 2, 8, 0.92); backdrop-filter: blur(20px);
       display: none; justify-content: center; align-items: center; z-index: 99999;
     }
     .holo-content {
-      background: rgba(8, 14, 28, 0.95); border: 2px solid var(--primary-cyan);
-      border-radius: 30px; padding: 3rem; max-width: 550px; width: 90%;
-      box-shadow: 0 0 60px rgba(0, 242, 254, 0.6); position: relative;
-      animation: holoFade 0.4s ease-out;
+      background: rgba(8, 14, 28, 0.95); border: 2px solid var(--primary-cyan); border-radius: 30px;
+      padding: 3rem; max-width: 550px; width: 90%; box-shadow: 0 0 60px rgba(0, 242, 254, 0.6); position: relative; animation: holoFade 0.4s ease-out;
     }
     @keyframes holoFade { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-    .close-holo {
-      position: absolute; top: 20px; left: 20px; color: #fff;
-      font-size: 1.5rem; cursor: pointer; transition: 0.3s;
-    }
+    .close-holo { position: absolute; top: 20px; left: 20px; color: #fff; font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
     .close-holo:hover { color: var(--neon-pink); }
 
     /* AI Chat Window */
     .ai-chat-btn {
       position: fixed; bottom: 35px; left: 35px; width: 65px; height: 65px; border-radius: 50%;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--neon-pink));
-      display: flex; justify-content: center; align-items: center; color: white;
-      font-size: 1.8rem; cursor: pointer; box-shadow: 0 0 35px rgba(0, 242, 254, 0.8);
-      z-index: 2000; transition: 0.3s;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--neon-pink)); display: flex; justify-content: center; align-items: center;
+      color: white; font-size: 1.8rem; cursor: pointer; box-shadow: 0 0 35px rgba(0, 242, 254, 0.8); z-index: 2000; transition: 0.3s;
     }
     .ai-chat-btn:hover { transform: scale(1.12); }
 
     .ai-chat-window {
-      position: fixed; bottom: 115px; left: 35px; width: 380px; height: 480px;
-      background: rgba(8, 14, 28, 0.95); backdrop-filter: blur(25px);
-      border: 1px solid var(--border-glow); border-radius: 26px; display: none;
-      flex-direction: column; z-index: 2000; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      position: fixed; bottom: 115px; left: 35px; width: 380px; height: 480px; background: rgba(8, 14, 28, 0.95); backdrop-filter: blur(25px);
+      border: 1px solid var(--border-glow); border-radius: 26px; display: none; flex-direction: column; z-index: 2000; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     }
-    .chat-header {
-      background: rgba(255, 255, 255, 0.05); padding: 1.2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
+    .chat-header { background: rgba(255, 255, 255, 0.05); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .chat-body { flex: 1; padding: 1.2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
     .chat-msg { padding: 12px 16px; border-radius: 16px; font-size: 0.92rem; max-width: 85%; line-height: 1.5; }
     .chat-msg.bot { background: rgba(0, 242, 254, 0.15); border: 1px solid var(--primary-cyan); align-self: flex-start; }
@@ -323,37 +274,41 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-outline" id="cursorOutline"></div>
 
-  <!-- Space Background Canvas -->
+  <!-- Space Background & Matrix Canvas -->
   <canvas id="space-canvas"></canvas>
+  <canvas id="matrix-canvas"></canvas>
 
   <!-- Toast Notification -->
   <div id="toast" class="toast">تم الإجراء بنجاح! 🚀</div>
 
   <!-- Telemetry Bar -->
   <div class="telemetry-bar">
-    <div class="telemetry-item"><i class="fa-solid fa-server"></i> CORE: HAMOD-SPACE-LAB</div>
-    <div class="telemetry-item"><i class="fa-solid fa-wifi"></i> LATENCY: 12ms</div>
-    <div class="telemetry-item"><i class="fa-solid fa-microchip"></i> CPU TEMP: 38°C</div>
+    <div><i class="fa-solid fa-server"></i> CORE: HAMOD-CYBER-CORE v4.0</div>
+    <div id="tempHUD"><i class="fa-solid fa-microchip"></i> CPU TEMP: 37°C</div>
+    <div class="hud-controls">
+      <button class="hud-btn" onclick="toggleMatrixTheme()"><i class="fa-solid fa-terminal"></i> وضع الماتريكس</button>
+      <button class="hud-btn" onclick="playBeep(800, 0.1)"><i class="fa-solid fa-volume-high"></i> اختبر الصوت</button>
+    </div>
   </div>
 
   <!-- Navbar -->
   <nav>
     <div class="logo">
-      <i class="fa-solid fa-planet-ringed"></i> HAMOD LABS
+      <i class="fa-solid fa-atom"></i> HAMOD LABS
     </div>
     <ul class="nav-links">
-      <li><a href="#">المجرة الرئيسية</a></li>
-      <li><a href="#products">معرض العتاد</a></li>
-      <li><a href="#ai">المساعد السيبراني</a></li>
+      <li><a href="#" onclick="playBeep(600,0.05)">المجرة الرئيسية</a></li>
+      <li><a href="#products" onclick="playBeep(600,0.05)">معرض العتاد</a></li>
+      <li><a href="#ai" onclick="playBeep(600,0.05)">المساعد السيبراني</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <span class="badge-space"><i class="fa-solid fa-shuttle-space"></i> HAMOD LABS • Deep Space Hardware</span>
-      <h1>عالم أجهزة الحاسوب والأكسسوارات الفضائية</h1>
-      <p>اكتشف القوة الكاملة مع أفضل لابتوبات Workstations وأجهزة الجيمينج، بالإضافة لكافة أكسسوارات الطاقة، الصوت والأداء الفائق.</p>
+      <span class="badge-space"><i class="fa-solid fa-bolt"></i> HYPERDRIVE ACTIVATED • ALL SYSTEMS GO</span>
+      <h1>أداء متعدّد المجرات وعالم العتاد الفائق</h1>
+      <p>محطة حمودي المتكاملة لتصفح أحدث أجهزة Workstation، العتاد الاحترافي للأمن السيبراني، وأفضل الملحقات ذات الأداء الأسطوري.</p>
     </div>
     
     <!-- 3D Cyber Planet Canvas -->
@@ -364,11 +319,11 @@
 
   <!-- Products Section -->
   <section class="products-section" id="products">
-    <h2 class="section-title">معرض العتاد الفائق</h2>
+    <h2 class="section-title">معرض العتاد السيبراني</h2>
     
     <div class="search-bar-container">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="ابحث عن أجهزة أو أكسسوارات معينة...">
+      <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="ابحث عن جهاز، كارت شاشة، أو ملحق...">
     </div>
     
     <div class="filter-bar">
@@ -400,30 +355,54 @@
       <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً بك يا حمودي في المحطة الفضائية! كيف يمكنني مساعدتك اليوم؟</div>
+      <div class="chat-msg bot">يا أهلاً بيك يا حمودي! أنا المساعد الذكي، النظام شغال 100% وأنا جاهز لكل أوامرك 🚀.</div>
     </div>
     <div class="chat-input">
-      <input type="text" id="userInput" placeholder="اسأل المساعد الذكي..." onkeypress="handleKey(event)">
+      <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKey(event)">
       <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
     </div>
   </div>
 
   <script>
-    /* Cursor */
+    /* Web Audio API Sound Generator */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq = 440, duration = 0.08) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(); osc.stop(audioCtx.currentTime + duration);
+    }
+
+    /* Cursor Logic */
     const cursorDot = document.getElementById('cursorDot');
     const cursorOutline = document.getElementById('cursorOutline');
     window.addEventListener('mousemove', (e) => {
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorDot.style.top = `${e.clientY}px`;
-      cursorOutline.style.left = `${e.clientX - 18}px`;
-      cursorOutline.style.top = `${e.clientY - 18}px`;
+      cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+      cursorOutline.style.left = `${e.clientX - 19}px`; cursorOutline.style.top = `${e.clientY - 19}px`;
     });
 
-    /* Products Database */
+    /* Live HUD CPU Temp Simulation */
+    setInterval(() => {
+      const temp = 35 + Math.floor(Math.random() * 8);
+      document.getElementById('tempHUD').innerHTML = `<i class="fa-solid fa-microchip"></i> CPU TEMP: ${temp}°C`;
+    }, 2500);
+
+    /* Matrix Mode Toggle */
+    function toggleMatrixTheme() {
+      document.body.classList.toggle('matrix-mode');
+      playBeep(1000, 0.15);
+      showToast("تم تغيير طابع النظام السيبراني! 🟩");
+    }
+
+    /* Database */
     const products = [
       { id: 1, title: "Dell Precision 5520", category: "workstation", price: "22,500 ج.م", stock: "متبقي 2 فقط!", badge: "الأكثر طلباً 🔥", rating: 5, icon: "fa-laptop-code", specs: ["Intel Core i7-7820HQ", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro M1200 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520" },
       { id: 2, title: "HP EliteBook 840 G6", category: "workstation", price: "18,000 ج.م", stock: "متوفر", badge: "قيمة ممتازة 💡", rating: 4.8, icon: "fa-laptop", specs: ["Intel Core i7-8665U", "16GB RAM DDR4", "256GB NVMe SSD", "Intel UHD Graphics 620"], amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G6" },
-      { id: 3, title: "Dell Precision 7530 Workstation", category: "workstation", price: "27,000 ج.م", stock: "متبقي 1 فقط!", badge: "أداء شاق 🏋️", rating: 5, icon: "fa-microchip", specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530" },
+      { id: 3, title: "Dell Precision 7530 Workstation", category: "workstation", price: "27,000 ج.م", stock: "متبقي 1 فقط!", badge: "أداء شاق 🏋️️", rating: 5, icon: "fa-microchip", specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530" },
       { id: 4, title: "Lenovo ThinkPad P52", category: "workstation", price: "24,000 ج.م", stock: "متوفر", badge: "صلابة عالية 🛡️", rating: 4.9, icon: "fa-laptop-medical", specs: ["Intel Core i7-8750H", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro P1000 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Thinkpad+P52" },
       { id: 5, title: "Apple MacBook Pro M2 Max", category: "workstation", price: "85,000 ج.م", stock: "جديد 🌟", badge: "القمة 👑", rating: 5, icon: "fa-apple", specs: ["Apple M2 Max Chip 12-Core", "32GB Unified Memory", "1TB SSD SuperFast", "Liquid Retina XDR Display 16\""], amazonUrl: "https://www.amazon.eg/s?k=MacBook+Pro+M2+Max" },
       { id: 6, title: "Lenovo Legion 5 Pro", category: "gaming", price: "34,500 ج.م", stock: "متبقي 1 فقط!", badge: "جيمنج محترف 🎮", rating: 5, icon: "fa-gamepad", specs: ["AMD Ryzen 7 5800H", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3060 6GB"], amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+5" },
@@ -434,11 +413,11 @@
       { id: 11, title: "وصلة كابل شاحن Type-C مضفر سريع 100W", category: "accessory", price: "350 ج.م", stock: "متوفر بكثرة", badge: "مقاوم للقطع 🔌", rating: 4.8, icon: "fa-plug", specs: ["طول 2 متر قماش مضفر", "يدعم نقل البيانات Fast Charge", "مقاوم للقطع والحرارة"], amazonUrl: "https://www.amazon.eg/s?k=Type+C+Cable+100W" }
     ];
 
-    /* Render Cards */
+    /* Render Product Cards */
     function renderProducts(items) {
       const grid = document.getElementById('grid');
       grid.innerHTML = items.map(p => `
-        <div class="card">
+        <div class="card" onmouseenter="playBeep(400, 0.03)">
           <span class="stock-tag">${p.stock}</span>
           <span class="badge-tag">${p.badge}</span>
           <div class="icon-box"><i class="fa-solid ${p.icon}"></i></div>
@@ -453,7 +432,7 @@
               <i class="fa-solid fa-eye"></i> معاينة الهولوجرام 🔮
             </button>
             <div class="action-buttons">
-              <a href="${p.amazonUrl}" target="_blank" class="btn-amazon"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
+              <a href="${p.amazonUrl}" target="_blank" class="btn-amazon" onclick="playBeep(900,0.1)"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
               <button class="btn-icon" onclick="copySpecs('${p.title}')"><i class="fa-regular fa-copy"></i></button>
             </div>
           </div>
@@ -463,6 +442,7 @@
     renderProducts(products);
 
     function filterData(cat) {
+      playBeep(700, 0.05);
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
       renderProducts(cat === 'all' ? products : products.filter(p => p.category === cat));
@@ -473,8 +453,8 @@
       renderProducts(products.filter(p => p.title.toLowerCase().includes(q)));
     }
 
-    /* Hologram Modal Logic */
     function openHolo(title, specs, price) {
+      playBeep(1200, 0.15);
       document.getElementById('holoBody').innerHTML = `
         <h2 style="color:var(--primary-cyan); margin-bottom:1rem"><i class="fa-solid fa-atom"></i> ${title}</h2>
         <p style="font-size:1.2rem; line-height:1.8; color:#fff">${specs}</p>
@@ -482,11 +462,12 @@
       `;
       document.getElementById('holoModal').style.display = 'flex';
     }
-    function closeHolo() { document.getElementById('holoModal').style.display = 'none'; }
+    function closeHolo() { playBeep(300, 0.1); document.getElementById('holoModal').style.display = 'none'; }
 
     function copySpecs(title) {
+      playBeep(1000, 0.1);
       navigator.clipboard.writeText(title);
-      showToast("تم النسخ بنجاح! 🚀");
+      showToast("تم نسج الاسم بنجاح! 🚀");
     }
 
     function showToast(msg) {
@@ -495,47 +476,63 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    /* AI Chat */
+    /* AI Chat Engine */
     function toggleChat() {
+      playBeep(850, 0.1);
       const w = document.getElementById('chatWindow');
       w.style.display = w.style.display === 'flex' ? 'none' : 'flex';
     }
     function sendMsg() {
       const i = document.getElementById('userInput'), text = i.value.trim();
       if (!text) return;
+      playBeep(1100, 0.08);
       const b = document.getElementById('chatBody');
       b.innerHTML += `<div class="chat-msg user">${text}</div>`;
       i.value = '';
       setTimeout(() => {
-        b.innerHTML += `<div class="chat-msg bot">مساعدك في المحطة الفضائية جاهز! أجهزة Dell Precision هي خيارك الأمثل.</div>`;
+        playBeep(600, 0.12);
+        b.innerHTML += `<div class="chat-msg bot">تحليلات النظام جاهزة! أجهزة Workstation تقدم أفضل أداء في تشغيل Virtual Machines والأمن السيبراني.</div>`;
         b.scrollTop = b.scrollHeight;
       }, 500);
     }
     function handleKey(e) { if (e.key === 'Enter') sendMsg(); }
 
-    /* 3D Space Background Canvas */
+    /* Matrix Rain Animation Canvas */
+    const matrixCanvas = document.getElementById('matrix-canvas');
+    const mCtx = matrixCanvas.getContext('2d');
+    matrixCanvas.width = window.innerWidth; matrixCanvas.height = window.innerHeight;
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZHAMOD';
+    const fontSize = 14; const columns = matrixCanvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      mCtx.fillStyle = 'rgba(0, 0, 0, 0.05)'; mCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+      mCtx.fillStyle = '#00f2fe'; mCtx.font = fontSize + 'px monospace';
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 33);
+
+    /* 3D Space & Planet Engine */
     const spaceCanvas = document.getElementById('space-canvas');
     const spaceScene = new THREE.Scene();
     const spaceCam = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const spaceRenderer = new THREE.WebGLRenderer({ canvas: spaceCanvas, alpha: true, antialias: true });
 
-    spaceRenderer.setSize(window.innerWidth, window.innerHeight);
-    spaceCam.position.z = 40;
+    spaceRenderer.setSize(window.innerWidth, window.innerHeight); spaceCam.position.z = 40;
 
-    const starsGeo = new THREE.BufferGeometry();
-    const starCount = 1200;
+    const starsGeo = new THREE.BufferGeometry(); const starCount = 1500;
     const starPos = new Float32Array(starCount * 3);
-
-    for (let i = 0; i < starCount * 3; i++) {
-      starPos[i] = (Math.random() - 0.5) * 120;
-    }
+    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 130;
     starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-
-    const starMat = new THREE.PointsMaterial({ size: 0.6, color: 0x00f2fe, transparent: true, opacity: 0.8 });
-    const starMesh = new THREE.Points(starsGeo, starMat);
+    const starMesh = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.6, color: 0x00f2fe, transparent: true, opacity: 0.8 }));
     spaceScene.add(starMesh);
 
-    /* 3D Planet Hero */
+    /* Planet Canvas */
     const planetContainer = document.getElementById('planet-3d-canvas');
     const planetScene = new THREE.Scene();
     const planetCam = new THREE.PerspectiveCamera(75, planetContainer.clientWidth / planetContainer.clientHeight, 0.1, 1000);
@@ -544,28 +541,27 @@
     planetRenderer.setSize(planetContainer.clientWidth, planetContainer.clientHeight);
     planetContainer.appendChild(planetRenderer.domElement);
 
-    const planetGeo = new THREE.SphereGeometry(1.6, 32, 32);
-    const planetMat = new THREE.MeshStandardMaterial({ color: 0x020208, wireframe: true, emissive: 0x00f2fe, emissiveIntensity: 0.6 });
-    const planet = new THREE.Mesh(planetGeo, planetMat);
+    const planet = new THREE.Mesh(
+      new THREE.SphereGeometry(1.6, 32, 32),
+      new THREE.MeshStandardMaterial({ color: 0x010206, wireframe: true, emissive: 0x00f2fe, emissiveIntensity: 0.7 })
+    );
     planetScene.add(planet);
 
-    const ringGeo = new THREE.TorusGeometry(2.6, 0.08, 16, 100);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0xff007f, wireframe: true });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = Math.PI / 3;
-    planetScene.add(ring);
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(2.6, 0.08, 16, 100),
+      new THREE.MeshBasicMaterial({ color: 0xff007f, wireframe: true })
+    );
+    ring.rotation.x = Math.PI / 3; planetScene.add(ring);
 
-    const pLight = new THREE.PointLight(0x00f2fe, 2, 100);
-    pLight.position.set(10, 10, 10);
+    const pLight = new THREE.PointLight(0x00f2fe, 2, 100); pLight.position.set(10, 10, 10);
     planetScene.add(pLight);
-
     planetCam.position.z = 4.8;
 
     function animateSpace() {
       requestAnimationFrame(animateSpace);
       starMesh.rotation.y += 0.0008;
-      planet.rotation.y += 0.005;
-      ring.rotation.z += 0.008;
+      planet.rotation.y += 0.006;
+      ring.rotation.z += 0.009;
       spaceRenderer.render(spaceScene, spaceCam);
       planetRenderer.render(planetScene, planetCam);
     }
