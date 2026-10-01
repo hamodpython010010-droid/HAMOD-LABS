@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | Hyper-Space Ultimate Cyber Universe</title>
+  <title>HAMOD LABS | Hyper-Warp Cyber Universe</title>
 
   <!-- Font Awesome & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +15,7 @@
   <style>
     :root {
       --bg-dark: #010206;
-      --bg-card: rgba(6, 11, 25, 0.75);
+      --bg-card: rgba(6, 11, 25, 0.8);
       --primary-cyan: #00f2fe;
       --primary-purple: #7f00ff;
       --neon-pink: #ff007f;
@@ -23,14 +23,13 @@
       --gold-glow: #ffd700;
       --text-main: #ffffff;
       --text-muted: #8a99ad;
-      --border-glow: rgba(0, 242, 254, 0.35);
+      --border-glow: rgba(0, 242, 254, 0.4);
     }
 
-    /* Matrix Theme Overrides */
     body.matrix-mode {
       --primary-cyan: #00ff66;
       --neon-pink: #003311;
-      --border-glow: rgba(0, 255, 102, 0.5);
+      --border-glow: rgba(0, 255, 102, 0.6);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
@@ -38,8 +37,7 @@
     body {
       background-color: var(--bg-dark);
       color: var(--text-main);
-      overflow-x: hidden;
-      position: relative;
+      overflow-x: hidden; position: relative;
     }
 
     /* Custom Cyber Cursor */
@@ -71,19 +69,19 @@
 
     /* System Telemetry HUD Bar */
     .telemetry-bar {
-      background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--border-glow);
+      background: rgba(0, 0, 0, 0.92); border-bottom: 1px solid var(--border-glow);
       padding: 8px 6%; display: flex; justify-content: space-between; align-items: center;
       font-size: 0.8rem; font-family: monospace; color: var(--primary-cyan);
       z-index: 1001; position: relative; backdrop-filter: blur(12px);
     }
-    .hud-controls { display: flex; gap: 12px; }
+    .hud-controls { display: flex; gap: 10px; }
     .hud-btn {
       background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan);
-      color: #fff; padding: 3px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: 0.3s;
+      color: #fff; padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; transition: 0.3s;
     }
-    .hud-btn:hover { background: var(--primary-cyan); color: #000; }
+    .hud-btn:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 15px var(--primary-cyan); }
 
-    /* Toast */
+    /* Toast Notification */
     .toast {
       position: fixed; top: 25px; left: 50%;
       transform: translateX(-50%) translateY(-100px);
@@ -165,12 +163,19 @@
 
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 2.5rem; }
 
-    /* Product Card */
+    /* Product Card with Laser Scanner Bar */
     .card {
       background: var(--bg-card); backdrop-filter: blur(25px); border: 1px solid var(--border-glow);
       border-radius: 28px; padding: 2rem; position: relative; display: flex; flex-direction: column;
-      justify-content: space-between; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      justify-content: space-between; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .card::before {
+      content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 242, 254, 0.25), transparent);
+      transition: 0.6s; pointer-events: none;
+    }
+    .card:hover::before { top: 100%; }
     .card:hover {
       transform: translateY(-12px) scale(1.02); border-color: var(--neon-pink);
       box-shadow: 0 20px 50px rgba(255, 0, 127, 0.35);
@@ -202,13 +207,14 @@
     .specs-list li { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 10px; }
     .specs-list i { color: var(--primary-cyan); }
 
-    .card-footer { display: flex; flex-direction: column; gap: 14px; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .card-footer { display: flex; flex-direction: column; gap: 12px; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); }
     .price { font-size: 1.6rem; font-weight: 900; color: var(--primary-cyan); text-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
 
+    .btn-group-holo { display: flex; gap: 8px; }
     .btn-holo {
-      background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan); color: var(--primary-cyan);
+      flex: 1; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--primary-cyan); color: var(--primary-cyan);
       padding: 10px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.88rem;
     }
     .btn-holo:hover { background: var(--primary-cyan); color: #000; box-shadow: 0 0 20px var(--primary-cyan); }
 
@@ -233,7 +239,7 @@
     }
     .holo-content {
       background: rgba(8, 14, 28, 0.95); border: 2px solid var(--primary-cyan); border-radius: 30px;
-      padding: 3rem; max-width: 550px; width: 90%; box-shadow: 0 0 60px rgba(0, 242, 254, 0.6); position: relative; animation: holoFade 0.4s ease-out;
+      padding: 3rem; max-width: 650px; width: 90%; box-shadow: 0 0 60px rgba(0, 242, 254, 0.6); position: relative; animation: holoFade 0.4s ease-out;
     }
     @keyframes holoFade { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
@@ -283,11 +289,11 @@
 
   <!-- Telemetry Bar -->
   <div class="telemetry-bar">
-    <div><i class="fa-solid fa-server"></i> CORE: HAMOD-CYBER-CORE v4.0</div>
+    <div><i class="fa-solid fa-server"></i> CORE: HAMOD-HYPER-CORE v5.0</div>
     <div id="tempHUD"><i class="fa-solid fa-microchip"></i> CPU TEMP: 37°C</div>
     <div class="hud-controls">
-      <button class="hud-btn" onclick="toggleMatrixTheme()"><i class="fa-solid fa-terminal"></i> وضع الماتريكس</button>
-      <button class="hud-btn" onclick="playBeep(800, 0.1)"><i class="fa-solid fa-volume-high"></i> اختبر الصوت</button>
+      <button class="hud-btn" onclick="toggleWarpSpeed()"><i class="fa-solid fa-shuttle-space"></i> وضع الـ Warp Speed 🚀</button>
+      <button class="hud-btn" onclick="toggleMatrixTheme()"><i class="fa-solid fa-terminal"></i> وضع الماتريكس 🟩</button>
     </div>
   </div>
 
@@ -306,9 +312,9 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <span class="badge-space"><i class="fa-solid fa-bolt"></i> HYPERDRIVE ACTIVATED • ALL SYSTEMS GO</span>
-      <h1>أداء متعدّد المجرات وعالم العتاد الفائق</h1>
-      <p>محطة حمودي المتكاملة لتصفح أحدث أجهزة Workstation، العتاد الاحترافي للأمن السيبراني، وأفضل الملحقات ذات الأداء الأسطوري.</p>
+      <span class="badge-space"><i class="fa-solid fa-bolt"></i> WARP SPEED ENGINE ACTIVE • FULL POWER</span>
+      <h1>عالم الأداء الخارق والأجهزة السيبرانية</h1>
+      <p>منصة حمودي المتطورة لتصفح واقتناء أحدث Workstations وأقوى أجهزة الجيمينج وأكسسوارات الأداء الأسطورية.</p>
     </div>
     
     <!-- 3D Cyber Planet Canvas -->
@@ -355,16 +361,16 @@
       <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">يا أهلاً بيك يا حمودي! أنا المساعد الذكي، النظام شغال 100% وأنا جاهز لكل أوامرك 🚀.</div>
+      <div class="chat-msg bot">أهلاً بك يا حمودي! المساعد الذكي جاهز ومستعد 100% لأي استفسار أو مقارنة بين الأجهزة! 🚀</div>
     </div>
     <div class="chat-input">
-      <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." onkeypress="handleKey(event)">
+      <input type="text" id="userInput" placeholder="اسأل المساعد الذكي..." onkeypress="handleKey(event)">
       <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
     </div>
   </div>
 
   <script>
-    /* Web Audio API Sound Generator */
+    /* Web Audio Synthesizer */
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playBeep(freq = 440, duration = 0.08) {
       if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -377,7 +383,7 @@
       osc.start(); osc.stop(audioCtx.currentTime + duration);
     }
 
-    /* Cursor Logic */
+    /* Cursor Control */
     const cursorDot = document.getElementById('cursorDot');
     const cursorOutline = document.getElementById('cursorOutline');
     window.addEventListener('mousemove', (e) => {
@@ -385,13 +391,19 @@
       cursorOutline.style.left = `${e.clientX - 19}px`; cursorOutline.style.top = `${e.clientY - 19}px`;
     });
 
-    /* Live HUD CPU Temp Simulation */
+    /* Live HUD Update */
     setInterval(() => {
       const temp = 35 + Math.floor(Math.random() * 8);
       document.getElementById('tempHUD').innerHTML = `<i class="fa-solid fa-microchip"></i> CPU TEMP: ${temp}°C`;
     }, 2500);
 
-    /* Matrix Mode Toggle */
+    /* Matrix Mode & Warp Speed */
+    let isWarpSpeed = false;
+    function toggleWarpSpeed() {
+      isWarpSpeed = !isWarpSpeed;
+      playBeep(1400, 0.2);
+      showToast(isWarpSpeed ? "تم تفعيل سرعة الـ Warp Speed! 🚀" : "عاد النظام للسرعة العادية 🛸");
+    }
     function toggleMatrixTheme() {
       document.body.classList.toggle('matrix-mode');
       playBeep(1000, 0.15);
@@ -402,7 +414,7 @@
     const products = [
       { id: 1, title: "Dell Precision 5520", category: "workstation", price: "22,500 ج.م", stock: "متبقي 2 فقط!", badge: "الأكثر طلباً 🔥", rating: 5, icon: "fa-laptop-code", specs: ["Intel Core i7-7820HQ", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro M1200 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+5520" },
       { id: 2, title: "HP EliteBook 840 G6", category: "workstation", price: "18,000 ج.م", stock: "متوفر", badge: "قيمة ممتازة 💡", rating: 4.8, icon: "fa-laptop", specs: ["Intel Core i7-8665U", "16GB RAM DDR4", "256GB NVMe SSD", "Intel UHD Graphics 620"], amazonUrl: "https://www.amazon.eg/s?k=HP+EliteBook+840+G6" },
-      { id: 3, title: "Dell Precision 7530 Workstation", category: "workstation", price: "27,000 ج.م", stock: "متبقي 1 فقط!", badge: "أداء شاق 🏋️️", rating: 5, icon: "fa-microchip", specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530" },
+      { id: 3, title: "Dell Precision 7530 Workstation", category: "workstation", price: "27,000 ج.م", stock: "متبقي 1 فقط!", badge: "أداء شاق 🏋", rating: 5, icon: "fa-microchip", specs: ["Intel Core i7-8850H", "32GB RAM DDR4", "1TB NVMe SSD", "Nvidia Quadro P2000 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Dell+Precision+7530" },
       { id: 4, title: "Lenovo ThinkPad P52", category: "workstation", price: "24,000 ج.م", stock: "متوفر", badge: "صلابة عالية 🛡️", rating: 4.9, icon: "fa-laptop-medical", specs: ["Intel Core i7-8750H", "32GB RAM DDR4", "512GB NVMe SSD", "Nvidia Quadro P1000 4GB"], amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Thinkpad+P52" },
       { id: 5, title: "Apple MacBook Pro M2 Max", category: "workstation", price: "85,000 ج.م", stock: "جديد 🌟", badge: "القمة 👑", rating: 5, icon: "fa-apple", specs: ["Apple M2 Max Chip 12-Core", "32GB Unified Memory", "1TB SSD SuperFast", "Liquid Retina XDR Display 16\""], amazonUrl: "https://www.amazon.eg/s?k=MacBook+Pro+M2+Max" },
       { id: 6, title: "Lenovo Legion 5 Pro", category: "gaming", price: "34,500 ج.م", stock: "متبقي 1 فقط!", badge: "جيمنج محترف 🎮", rating: 5, icon: "fa-gamepad", specs: ["AMD Ryzen 7 5800H", "16GB RAM DDR4", "1TB NVMe SSD", "Nvidia RTX 3060 6GB"], amazonUrl: "https://www.amazon.eg/s?k=Lenovo+Legion+5" },
@@ -413,7 +425,7 @@
       { id: 11, title: "وصلة كابل شاحن Type-C مضفر سريع 100W", category: "accessory", price: "350 ج.م", stock: "متوفر بكثرة", badge: "مقاوم للقطع 🔌", rating: 4.8, icon: "fa-plug", specs: ["طول 2 متر قماش مضفر", "يدعم نقل البيانات Fast Charge", "مقاوم للقطع والحرارة"], amazonUrl: "https://www.amazon.eg/s?k=Type+C+Cable+100W" }
     ];
 
-    /* Render Product Cards */
+    /* Render Cards */
     function renderProducts(items) {
       const grid = document.getElementById('grid');
       grid.innerHTML = items.map(p => `
@@ -428,9 +440,11 @@
           </div>
           <div class="card-footer">
             <span class="price">${p.price}</span>
-            <button class="btn-holo" onclick="openHolo('${p.title}', '${p.specs.join('<br>')}', '${p.price}')">
-              <i class="fa-solid fa-eye"></i> معاينة الهولوجرام 🔮
-            </button>
+            <div class="btn-group-holo">
+              <button class="btn-holo" onclick="openHolo('${p.title}', '${p.specs.join('<br>')}', '${p.price}')">
+                <i class="fa-solid fa-eye"></i> الهولوجرام 🔮
+              </button>
+            </div>
             <div class="action-buttons">
               <a href="${p.amazonUrl}" target="_blank" class="btn-amazon" onclick="playBeep(900,0.1)"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
               <button class="btn-icon" onclick="copySpecs('${p.title}')"><i class="fa-regular fa-copy"></i></button>
@@ -465,9 +479,7 @@
     function closeHolo() { playBeep(300, 0.1); document.getElementById('holoModal').style.display = 'none'; }
 
     function copySpecs(title) {
-      playBeep(1000, 0.1);
-      navigator.clipboard.writeText(title);
-      showToast("تم نسج الاسم بنجاح! 🚀");
+      playBeep(1000, 0.1); navigator.clipboard.writeText(title); showToast("تم نسخ الاسم بنجاح! 🚀");
     }
 
     function showToast(msg) {
@@ -476,7 +488,7 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    /* AI Chat Engine */
+    /* AI Chat */
     function toggleChat() {
       playBeep(850, 0.1);
       const w = document.getElementById('chatWindow');
@@ -491,13 +503,13 @@
       i.value = '';
       setTimeout(() => {
         playBeep(600, 0.12);
-        b.innerHTML += `<div class="chat-msg bot">تحليلات النظام جاهزة! أجهزة Workstation تقدم أفضل أداء في تشغيل Virtual Machines والأمن السيبراني.</div>`;
+        b.innerHTML += `<div class="chat-msg bot">أهلاً يا حمودي! الأداء متصاعد والمحركات شغالة بأعلى كفاءة. جاهز لأي استفسار عالي الدقة!</div>`;
         b.scrollTop = b.scrollHeight;
       }, 500);
     }
     function handleKey(e) { if (e.key === 'Enter') sendMsg(); }
 
-    /* Matrix Rain Animation Canvas */
+    /* Matrix Rain Animation */
     const matrixCanvas = document.getElementById('matrix-canvas');
     const mCtx = matrixCanvas.getContext('2d');
     matrixCanvas.width = window.innerWidth; matrixCanvas.height = window.innerHeight;
@@ -517,7 +529,7 @@
     }
     setInterval(drawMatrix, 33);
 
-    /* 3D Space & Planet Engine */
+    /* 3D Space & Warp Speed Engine */
     const spaceCanvas = document.getElementById('space-canvas');
     const spaceScene = new THREE.Scene();
     const spaceCam = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -525,11 +537,11 @@
 
     spaceRenderer.setSize(window.innerWidth, window.innerHeight); spaceCam.position.z = 40;
 
-    const starsGeo = new THREE.BufferGeometry(); const starCount = 1500;
+    const starsGeo = new THREE.BufferGeometry(); const starCount = 1800;
     const starPos = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 130;
+    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 140;
     starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-    const starMesh = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.6, color: 0x00f2fe, transparent: true, opacity: 0.8 }));
+    const starMesh = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.6, color: 0x00f2fe, transparent: true, opacity: 0.85 }));
     spaceScene.add(starMesh);
 
     /* Planet Canvas */
@@ -543,7 +555,7 @@
 
     const planet = new THREE.Mesh(
       new THREE.SphereGeometry(1.6, 32, 32),
-      new THREE.MeshStandardMaterial({ color: 0x010206, wireframe: true, emissive: 0x00f2fe, emissiveIntensity: 0.7 })
+      new THREE.MeshStandardMaterial({ color: 0x010206, wireframe: true, emissive: 0x00f2fe, emissiveIntensity: 0.8 })
     );
     planetScene.add(planet);
 
@@ -559,9 +571,10 @@
 
     function animateSpace() {
       requestAnimationFrame(animateSpace);
-      starMesh.rotation.y += 0.0008;
-      planet.rotation.y += 0.006;
-      ring.rotation.z += 0.009;
+      const speed = isWarpSpeed ? 0.015 : 0.0008;
+      starMesh.rotation.y += speed;
+      planet.rotation.y += isWarpSpeed ? 0.03 : 0.006;
+      ring.rotation.z += isWarpSpeed ? 0.04 : 0.009;
       spaceRenderer.render(spaceScene, spaceCam);
       planetRenderer.render(planetScene, planetCam);
     }
