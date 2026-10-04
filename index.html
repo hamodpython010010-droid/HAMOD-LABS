@@ -72,6 +72,12 @@
     .card:hover{transform:translateY(-12px) scale(1.02);border-color:var(--neon-pink);box-shadow:0 20px 50px rgba(255,0,127,.4)}
     .stock-tag{position:absolute;top:20px;right:20px;background:rgba(255,0,127,.2);border:1px solid var(--neon-pink);color:var(--neon-pink);padding:5px 14px;border-radius:15px;font-size:.8rem;font-weight:800;z-index:2}
     .badge-tag{position:absolute;top:20px;left:20px;background:rgba(255,215,0,.15);border:1px solid var(--gold-glow);color:var(--gold-glow);padding:5px 14px;border-radius:15px;font-size:.8rem;font-weight:800;z-index:2}
+
+    .product-image-box{width:100%;height:230px;background:radial-gradient(circle,rgba(0,242,254,.10),rgba(0,0,0,.55));border:1px solid var(--border-glow);border-radius:22px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;overflow:hidden;position:relative}
+    .product-image{width:100%;height:100%;object-fit:contain;padding:10px;display:block;transition:transform .35s ease;filter:drop-shadow(0 12px 20px rgba(0,242,254,.15))}
+    .card:hover .product-image{transform:scale(1.04)}
+    .real-image-badge{position:absolute;bottom:10px;left:10px;background:rgba(0,255,102,.12);border:1px solid var(--neon-green);color:var(--neon-green);padding:4px 9px;border-radius:12px;font-size:.72rem;font-weight:800;z-index:2}
+
     .icon-box{width:100%;height:170px;background:radial-gradient(circle,rgba(0,242,254,.18) 0%,rgba(0,0,0,.5) 100%);border:1px dashed var(--border-glow);border-radius:22px;display:flex;justify-content:center;align-items:center;margin-bottom:1.5rem;color:var(--primary-cyan);font-size:4.2rem;transition:.4s}
     .card:hover .icon-box{background:radial-gradient(circle,rgba(255,0,127,.35) 0%,rgba(0,242,254,.25) 100%);color:#fff;text-shadow:0 0 30px var(--neon-pink);border-style:solid}
     .card-title{font-size:1.45rem;font-weight:800;margin-bottom:.5rem}
@@ -232,10 +238,19 @@
     /* ضع الـ Tracking ID بتاعك هنا (من Associates Central) */
     const AFFILIATE_TAG = 'mohamed0650-21';
     const products = [];
+    const REAL_IMAGES = {"Dell Precision 5520":"https://product.hstatic.net/1000331874/product/dell_precision_m5520.jpg","HP EliteBook 840 G6":"https://www.untech.com.au/cdn/shop/files/hp-elitebook-840-g6-laptop-14-fhd-i7-8565u-16gb-ram-256gb-ssd-win-11-2113140_800x.png?v=1767452347","Dell Precision 7530 Workstation":"https://d2e6ccujb3mkqf.cloudfront.net/240a356b-a440-4be2-8154-ddb6849df012-1_9bb18202-a628-4ce4-aea1-5e1899255b9d.jpg","Lenovo ThinkPad P52":"https://laptopsking.com/cdn/shop/files/LenovoThinkpadP52i78th_4.jpg?v=1696255598&width=1946","Apple MacBook Pro M2 Max":"https://www.apple.com/v/macbook-pro/az/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg","HP ZBook Fury 15 G7":"https://www.laptopcentrum.nl/image/cache/catalog/000/NewFolder/fury%2015%20g7-1-800x800w.jpg","Lenovo ThinkPad P1 Gen 3":"https://cdn.izotcomputers.com/10381-large_default/mobile-workstation-second-hand-lenovo-thinkpad-p1-gen-3.jpg","Dell Latitude 7420":"https://www.cto-technology.com/cdn/shop/files/7420bk-1.jpg?v=1757362979","Lenovo ThinkPad T14 Gen 2":"https://olcha.uz/image/700x700/products/2022-07-07/noutbuk-lenovo-thinkpad-t14-gen-2-i7-1165g7-16512gb-ssd-14-63802-0.jpeg","Dell XPS 15 9520":"https://microless.com/cdn/products/fcb4d769caf604afd4e52241e619b006-hi.jpg","Apple MacBook Air M2":"https://zshop.vn/images/detailed/120/macbook-air-midnight-gallery1-20220606_aup3-bx.jpg","Apple MacBook Pro 14 M3 Pro":"https://media.ldlc.com/r1600/ld/products/00/06/07/94/LD0006079429.jpg","HP EliteBook 850 G7":"https://www.buyitdirect.ie/Images/T1850G7i732GB512GBW11P_1_Supersize.jpg?v=3","HP Pavilion 15":"https://www.laptoparena.net/images/HP_Pavilion_15_Laptop_800R2EA_image_1.jpg","Acer Swift 3":"https://f00.esfr.pl/foto/6/63108743353/95aa89a53f1a8d5a3f6abfafb871db4/archival-acer-laptop-swift3-r5-8gb-512ssd-w10-silver%2C63108743353_5.webp","Lenovo Legion 5 Pro":"https://psref.lenovo.com/syspool/Sys/PDF/Legion/Lenovo_Legion_5_Pro_16ACH6H/Lenovo_Legion_5_Pro_16ACH6H_Spec.pdf","ASUS ROG Strix G15":"https://techgurustore.in/product-images/51wQ18eozvL.jpg/1282329000023390402/1100x1100","Acer Nitro 5 Gaming":"https://static2-ecemea.acer.com/media/catalog/product/_/_/________a__acer-nitro-5_an515-44_red-kb_modelmain_1_1_nh.q9heh.001.png","ASUS TUF Gaming F15":"https://e-katalog.kz/jpg_zoom1/2509880.jpg","Lenovo LOQ 15":"https://gfx3.senetic.com/akeneo-catalog/e/d/6/0/ed60e420048a1df0026c078d95eca467a261d7f0_1767820_83GS007LPB_image1.jpg","Acer Predator Helios 300":"https://s1.cel.ro/images/mari/2023/11/08/Laptop-Gaming-ACER-Predator-PH315-55-i9-12900H-15-6inch-QHD-IPS-SlimBezel-32GB-1TB-SSD-RTX-3080-8GB-Win11-Home-Abyssal-Black-NH-QGMEX-007.jpg","MSI Raider GE77":"https://laptopmedia.com/wp-content/uploads/2022/07/61uxDTnehrL._AC_SL1500_.jpg","Razer Blade 15":"https://media.power-cdn.net/images/h-af755b25fc3f9c29f68615868ad4935e/products/1157016/1157016_4_600x600_t_g.webp","ASUS ROG Zephyrus G14":"https://media.ldlc.com/r1600/ld/products/00/05/95/23/LD0005952300.jpg","Dell G15 5530":"https://laptopkhanhtran.vn/pic/product/Dell_Gami_638219236669530959_HasThumb.png","Gigabyte G5 KE":"https://product.hstatic.net/1000296652/product/gigabyte_g5_ke_310c0cea8f1742868cf6d87cefdb598f.png","Samsung Galaxy S23 Ultra":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-s918bzkgmea/gallery/levant-galaxy-s23-ultra-s918-sm-s918bzkgmea-thumb-535237667?$344_344_PNG$","Samsung Galaxy A54 5G":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-a546elvamea/gallery/levant-galaxy-a54-5g-sm-a546-sm-a546elvamea-thumb-535257851?$344_344_PNG$","iPhone 14 Pro Max":"https://cdn.idealo.com/folder/Product/202093/7/202093780/s1_produktbild_max/apple-iphone-14-pro-max-1tb-space-schwarz.jpg","iPhone 13":"https://www.iphonespreowned.co.za/cdn/shop/products/iPhone-13-Blue-2_4b95397d-f379-4d88-840c-e0c070f7b4d2.png?v=1660160662","Xiaomi Redmi Note 12 Pro":"https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-12-pro-5g/pc/section2-01.jpg","Xiaomi 13T":"https://skay.ua/235925/xiaomi-13t-8256gb-meadow-green-nfc-eu.jpg","OPPO Reno 10":"https://api.priceinkenya.com/media/133864/conversions/Oppo-Reno-10-a-original.webp","realme 11 Pro":"https://cdn.kalvo.com/uploads/img/gallery/51439-realme-11-pro-3.jpg","Samsung Galaxy Tab S9":"https://a-static.mlcdn.com.br/800x800/tablet-samsung-galaxy-tab-s9-256gb-tela-de-11-wi-fi-android-13-grafite-sm-x710nzahzto/kabum/474712/8367cb98d9a6115f9bbb45444c551012.jpg","iPad 10th Generation":"https://i.ebayimg.com/images/g/9-kAAOSwr3xkC1Ri/s-l1200.jpg","Lenovo Tab P11":"https://www.ietresinformatica.com/media/catalog/product/cache/81c729132649484cb6d742515cd80d6c/l/e/lenovo_tab_p11_sg_01_800x800.jpg"};
+
+    function fallbackSvg(title){
+      const safe = String(title).replace(/[&<>"']/g, '');
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" rx="28" fill="#07111f"/><rect x="120" y="80" width="560" height="300" rx="20" fill="#111d2e" stroke="#00f2fe" stroke-width="5"/><rect x="145" y="105" width="510" height="245" rx="12" fill="#02050b"/><path d="M90 405h620l-55 35H145z" fill="#1b2b40" stroke="#00f2fe" stroke-width="3"/><text x="400" y="235" fill="#00f2fe" font-size="30" text-anchor="middle" font-family="Arial">${safe}</text></svg>`;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
     /* add(category, title, price, stock, badge, rating, icon, specs[], amazonSearchWords) */
     function add(category, title, price, stock, badge, rating, icon, specs, q) {
       products.push({
         id: products.length + 1, title, category, price, stock, badge, rating, icon, specs,
+        imageUrl: REAL_IMAGES[title] || '',
         amazonUrl: 'https://www.amazon.eg/s?k=' + encodeURIComponent(q || title) + '&tag=' + AFFILIATE_TAG
       });
     }
@@ -338,7 +353,7 @@
         <div class="card" onmouseenter="playBeep(400, 0.03)">
           <span class="stock-tag">${p.stock}</span>
           <span class="badge-tag">${p.badge}</span>
-          <div class="icon-box"><i class="fa-solid ${p.icon}"></i></div>
+          <div class="product-image-box"><img class="product-image" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${'${p.title}'}')">${p.imageUrl ? '<span class="real-image-badge">صورة حقيقية</span>' : ''}</div>
           <div>
             <h3 class="card-title">${p.title}</h3>
             <div class="rating">${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(p.rating))} <span style="color:var(--text-muted)">${p.rating}</span></div>
@@ -379,7 +394,7 @@
     function openHolo(id) {
       const p = products.find(x => x.id === id);
       playBeep(1200, 0.15);
-      document.getElementById('holoBody').innerHTML = `
+      document.getElementById('holoBody').innerHTML = `<div class="product-image-box" style="height:260px;margin-bottom:20px"><img class="product-image" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="eager" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${'${p.title}'}')">${p.imageUrl ? '<span class="real-image-badge">صورة حقيقية</span>' : ''}</div>
         <h2 style="color:var(--primary-cyan);margin-bottom:1rem"><i class="fa-solid fa-atom"></i> ${p.title}</h2>
         <p style="font-size:1.2rem;line-height:1.8;color:#fff">${p.specs.join('<br>')}</p>
         <h3 style="color:var(--neon-pink);margin-top:1.5rem;font-size:1.8rem">${p.price}</h3>
