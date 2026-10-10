@@ -3,133 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | siuuu </title>
-  <meta name="description" content="HAMOD LABS: متجر احترافي للابتوبات والورك ستيشن والموبايلات مع نظام أرباح وعروض فلاش ومساعد ذكي.">
+  <title>HAMOD LABS | Luxury Tech Store</title>
+  <meta name="description" content="HAMOD LABS: متجر عتاد رقمي بتصميم فاخر وراقي يجمع بين أحدث اللابتوبات والموبايلات وأدوات الإدارة الذكية.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root{--az-dark:#131921;--az-light:#232f3e;--az-yellow:#febd69;--az-orange:#ffa41c;--bg-body:#eaeded;--text-main:#0f1111;--text-muted:#565959;--border-color:#d5d9d9}
+    :root{--bg-deep:#05070b;--bg-card:rgba(18,24,38,0.75);--primary-cyan:#00f2fe;--neon-purple:#7f00ff;--gold:#ffd700;--text-main:#fff;--text-muted:#94a3b8;--border-glass:rgba(255,255,255,0.08)}
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Tajawal',sans-serif}
-    body{background-color:var(--bg-body);color:var(--text-main);overflow-x:hidden}
+    body{background-color:var(--bg-deep);color:var(--text-main);overflow-x:hidden;background-image:radial-gradient(circle at 10% 20%, rgba(0,242,254,0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(127,0,255,0.05) 0%, transparent 40%);min-height:100vh}
 
-    header{background-color:var(--az-dark);color:#fff;position:sticky;top:0;z-index:1000}
-    .header-main{display:flex;align-items:center;justify-content:space-between;padding:12px 4%;gap:15px;flex-wrap:wrap}
-    .logo{font-size:1.6rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:8px;text-decoration:none}
-    .logo span{color:var(--az-yellow)}
-    
-    .search-box-az{flex:2;display:flex;max-width:700px;min-width:250px;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:.2s}
-    .search-box-az:focus-within{border-color:var(--az-orange)}
-    .search-box-az select{background:#f3f3f3;border:none;padding:10px 12px;font-size:0.9rem;outline:none;cursor:pointer;color:#555}
-    .search-box-az input{flex:1;border:none;padding:10px 15px;font-size:1rem;outline:none}
-    .search-btn-az{background:var(--az-yellow);border:none;padding:0 20px;font-size:1.2rem;cursor:pointer;color:#111;transition:.2s}
-    .search-btn-az:hover{background:var(--az-orange)}
+    /* Luxury Header */
+    header{background:rgba(5,7,11,0.85);backdrop-filter:blur(20px);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--border-glass)}
+    .header-top{display:flex;justify-content:space-between;align-items:center;padding:15px 5%;gap:20px;flex-wrap:wrap}
+    .logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo span{background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-    .shark-metrics{background:#232f3e;color:var(--az-yellow);padding:8px 4%;font-size:0.9rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #3a4553;flex-wrap:wrap;gap:10px}
-    .metrics-btn{background:var(--az-yellow);color:#111;border:none;padding:5px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:0.8rem}
+    .search-box-lux{flex:2;display:flex;max-width:650px;min-width:260px;background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:30px;overflow:hidden;backdrop-filter:blur(10px);transition:.3s}
+    .search-box-lux:focus-within{border-color:var(--primary-cyan);box-shadow:0 0 20px rgba(0,242,254,0.2)}
+    .search-box-lux select{background:transparent;border:none;padding:12px 15px;color:var(--text-muted);font-size:0.9rem;outline:none;cursor:pointer}
+    .search-box-lux input{flex:1;border:none;padding:12px 15px;background:transparent;color:#fff;font-size:1rem;outline:none}
+    .search-btn-lux{background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));border:none;padding:0 22px;color:#fff;font-size:1.1rem;cursor:pointer;transition:.3s}
+    .search-btn-lux:hover{opacity:.9}
 
-    .header-nav-sub{background-color:var(--az-light);display:flex;padding:8px 4%;gap:25px;font-size:0.95rem;overflow-x:auto;white-space:nowrap}
-    .header-nav-sub a{color:#fff;text-decoration:none;padding:4px 8px;border:1px solid transparent;border-radius:2px}
-    .header-nav-sub a:hover{border-color:#fff}
+    .shark-metrics-lux{background:rgba(18,24,38,0.9);padding:8px 5%;font-size:0.85rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border-glass);color:var(--primary-cyan);font-family:'Orbitron',sans-serif}
+    .lux-btn{background:rgba(0,242,254,0.1);border:1px solid var(--primary-cyan);color:var(--primary-cyan);padding:5px 14px;border-radius:20px;font-weight:bold;cursor:pointer;transition:.3s;font-size:0.75rem}
+    .lux-btn:hover{background:var(--primary-cyan);color:#000;box-shadow:0 0 15px var(--primary-cyan)}
 
-    .main-container{display:flex;max-width:1400px;margin:20px auto;padding:0 20px;gap:25px}
-    
-    .sidebar{width:260px;flex-shrink:0;background:#fff;padding:20px;border-radius:8px;border:1px solid var(--border-color);height:fit-content}
-    .sidebar h3{font-size:1.1rem;margin-bottom:15px;color:var(--text-main);border-bottom:1px solid var(--border-color);padding-bottom:8px}
+    .nav-sub-lux{display:flex;padding:10px 5%;gap:25px;background:rgba(10,14,23,0.5);overflow-x:auto;white-space:nowrap;border-bottom:1px solid var(--border-glass)}
+    .nav-sub-lux a{color:var(--text-muted);text-decoration:none;font-weight:600;font-size:0.95rem;transition:.3s}
+    .nav-sub-lux a:hover{color:var(--primary-cyan)}
+
+    /* Layout */
+    .main-container{display:flex;max-width:1450px;margin:30px auto;padding:0 30px;gap:30px}
+
+    /* Sidebar Luxury */
+    .sidebar-lux{width:280px;flex-shrink:0;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:20px;padding:25px;height:fit-content}
+    .sidebar-lux h3{font-size:1.1rem;margin-bottom:15px;color:#fff;border-bottom:1px solid var(--border-glass);padding-bottom:10px}
     .filter-group{margin-bottom:20px}
-    .filter-group label{display:block;margin-bottom:8px;cursor:pointer;font-size:0.95rem;color:var(--text-muted)}
-    .filter-group input{margin-left:8px}
-    .sidebar input[type="number"]{width:100%;padding:8px;border:1px solid var(--border-color);border-radius:4px;margin-top:8px}
-    .sidebar button{width:100%;background:var(--az-yellow);border:none;padding:8px;border-radius:4px;font-weight:bold;cursor:pointer;margin-top:10px}
-    .sidebar button:hover{background:var(--az-orange)}
+    .filter-group label{display:block;margin-bottom:10px;cursor:pointer;font-size:0.95rem;color:var(--text-muted);transition:.2s}
+    .filter-group label:hover{color:#fff}
+    .filter-group input{margin-left:10px}
+    .sidebar-lux input[type="number"]{width:100%;padding:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:10px;color:#fff;margin-top:8px;outline:none}
+    .sidebar-lux button{width:100%;background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));border:none;padding:10px;border-radius:10px;font-weight:bold;color:#fff;cursor:pointer;margin-top:12px;transition:.3s}
+    .sidebar-lux button:hover{box-shadow:0 0 15px var(--primary-cyan)}
 
-    .content-area{flex:1}
+    /* Content Area */
+    .content-lux{flex:1}
     
-    .flash-banner{background:linear-gradient(135deg,#ff9900,#ff4500);color:#fff;padding:15px 20px;border-radius:8px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(255,153,0,0.3);flex-wrap:wrap;gap:10px}
-    .flash-banner h3{font-size:1.3rem;margin-bottom:5px}
+    .flash-lux{background:linear-gradient(135deg,rgba(255,153,0,0.15),rgba(255,69,0,0.15));border:1px solid rgba(255,153,0,0.4);padding:20px 25px;border-radius:20px;margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);flex-wrap:wrap;gap:15px}
+    .flash-lux h3{font-size:1.2rem;color:#ff9900;margin-bottom:5px}
 
-    .banner{background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;color:#fff;padding:30px;border-radius:8px;margin-bottom:20px}
-    .banner h1{font-size:2rem;margin-bottom:8px}
+    .banner-lux{background:linear-gradient(135deg,rgba(0,242,254,0.1),rgba(127,0,255,0.1)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;border:1px solid var(--border-glass);padding:40px;border-radius:20px;margin-bottom:25px}
+    .banner-lux h1{font-size:2.2rem;margin-bottom:10px;color:#fff}
+    .banner-lux p{color:var(--text-muted);font-size:1.05rem;max-width:600px}
 
-    .results-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;background:#fff;padding:10px 15px;border:1px solid var(--border-color);border-radius:4px;font-size:0.9rem;color:var(--text-muted)}
+    .results-bar-lux{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;background:var(--bg-card);backdrop-filter:blur(10px);padding:15px 20px;border:1px solid var(--border-glass);border-radius:15px;font-size:0.9rem;color:var(--text-muted)}
 
-    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
-    .az-card{background:#fff;border:1px solid var(--border-color);border-radius:8px;padding:15px;display:flex;flex-direction:column;justify-content:space-between;transition:.2s;position:relative}
-    .az-card:hover{box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+    /* Products Luxury Grid */
+    .products-grid-lux{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:25px}
+    .lux-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;transition:.4s;position:relative;overflow:hidden}
+    .lux-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--primary-cyan),transparent);opacity:0;transition:.3s}
+    .lux-card:hover{transform:translateY(-8px);border-color:var(--primary-cyan);box-shadow:0 15px 35px rgba(0,242,254,0.15)}
+    .lux-card:hover::before{opacity:1}
     
-    .az-img-box{width:100%;height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative}
-    .az-img{max-width:100%;max-height:100%;object-fit:contain}
+    .lux-img-box{width:100%;height:170px;background:rgba(0,0,0,0.2);border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;padding:10px}
+    .lux-img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.5))}
     
-    .az-title{font-size:0.95rem;font-weight:700;color:#007185;margin-bottom:8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .az-rating{color:#ffa41c;font-size:0.85rem;margin-bottom:8px;display:flex;align-items:center;gap:4px}
-    .az-rating span{color:#007185}
+    .lux-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .lux-rating{color:var(--gold);font-size:0.85rem;margin-bottom:10px;display:flex;align-items:center;gap:4px}
+    .lux-rating span{color:var(--text-muted)}
 
-    .az-specs{list-style:none;font-size:0.8rem;color:var(--text-muted);margin-bottom:12px}
-    .az-specs li{margin-bottom:3px}
+    .lux-specs{list-style:none;font-size:0.82rem;color:var(--text-muted);margin-bottom:15px}
+    .lux-specs li{margin-bottom:4px}
 
-    .az-price-box{margin-top:auto}
-    .az-price{font-size:1.25rem;font-weight:900;color:#0f1111;margin-bottom:8px}
+    .lux-price-box{margin-top:auto}
+    .lux-price{font-size:1.35rem;font-weight:900;color:var(--primary-cyan);margin-bottom:12px}
 
-    .btn-az-buy{display:block;background:var(--az-yellow);color:#0f1111;text-align:center;padding:8px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.9rem;border:1px solid #a88734;transition:.2s}
-    .btn-az-buy:hover{background:var(--az-orange)}
+    .btn-lux-buy{display:block;background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));color:#fff;text-align:center;padding:10px;border-radius:12px;text-decoration:none;font-weight:700;font-size:0.9rem;transition:.3s}
+    .btn-lux-buy:hover{opacity:.9;box-shadow:0 0 20px rgba(0,242,254,0.4)}
 
-    .modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;z-index:2000}
-    .modal-content{background:#fff;padding:30px;border-radius:10px;width:400px;max-width:90%;color:#111}
-    .modal-content h3{margin-bottom:15px;color:#232f3e}
-    .modal-content input{width:100%;padding:10px;margin-bottom:15px;border:1px solid var(--border-color);border-radius:5px}
-    .modal-content button{background:var(--az-yellow);border:none;padding:10px 20px;font-weight:bold;border-radius:5px;cursor:pointer}
+    /* Modal Luxury */
+    .modal-lux{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,7,11,0.8);backdrop-filter:blur(15px);display:none;justify-content:center;align-items:center;z-index:2000}
+    .modal-lux-content{background:var(--bg-card);backdrop-filter:blur(25px);border:1px solid var(--border-glass);padding:35px;border-radius:25px;width:420px;max-width:90%;color:#fff}
+    .modal-lux-content h3{margin-bottom:15px;color:var(--primary-cyan)}
+    .modal-lux-content input{width:100%;padding:12px;margin-bottom:20px;background:rgba(255,255,255,0.05);border:1px solid var(--border-glass);border-radius:12px;color:#fff;outline:none}
+    .modal-lux-content button{background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));border:none;padding:10px 22px;font-weight:bold;border-radius:12px;color:#fff;cursor:pointer}
 
-    .ai-chat-btn{position:fixed;bottom:25px;left:25px;background:#232f3e;color:var(--az-yellow);width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:1500}
-    .ai-chat-window{position:fixed;bottom:95px;left:25px;width:350px;height:400px;background:#fff;border-radius:10px;box-shadow:0 5px 25px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:1500;border:1px solid var(--border-color)}
-    .chat-header{background:#232f3e;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;border-top-left-radius:10px;border-top-right-radius:10px}
-    .chat-body{flex:1;padding:12px;overflow-y:auto;font-size:0.9rem;display:flex;flex-direction:column;gap:10px}
-    .chat-msg{padding:8px 12px;border-radius:8px;max-width:85%}
-    .chat-msg.bot{background:#f3f3f3;color:#333;align-self:flex-start}
-    .chat-msg.user{background:var(--az-yellow);color:#111;align-self:flex-end}
-    .chat-footer{display:flex;padding:10px;border-top:1px solid var(--border-color)}
-    .chat-footer input{flex:1;padding:8px;border:1px solid var(--border-color);border-radius:5px;outline:none}
-    .chat-footer button{background:#232f3e;color:#fff;border:none;padding:8px 15px;border-radius:5px;margin-right:5px;cursor:pointer}
+    /* AI Chat Glass */
+    .ai-btn-lux{position:fixed;bottom:30px;left:30px;background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));color:#fff;width:65px;height:65px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.6rem;cursor:pointer;box-shadow:0 0 25px rgba(0,242,254,0.4);z-index:1500;transition:.3s}
+    .ai-btn-lux:hover{transform:scale(1.1)}
+    .ai-win-lux{position:fixed;bottom:110px;left:30px;width:360px;height:420px;background:var(--bg-card);backdrop-filter:blur(30px);border:1px solid var(--border-glass);border-radius:25px;display:none;flex-direction:column;z-index:1500;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+    .chat-head{background:rgba(255,255,255,0.03);padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-glass)}
+    .chat-body{flex:1;padding:15px;overflow-y:auto;font-size:0.9rem;display:flex;flex-direction:column;gap:12px}
+    .chat-msg{padding:10px 14px;border-radius:14px;max-width:85%}
+    .chat-msg.bot{background:rgba(0,242,254,0.1);border:1px solid var(--primary-cyan);color:#fff;align-self:flex-start}
+    .chat-msg.user{background:var(--neon-purple);color:#fff;align-self:flex-end}
+    .chat-foot{display:flex;padding:12px;border-top:1px solid var(--border-glass)}
+    .chat-foot input{flex:1;padding:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:12px;color:#fff;outline:none}
+    .chat-foot button{background:var(--primary-cyan);color:#000;border:none;padding:10px 18px;border-radius:12px;margin-right:8px;font-weight:bold;cursor:pointer}
 
-    .toast{position:fixed;bottom:25px;right:25px;background:#232f3e;color:#fff;padding:10px 25px;border-radius:20px;font-weight:bold;z-index:9999;border:1px solid var(--az-yellow);transition:.3s;transform:translateY(100px);opacity:0}
-    .toast.show{transform:translateY(0);opacity:1}
+    .toast-lux{position:fixed;bottom:30px;right:30px;background:rgba(18,24,38,0.95);backdrop-filter:blur(20px);border:1px solid var(--primary-cyan);color:#fff;padding:12px 25px;border-radius:20px;font-weight:bold;z-index:9999;box-shadow:0 0 25px rgba(0,242,254,0.3);transition:.4s;transform:translateY(100px);opacity:0}
+    .toast-lux.show{transform:translateY(0);opacity:1}
 
-    @media(max-width:900px){.main-container{flex-direction:column}.sidebar{width:100%}}
+    @media(max-width:900px){.main-container{flex-direction:column}.sidebar-lux{width:100%}}
   </style>
 </head>
 <body>
 
-  <div id="toast" class="toast">تم الإجراء بنجاح</div>
+  <div id="toast" class="toast-lux">تم الإجراء بنجاح</div>
 
-  <div class="modal" id="inventoryModal">
-    <div class="modal-content">
-      <h3><i class="fa-solid fa-boxes-stacked"></i> لوحة إدارة المخزون (دياموند)</h3>
+  <div class="modal-lux" id="inventoryModal">
+    <div class="modal-lux-content">
+      <h3><i class="fa-solid fa-boxes-stacked"></i> لوحة إدارة المخزون الفاخرة</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:15px">تحديث نسبة الخصم اللحظية على الأجهزة:</p>
       <input type="number" id="discountInput" placeholder="نسبة التخفيض % (مثال: 5)">
-      <button onclick="applyDiscount()">تحديث الأسعار الآن</button>
-      <button style="background:#ddd;margin-right:8px" onclick="closeModal()">إغلاق</button>
+      <button onclick="applyDiscount()">تطبيق التحديث</button>
+      <button style="background:rgba(255,255,255,0.1);margin-right:8px" onclick="closeModal()">إغلاق</button>
     </div>
   </div>
 
   <header>
-    <div class="header-main">
+    <div class="header-top">
       <a href="#" class="logo"><i class="fa-solid fa-atom"></i> HAMOD <span>LABS</span></a>
-      <div class="search-box-az">
+      <div class="search-box-lux">
         <select id="catSelect" onchange="applyFilter()">
-          <option value="all">كل الأقسام</option>
-          <option value="workstation">Workstations</option>
-          <option value="gaming">Gaming</option>
-          <option value="phone">موبايلات</option>
-          <option value="accessory">أكسسوارات</option>
+          <option value="all" style="background:#05070b">كل الأقسام</option>
+          <option value="workstation" style="background:#05070b">Workstations</option>
+          <option value="gaming" style="background:#05070b">Gaming</option>
+          <option value="phone" style="background:#05070b">موبايلات</option>
+          <option value="accessory" style="background:#05070b">أكسسوارات</option>
         </select>
-        <input type="text" id="searchInput" onkeyup="applyFilter()" placeholder="بحث في متجر حمودي...">
-        <button class="search-btn-az" onclick="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" id="searchInput" onkeyup="applyFilter()" placeholder="ابحث عن أحدث الأجهزة...">
+        <button class="search-btn-lux" onclick="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
     </div>
 
-    <div class="shark-metrics">
-      <span><i class="fa-solid fa-chart-line"></i> أرباح الأفلييت (كيفن): <strong id="profitCounter">0 ج.م</strong> (Tag: mohamed0650-21)</span>
-      <button class="metrics-btn" onclick="openModal()"><i class="fa-solid fa-gear"></i> إدارة الأسعار</button>
+    <div class="shark-metrics-lux">
+      <span><i class="fa-solid fa-chart-line"></i> أرباح الأفلييت التقديرية: <strong id="profitCounter" style="color:#fff">0 ج.م</strong> (Tag: mohamed0650-21)</span>
+      <button class="lux-btn" onclick="openModal()"><i class="fa-solid fa-gear"></i> لوحة التحكم</button>
     </div>
 
-    <div class="header-nav-sub">
+    <div class="nav-sub-lux">
       <a href="#" onclick="setCategory('all', this)">الكل</a>
       <a href="#" onclick="setCategory('workstation', this)">Workstations</a>
       <a href="#" onclick="setCategory('gaming', this)">Gaming</a>
@@ -139,8 +153,8 @@
   </header>
 
   <div class="main-container">
-    <aside class="sidebar">
-      <h3>الفئات</h3>
+    <aside class="sidebar-lux">
+      <h3>الأقسام والفئات</h3>
       <div class="filter-group">
         <label><input type="radio" name="fcat" checked onclick="setCategory('all', null)"> الكل</label>
         <label><input type="radio" name="fcat" onclick="setCategory('workstation', null)"> Workstations</label>
@@ -149,46 +163,46 @@
         <label><input type="radio" name="fcat" onclick="setCategory('accessory', null)"> أكسسوارات</label>
       </div>
 
-      <h3>الميزانية</h3>
+      <h3>فلترة الميزانية</h3>
       <div class="filter-group">
-        <input type="number" id="maxBudget" placeholder="أقصى ميزانية (ج.م)">
-        <button onclick="filterByBudget()">تطبيق</button>
+        <input type="number" id="maxBudget" placeholder="الميزانية القصوى (ج.م)">
+        <button onclick="filterByBudget()">تصفية النتائج</button>
       </div>
     </aside>
 
-    <main class="content-area">
-      <div class="flash-banner">
+    <main class="content-lux">
+      <div class="flash-lux">
         <div>
-          <h3><i class="fa-solid fa-bolt"></i> عروض الفلاش (مارك كيوبان)</h3>
-          <p>خصومات فورية على الأجهزة الهندسية وأجهزة الجيمينج!</p>
+          <h3><i class="fa-solid fa-bolt"></i> عروض الفلاش الحصرية</h3>
+          <p style="font-size:0.9rem;color:var(--text-muted)">خصومات فورية لفترة محدودة على أقوى أجهزة اللابتوب الهندسية.</p>
         </div>
-        <button style="background:#fff;color:#ff4500;border:none;padding:10px 20px;border-radius:5px;font-weight:bold;cursor:pointer" onclick="triggerFlashSale()">فعّل الخصم ⚡</button>
+        <button style="background:#ff9900;color:#000;border:none;padding:10px 20px;border-radius:12px;font-weight:bold;cursor:pointer" onclick="triggerFlashSale()">تفعيل العرض ⚡</button>
       </div>
 
-      <div class="banner">
-        <h1>متجر العتاد الرقمي الاحترافي</h1>
-        <p>أحدث اللابتوبات والورك ستيشن والموبايلات بأسعار مصرية ورابط مباشر لأمازون.</p>
+      <div class="banner-lux">
+        <h1>متجر العتاد الرقمي الفاخر</h1>
+        <p>اكتشف تشكيلة النخبة من اللابتوبات، الورك ستيشن، وأجهزة الجيمينج بتصميم عصري وأسعار مصرية[cite: 1].</p>
       </div>
 
-      <div class="results-bar">
+      <div class="results-bar-lux">
         <span id="countResults">جاري التحميل...</span>
-        <span>mohamed0650-21</span>
+        <span>الوسم النشط: mohamed0650-21[cite: 1]</span>
       </div>
 
-      <div class="products-grid" id="grid"></div>
+      <div class="products-grid-lux" id="grid"></div>
     </main>
   </div>
 
-  <div class="ai-chat-btn" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></div>
-  <div class="ai-chat-window" id="chatWindow">
-    <div class="chat-header">
-      <span><i class="fa-solid fa-brain"></i> مساعد حمودي الذكي</span>
+  <div class="ai-btn-lux" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></div>
+  <div class="ai-win-lux" id="chatWindow">
+    <div class="chat-head">
+      <span><i class="fa-solid fa-brain" style="color:var(--primary-cyan)"></i> المساعد الذكي الفاخر</span>
       <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً يا حمودي! اسألني عن أي جهاز أو ميزانية مقترحة! 🚀</div>
+      <div class="chat-msg bot">أهلاً يا حمودي! المساعد الذكي جاهز لمساعدتك في اختيار الجهاز الأنسب لاحتياجك 🚀</div>
     </div>
-    <div class="chat-footer">
+    <div class="chat-foot">
       <input type="text" id="userInput" placeholder="اسأل عن جهاز..." onkeypress="handleKey(event)">
       <button onclick="sendMsg()">إرسال</button>
     </div>
@@ -202,7 +216,7 @@
 
     function fallbackSvg(title){
       const safe = String(title).replace(/[&<>"']/g, '');
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" rx="10" fill="#fff"/><text x="400" y="250" fill="#333" font-size="28" text-anchor="middle" font-family="Arial">${safe}</text></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" rx="10" fill="#121826"/><text x="400" y="250" fill="#00f2fe" font-size="28" text-anchor="middle" font-family="Arial">${safe}</text></svg>`;
       return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
     }
 
@@ -277,18 +291,18 @@
       document.getElementById('countResults').textContent = `النتائج المعروضة: ${items.length} منتج`;
       if (!items.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">لا توجد منتجات مطابقة</div>'; return; }
       grid.innerHTML = items.map(p => `
-        <div class="az-card">
+        <div class="lux-card">
           <div>
-            <div class="az-img-box">
-              <img class="az-img" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${p.title}')">
+            <div class="lux-img-box">
+              <img class="lux-img" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${p.title}')">
             </div>
-            <div class="az-title">${p.title}</div>
-            <div class="az-rating"><i class="fa-solid fa-star"></i><span>4.8</span></div>
-            <ul class="az-specs">${p.specs.map(s => `<li>• ${s}</li>`).join('')}</ul>
+            <div class="lux-title">${p.title}</div>
+            <div class="lux-rating"><i class="fa-solid fa-star"></i><span>4.8</span></div>
+            <ul class="lux-specs">${p.specs.map(s => `<li>• ${s}</li>`).join('')}</ul>
           </div>
-          <div class="az-price-box">
-            <div class="az-price">${p.price}</div>
-            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-az-buy" onclick="trackClick(${p.cleanPrice})"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
+          <div class="lux-price-box">
+            <div class="lux-price">${p.price}</div>
+            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-lux-buy" onclick="trackClick(${p.cleanPrice})"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
           </div>
         </div>
       `).join('');
