@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | متجر العتاد الرقمي (Shark Tank Fully Loaded)</title>
-  <meta name="description" content="HAMOD LABS: متجر متكامل للابتوبات والورك ستيشن والموبايلات مع لوحة تحكم أرباح وعروض فلاش ومساعد ذكي.">
+  <title>HAMOD LABS | siuuu </title>
+  <meta name="description" content="HAMOD LABS: متجر احترافي للابتوبات والورك ستيشن والموبايلات مع نظام أرباح وعروض فلاش ومساعد ذكي.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +13,7 @@
     body{background-color:var(--bg-body);color:var(--text-main);overflow-x:hidden}
 
     header{background-color:var(--az-dark);color:#fff;position:sticky;top:0;z-index:1000}
-    .header-main{display:flex;align-items:center;justify-content:space-between;padding:10px 4%;gap:15px;flex-wrap:wrap}
+    .header-main{display:flex;align-items:center;justify-content:space-between;padding:12px 4%;gap:15px;flex-wrap:wrap}
     .logo{font-size:1.6rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:8px;text-decoration:none}
     .logo span{color:var(--az-yellow)}
     
@@ -24,9 +24,8 @@
     .search-btn-az{background:var(--az-yellow);border:none;padding:0 20px;font-size:1.2rem;cursor:pointer;color:#111;transition:.2s}
     .search-btn-az:hover{background:var(--az-orange)}
 
-    /* Kevin's Financial Bar */
     .shark-metrics{background:#232f3e;color:var(--az-yellow);padding:8px 4%;font-size:0.9rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #3a4553;flex-wrap:wrap;gap:10px}
-    .metrics-btn{background:var(--az-yellow);color:#111;border:none;padding:4px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:0.8rem}
+    .metrics-btn{background:var(--az-yellow);color:#111;border:none;padding:5px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:0.8rem}
 
     .header-nav-sub{background-color:var(--az-light);display:flex;padding:8px 4%;gap:25px;font-size:0.95rem;overflow-x:auto;white-space:nowrap}
     .header-nav-sub a{color:#fff;text-decoration:none;padding:4px 8px;border:1px solid transparent;border-radius:2px}
@@ -45,8 +44,7 @@
 
     .content-area{flex:1}
     
-    /* Mark Cuban's Flash Deal Banner */
-    .flash-banner{background:linear-gradient(135deg,#ff9900,#ff4500);color:#fff;padding:15px 20px;border-radius:8px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(255,153,0,0.3)}
+    .flash-banner{background:linear-gradient(135deg,#ff9900,#ff4500);color:#fff;padding:15px 20px;border-radius:8px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(255,153,0,0.3);flex-wrap:wrap;gap:10px}
     .flash-banner h3{font-size:1.3rem;margin-bottom:5px}
 
     .banner{background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;color:#fff;padding:30px;border-radius:8px;margin-bottom:20px}
@@ -74,14 +72,12 @@
     .btn-az-buy{display:block;background:var(--az-yellow);color:#0f1111;text-align:center;padding:8px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.9rem;border:1px solid #a88734;transition:.2s}
     .btn-az-buy:hover{background:var(--az-orange)}
 
-    /* Diamond John's Inventory Modal */
     .modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;z-index:2000}
     .modal-content{background:#fff;padding:30px;border-radius:10px;width:400px;max-width:90%;color:#111}
     .modal-content h3{margin-bottom:15px;color:#232f3e}
     .modal-content input{width:100%;padding:10px;margin-bottom:15px;border:1px solid var(--border-color);border-radius:5px}
     .modal-content button{background:var(--az-yellow);border:none;padding:10px 20px;font-weight:bold;border-radius:5px;cursor:pointer}
 
-    /* Mark Cuban's Chat Widget */
     .ai-chat-btn{position:fixed;bottom:25px;left:25px;background:#232f3e;color:var(--az-yellow);width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:1500}
     .ai-chat-window{position:fixed;bottom:95px;left:25px;width:350px;height:400px;background:#fff;border-radius:10px;box-shadow:0 5px 25px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:1500;border:1px solid var(--border-color)}
     .chat-header{background:#232f3e;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;border-top-left-radius:10px;border-top-right-radius:10px}
@@ -93,20 +89,19 @@
     .chat-footer input{flex:1;padding:8px;border:1px solid var(--border-color);border-radius:5px;outline:none}
     .chat-footer button{background:#232f3e;color:#fff;border:none;padding:8px 15px;border-radius:5px;margin-right:5px;cursor:pointer}
 
-    .toast{position:fixed;bottom:25px;right:25px;background:#232f3e;color:#fff;padding:10px 25px;border-radius:20px;font-weight:bold;transition:.3s;z-index:9999;border:1px solid var(--az-yellow)}
+    .toast{position:fixed;bottom:25px;right:25px;background:#232f3e;color:#fff;padding:10px 25px;border-radius:20px;font-weight:bold;z-index:9999;border:1px solid var(--az-yellow);transition:.3s;transform:translateY(100px);opacity:0}
     .toast.show{transform:translateY(0);opacity:1}
-    .toast{transform:translateY(100px);opacity:0}
+
+    @media(max-width:900px){.main-container{flex-direction:column}.sidebar{width:100%}}
   </style>
 </head>
 <body>
 
   <div id="toast" class="toast">تم الإجراء بنجاح</div>
 
-  <!-- Diamond John's Inventory Modal -->
   <div class="modal" id="inventoryModal">
     <div class="modal-content">
-      <h3><i class="fa-solid fa-boxes-stacked"></i> لوحة إدارة المخزون والتسعير (دياموند جون)</h3>
-      <p style="font-size:0.85rem;color:#666;margin-bottom:15px">تحديث نسبة الخصم العامة على أسعار المنتجات في السوق المصري:</p>
+      <h3><i class="fa-solid fa-boxes-stacked"></i> لوحة إدارة المخزون (دياموند)</h3>
       <input type="number" id="discountInput" placeholder="نسبة التخفيض % (مثال: 5)">
       <button onclick="applyDiscount()">تحديث الأسعار الآن</button>
       <button style="background:#ddd;margin-right:8px" onclick="closeModal()">إغلاق</button>
@@ -124,22 +119,21 @@
           <option value="phone">موبايلات</option>
           <option value="accessory">أكسسوارات</option>
         </select>
-        <input type="text" id="searchInput" onkeyup="applyFilter()" placeholder="بحث في HAMOD LABS...">
+        <input type="text" id="searchInput" onkeyup="applyFilter()" placeholder="بحث في متجر حمودي...">
         <button class="search-btn-az" onclick="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
     </div>
 
-    <!-- Kevin O'Leary's Financial Metric Bar -->
     <div class="shark-metrics">
-      <span><i class="fa-solid fa-chart-line"></i> أرباح الأفلييت التقديرية (كيفن): <strong id="profitCounter">0 ج.م</strong> (Tag: mohamed0650-21)</span>
-      <button class="metrics-btn" onclick="openModal()"><i class="fa-solid fa-gear"></i> لوحة إدارة المخزون (دياموند)</button>
+      <span><i class="fa-solid fa-chart-line"></i> أرباح الأفلييت (كيفن): <strong id="profitCounter">0 ج.م</strong> (Tag: mohamed0650-21)</span>
+      <button class="metrics-btn" onclick="openModal()"><i class="fa-solid fa-gear"></i> إدارة الأسعار</button>
     </div>
 
     <div class="header-nav-sub">
       <a href="#" onclick="setCategory('all', this)">الكل</a>
-      <a href="#" onclick="setCategory('workstation', this)">لابتوبات Workstations</a>
-      <a href="#" onclick="setCategory('gaming', this)">أجهزة Gaming</a>
-      <a href="#" onclick="setCategory('phone', this)">موبايلات وتابلت</a>
+      <a href="#" onclick="setCategory('workstation', this)">Workstations</a>
+      <a href="#" onclick="setCategory('gaming', this)">Gaming</a>
+      <a href="#" onclick="setCategory('phone', this)">موبايلات</a>
       <a href="#" onclick="setCategory('accessory', this)">أكسسوارات</a>
     </div>
   </header>
@@ -151,50 +145,48 @@
         <label><input type="radio" name="fcat" checked onclick="setCategory('all', null)"> الكل</label>
         <label><input type="radio" name="fcat" onclick="setCategory('workstation', null)"> Workstations</label>
         <label><input type="radio" name="fcat" onclick="setCategory('gaming', null)"> Gaming</label>
-        <label><input type="radio" name="fcat" onclick="setCategory('phone', null)"> موبايلات وتابلت</label>
+        <label><input type="radio" name="fcat" onclick="setCategory('phone', null)"> موبايلات</label>
         <label><input type="radio" name="fcat" onclick="setCategory('accessory', null)"> أكسسوارات</label>
       </div>
 
-      <h3>فلترة بالميزانية</h3>
+      <h3>الميزانية</h3>
       <div class="filter-group">
         <input type="number" id="maxBudget" placeholder="أقصى ميزانية (ج.م)">
-        <button onclick="filterByBudget()">تطبيق الميزانية</button>
+        <button onclick="filterByBudget()">تطبيق</button>
       </div>
     </aside>
 
     <main class="content-area">
-      <!-- Mark Cuban's Flash Deal Banner -->
       <div class="flash-banner">
         <div>
-          <h3><i class="fa-solid fa-bolt"></i> عروض الفلاش السيبرانية (مارك كيوبان)</h3>
-          <p>خصومات حصرية لفترة محدودة على أجهزة الورك ستيشن واللابتوبات الهندسية!</p>
+          <h3><i class="fa-solid fa-bolt"></i> عروض الفلاش (مارك كيوبان)</h3>
+          <p>خصومات فورية على الأجهزة الهندسية وأجهزة الجيمينج!</p>
         </div>
-        <button style="background:#fff;color:#ff4500;border:none;padding:10px 20px;border-radius:5px;font-weight:bold;cursor:pointer" onclick="triggerFlashSale()">فعّل عروض الفلاش ⚡</button>
+        <button style="background:#fff;color:#ff4500;border:none;padding:10px 20px;border-radius:5px;font-weight:bold;cursor:pointer" onclick="triggerFlashSale()">فعّل الخصم ⚡</button>
       </div>
 
       <div class="banner">
-        <h1>متجر العتاد الرقمي (Shark Tank Fully Loaded)</h1>
-        <p>المنصة المتكاملة المعتمدة من الشاركس لبيع أقوى العتاد واللابتوبات في مصر.</p>
+        <h1>متجر العتاد الرقمي الاحترافي</h1>
+        <p>أحدث اللابتوبات والورك ستيشن والموبايلات بأسعار مصرية ورابط مباشر لأمازون.</p>
       </div>
 
       <div class="results-bar">
         <span id="countResults">جاري التحميل...</span>
-        <span>الوسم النشط: mohamed0650-21</span>
+        <span>mohamed0650-21</span>
       </div>
 
       <div class="products-grid" id="grid"></div>
     </main>
   </div>
 
-  <!-- Mark Cuban's AI Assistant Chat Window -->
   <div class="ai-chat-btn" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></div>
   <div class="ai-chat-window" id="chatWindow">
     <div class="chat-header">
-      <span><i class="fa-solid fa-brain"></i> مساعد مارك الذكي</span>
+      <span><i class="fa-solid fa-brain"></i> مساعد حمودي الذكي</span>
       <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً يا حمودي! أنا مساعد المتجر الذكي. اسألني عن أي جهاز أو ميزانية مقترحة! 🚀</div>
+      <div class="chat-msg bot">أهلاً يا حمودي! اسألني عن أي جهاز أو ميزانية مقترحة! 🚀</div>
     </div>
     <div class="chat-footer">
       <input type="text" id="userInput" placeholder="اسأل عن جهاز..." onkeypress="handleKey(event)">
@@ -318,15 +310,13 @@
       applyFilter();
     }
 
-    /* كيفن أوليري: تتبع الأرباح عند النقر */
     function trackClick(price) {
-      let commission = Math.floor(price * 0.03); // عمولة تقديرية 3%
+      let commission = Math.floor(price * 0.03);
       estimatedProfit += commission;
       document.getElementById('profitCounter').textContent = estimatedProfit + ' ج.م';
       showToast("تم تسجيل النقرة وحساب عمولة الأفلييت بنجاح! 💰");
     }
 
-    /* دياموند جون: لوحة التحكم وتحديث الأسعار */
     function openModal() { document.getElementById('inventoryModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('inventoryModal').style.display = 'none'; }
     function applyDiscount() {
@@ -341,17 +331,15 @@
       showToast(`تم تطبيق خصم ${val}% على كافة منتجات المعرض لحظياً! 📉`);
     }
 
-    /* مارك كيوبان: عروض الفلاش */
     function triggerFlashSale() {
       products.forEach(p => {
         p.cleanPrice = Math.floor(p.cleanPrice * 0.9);
-        p.price = p.cleanPrice.toLocaleString() + ' ج.م (عرض فلاش)';
+        p.price = p.cleanPrice.toLocaleString() + ' ج.م (فلاش)';
       });
       renderProducts(products);
       showToast("⚡ تم تفعيل عروض الفلاش وحرق الأسعار لكافة الأجهزة!");
     }
 
-    /* مارك كيوبان: الشات البوت الذكي */
     function toggleChat() {
       const win = document.getElementById('chatWindow');
       win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
