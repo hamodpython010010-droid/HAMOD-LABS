@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | خش بكلكك اليمين (Shark Tank Edition)</title>
-  <meta name="description" content="HAMOD LABS: متجر متكامل للابتوبات والورك ستيشن والموبايلات بتصميم تجاري احترافي مع أدوات تحليل المبيعات والأسعار.">
+  <title>HAMOD LABS | متجر العتاد الرقمي (Shark Tank Fully Loaded)</title>
+  <meta name="description" content="HAMOD LABS: متجر متكامل للابتوبات والورك ستيشن والموبايلات مع لوحة تحكم أرباح وعروض فلاش ومساعد ذكي.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
@@ -24,7 +24,9 @@
     .search-btn-az{background:var(--az-yellow);border:none;padding:0 20px;font-size:1.2rem;cursor:pointer;color:#111;transition:.2s}
     .search-btn-az:hover{background:var(--az-orange)}
 
-    .shark-metrics{background:#232f3e;color:var(--az-yellow);padding:6px 4%;font-size:0.85rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #3a4553}
+    /* Kevin's Financial Bar */
+    .shark-metrics{background:#232f3e;color:var(--az-yellow);padding:8px 4%;font-size:0.9rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #3a4553;flex-wrap:wrap;gap:10px}
+    .metrics-btn{background:var(--az-yellow);color:#111;border:none;padding:4px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:0.8rem}
 
     .header-nav-sub{background-color:var(--az-light);display:flex;padding:8px 4%;gap:25px;font-size:0.95rem;overflow-x:auto;white-space:nowrap}
     .header-nav-sub a{color:#fff;text-decoration:none;padding:4px 8px;border:1px solid transparent;border-radius:2px}
@@ -42,9 +44,13 @@
     .sidebar button:hover{background:var(--az-orange)}
 
     .content-area{flex:1}
-    .banner{background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;color:#fff;padding:40px;border-radius:8px;margin-bottom:20px}
-    .banner h1{font-size:2.2rem;margin-bottom:10px}
-    .banner p{font-size:1.1rem;max-width:600px}
+    
+    /* Mark Cuban's Flash Deal Banner */
+    .flash-banner{background:linear-gradient(135deg,#ff9900,#ff4500);color:#fff;padding:15px 20px;border-radius:8px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(255,153,0,0.3)}
+    .flash-banner h3{font-size:1.3rem;margin-bottom:5px}
+
+    .banner{background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;color:#fff;padding:30px;border-radius:8px;margin-bottom:20px}
+    .banner h1{font-size:2rem;margin-bottom:8px}
 
     .results-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;background:#fff;padding:10px 15px;border:1px solid var(--border-color);border-radius:4px;font-size:0.9rem;color:var(--text-muted)}
 
@@ -68,15 +74,44 @@
     .btn-az-buy{display:block;background:var(--az-yellow);color:#0f1111;text-align:center;padding:8px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.9rem;border:1px solid #a88734;transition:.2s}
     .btn-az-buy:hover{background:var(--az-orange)}
 
-    .toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(100px);background:#232f3e;color:#fff;padding:10px 25px;border-radius:20px;font-weight:bold;transition:.3s;z-index:9999;border:1px solid var(--az-yellow)}
-    .toast.show{transform:translateX(-50%) translateY(0)}
+    /* Diamond John's Inventory Modal */
+    .modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;z-index:2000}
+    .modal-content{background:#fff;padding:30px;border-radius:10px;width:400px;max-width:90%;color:#111}
+    .modal-content h3{margin-bottom:15px;color:#232f3e}
+    .modal-content input{width:100%;padding:10px;margin-bottom:15px;border:1px solid var(--border-color);border-radius:5px}
+    .modal-content button{background:var(--az-yellow);border:none;padding:10px 20px;font-weight:bold;border-radius:5px;cursor:pointer}
 
-    @media(max-width:900px){.main-container{flex-direction:column}.sidebar{width:100%}}
+    /* Mark Cuban's Chat Widget */
+    .ai-chat-btn{position:fixed;bottom:25px;left:25px;background:#232f3e;color:var(--az-yellow);width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:1500}
+    .ai-chat-window{position:fixed;bottom:95px;left:25px;width:350px;height:400px;background:#fff;border-radius:10px;box-shadow:0 5px 25px rgba(0,0,0,0.2);display:none;flex-direction:column;z-index:1500;border:1px solid var(--border-color)}
+    .chat-header{background:#232f3e;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;border-top-left-radius:10px;border-top-right-radius:10px}
+    .chat-body{flex:1;padding:12px;overflow-y:auto;font-size:0.9rem;display:flex;flex-direction:column;gap:10px}
+    .chat-msg{padding:8px 12px;border-radius:8px;max-width:85%}
+    .chat-msg.bot{background:#f3f3f3;color:#333;align-self:flex-start}
+    .chat-msg.user{background:var(--az-yellow);color:#111;align-self:flex-end}
+    .chat-footer{display:flex;padding:10px;border-top:1px solid var(--border-color)}
+    .chat-footer input{flex:1;padding:8px;border:1px solid var(--border-color);border-radius:5px;outline:none}
+    .chat-footer button{background:#232f3e;color:#fff;border:none;padding:8px 15px;border-radius:5px;margin-right:5px;cursor:pointer}
+
+    .toast{position:fixed;bottom:25px;right:25px;background:#232f3e;color:#fff;padding:10px 25px;border-radius:20px;font-weight:bold;transition:.3s;z-index:9999;border:1px solid var(--az-yellow)}
+    .toast.show{transform:translateY(0);opacity:1}
+    .toast{transform:translateY(100px);opacity:0}
   </style>
 </head>
 <body>
 
   <div id="toast" class="toast">تم الإجراء بنجاح</div>
+
+  <!-- Diamond John's Inventory Modal -->
+  <div class="modal" id="inventoryModal">
+    <div class="modal-content">
+      <h3><i class="fa-solid fa-boxes-stacked"></i> لوحة إدارة المخزون والتسعير (دياموند جون)</h3>
+      <p style="font-size:0.85rem;color:#666;margin-bottom:15px">تحديث نسبة الخصم العامة على أسعار المنتجات في السوق المصري:</p>
+      <input type="number" id="discountInput" placeholder="نسبة التخفيض % (مثال: 5)">
+      <button onclick="applyDiscount()">تحديث الأسعار الآن</button>
+      <button style="background:#ddd;margin-right:8px" onclick="closeModal()">إغلاق</button>
+    </div>
+  </div>
 
   <header>
     <div class="header-main">
@@ -93,10 +128,13 @@
         <button class="search-btn-az" onclick="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
     </div>
+
+    <!-- Kevin O'Leary's Financial Metric Bar -->
     <div class="shark-metrics">
-      <span><i class="fa-solid fa-chart-line"></i> مؤشر أرباح الأفلييت (كيفن): نشط</span>
-      <span id="syncStatus"><i class="fa-solid fa-sync fa-spin"></i> الأسعار متزامنة لحظياً (دياموند)</span>
+      <span><i class="fa-solid fa-chart-line"></i> أرباح الأفلييت التقديرية (كيفن): <strong id="profitCounter">0 ج.م</strong> (Tag: mohamed0650-21)</span>
+      <button class="metrics-btn" onclick="openModal()"><i class="fa-solid fa-gear"></i> لوحة إدارة المخزون (دياموند)</button>
     </div>
+
     <div class="header-nav-sub">
       <a href="#" onclick="setCategory('all', this)">الكل</a>
       <a href="#" onclick="setCategory('workstation', this)">لابتوبات Workstations</a>
@@ -125,22 +163,48 @@
     </aside>
 
     <main class="content-area">
+      <!-- Mark Cuban's Flash Deal Banner -->
+      <div class="flash-banner">
+        <div>
+          <h3><i class="fa-solid fa-bolt"></i> عروض الفلاش السيبرانية (مارك كيوبان)</h3>
+          <p>خصومات حصرية لفترة محدودة على أجهزة الورك ستيشن واللابتوبات الهندسية!</p>
+        </div>
+        <button style="background:#fff;color:#ff4500;border:none;padding:10px 20px;border-radius:5px;font-weight:bold;cursor:pointer" onclick="triggerFlashSale()">فعّل عروض الفلاش ⚡</button>
+      </div>
+
       <div class="banner">
-        <h1>متجر العتاد السيبراني (Shark Tank Backed)</h1>
-        <p>المنصة المطورة خصيصاً لتوفير أفضل أجهزة الوورك ستيشن والجيمينج مع عمولة أمازون ومراقبة الأسعار[cite: 1].</p>
+        <h1>متجر العتاد الرقمي (Shark Tank Fully Loaded)</h1>
+        <p>المنصة المتكاملة المعتمدة من الشاركس لبيع أقوى العتاد واللابتوبات في مصر.</p>
       </div>
 
       <div class="results-bar">
         <span id="countResults">جاري التحميل...</span>
-        <span>الوسم النشط: mohamed0650-21[cite: 1]</span>
+        <span>الوسم النشط: mohamed0650-21</span>
       </div>
 
       <div class="products-grid" id="grid"></div>
     </main>
   </div>
 
+  <!-- Mark Cuban's AI Assistant Chat Window -->
+  <div class="ai-chat-btn" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></div>
+  <div class="ai-chat-window" id="chatWindow">
+    <div class="chat-header">
+      <span><i class="fa-solid fa-brain"></i> مساعد مارك الذكي</span>
+      <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">أهلاً يا حمودي! أنا مساعد المتجر الذكي. اسألني عن أي جهاز أو ميزانية مقترحة! 🚀</div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="userInput" placeholder="اسأل عن جهاز..." onkeypress="handleKey(event)">
+      <button onclick="sendMsg()">إرسال</button>
+    </div>
+  </div>
+
   <script>
     const AFFILIATE_TAG = 'mohamed0650-21';
+    let estimatedProfit = 0;
     const products = [];
     const REAL_IMAGES = {"Dell Precision 5520":"https://product.hstatic.net/1000331874/product/dell_precision_m5520.jpg","HP EliteBook 840 G6":"https://www.untech.com.au/cdn/shop/files/hp-elitebook-840-g6-laptop-14-fhd-i7-8565u-16gb-ram-256gb-ssd-win-11-2113140_800x.png?v=1767452347","Dell Precision 7530 Workstation":"https://d2e6ccujb3mkqf.cloudfront.net/240a356b-a440-4be2-8154-ddb6849df012-1_9bb18202-a628-4ce4-aea1-5e1899255b9d.jpg","Lenovo ThinkPad P52":"https://laptopsking.com/cdn/shop/files/LenovoThinkpadP52i78th_4.jpg?v=1696255598&width=1946","Apple MacBook Pro M2 Max":"https://www.apple.com/v/macbook-pro/az/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg","HP ZBook Fury 15 G7":"https://www.laptopcentrum.nl/image/cache/catalog/000/NewFolder/fury%2015%20g7-1-800x800w.jpg","Lenovo ThinkPad P1 Gen 3":"https://cdn.izotcomputers.com/10381-large_default/mobile-workstation-second-hand-lenovo-thinkpad-p1-gen-3.jpg","Dell Latitude 7420":"https://www.cto-technology.com/cdn/shop/files/7420bk-1.jpg?v=1757362979","Lenovo ThinkPad T14 Gen 2":"https://olcha.uz/image/700x700/products/2022-07-07/noutbuk-lenovo-thinkpad-t14-gen-2-i7-1165g7-16512gb-ssd-14-63802-0.jpeg","Dell XPS 15 9520":"https://microless.com/cdn/products/fcb4d769caf604afd4e52241e619b006-hi.jpg","Apple MacBook Air M2":"https://zshop.vn/images/detailed/120/macbook-air-midnight-gallery1-20220606_aup3-bx.jpg","Apple MacBook Pro 14 M3 Pro":"https://media.ldlc.com/r1600/ld/products/00/06/07/94/LD0006079429.jpg","HP EliteBook 850 G7":"https://www.buyitdirect.ie/Images/T1850G7i732GB512GBW11P_1_Supersize.jpg?v=3","HP Pavilion 15":"https://www.laptoparena.net/images/HP_Pavilion_15_Laptop_800R2EA_image_1.jpg","Acer Swift 3":"https://f00.esfr.pl/foto/6/63108743353/95aa89a53f1a8d5a3f6abfafb871db4/archival-acer-laptop-swift3-r5-8gb-512ssd-w10-silver%2C63108743353_5.webp","Lenovo Legion 5 Pro":"https://psref.lenovo.com/syspool/Sys/PDF/Legion/Lenovo_Legion_5_Pro_16ACH6H/Lenovo_Legion_5_Pro_16ACH6H_Spec.pdf","ASUS ROG Strix G15":"https://techgurustore.in/product-images/51wQ18eozvL.jpg/1282329000023390402/1100x1100","Acer Nitro 5 Gaming":"https://static2-ecemea.acer.com/media/catalog/product/_/_/________a__acer-nitro-5_an515-44_red-kb_modelmain_1_1_nh.q9heh.001.png","ASUS TUF Gaming F15":"https://e-katalog.kz/jpg_zoom1/2509880.jpg","Lenovo LOQ 15":"https://gfx3.senetic.com/akeneo-catalog/e/d/6/0/ed60e420048a1df0026c078d95eca467a261d7f0_1767820_83GS007LPB_image1.jpg","Acer Predator Helios 300":"https://s1.cel.ro/images/mari/2023/11/08/Laptop-Gaming-ACER-Predator-PH315-55-i9-12900H-15-6inch-QHD-IPS-SlimBezel-32GB-1TB-SSD-RTX-3080-8GB-Win11-Home-Abyssal-Black-NH-QGMEX-007.jpg","MSI Raider GE77":"https://laptopmedia.com/wp-content/uploads/2022/07/61uxDTnehrL._AC_SL1500_.jpg","Razer Blade 15":"https://media.power-cdn.net/images/h-af755b25fc3f9c29f68615868ad4935e/products/1157016/1157016_4_600x600_t_g.webp","ASUS ROG Zephyrus G14":"https://media.ldlc.com/r1600/ld/products/00/05/95/23/LD0005952300.jpg","Dell G15 5530":"https://laptopkhanhtran.vn/pic/product/Dell_Gami_638219236669530959_HasThumb.png","Gigabyte G5 KE":"https://product.hstatic.net/1000296652/product/gigabyte_g5_ke_310c0cea8f1742868cf6d87cefdb598f.png","Samsung Galaxy S23 Ultra":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-s918bzkgmea/gallery/levant-galaxy-s23-ultra-s918-sm-s918bzkgmea-thumb-535237667?$344_344_PNG$","Samsung Galaxy A54 5G":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-a546elvamea/gallery/levant-galaxy-a54-5g-sm-a546-sm-a546elvamea-thumb-535257851?$344_344_PNG$","iPhone 14 Pro Max":"https://cdn.idealo.com/folder/Product/202093/7/202093780/s1_produktbild_max/apple-iphone-14-pro-max-1tb-space-schwarz.jpg","iPhone 13":"https://www.iphonespreowned.co.za/cdn/shop/products/iPhone-13-Blue-2_4b95397d-f379-4d88-840c-e0c070f7b4d2.png?v=1660160662","Xiaomi Redmi Note 12 Pro":"https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-12-pro-5g/pc/section2-01.jpg","Xiaomi 13T":"https://skay.ua/235925/xiaomi-13t-8256gb-meadow-green-nfc-eu.jpg","OPPO Reno 10":"https://api.priceinkenya.com/media/133864/conversions/Oppo-Reno-10-a-original.webp","realme 11 Pro":"https://cdn.kalvo.com/uploads/img/gallery/51439-realme-11-pro-3.jpg","Samsung Galaxy Tab S9":"https://a-static.mlcdn.com.br/800x800/tablet-samsung-galaxy-tab-s9-256gb-tela-de-11-wi-fi-android-13-grafite-sm-x710nzahzto/kabum/474712/8367cb98d9a6115f9bbb45444c551012.jpg","iPad 10th Generation":"https://i.ebayimg.com/images/g/9-kAAOSwr3xkC1Ri/s-l1200.jpg","Lenovo Tab P11":"https://www.ietresinformatica.com/media/catalog/product/cache/81c729132649484cb6d742515cd80d6c/l/e/lenovo_tab_p11_sg_01_800x800.jpg","هارد SSD خارجي Samsung T7 1TB":"https://paksell.pk/cdn/shop/products/samsung-t7-portable-ssd-1tb-usb32-gen-2-type-c-external-ssd-438520_959x959.jpg?v=1691492418","لوجيتك G102":"https://spacenet.tn/109151-large_default/souris-gaming-spirit-of-gamer-logitech-g102-noir.jpg"};
 
@@ -219,7 +283,7 @@
     function renderProducts(items) {
       const grid = document.getElementById('grid');
       document.getElementById('countResults').textContent = `النتائج المعروضة: ${items.length} منتج`;
-      if (!items.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">لا توجد منتجات مطابقة لبحثك</div>'; return; }
+      if (!items.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">لا توجد منتجات مطابقة</div>'; return; }
       grid.innerHTML = items.map(p => `
         <div class="az-card">
           <div>
@@ -227,15 +291,12 @@
               <img class="az-img" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${p.title}')">
             </div>
             <div class="az-title">${p.title}</div>
-            <div class="az-rating">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-              <span>4.8</span>
-            </div>
+            <div class="az-rating"><i class="fa-solid fa-star"></i><span>4.8</span></div>
             <ul class="az-specs">${p.specs.map(s => `<li>• ${s}</li>`).join('')}</ul>
           </div>
           <div class="az-price-box">
             <div class="az-price">${p.price}</div>
-            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-az-buy" onclick="trackClick()"><i class="fa-brands fa-amazon"></i> شحن أمازون</a>
+            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-az-buy" onclick="trackClick(${p.cleanPrice})"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
           </div>
         </div>
       `).join('');
@@ -245,7 +306,6 @@
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       const selectCat = document.getElementById('catSelect').value;
       if(selectCat !== 'all') currentCat = selectCat;
-      
       renderProducts(products.filter(p => 
         (currentCat === 'all' || p.category === currentCat) &&
         (p.title.toLowerCase().includes(q) || p.specs.join(' ').toLowerCase().includes(q))
@@ -258,16 +318,66 @@
       applyFilter();
     }
 
+    /* كيفن أوليري: تتبع الأرباح عند النقر */
+    function trackClick(price) {
+      let commission = Math.floor(price * 0.03); // عمولة تقديرية 3%
+      estimatedProfit += commission;
+      document.getElementById('profitCounter').textContent = estimatedProfit + ' ج.م';
+      showToast("تم تسجيل النقرة وحساب عمولة الأفلييت بنجاح! 💰");
+    }
+
+    /* دياموند جون: لوحة التحكم وتحديث الأسعار */
+    function openModal() { document.getElementById('inventoryModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('inventoryModal').style.display = 'none'; }
+    function applyDiscount() {
+      const val = parseInt(document.getElementById('discountInput').value);
+      if(isNaN(val) || val <= 0) { showToast("أدخل نسبة تخفيض صحيحة"); return; }
+      products.forEach(p => {
+        p.cleanPrice = Math.floor(p.cleanPrice * (1 - val / 100));
+        p.price = p.cleanPrice.toLocaleString() + ' ج.م';
+      });
+      renderProducts(products);
+      closeModal();
+      showToast(`تم تطبيق خصم ${val}% على كافة منتجات المعرض لحظياً! 📉`);
+    }
+
+    /* مارك كيوبان: عروض الفلاش */
+    function triggerFlashSale() {
+      products.forEach(p => {
+        p.cleanPrice = Math.floor(p.cleanPrice * 0.9);
+        p.price = p.cleanPrice.toLocaleString() + ' ج.م (عرض فلاش)';
+      });
+      renderProducts(products);
+      showToast("⚡ تم تفعيل عروض الفلاش وحرق الأسعار لكافة الأجهزة!");
+    }
+
+    /* مارك كيوبان: الشات البوت الذكي */
+    function toggleChat() {
+      const win = document.getElementById('chatWindow');
+      win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function sendMsg() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if(!text) return;
+      const body = document.getElementById('chatBody');
+      body.innerHTML += `<div class="chat-msg user">${text}</div>`;
+      input.value = '';
+      setTimeout(() => {
+        let reply = "أهلاً يا حمودي! جهازي المقترح ليك هو Dell Precision 5520 أو Lenovo Legion 5 Pro، اتفضل اتصفحهم في المعرض فوق! 🚀";
+        if(text.includes('موبايل')) reply = "أفضل موبايل متاح حالياً هو Samsung Galaxy S23 Ultra أو iPhone 14 Pro Max!";
+        body.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
+        body.scrollTop = body.scrollHeight;
+      }, 500);
+    }
+    function handleKey(e) { if(e.key === 'Enter') sendMsg(); }
+
     function filterByBudget() {
       const max = parseInt(document.getElementById('maxBudget').value);
       if (isNaN(max) || max <= 0) { showToast("أدخل ميزانية صحيحة"); return; }
       const matched = products.filter(p => p.cleanPrice <= max);
       renderProducts(matched);
       showToast(`تم عرض ${matched.length} جهاز يناسب ميزانيتك`);
-    }
-
-    function trackClick() {
-      showToast("تم توجيهك لمتجر أمازون بنجاح (تم تسجيل العمولة) 🚀");
     }
 
     function showToast(msg) {
