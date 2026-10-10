@@ -3,148 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | العتاد الأنيق</title>
-  <meta name="description" content="HAMOD LABS: معرض لابتوبات وورك ستيشن وجيمنج وموبايلات بأسعار مصر وتصميم بسيط ومنظم.">
+  <title>HAMOD LABS | متجر العتاد الرقمي</title>
+  <meta name="description" content="HAMOD LABS: متجر متكامل للابتوبات والورك ستيشن والموبايلات بتصميم تجاري احترافي شبه أمازون.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root{--bg-dark:#0a0d14;--bg-card:#131b2e;--primary-cyan:#00f2fe;--neon-pink:#ff007f;--text-main:#fff;--text-muted:#8a99ad;--border-color:rgba(255,255,255,.08)}
+    :root{--az-dark:#131921;--az-light:#232f3e;--az-yellow:#febd69;--az-orange:#ffa41c;--bg-body:#eaeded;--text-main:#0f1111;--text-muted:#565959;--border-color:#d5d9d9}
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Tajawal',sans-serif}
-    body{background-color:var(--bg-dark);color:var(--text-main);overflow-x:hidden}
+    body{background-color:var(--bg-body);color:var(--text-main);overflow-x:hidden}
+
+    /* Amazon Header */
+    header{background-color:var(--az-dark);color:#fff;position:sticky;top:0;z-index:1000}
+    .header-main{display:flex;align-items:center;justify-content:space-between;padding:10px 4%;gap:15px;flex-wrap:wrap}
+    .logo{font-size:1.6rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:8px;text-decoration:none}
+    .logo span{color:var(--az-yellow)}
     
-    nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 8%;background:rgba(10,13,20,.9);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--border-color)}
-    .logo{font-size:1.8rem;font-weight:900;color:var(--primary-cyan);display:flex;align-items:center;gap:10px}
-    .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{color:var(--text-muted);text-decoration:none;font-weight:700;transition:.3s}
-    .nav-links a:hover{color:var(--primary-cyan)}
+    .search-box-az{flex:2;display:flex;max-width:700px;min-width:250px;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:.2s}
+    .search-box-az:focus-within{border-color:var(--az-orange)}
+    .search-box-az select{background:#f3f3f3;border:none;padding:10px 12px;font-size:0.9rem;outline:none;cursor:pointer;color:#555}
+    .search-box-az input{flex:1;border:none;padding:10px 15px;font-size:1rem;outline:none}
+    .search-btn-az{background:var(--az-yellow);border:none;padding:0 20px;font-size:1.2rem;cursor:pointer;color:#111;transition:.2s}
+    .search-btn-az:hover{background:var(--az-orange)}
 
-    .hero{text-align:center;padding:5rem 2rem 3rem;max-width:800px;margin:0 auto}
-    .hero h1{font-size:3rem;font-weight:900;margin-bottom:1rem;color:#fff}
-    .hero p{font-size:1.15rem;color:var(--text-muted);line-height:1.7}
+    .header-nav-sub{background-color:var(--az-light);display:flex;padding:8px 4%;gap:25px;font-size:0.95rem;overflow-x:auto;white-space:nowrap}
+    .header-nav-sub a{color:#fff;text-decoration:none;padding:4px 8px;border:1px solid transparent;border-radius:2px}
+    .header-nav-sub a:hover{border-color:#fff}
 
-    .budget-section{max-width:800px;margin:1rem auto 3rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:1.5rem 2rem}
-    .budget-box{display:flex;gap:12px;margin-top:1rem;flex-wrap:wrap}
-    .budget-box select,.budget-box input{flex:1;min-width:180px;padding:12px 16px;background:#0f1523;border:1px solid var(--border-color);border-radius:10px;color:#fff;font-size:1rem;outline:none}
-    .budget-box button{padding:12px 24px;background:var(--primary-cyan);color:#000;font-weight:bold;border:none;border-radius:10px;cursor:pointer;transition:.3s}
-    .budget-box button:hover{opacity:.9}
+    /* Main Container layout */
+    .main-container{display:flex;max-width:1400px;margin:20px auto;padding:0 20px;gap:25px}
+    
+    /* Sidebar Filters */
+    .sidebar{width:260px;flex-shrink:0;background:#fff;padding:20px;border-radius:8px;border:1px solid var(--border-color);height:fit-content}
+    .sidebar h3{font-size:1.1rem;margin-bottom:15px;color:var(--text-main);border-bottom:1px solid var(--border-color);padding-bottom:8px}
+    .filter-group{margin-bottom:20px}
+    .filter-group label{display:block;margin-bottom:8px;cursor:pointer;font-size:0.95rem;color:var(--text-muted)}
+    .filter-group input{margin-left:8px}
+    .sidebar input[type="number"]{width:100%;padding:8px;border:1px solid var(--border-color);border-radius:4px;margin-top:8px}
+    .sidebar button{width:100%;background:var(--az-yellow);border:none;padding:8px;border-radius:4px;font-weight:bold;cursor:pointer;margin-top:10px}
+    .sidebar button:hover{background:var(--az-orange)}
 
-    .search-filter-container{max-width:900px;margin:0 auto 2.5rem;padding:0 1rem}
-    .search-bar{position:relative;margin-bottom:1.5rem}
-    .search-bar input{width:100%;padding:14px 20px 14px 50px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:30px;color:#fff;font-size:1rem;outline:none}
-    .search-bar i{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
-    .filter-bar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-    .filter-btn{padding:8px 20px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;color:var(--text-muted);cursor:pointer;font-weight:700;transition:.3s}
-    .filter-btn.active,.filter-btn:hover{background:var(--primary-cyan);border-color:var(--primary-cyan);color:#000}
+    /* Content Area */
+    .content-area{flex:1}
+    .banner{background:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;color:#fff;padding:40px;border-radius:8px;margin-bottom:20px}
+    .banner h1{font-size:2.2rem;margin-bottom:10px}
+    .banner p{font-size:1.1rem;max-width:600px}
 
-    .products-section{padding:0 8% 5rem}
-    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem}
-    .card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:1.5rem;display:flex;flex-direction:column;justify-content:space-between;transition:.3s}
-    .card:hover{border-color:var(--primary-cyan);transform:translateY(-5px)}
-    .product-img-box{width:100%;height:180px;background:#0a0d14;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;overflow:hidden}
-    .product-img{width:100%;height:100%;object-fit:contain;padding:10px}
-    .card-title{font-size:1.2rem;font-weight:800;margin-bottom:.5rem}
-    .specs-list{list-style:none;color:var(--text-muted);font-size:0.88rem;margin-bottom:1.2rem}
-    .specs-list li{margin-bottom:.4rem}
-    .card-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border-color);padding-top:1rem}
-    .price{font-size:1.3rem;font-weight:900;color:var(--primary-cyan)}
-    .btn-amazon{background:#ff9900;color:#000;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:0.9rem;display:flex;align-items:center;gap:6px}
+    .results-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;background:#fff;padding:10px 15px;border:1px solid var(--border-color);border-radius:4px;font-size:0.9rem;color:var(--text-muted)}
 
-    .toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--primary-cyan);color:#000;padding:10px 25px;border-radius:20px;font-weight:bold;transition:.3s;z-index:9999}
+    /* Products Grid (Amazon Cards) */
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+    .az-card{background:#fff;border:1px solid var(--border-color);border-radius:8px;padding:15px;display:flex;flex-direction:column;justify-content:space-between;transition:.2s;position:relative}
+    .az-card:hover{box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+    
+    .az-img-box{width:100%;height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative}
+    .az-img{max-width:100%;max-height:100%;object-fit:contain}
+    
+    .az-title{font-size:0.95rem;font-weight:700;color:#007185;margin-bottom:8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .az-title:hover{color:#c7511f;text-decoration:underline;cursor:pointer}
+    
+    .az-rating{color:#ffa41c;font-size:0.85rem;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+    .az-rating span{color:#007185}
+
+    .az-specs{list-style:none;font-size:0.8rem;color:var(--text-muted);margin-bottom:12px}
+    .az-specs li{margin-bottom:3px}
+
+    .az-price-box{margin-top:auto}
+    .az-price{font-size:1.25rem;font-weight:900;color:#0f1111;margin-bottom:8px}
+    .az-price span{font-size:0.8rem;font-weight:normal}
+
+    .btn-az-buy{display:block;background:var(--az-yellow);color:#0f1111;text-align:center;padding:8px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.9rem;border:1px solid #a88734;transition:.2s}
+    .btn-az-buy:hover{background:var(--az-orange)}
+
+    .toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(100px);background:#232f3e;color:#fff;padding:10px 25px;border-radius:20px;font-weight:bold;transition:.3s;z-index:9999;border:1px solid var(--az-yellow)}
     .toast.show{transform:translateX(-50%) translateY(0)}
 
-    @media(max-width:768px){.nav-links{display:none}.hero h1{font-size:2.2rem}}
+    @media(max-width:900px){.main-container{flex-direction:column}.sidebar{width:100%}}
   </style>
 </head>
 <body>
 
   <div id="toast" class="toast">تم الإجراء بنجاح</div>
 
-  <nav>
-    <div class="logo"><i class="fa-solid fa-atom"></i> HAMOD LABS</div>
-    <ul class="nav-links">
-      <li><a href="#">الرئيسية</a></li>
-      <li><a href="#products">العتاد</a></li>
-      <li><a href="#budget">حاسبة الميزانية</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <h1>منصة العتاد والأجهزة الرقمية</h1>
-    <p>تصفح أحدث اللابتوبات، الورك ستيشن، والموبايلات بأسعار السوق المصري بتصميم بسيط ومنظم وسهل التصفح.</p>
-  </section>
-
-  <section class="budget-section" id="budget">
-    <h3 style="color:#fff;font-size:1.2rem"><i class="fa-solid fa-calculator" style="color:var(--primary-cyan)"></i> حاسبة الميزانية السريعة</h3>
-    <div class="budget-box">
-      <select id="budgetCategory">
-        <option value="all">كل الفئات</option>
-        <option value="workstation">Workstations</option>
-        <option value="gaming">Gaming</option>
-        <option value="phone">موبايلات</option>
-        <option value="accessory">أكسسوارات</option>
-      </select>
-      <input type="number" id="maxBudget" placeholder="الميزانية القصوى (بالجنيه)">
-      <button onclick="filterByBudget()">فلترة النتائج</button>
+  <header>
+    <div class="header-main">
+      <a href="#" class="logo"><i class="fa-solid fa-atom"></i> HAMOD <span>LABS</span></a>
+      <div class="search-box-az">
+        <select id="catSelect" onchange="applyFilter()">
+          <option value="all">كل الأقسام</option>
+          <option value="workstation">Workstations</option>
+          <option value="gaming">Gaming</option>
+          <option value="phone">موبايلات</option>
+          <option value="accessory">أكسسوارات</option>
+        </select>
+        <input type="text" id="searchInput" onkeyup="applyFilter()" placeholder="بحث في HAMOD LABS...">
+        <button class="search-btn-az" onclick="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
     </div>
-  </section>
+    <div class="header-nav-sub">
+      <a href="#" onclick="setCategory('all', this)">الكل</a>
+      <a href="#" onclick="setCategory('workstation', this)">لابتوبات Workstations</a>
+      <a href="#" onclick="setCategory('gaming', this)">أجهزة Gaming</a>
+      <a href="#" onclick="setCategory('phone', this)">موبايلات وتابلت</a>
+      <a href="#" onclick="setCategory('accessory', this)">أكسسوارات وعرصت</a>
+    </div>
+  </header>
 
-  <div class="search-filter-container">
-    <div class="search-bar">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="ابحث عن جهاز أو ملحق...">
-    </div>
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterData('all',this)">الكل</button>
-      <button class="filter-btn" onclick="filterData('workstation',this)">Workstations</button>
-      <button class="filter-btn" onclick="filterData('gaming',this)">Gaming</button>
-      <button class="filter-btn" onclick="filterData('phone',this)">موبايلات</button>
-      <button class="filter-btn" onclick="filterData('accessory',this)">أكسسوارات</button>
-    </div>
+  <div class="main-container">
+    <!-- Sidebar Filters -->
+    <aside class="sidebar">
+      <h3>الفئات</h3>
+      <div class="filter-group">
+        <label><input type="radio" name="fcat" checked onclick="setCategory('all', null)"> الكل</label>
+        <label><input type="radio" name="fcat" onclick="setCategory('workstation', null)"> Workstations</label>
+        <label><input type="radio" name="fcat" onclick="setCategory('gaming', null)"> Gaming</label>
+        <label><input type="radio" name="fcat" onclick="setCategory('phone', null)"> موبايلات وتابلت</label>
+        <label><input type="radio" name="fcat" onclick="setCategory('accessory', null)"> أكسسوارات</label>
+      </div>
+
+      <h3>فلترة بالميزانية</h3>
+      <div class="filter-group">
+        <input type="number" id="maxBudget" placeholder="أقصى ميزانية (ج.م)">
+        <button onclick="filterByBudget()">تطبيق الميزانية</button>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content-area">
+      <div class="banner">
+        <h1>متجر العتاد السيبراني</h1>
+        <p>أقوى لابتوبات الوورك ستيشن وأجهزة الجيمينج وأحدث الهواتف الذكية بأسعار مصرية مع روابط شراء مباشرة من أمازون[cite: 1].</p>
+      </div>
+
+      <div class="results-bar">
+        <span id="countResults">جاري التحميل...</span>
+        <span>ترتيب حسب: الأكثر مبيعاً</span>
+      </div>
+
+      <div class="products-grid" id="grid"></div>
+    </main>
   </div>
-
-  <section class="products-section" id="products">
-    <div class="products-grid" id="grid"></div>
-  </section>
 
   <script>
     const AFFILIATE_TAG = 'mohamed0650-21';
     const products = [];
+    const REAL_IMAGES = {"Dell Precision 5520":"https://product.hstatic.net/1000331874/product/dell_precision_m5520.jpg","HP EliteBook 840 G6":"https://www.untech.com.au/cdn/shop/files/hp-elitebook-840-g6-laptop-14-fhd-i7-8565u-16gb-ram-256gb-ssd-win-11-2113140_800x.png?v=1767452347","Dell Precision 7530 Workstation":"https://d2e6ccujb3mkqf.cloudfront.net/240a356b-a440-4be2-8154-ddb6849df012-1_9bb18202-a628-4ce4-aea1-5e1899255b9d.jpg","Lenovo ThinkPad P52":"https://laptopsking.com/cdn/shop/files/LenovoThinkpadP52i78th_4.jpg?v=1696255598&width=1946","Apple MacBook Pro M2 Max":"https://www.apple.com/v/macbook-pro/az/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg","HP ZBook Fury 15 G7":"https://www.laptopcentrum.nl/image/cache/catalog/000/NewFolder/fury%2015%20g7-1-800x800w.jpg","Lenovo ThinkPad P1 Gen 3":"https://cdn.izotcomputers.com/10381-large_default/mobile-workstation-second-hand-lenovo-thinkpad-p1-gen-3.jpg","Dell Latitude 7420":"https://www.cto-technology.com/cdn/shop/files/7420bk-1.jpg?v=1757362979","Lenovo ThinkPad T14 Gen 2":"https://olcha.uz/image/700x700/products/2022-07-07/noutbuk-lenovo-thinkpad-t14-gen-2-i7-1165g7-16512gb-ssd-14-63802-0.jpeg","Dell XPS 15 9520":"https://microless.com/cdn/products/fcb4d769caf604afd4e52241e619b006-hi.jpg","Apple MacBook Air M2":"https://zshop.vn/images/detailed/120/macbook-air-midnight-gallery1-20220606_aup3-bx.jpg","Apple MacBook Pro 14 M3 Pro":"https://media.ldlc.com/r1600/ld/products/00/06/07/94/LD0006079429.jpg","HP EliteBook 850 G7":"https://www.buyitdirect.ie/Images/T1850G7i732GB512GBW11P_1_Supersize.jpg?v=3","HP Pavilion 15":"https://www.laptoparena.net/images/HP_Pavilion_15_Laptop_800R2EA_image_1.jpg","Acer Swift 3":"https://f00.esfr.pl/foto/6/63108743353/95aa89a53f1a8d5a3f6abfafb871db4/archival-acer-laptop-swift3-r5-8gb-512ssd-w10-silver%2C63108743353_5.webp","Lenovo Legion 5 Pro":"https://psref.lenovo.com/syspool/Sys/PDF/Legion/Lenovo_Legion_5_Pro_16ACH6H/Lenovo_Legion_5_Pro_16ACH6H_Spec.pdf","ASUS ROG Strix G15":"https://techgurustore.in/product-images/51wQ18eozvL.jpg/1282329000023390402/1100x1100","Acer Nitro 5 Gaming":"https://static2-ecemea.acer.com/media/catalog/product/_/_/________a__acer-nitro-5_an515-44_red-kb_modelmain_1_1_nh.q9heh.001.png","ASUS TUF Gaming F15":"https://e-katalog.kz/jpg_zoom1/2509880.jpg","Lenovo LOQ 15":"https://gfx3.senetic.com/akeneo-catalog/e/d/6/0/ed60e420048a1df0026c078d95eca467a261d7f0_1767820_83GS007LPB_image1.jpg","Acer Predator Helios 300":"https://s1.cel.ro/images/mari/2023/11/08/Laptop-Gaming-ACER-Predator-PH315-55-i9-12900H-15-6inch-QHD-IPS-SlimBezel-32GB-1TB-SSD-RTX-3080-8GB-Win11-Home-Abyssal-Black-NH-QGMEX-007.jpg","MSI Raider GE77":"https://laptopmedia.com/wp-content/uploads/2022/07/61uxDTnehrL._AC_SL1500_.jpg","Razer Blade 15":"https://media.power-cdn.net/images/h-af755b25fc3f9c29f68615868ad4935e/products/1157016/1157016_4_600x600_t_g.webp","ASUS ROG Zephyrus G14":"https://media.ldlc.com/r1600/ld/products/00/05/95/23/LD0005952300.jpg","Dell G15 5530":"https://laptopkhanhtran.vn/pic/product/Dell_Gami_638219236669530959_HasThumb.png","Gigabyte G5 KE":"https://product.hstatic.net/1000296652/product/gigabyte_g5_ke_310c0cea8f1742868cf6d87cefdb598f.png","Samsung Galaxy S23 Ultra":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-s918bzkgmea/gallery/levant-galaxy-s23-ultra-s918-sm-s918bzkgmea-thumb-535237667?$344_344_PNG$","Samsung Galaxy A54 5G":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-a546elvamea/gallery/levant-galaxy-a54-5g-sm-a546-sm-a546elvamea-thumb-535257851?$344_344_PNG$","iPhone 14 Pro Max":"https://cdn.idealo.com/folder/Product/202093/7/202093780/s1_produktbild_max/apple-iphone-14-pro-max-1tb-space-schwarz.jpg","iPhone 13":"https://www.iphonespreowned.co.za/cdn/shop/products/iPhone-13-Blue-2_4b95397d-f379-4d88-840c-e0c070f7b4d2.png?v=1660160662","Xiaomi Redmi Note 12 Pro":"https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-12-pro-5g/pc/section2-01.jpg","Xiaomi 13T":"https://skay.ua/235925/xiaomi-13t-8256gb-meadow-green-nfc-eu.jpg","OPPO Reno 10":"https://api.priceinkenya.com/media/133864/conversions/Oppo-Reno-10-a-original.webp","realme 11 Pro":"https://cdn.kalvo.com/uploads/img/gallery/51439-realme-11-pro-3.jpg","Samsung Galaxy Tab S9":"https://a-static.mlcdn.com.br/800x800/tablet-samsung-galaxy-tab-s9-256gb-tela-de-11-wi-fi-android-13-grafite-sm-x710nzahzto/kabum/474712/8367cb98d9a6115f9bbb45444c551012.jpg","iPad 10th Generation":"https://i.ebayimg.com/images/g/9-kAAOSwr3xkC1Ri/s-l1200.jpg","Lenovo Tab P11":"https://www.ietresinformatica.com/media/catalog/product/cache/81c729132649484cb6d742515cd80d6c/l/e/lenovo_tab_p11_sg_01_800x800.jpg","هارد SSD خارجي Samsung T7 1TB":"https://paksell.pk/cdn/shop/products/samsung-t7-portable-ssd-1tb-usb32-gen-2-type-c-external-ssd-438520_959x959.jpg?v=1691492418","لوجيتك G102":"https://spacenet.tn/109151-large_default/souris-gaming-spirit-of-gamer-logitech-g102-noir.jpg"};
+
+    function fallbackSvg(title){
+      const safe = String(title).replace(/[&<>"']/g, '');
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" rx="10" fill="#fff"/><text x="400" y="250" fill="#333" font-size="28" text-anchor="middle" font-family="Arial">${safe}</text></svg>`;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
 
     function add(category, title, price, specs, q) {
       let cleanPrice = parseInt(price.replace(/[^0-9]/g, '')) || 0;
       products.push({
         id: products.length + 1, title, category, price, cleanPrice, specs,
+        imageUrl: REAL_IMAGES[title] || '',
         amazonUrl: 'https://www.amazon.eg/s?k=' + encodeURIComponent(q || title) + '&tag=' + AFFILIATE_TAG
       });
     }
 
-    add("workstation","Dell Precision 5520","17,500 ج.م",["Intel i7-7820HQ", "32GB RAM", "512GB SSD", "Quadro M1200"],"Dell Precision 5520");
-    add("workstation","HP EliteBook 840 G6","25,950 ج.م",["Intel i7-8665U", "16GB RAM", "256GB SSD"],"HP EliteBook 840 G6");
+    /* جميع الأجهزة والمنتجات الأصلية بالكامل */
+    add("workstation","Dell Precision 5520","17,500 ج.م",["Core i7-7820HQ", "32GB RAM", "512GB SSD"],"Dell Precision 5520");
+    add("workstation","HP EliteBook 840 G6","25,950 ج.م",["Core i7-8665U", "16GB RAM", "256GB SSD"],"HP EliteBook 840 G6");
+    add("workstation","Dell Precision 7530 Workstation","22,500 ج.م",["Core i7-8850H", "32GB RAM", "1TB SSD"],"Dell Precision 7530");
+    add("workstation","Lenovo ThinkPad P52","24,000 ج.م",["Core i7-8750H", "32GB RAM", "512GB SSD"],"Lenovo Thinkpad P52");
     add("workstation","Apple MacBook Pro M2 Max","85,000 ج.م",["M2 Max Chip", "32GB RAM", "1TB SSD"],"MacBook Pro M2 Max");
+    add("workstation","HP ZBook Studio G5","26,500 ج.م",["Core i7-9750H", "32GB RAM", "512GB SSD"],"HP ZBook Studio G5");
+    add("workstation","Dell Precision 7740","38,000 ج.م",["Core i9-9880H", "64GB RAM", "1TB SSD"],"Dell Precision 7740");
+    add("workstation","Lenovo ThinkPad P1 Gen 3","38,000 ج.م",["Core i7-10850H", "32GB RAM", "1TB SSD"],"Lenovo ThinkPad P1 Gen 3");
+    add("workstation","HP ZBook Fury 15 G7","35,550 ج.م",["Core i7-10850H", "32GB RAM", "1TB SSD"],"HP ZBook Fury 15 G7");
+    add("workstation","Dell Latitude 7420","20,500 ج.م",["Core i7-1185G7", "16GB RAM", "512GB SSD"],"Dell Latitude 7420");
+    add("workstation","Lenovo ThinkPad T14 Gen 2","21,500 ج.م",["Core i5-1135G7", "16GB RAM", "512GB SSD"],"Lenovo ThinkPad T14 Gen 2");
+    add("workstation","Dell XPS 15 9520","52,500 ج.م",["Core i7-12700H", "32GB RAM", "1TB SSD"],"Dell XPS 15 9520");
+    add("workstation","Apple MacBook Air M2","46,000 ج.م",["Apple M2", "8GB RAM", "256GB SSD"],"MacBook Air M2");
+    add("workstation","Apple MacBook Pro 14 M3 Pro","95,000 ج.م",["M3 Pro Chip", "18GB RAM", "512GB SSD"],"MacBook Pro 14 M3 Pro");
+    add("workstation","Microsoft Surface Laptop 4","32,000 ج.م",["Core i7-1185G7", "16GB RAM", "512GB SSD"],"Surface Laptop 4");
+    add("workstation","HP EliteBook 850 G7","20,000 ج.م",["Core i7-10610U", "16GB RAM", "512GB SSD"],"HP EliteBook 850 G7");
+    add("workstation","ASUS ZenBook 14 OLED","33,000 ج.م",["Core i7-1260P", "16GB RAM", "512GB SSD"],"ASUS ZenBook 14 OLED");
+    add("workstation","Lenovo IdeaPad Slim 5","19,500 ج.م",["Ryzen 5 5500U", "16GB RAM", "512GB SSD"],"Lenovo IdeaPad Slim 5");
+    add("workstation","HP Pavilion 15","21,500 ج.م",["Core i5-1235U", "8GB RAM", "512GB SSD"],"HP Pavilion 15");
+    add("workstation","Acer Swift 3","20,500 ج.م",["Ryzen 7 5700U", "16GB RAM", "512GB SSD"],"Acer Swift 3");
+
     add("gaming","Lenovo Legion 5 Pro","34,500 ج.م",["Ryzen 7 5800H", "16GB RAM", "RTX 3060"],"Lenovo Legion 5");
     add("gaming","ASUS ROG Strix G15","38,000 ج.م",["Ryzen 9 5900HX", "16GB RAM", "RTX 3070"],"ASUS ROG Strix G15");
-    add("phone","Samsung Galaxy S23 Ultra","48,000 ج.م",["Snapdragon 8 Gen 2", "12GB RAM", "256GB"],"Samsung Galaxy S23 Ultra");
-    add("phone","iPhone 14 Pro Max","62,000 ج.م",["A16 Bionic", "6GB RAM", "256GB"],"iPhone 14 Pro Max");
-    add("accessory","ماوس جيمنج Logitech G102","650 ج.م",["8000 DPI", "RGB Lighting"],"Logitech G102");
-    add("accessory","هارد SSD خارجي Samsung T7 1TB","3,600 ج.م",["1050MB/s", "USB 3.2"],"Samsung T7 1TB");
+    add("gaming","Acer Nitro 5 Gaming","29,500 ج.م",["Core i5-11400H", "16GB RAM", "RTX 3050"],"Acer Nitro 5");
+    add("gaming","MSI Katana GF66","33,000 ج.م",["Core i7-11800H", "16GB RAM", "RTX 3060"],"MSI Katana GF66");
+    add("gaming","HP Victus 16","29,500 ج.م",["Ryzen 5 5600H", "16GB RAM", "RTX 3050 Ti"],"HP Victus 16");
+    add("gaming","ASUS TUF Gaming F15","30,500 ج.م",["Core i7-11800H", "16GB RAM", "RTX 3050 Ti"],"ASUS TUF Gaming F15");
+    add("gaming","Lenovo LOQ 15","35,000 ج.م",["Core i5-12450H", "16GB RAM", "RTX 4050"],"Lenovo LOQ 15");
+    add("gaming","Acer Predator Helios 300","47,000 ج.م",["Core i7-12700H", "16GB RAM", "RTX 3070 Ti"],"Acer Predator Helios 300");
+    add("gaming","Dell G15 5530","49,500 ج.م",["Core i7-13650HX", "16GB RAM", "RTX 4050"],"Dell G15 5530");
+    add("gaming","MSI Raider GE77","78,000 ج.م",["Core i9-12900HX", "32GB RAM", "RTX 3080 Ti"],"MSI Raider GE77");
+    add("gaming","ASUS ROG Zephyrus G14","52,000 ج.م",["Ryzen 9 6900HS", "16GB RAM", "RX 6800S"],"ASUS ROG Zephyrus G14");
+    add("gaming","Lenovo Legion 7i","68,000 ج.م",["Core i9-12900H", "32GB RAM", "RTX 3070 Ti"],"Lenovo Legion 7i");
+    add("gaming","Razer Blade 15","95,000 ج.م",["Core i7-12800H", "16GB RAM", "RTX 3070 Ti"],"Razer Blade 15");
+    add("gaming","Gigabyte G5 KE","27,500 ج.م",["Core i5-12500H", "16GB RAM", "RTX 3060"],"Gigabyte G5 KE");
+    add("gaming","Alienware m15 R7","85,000 ج.م",["Core i7-12700H", "32GB RAM", "RTX 3070 Ti"],"Alienware m15 R7");
+
+    add("phone","Samsung Galaxy S23 Ultra","48,000 ج.م",["Snapdragon 8 Gen 2", "12GB RAM", "كاميرا 200MP"],"Samsung Galaxy S23 Ultra");
+    add("phone","Samsung Galaxy A54 5G","16,500 ج.م",["Exynos 1380", "8GB RAM", "شاشة 120Hz"],"Samsung Galaxy A54");
+    add("phone","iPhone 14 Pro Max","62,000 ج.م",["A16 Bionic", "6GB RAM", "Dynamic Island"],"iPhone 14 Pro Max");
+    add("phone","iPhone 13","35,000 ج.م",["A15 Bionic", "4GB RAM", "128GB"],"iPhone 13 128GB");
+    add("phone","Xiaomi Redmi Note 12 Pro","14,000 ج.م",["Dimensity 1080", "8GB RAM", "شحن 67W"],"Xiaomi Redmi Note 12 Pro");
+    add("phone","Xiaomi 13T","27,000 ج.م",["Dimensity 8200 Ultra", "12GB RAM", "كاميرا Leica"],"Xiaomi 13T");
+    add("phone","OPPO Reno 10","19,500 ج.م",["Dimensity 7050", "8GB RAM", "شحن سريع"],"OPPO Reno 10");
+    add("phone","realme 11 Pro","17,000 ج.م",["Dimensity 7050", "8GB RAM", "شاشة منحنية"],"realme 11 Pro");
+    add("phone","Samsung Galaxy Tab S9","38,000 ج.م",["Snapdragon 8 Gen 2", "شاشة AMOLED", "مقاوم للماء"],"Samsung Galaxy Tab S9");
+    add("phone","iPad 10th Generation","22,000 ج.م",["A14 Bionic", "Liquid Retina", "USB-C"],"iPad 10th Generation");
+    add("phone","Lenovo Tab P11","8,500 ج.م",["Helio G99", "4GB RAM", "شاشة 2K"],"Lenovo Tab P11");
+
+    add("accessory","سماعة جيمنج محيطية 7.1 RGB Headset","1,250 ج.م",["صوت محيطي 7.1", "مايك عازل للضوضاء", "RGB"],"Gaming Headset 7.1");
+    add("accessory","باور بنك Anker Fast Charging 20,000mAh","1,800 ج.م",["سعة 20000mAh", "شحن سريع PD", "يدعم اللابتوب"],"Anker Powerbank 20000");
+    add("accessory","وصلة كابل شاحن Type-C مضفر سريع 100W","350 ج.م",["طول 2 متر قماش مضفر", "Fast Charge"],"Type C Cable 100W");
+    add("accessory","لوجيتك G102","650 ج.م",["8000 DPI", "إضاءة RGB LIGHTSYNC"],"Logitech G102");
+    add("accessory","هارد SSD خارجي Samsung T7 1TB","3,600 ج.م",["سرعة 1050MB/s", "USB 3.2"],"Samsung T7 1TB");
 
     let currentCat = 'all';
 
     function renderProducts(items) {
       const grid = document.getElementById('grid');
-      if (!items.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:2rem">لا توجد نتائج مطابقة</div>'; return; }
+      document.getElementById('countResults').textContent = `النتائج المعروضة: ${items.length} منتج`;
+      if (!items.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">لا توجد منتجات مطابقة لبحثك</div>'; return; }
       grid.innerHTML = items.map(p => `
-        <div class="card">
+        <div class="az-card">
           <div>
-            <div class="product-img-box">
-              <i class="fa-solid fa-laptop" style="font-size:3rem;color:var(--primary-cyan)"></i>
+            <div class="az-img-box">
+              <img class="az-img" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${p.title}')">
             </div>
-            <h3 class="card-title">${p.title}</h3>
-            <ul class="specs-list">${p.specs.map(s => `<li>• ${s}</li>`).join('')}</ul>
+            <div class="az-title">${p.title}</div>
+            <div class="az-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+              <span>4.8</span>
+            </div>
+            <ul class="az-specs">${p.specs.map(s => `<li>• ${s}</li>`).join('')}</ul>
           </div>
-          <div class="card-footer">
-            <span class="price">${p.price}</span>
-            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-amazon"><i class="fa-brands fa-amazon"></i> شراء</a>
+          <div class="az-price-box">
+            <div class="az-price">${p.price}</div>
+            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-az-buy"><i class="fa-brands fa-amazon"></i> شحن أمازون</a>
           </div>
         </div>
       `).join('');
@@ -152,20 +248,20 @@
 
     function applyFilter() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const selectCat = document.getElementById('catSelect').value;
+      if(selectCat !== 'all') currentCat = selectCat;
+      
       renderProducts(products.filter(p => 
         (currentCat === 'all' || p.category === currentCat) &&
         (p.title.toLowerCase().includes(q) || p.specs.join(' ').toLowerCase().includes(q))
       ));
     }
 
-    function filterData(cat, btn) {
+    function setCategory(cat, el) {
       currentCat = cat;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      document.getElementById('catSelect').value = cat;
       applyFilter();
     }
-
-    function searchProducts() { applyFilter(); }
 
     function filterByBudget() {
       const max = parseInt(document.getElementById('maxBudget').value);
