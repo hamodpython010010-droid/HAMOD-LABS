@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAMOD LABS | Luxury Tech Store</title>
-  <meta name="description" content="HAMOD LABS: متجر عتاد رقمي بتصميم فاخر وراقي يجمع بين أحدث اللابتوبات والموبايلات وأدوات الإدارة الذكية.">
+  <title>HAMOD LABS | متجر عتاد رقمي</title>
+  <meta name="description" content="HAMOD LABS: دليل لابتوبات وموبايلات وإكسسوارات بأسعار مصرية تقريبية مع روابط الشراء من أمازون مصر.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
@@ -12,7 +12,6 @@
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Tajawal',sans-serif}
     body{background-color:var(--bg-deep);color:var(--text-main);overflow-x:hidden;background-image:radial-gradient(circle at 10% 20%, rgba(0,242,254,0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(127,0,255,0.05) 0%, transparent 40%);min-height:100vh}
 
-    /* Luxury Header */
     header{background:rgba(5,7,11,0.85);backdrop-filter:blur(20px);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--border-glass)}
     .header-top{display:flex;justify-content:space-between;align-items:center;padding:15px 5%;gap:20px;flex-wrap:wrap}
     .logo{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;text-decoration:none}
@@ -25,18 +24,15 @@
     .search-btn-lux{background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));border:none;padding:0 22px;color:#fff;font-size:1.1rem;cursor:pointer;transition:.3s}
     .search-btn-lux:hover{opacity:.9}
 
-    .shark-metrics-lux{background:rgba(18,24,38,0.9);padding:8px 5%;font-size:0.85rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border-glass);color:var(--primary-cyan);font-family:'Orbitron',sans-serif}
-    .lux-btn{background:rgba(0,242,254,0.1);border:1px solid var(--primary-cyan);color:var(--primary-cyan);padding:5px 14px;border-radius:20px;font-weight:bold;cursor:pointer;transition:.3s;font-size:0.75rem}
-    .lux-btn:hover{background:var(--primary-cyan);color:#000;box-shadow:0 0 15px var(--primary-cyan)}
+    .info-bar{background:rgba(18,24,38,0.9);padding:8px 5%;font-size:0.8rem;border-top:1px solid var(--border-glass);color:var(--text-muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .info-bar strong{color:var(--primary-cyan)}
 
     .nav-sub-lux{display:flex;padding:10px 5%;gap:25px;background:rgba(10,14,23,0.5);overflow-x:auto;white-space:nowrap;border-bottom:1px solid var(--border-glass)}
     .nav-sub-lux a{color:var(--text-muted);text-decoration:none;font-weight:600;font-size:0.95rem;transition:.3s}
-    .nav-sub-lux a:hover{color:var(--primary-cyan)}
+    .nav-sub-lux a:hover,.nav-sub-lux a.active{color:var(--primary-cyan)}
 
-    /* Layout */
     .main-container{display:flex;max-width:1450px;margin:30px auto;padding:0 30px;gap:30px}
 
-    /* Sidebar Luxury */
     .sidebar-lux{width:280px;flex-shrink:0;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:20px;padding:25px;height:fit-content}
     .sidebar-lux h3{font-size:1.1rem;margin-bottom:15px;color:#fff;border-bottom:1px solid var(--border-glass);padding-bottom:10px}
     .filter-group{margin-bottom:20px}
@@ -45,187 +41,266 @@
     .filter-group input{margin-left:10px}
     .sidebar-lux input[type="number"]{width:100%;padding:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:10px;color:#fff;margin-top:8px;outline:none}
     .sidebar-lux button{width:100%;background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));border:none;padding:10px;border-radius:10px;font-weight:bold;color:#fff;cursor:pointer;margin-top:12px;transition:.3s}
+    .sidebar-lux button.ghost{background:rgba(255,255,255,0.08)}
     .sidebar-lux button:hover{box-shadow:0 0 15px var(--primary-cyan)}
 
-    /* Content Area */
-    .content-lux{flex:1}
-    
-    .flash-lux{background:linear-gradient(135deg,rgba(255,153,0,0.15),rgba(255,69,0,0.15));border:1px solid rgba(255,153,0,0.4);padding:20px 25px;border-radius:20px;margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px);flex-wrap:wrap;gap:15px}
-    .flash-lux h3{font-size:1.2rem;color:#ff9900;margin-bottom:5px}
+    .content-lux{flex:1;min-width:0}
 
     .banner-lux{background:linear-gradient(135deg,rgba(0,242,254,0.1),rgba(127,0,255,0.1)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;border:1px solid var(--border-glass);padding:40px;border-radius:20px;margin-bottom:25px}
     .banner-lux h1{font-size:2.2rem;margin-bottom:10px;color:#fff}
     .banner-lux p{color:var(--text-muted);font-size:1.05rem;max-width:600px}
 
+    .notice{background:rgba(255,215,0,0.07);border:1px solid rgba(255,215,0,0.25);color:#e8d9a0;padding:12px 18px;border-radius:14px;margin-bottom:20px;font-size:0.88rem;line-height:1.7}
+
     .results-bar-lux{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;background:var(--bg-card);backdrop-filter:blur(10px);padding:15px 20px;border:1px solid var(--border-glass);border-radius:15px;font-size:0.9rem;color:var(--text-muted)}
 
-    /* Products Luxury Grid */
     .products-grid-lux{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:25px}
     .lux-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-glass);border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;transition:.4s;position:relative;overflow:hidden}
     .lux-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--primary-cyan),transparent);opacity:0;transition:.3s}
     .lux-card:hover{transform:translateY(-8px);border-color:var(--primary-cyan);box-shadow:0 15px 35px rgba(0,242,254,0.15)}
     .lux-card:hover::before{opacity:1}
-    
+
     .lux-img-box{width:100%;height:170px;background:rgba(0,0,0,0.2);border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;padding:10px}
     .lux-img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.5))}
-    
-    .lux-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .lux-rating{color:var(--gold);font-size:0.85rem;margin-bottom:10px;display:flex;align-items:center;gap:4px}
-    .lux-rating span{color:var(--text-muted)}
 
+    .lux-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .lux-specs{list-style:none;font-size:0.82rem;color:var(--text-muted);margin-bottom:15px}
     .lux-specs li{margin-bottom:4px}
 
     .lux-price-box{margin-top:auto}
-    .lux-price{font-size:1.35rem;font-weight:900;color:var(--primary-cyan);margin-bottom:12px}
+    .lux-price{font-size:1.35rem;font-weight:900;color:var(--primary-cyan);margin-bottom:2px}
+    .lux-price-note{font-size:0.72rem;color:var(--text-muted);margin-bottom:12px}
 
     .btn-lux-buy{display:block;background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));color:#fff;text-align:center;padding:10px;border-radius:12px;text-decoration:none;font-weight:700;font-size:0.9rem;transition:.3s}
     .btn-lux-buy:hover{opacity:.9;box-shadow:0 0 20px rgba(0,242,254,0.4)}
 
-    /* Modal Luxury */
-    .modal-lux{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(5,7,11,0.8);backdrop-filter:blur(15px);display:none;justify-content:center;align-items:center;z-index:2000}
-    .modal-lux-content{background:var(--bg-card);backdrop-filter:blur(25px);border:1px solid var(--border-glass);padding:35px;border-radius:25px;width:420px;max-width:90%;color:#fff}
-    .modal-lux-content h3{margin-bottom:15px;color:var(--primary-cyan)}
-    .modal-lux-content input{width:100%;padding:12px;margin-bottom:20px;background:rgba(255,255,255,0.05);border:1px solid var(--border-glass);border-radius:12px;color:#fff;outline:none}
-    .modal-lux-content button{background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));border:none;padding:10px 22px;font-weight:bold;border-radius:12px;color:#fff;cursor:pointer}
-
-    /* AI Chat Glass */
     .ai-btn-lux{position:fixed;bottom:30px;left:30px;background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple));color:#fff;width:65px;height:65px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:1.6rem;cursor:pointer;box-shadow:0 0 25px rgba(0,242,254,0.4);z-index:1500;transition:.3s}
     .ai-btn-lux:hover{transform:scale(1.1)}
-    .ai-win-lux{position:fixed;bottom:110px;left:30px;width:360px;height:420px;background:var(--bg-card);backdrop-filter:blur(30px);border:1px solid var(--border-glass);border-radius:25px;display:none;flex-direction:column;z-index:1500;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+    .ai-win-lux{position:fixed;bottom:110px;left:30px;width:360px;max-width:calc(100vw - 40px);height:420px;background:rgba(10,14,23,0.97);backdrop-filter:blur(30px);border:1px solid var(--border-glass);border-radius:25px;display:none;flex-direction:column;z-index:1500;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
     .chat-head{background:rgba(255,255,255,0.03);padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-glass)}
+    .chat-head i.close{cursor:pointer;color:var(--text-muted)}
     .chat-body{flex:1;padding:15px;overflow-y:auto;font-size:0.9rem;display:flex;flex-direction:column;gap:12px}
-    .chat-msg{padding:10px 14px;border-radius:14px;max-width:85%}
+    .chat-msg{padding:10px 14px;border-radius:14px;max-width:85%;line-height:1.6}
     .chat-msg.bot{background:rgba(0,242,254,0.1);border:1px solid var(--primary-cyan);color:#fff;align-self:flex-start}
     .chat-msg.user{background:var(--neon-purple);color:#fff;align-self:flex-end}
+    .chat-msg a{color:var(--primary-cyan)}
     .chat-foot{display:flex;padding:12px;border-top:1px solid var(--border-glass)}
     .chat-foot input{flex:1;padding:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:12px;color:#fff;outline:none}
     .chat-foot button{background:var(--primary-cyan);color:#000;border:none;padding:10px 18px;border-radius:12px;margin-right:8px;font-weight:bold;cursor:pointer}
 
+    footer{max-width:1450px;margin:10px auto 40px;padding:20px 30px;color:var(--text-muted);font-size:0.82rem;line-height:1.9;border-top:1px solid var(--border-glass)}
+
     .toast-lux{position:fixed;bottom:30px;right:30px;background:rgba(18,24,38,0.95);backdrop-filter:blur(20px);border:1px solid var(--primary-cyan);color:#fff;padding:12px 25px;border-radius:20px;font-weight:bold;z-index:9999;box-shadow:0 0 25px rgba(0,242,254,0.3);transition:.4s;transform:translateY(100px);opacity:0}
     .toast-lux.show{transform:translateY(0);opacity:1}
 
-    @media(max-width:900px){.main-container{flex-direction:column}.sidebar-lux{width:100%}}
+    .cmp-label{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;cursor:pointer}
+    .cmp-label input{accent-color:#00f2fe;margin:0}
+    .cmp-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(18,24,38,0.97);border:1px solid var(--primary-cyan);border-radius:30px;padding:10px 20px;display:none;align-items:center;gap:12px;z-index:1600;box-shadow:0 0 25px rgba(0,242,254,0.3);font-size:0.9rem;white-space:nowrap}
+    .cmp-bar button,.modal-box button.close-btn{border:none;border-radius:20px;padding:8px 16px;font-weight:700;cursor:pointer;color:#fff}
+    .cmp-bar .go{background:linear-gradient(45deg,var(--primary-cyan),var(--neon-purple))}
+    .cmp-bar .clear,.modal-box button.close-btn{background:rgba(255,255,255,0.12)}
+    .modal-lux{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,7,11,0.85);backdrop-filter:blur(10px);display:none;justify-content:center;align-items:center;z-index:2000;padding:15px}
+    .modal-box{background:#0b1019;border:1px solid var(--border-glass);border-radius:20px;padding:25px;max-width:900px;width:100%;max-height:90vh;overflow:auto}
+    .modal-box h3{color:var(--primary-cyan);margin-bottom:15px}
+    .cmp-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-bottom:15px}
+    .cmp-table th,.cmp-table td{border:1px solid var(--border-glass);padding:10px;vertical-align:top;text-align:right}
+    .cmp-table th{color:var(--text-muted);width:90px;font-weight:600}
+    .cmp-table ul{list-style:none}
+    .cmp-table a{color:var(--primary-cyan);font-weight:700;text-decoration:none}
+    .guides{background:var(--bg-card);border:1px solid var(--border-glass);border-radius:20px;padding:20px;margin-bottom:25px}
+    .guides h2{font-size:1.1rem;margin-bottom:6px}
+    .guides p.sub{color:var(--text-muted);font-size:0.82rem;margin-bottom:12px;line-height:1.7}
+    .guide-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .guide-tabs button{background:rgba(0,242,254,0.08);border:1px solid var(--primary-cyan);color:var(--primary-cyan);padding:7px 14px;border-radius:20px;cursor:pointer;font-size:0.85rem;font-weight:700}
+    .guide-tabs button.active{background:var(--primary-cyan);color:#000}
+    .guide-pick{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--border-glass);flex-wrap:wrap}
+    .guide-pick .nm{font-weight:700}
+    .guide-pick .sp{color:var(--text-muted);font-size:0.8rem}
+    .guide-pick a{color:var(--primary-cyan);font-weight:700;text-decoration:none;font-size:0.85rem}
+    .stale{display:none;background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.35);color:#ffb3b3;padding:12px 18px;border-radius:14px;margin-bottom:20px;font-size:0.88rem;line-height:1.7}
+
+    @media(max-width:900px){.main-container{flex-direction:column;padding:0 15px}.sidebar-lux{width:100%}.banner-lux{padding:25px}.banner-lux h1{font-size:1.6rem}}
   </style>
 </head>
 <body>
 
-  <div id="toast" class="toast-lux">تم الإجراء بنجاح</div>
-
-  <div class="modal-lux" id="inventoryModal">
-    <div class="modal-lux-content">
-      <h3><i class="fa-solid fa-boxes-stacked"></i> لوحة إدارة المخزون الفاخرة</h3>
-      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:15px">تحديث نسبة الخصم اللحظية على الأجهزة:</p>
-      <input type="number" id="discountInput" placeholder="نسبة التخفيض % (مثال: 5)">
-      <button onclick="applyDiscount()">تطبيق التحديث</button>
-      <button style="background:rgba(255,255,255,0.1);margin-right:8px" onclick="closeModal()">إغلاق</button>
-    </div>
-  </div>
+  <div id="toast" class="toast-lux"></div>
 
   <header>
     <div class="header-top">
       <a href="#" class="logo"><i class="fa-solid fa-atom"></i> HAMOD <span>LABS</span></a>
       <div class="search-box-lux">
-        <select id="catSelect" onchange="applyFilter()">
+        <select id="catSelect" onchange="setCategory(this.value)">
           <option value="all" style="background:#05070b">كل الأقسام</option>
           <option value="workstation" style="background:#05070b">Workstations</option>
           <option value="gaming" style="background:#05070b">Gaming</option>
           <option value="phone" style="background:#05070b">موبايلات</option>
           <option value="accessory" style="background:#05070b">أكسسوارات</option>
         </select>
-        <input type="text" id="searchInput" onkeyup="applyFilter()" placeholder="ابحث عن أحدث الأجهزة...">
-        <button class="search-btn-lux" onclick="applyFilter()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" id="searchInput" oninput="applyFilter()" placeholder="ابحث عن جهاز...">
+        <button class="search-btn-lux" onclick="applyFilter()" aria-label="بحث"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
     </div>
 
-    <div class="shark-metrics-lux">
-      <span><i class="fa-solid fa-chart-line"></i> أرباح الأفلييت التقديرية: <strong id="profitCounter" style="color:#fff">0 ج.م</strong> (Tag: mohamed0650-21)</span>
-      <button class="lux-btn" onclick="openModal()"><i class="fa-solid fa-gear"></i> لوحة التحكم</button>
+    <div class="info-bar">
+      <span><i class="fa-solid fa-circle-info"></i> بنكسب عمولة من المشتريات المؤهلة عبر روابطنا على أمازون، من غير أي زيادة عليك.</span>
+      <span>آخر تحديث للأسعار: <strong id="lastUpdated"></strong></span>
     </div>
 
-    <div class="nav-sub-lux">
-      <a href="#" onclick="setCategory('all', this)">الكل</a>
-      <a href="#" onclick="setCategory('workstation', this)">Workstations</a>
-      <a href="#" onclick="setCategory('gaming', this)">Gaming</a>
-      <a href="#" onclick="setCategory('phone', this)">موبايلات</a>
-      <a href="#" onclick="setCategory('accessory', this)">أكسسوارات</a>
+    <div class="nav-sub-lux" id="navSub">
+      <a href="#" data-cat="all" class="active">الكل</a>
+      <a href="#" data-cat="workstation">Workstations</a>
+      <a href="#" data-cat="gaming">Gaming</a>
+      <a href="#" data-cat="phone">موبايلات</a>
+      <a href="#" data-cat="accessory">أكسسوارات</a>
     </div>
   </header>
 
   <div class="main-container">
     <aside class="sidebar-lux">
       <h3>الأقسام والفئات</h3>
-      <div class="filter-group">
-        <label><input type="radio" name="fcat" checked onclick="setCategory('all', null)"> الكل</label>
-        <label><input type="radio" name="fcat" onclick="setCategory('workstation', null)"> Workstations</label>
-        <label><input type="radio" name="fcat" onclick="setCategory('gaming', null)"> Gaming</label>
-        <label><input type="radio" name="fcat" onclick="setCategory('phone', null)"> موبايلات</label>
-        <label><input type="radio" name="fcat" onclick="setCategory('accessory', null)"> أكسسوارات</label>
+      <div class="filter-group" id="radioGroup">
+        <label><input type="radio" name="fcat" value="all" checked> الكل</label>
+        <label><input type="radio" name="fcat" value="workstation"> Workstations</label>
+        <label><input type="radio" name="fcat" value="gaming"> Gaming</label>
+        <label><input type="radio" name="fcat" value="phone"> موبايلات</label>
+        <label><input type="radio" name="fcat" value="accessory"> أكسسوارات</label>
       </div>
 
       <h3>فلترة الميزانية</h3>
       <div class="filter-group">
-        <input type="number" id="maxBudget" placeholder="الميزانية القصوى (ج.م)">
+        <input type="number" id="maxBudget" placeholder="الميزانية القصوى (ج.م)" min="0">
         <button onclick="filterByBudget()">تصفية النتائج</button>
+        <button class="ghost" onclick="resetFilters()">مسح الفلاتر</button>
       </div>
     </aside>
 
     <main class="content-lux">
-      <div class="flash-lux">
-        <div>
-          <h3><i class="fa-solid fa-bolt"></i> عروض الفلاش الحصرية</h3>
-          <p style="font-size:0.9rem;color:var(--text-muted)">خصومات فورية لفترة محدودة على أقوى أجهزة اللابتوب الهندسية.</p>
-        </div>
-        <button style="background:#ff9900;color:#000;border:none;padding:10px 20px;border-radius:12px;font-weight:bold;cursor:pointer" onclick="triggerFlashSale()">تفعيل العرض ⚡</button>
+      <div class="banner-lux">
+        <h1>متجر العتاد الرقمي</h1>
+        <p>تشكيلة من اللابتوبات والورك ستيشن وأجهزة الجيمينج والموبايلات، بأسعار مصرية تقريبية وروابط شراء من أمازون مصر.</p>
       </div>
 
-      <div class="banner-lux">
-        <h1>متجر العتاد الرقمي الفاخر</h1>
-        <p>اكتشف تشكيلة النخبة من اللابتوبات، الورك ستيشن، وأجهزة الجيمينج بتصميم عصري وأسعار مصرية[cite: 1].</p>
+      <div class="notice">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        الأسعار المعروضة تقريبية ومكتوبة يدويًا، وبتتغير على أمازون باستمرار. السعر النهائي هو اللي بيظهر لك على صفحة أمازون وقت الشراء.
       </div>
+
+      <div class="stale" id="staleNotice"></div>
+
+      <section class="guides" id="guides">
+        <h2><i class="fa-solid fa-lightbulb"></i> ترشيحات سريعة حسب الميزانية</h2>
+        <p class="sub" id="guideSub"></p>
+        <div class="guide-tabs" id="guideTabs"></div>
+        <div id="guidePicks"></div>
+      </section>
 
       <div class="results-bar-lux">
         <span id="countResults">جاري التحميل...</span>
-        <span>الوسم النشط: mohamed0650-21[cite: 1]</span>
       </div>
 
       <div class="products-grid-lux" id="grid"></div>
     </main>
   </div>
 
-  <div class="ai-btn-lux" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></div>
+  <footer>
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>بصفتنا من المشاركين في برنامج أمازون للتسويق بالعمولة، نحصل على عمولة من المشتريات المؤهلة. أمازون وشعارها علامات تجارية تخص Amazon.com, Inc. وشركاتها التابعة.</p>
+    <p>الموقع بيستخدم Google Analytics لإحصائيات الزيارات والنقرات بشكل مجمّع، من غير ما نجمع اسمك أو بياناتك الشخصية.</p>
+    <p>صور المنتجات للتوضيح فقط، ومواصفات الأجهزة والأسعار الفعلية بتتأكد منها على صفحة المنتج في أمازون.</p>
+  </footer>
+
+  <div class="cmp-bar" id="cmpBar">
+    <span id="cmpCount"></span>
+    <button class="go" onclick="openCompare()">قارن الآن</button>
+    <button class="clear" onclick="clearCompare()">مسح</button>
+  </div>
+  <div class="modal-lux" id="cmpModal" onclick="if(event.target===this)closeCompare()">
+    <div class="modal-box">
+      <h3><i class="fa-solid fa-scale-balanced"></i> مقارنة المنتجات</h3>
+      <div id="cmpBody"></div>
+      <button class="close-btn" onclick="closeCompare()">إغلاق</button>
+    </div>
+  </div>
+
+  <div class="ai-btn-lux" onclick="toggleChat()" role="button" aria-label="مساعد البحث"><i class="fa-solid fa-robot"></i></div>
   <div class="ai-win-lux" id="chatWindow">
     <div class="chat-head">
-      <span><i class="fa-solid fa-brain" style="color:var(--primary-cyan)"></i> المساعد الذكي الفاخر</span>
-      <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
+      <span><i class="fa-solid fa-robot"></i> مساعد البحث</span>
+      <i class="fa-solid fa-xmark close" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">أهلاً يا حمودي! المساعد الذكي جاهز لمساعدتك في اختيار الجهاز الأنسب لاحتياجك 🚀</div>
+      <div class="chat-msg bot">أهلاً بيك! اكتب نوع الجهاز وميزانيتك، مثلاً: "لابتوب جيمنج 35000" أو "موبايل 15000"، وأنا هرشح لك من المنتجات الموجودة.</div>
     </div>
     <div class="chat-foot">
-      <input type="text" id="userInput" placeholder="اسأل عن جهاز..." onkeypress="handleKey(event)">
+      <input type="text" id="userInput" placeholder="اكتب طلبك..." onkeydown="handleKey(event)">
       <button onclick="sendMsg()">إرسال</button>
     </div>
   </div>
 
   <script>
+    // ===== إعدادات =====
     const AFFILIATE_TAG = 'mohamed0650-21';
-    let estimatedProfit = 0;
+    const LAST_UPDATED  = '2026-10-10';   // غيّر التاريخ ده كل ما تحدّث الأسعار
+    const GA_ID = 'G-409187QFR3';         // Measurement ID بتاع Google Analytics
+
+    // ===== إحصائيات الزيارات والنقرات (Google Analytics 4) =====
+    function track(name, params) {
+      try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) {}
+    }
+    (function initAnalytics() {
+      if (!GA_ID) return;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID);
+    })();
+
+    // ===== روابط المنتجات المباشرة =====
+    // حط الـ ASIN هنا لكل منتج (الاسم لازم يكون مطابق للاسم في add(...)).
+    // المنتج اللي ليه ASIN بيفتح صفحته مباشرة على أمازون مصر، واللي معندوش بيفتح نتيجة بحث.
+    const ASINS = {
+      "سماعة بلوتوث لاسلكية Over-Ear": "B0H8WSDJDM",
+      // "Dell Precision 5520": "B0XXXXXXXX",
+      // "Xiaomi 13T": "B0XXXXXXXX",
+    };
+
+    // ===== تحديث الأسعار =====
+    // لو حطيت سعر هنا بيتقدّم على السعر المكتوب في add(...). الاسم لازم يكون مطابق بالظبط.
+    const PRICES = {
+      // "Xiaomi 13T": "26,500 ج.م",
+    };
+
     const products = [];
-    const REAL_IMAGES = {"Dell Precision 5520":"https://product.hstatic.net/1000331874/product/dell_precision_m5520.jpg","HP EliteBook 840 G6":"https://www.untech.com.au/cdn/shop/files/hp-elitebook-840-g6-laptop-14-fhd-i7-8565u-16gb-ram-256gb-ssd-win-11-2113140_800x.png?v=1767452347","Dell Precision 7530 Workstation":"https://d2e6ccujb3mkqf.cloudfront.net/240a356b-a440-4be2-8154-ddb6849df012-1_9bb18202-a628-4ce4-aea1-5e1899255b9d.jpg","Lenovo ThinkPad P52":"https://laptopsking.com/cdn/shop/files/LenovoThinkpadP52i78th_4.jpg?v=1696255598&width=1946","Apple MacBook Pro M2 Max":"https://www.apple.com/v/macbook-pro/az/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg","HP ZBook Fury 15 G7":"https://www.laptopcentrum.nl/image/cache/catalog/000/NewFolder/fury%2015%20g7-1-800x800w.jpg","Lenovo ThinkPad P1 Gen 3":"https://cdn.izotcomputers.com/10381-large_default/mobile-workstation-second-hand-lenovo-thinkpad-p1-gen-3.jpg","Dell Latitude 7420":"https://www.cto-technology.com/cdn/shop/files/7420bk-1.jpg?v=1757362979","Lenovo ThinkPad T14 Gen 2":"https://olcha.uz/image/700x700/products/2022-07-07/noutbuk-lenovo-thinkpad-t14-gen-2-i7-1165g7-16512gb-ssd-14-63802-0.jpeg","Dell XPS 15 9520":"https://microless.com/cdn/products/fcb4d769caf604afd4e52241e619b006-hi.jpg","Apple MacBook Air M2":"https://zshop.vn/images/detailed/120/macbook-air-midnight-gallery1-20220606_aup3-bx.jpg","Apple MacBook Pro 14 M3 Pro":"https://media.ldlc.com/r1600/ld/products/00/06/07/94/LD0006079429.jpg","HP EliteBook 850 G7":"https://www.buyitdirect.ie/Images/T1850G7i732GB512GBW11P_1_Supersize.jpg?v=3","HP Pavilion 15":"https://www.laptoparena.net/images/HP_Pavilion_15_Laptop_800R2EA_image_1.jpg","Acer Swift 3":"https://f00.esfr.pl/foto/6/63108743353/95aa89a53f1a8d5a3f6abfafb871db4/archival-acer-laptop-swift3-r5-8gb-512ssd-w10-silver%2C63108743353_5.webp","Lenovo Legion 5 Pro":"https://psref.lenovo.com/syspool/Sys/PDF/Legion/Lenovo_Legion_5_Pro_16ACH6H/Lenovo_Legion_5_Pro_16ACH6H_Spec.pdf","ASUS ROG Strix G15":"https://techgurustore.in/product-images/51wQ18eozvL.jpg/1282329000023390402/1100x1100","Acer Nitro 5 Gaming":"https://static2-ecemea.acer.com/media/catalog/product/_/_/________a__acer-nitro-5_an515-44_red-kb_modelmain_1_1_nh.q9heh.001.png","ASUS TUF Gaming F15":"https://e-katalog.kz/jpg_zoom1/2509880.jpg","Lenovo LOQ 15":"https://gfx3.senetic.com/akeneo-catalog/e/d/6/0/ed60e420048a1df0026c078d95eca467a261d7f0_1767820_83GS007LPB_image1.jpg","Acer Predator Helios 300":"https://s1.cel.ro/images/mari/2023/11/08/Laptop-Gaming-ACER-Predator-PH315-55-i9-12900H-15-6inch-QHD-IPS-SlimBezel-32GB-1TB-SSD-RTX-3080-8GB-Win11-Home-Abyssal-Black-NH-QGMEX-007.jpg","MSI Raider GE77":"https://laptopmedia.com/wp-content/uploads/2022/07/61uxDTnehrL._AC_SL1500_.jpg","Razer Blade 15":"https://media.power-cdn.net/images/h-af755b25fc3f9c29f68615868ad4935e/products/1157016/1157016_4_600x600_t_g.webp","ASUS ROG Zephyrus G14":"https://media.ldlc.com/r1600/ld/products/00/05/95/23/LD0005952300.jpg","Dell G15 5530":"https://laptopkhanhtran.vn/pic/product/Dell_Gami_638219236669530959_HasThumb.png","Gigabyte G5 KE":"https://product.hstatic.net/1000296652/product/gigabyte_g5_ke_310c0cea8f1742868cf6d87cefdb598f.png","Samsung Galaxy S23 Ultra":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-s918bzkgmea/gallery/levant-galaxy-s23-ultra-s918-sm-s918bzkgmea-thumb-535237667?$344_344_PNG$","Samsung Galaxy A54 5G":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-a546elvamea/gallery/levant-galaxy-a54-5g-sm-a546-sm-a546elvamea-thumb-535257851?$344_344_PNG$","iPhone 14 Pro Max":"https://cdn.idealo.com/folder/Product/202093/7/202093780/s1_produktbild_max/apple-iphone-14-pro-max-1tb-space-schwarz.jpg","iPhone 13":"https://www.iphonespreowned.co.za/cdn/shop/products/iPhone-13-Blue-2_4b95397d-f379-4d88-840c-e0c070f7b4d2.png?v=1660160662","Xiaomi Redmi Note 12 Pro":"https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-12-pro-5g/pc/section2-01.jpg","Xiaomi 13T":"https://skay.ua/235925/xiaomi-13t-8256gb-meadow-green-nfc-eu.jpg","OPPO Reno 10":"https://api.priceinkenya.com/media/133864/conversions/Oppo-Reno-10-a-original.webp","realme 11 Pro":"https://cdn.kalvo.com/uploads/img/gallery/51439-realme-11-pro-3.jpg","Samsung Galaxy Tab S9":"https://a-static.mlcdn.com.br/800x800/tablet-samsung-galaxy-tab-s9-256gb-tela-de-11-wi-fi-android-13-grafite-sm-x710nzahzto/kabum/474712/8367cb98d9a6115f9bbb45444c551012.jpg","iPad 10th Generation":"https://i.ebayimg.com/images/g/9-kAAOSwr3xkC1Ri/s-l1200.jpg","Lenovo Tab P11":"https://www.ietresinformatica.com/media/catalog/product/cache/81c729132649484cb6d742515cd80d6c/l/e/lenovo_tab_p11_sg_01_800x800.jpg","هارد SSD خارجي Samsung T7 1TB":"https://paksell.pk/cdn/shop/products/samsung-t7-portable-ssd-1tb-usb32-gen-2-type-c-external-ssd-438520_959x959.jpg?v=1691492418","لوجيتك G102":"https://spacenet.tn/109151-large_default/souris-gaming-spirit-of-gamer-logitech-g102-noir.jpg"};
+    const REAL_IMAGES = {"Dell Precision 5520":"https://product.hstatic.net/1000331874/product/dell_precision_m5520.jpg","HP EliteBook 840 G6":"https://www.untech.com.au/cdn/shop/files/hp-elitebook-840-g6-laptop-14-fhd-i7-8565u-16gb-ram-256gb-ssd-win-11-2113140_800x.png?v=1767452347","Dell Precision 7530 Workstation":"https://d2e6ccujb3mkqf.cloudfront.net/240a356b-a440-4be2-8154-ddb6849df012-1_9bb18202-a628-4ce4-aea1-5e1899255b9d.jpg","Lenovo ThinkPad P52":"https://laptopsking.com/cdn/shop/files/LenovoThinkpadP52i78th_4.jpg?v=1696255598&width=1946","Apple MacBook Pro M2 Max":"https://www.apple.com/v/macbook-pro/az/images/overview/hero/hero_intro_endframe__e6khcva4hkeq_large.jpg","HP ZBook Fury 15 G7":"https://www.laptopcentrum.nl/image/cache/catalog/000/NewFolder/fury%2015%20g7-1-800x800w.jpg","Lenovo ThinkPad P1 Gen 3":"https://cdn.izotcomputers.com/10381-large_default/mobile-workstation-second-hand-lenovo-thinkpad-p1-gen-3.jpg","Dell Latitude 7420":"https://www.cto-technology.com/cdn/shop/files/7420bk-1.jpg?v=1757362979","Lenovo ThinkPad T14 Gen 2":"https://olcha.uz/image/700x700/products/2022-07-07/noutbuk-lenovo-thinkpad-t14-gen-2-i7-1165g7-16512gb-ssd-14-63802-0.jpeg","Dell XPS 15 9520":"https://microless.com/cdn/products/fcb4d769caf604afd4e52241e619b006-hi.jpg","Apple MacBook Air M2":"https://zshop.vn/images/detailed/120/macbook-air-midnight-gallery1-20220606_aup3-bx.jpg","Apple MacBook Pro 14 M3 Pro":"https://media.ldlc.com/r1600/ld/products/00/06/07/94/LD0006079429.jpg","HP EliteBook 850 G7":"https://www.buyitdirect.ie/Images/T1850G7i732GB512GBW11P_1_Supersize.jpg?v=3","HP Pavilion 15":"https://www.laptoparena.net/images/HP_Pavilion_15_Laptop_800R2EA_image_1.jpg","Acer Swift 3":"https://f00.esfr.pl/foto/6/63108743353/95aa89a53f1a8d5a3f6abfafb871db4/archival-acer-laptop-swift3-r5-8gb-512ssd-w10-silver%2C63108743353_5.webp","ASUS ROG Strix G15":"https://techgurustore.in/product-images/51wQ18eozvL.jpg/1282329000023390402/1100x1100","Acer Nitro 5 Gaming":"https://static2-ecemea.acer.com/media/catalog/product/_/_/________a__acer-nitro-5_an515-44_red-kb_modelmain_1_1_nh.q9heh.001.png","ASUS TUF Gaming F15":"https://e-katalog.kz/jpg_zoom1/2509880.jpg","Lenovo LOQ 15":"https://gfx3.senetic.com/akeneo-catalog/e/d/6/0/ed60e420048a1df0026c078d95eca467a261d7f0_1767820_83GS007LPB_image1.jpg","Acer Predator Helios 300":"https://s1.cel.ro/images/mari/2023/11/08/Laptop-Gaming-ACER-Predator-PH315-55-i9-12900H-15-6inch-QHD-IPS-SlimBezel-32GB-1TB-SSD-RTX-3080-8GB-Win11-Home-Abyssal-Black-NH-QGMEX-007.jpg","MSI Raider GE77":"https://laptopmedia.com/wp-content/uploads/2022/07/61uxDTnehrL._AC_SL1500_.jpg","Razer Blade 15":"https://media.power-cdn.net/images/h-af755b25fc3f9c29f68615868ad4935e/products/1157016/1157016_4_600x600_t_g.webp","ASUS ROG Zephyrus G14":"https://media.ldlc.com/r1600/ld/products/00/05/95/23/LD0005952300.jpg","Dell G15 5530":"https://laptopkhanhtran.vn/pic/product/Dell_Gami_638219236669530959_HasThumb.png","Gigabyte G5 KE":"https://product.hstatic.net/1000296652/product/gigabyte_g5_ke_310c0cea8f1742868cf6d87cefdb598f.png","Samsung Galaxy S23 Ultra":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-s918bzkgmea/gallery/levant-galaxy-s23-ultra-s918-sm-s918bzkgmea-thumb-535237667?$344_344_PNG$","Samsung Galaxy A54 5G":"https://images.samsung.com/is/image/samsung/p6pim/levant/sm-a546elvamea/gallery/levant-galaxy-a54-5g-sm-a546-sm-a546elvamea-thumb-535257851?$344_344_PNG$","iPhone 14 Pro Max":"https://cdn.idealo.com/folder/Product/202093/7/202093780/s1_produktbild_max/apple-iphone-14-pro-max-1tb-space-schwarz.jpg","iPhone 13":"https://www.iphonespreowned.co.za/cdn/shop/products/iPhone-13-Blue-2_4b95397d-f379-4d88-840c-e0c070f7b4d2.png?v=1660160662","Xiaomi Redmi Note 12 Pro":"https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-12-pro-5g/pc/section2-01.jpg","Xiaomi 13T":"https://skay.ua/235925/xiaomi-13t-8256gb-meadow-green-nfc-eu.jpg","OPPO Reno 10":"https://api.priceinkenya.com/media/133864/conversions/Oppo-Reno-10-a-original.webp","realme 11 Pro":"https://cdn.kalvo.com/uploads/img/gallery/51439-realme-11-pro-3.jpg","Samsung Galaxy Tab S9":"https://a-static.mlcdn.com.br/800x800/tablet-samsung-galaxy-tab-s9-256gb-tela-de-11-wi-fi-android-13-grafite-sm-x710nzahzto/kabum/474712/8367cb98d9a6115f9bbb45444c551012.jpg","iPad 10th Generation":"https://i.ebayimg.com/images/g/9-kAAOSwr3xkC1Ri/s-l1200.jpg","Lenovo Tab P11":"https://www.ietresinformatica.com/media/catalog/product/cache/81c729132649484cb6d742515cd80d6c/l/e/lenovo_tab_p11_sg_01_800x800.jpg","هارد SSD خارجي Samsung T7 1TB":"https://paksell.pk/cdn/shop/products/samsung-t7-portable-ssd-1tb-usb32-gen-2-type-c-external-ssd-438520_959x959.jpg?v=1691492418","لوجيتك G102":"https://spacenet.tn/109151-large_default/souris-gaming-spirit-of-gamer-logitech-g102-noir.jpg"};
 
     function fallbackSvg(title){
-      const safe = String(title).replace(/[&<>"']/g, '');
+      const safe = String(title).replace(/[&<>"'`]/g, '');
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500"><rect width="800" height="500" rx="10" fill="#121826"/><text x="400" y="250" fill="#00f2fe" font-size="28" text-anchor="middle" font-family="Arial">${safe}</text></svg>`;
       return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
     }
 
-    function add(category, title, price, specs, q) {
-      let cleanPrice = parseInt(price.replace(/[^0-9]/g, '')) || 0;
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // add(القسم, الاسم, السعر, المواصفات, كلمة البحث, ASIN اختياري)
+    // لو حطيت ASIN الرابط بيفتح صفحة المنتج نفسها مباشرة، لو لأ بيفتح نتيجة بحث على أمازون مصر.
+    function add(category, title, price, specs, q, asin) {
+      asin = asin || ASINS[title];
+      price = PRICES[title] || price;
+      const cleanPrice = parseInt(price.replace(/[^0-9]/g, '')) || 0;
+      const amazonUrl = asin
+        ? 'https://www.amazon.eg/dp/' + encodeURIComponent(asin) + '?tag=' + AFFILIATE_TAG
+        : 'https://www.amazon.eg/s?k=' + encodeURIComponent(q || title) + '&tag=' + AFFILIATE_TAG;
       products.push({
         id: products.length + 1, title, category, price, cleanPrice, specs,
         imageUrl: REAL_IMAGES[title] || '',
-        amazonUrl: 'https://www.amazon.eg/s?k=' + encodeURIComponent(q || title) + '&tag=' + AFFILIATE_TAG
+        amazonUrl, direct: !!asin
       });
     }
 
@@ -249,7 +324,6 @@
     add("workstation","Lenovo IdeaPad Slim 5","19,500 ج.م",["Ryzen 5 5500U", "16GB RAM", "512GB SSD"],"Lenovo IdeaPad Slim 5");
     add("workstation","HP Pavilion 15","21,500 ج.م",["Core i5-1235U", "8GB RAM", "512GB SSD"],"HP Pavilion 15");
     add("workstation","Acer Swift 3","20,500 ج.م",["Ryzen 7 5700U", "16GB RAM", "512GB SSD"],"Acer Swift 3");
-
     add("gaming","Lenovo Legion 5 Pro","34,500 ج.م",["Ryzen 7 5800H", "16GB RAM", "RTX 3060"],"Lenovo Legion 5");
     add("gaming","ASUS ROG Strix G15","38,000 ج.م",["Ryzen 9 5900HX", "16GB RAM", "RTX 3070"],"ASUS ROG Strix G15");
     add("gaming","Acer Nitro 5 Gaming","29,500 ج.م",["Core i5-11400H", "16GB RAM", "RTX 3050"],"Acer Nitro 5");
@@ -265,7 +339,6 @@
     add("gaming","Razer Blade 15","95,000 ج.م",["Core i7-12800H", "16GB RAM", "RTX 3070 Ti"],"Razer Blade 15");
     add("gaming","Gigabyte G5 KE","27,500 ج.م",["Core i5-12500H", "16GB RAM", "RTX 3060"],"Gigabyte G5 KE");
     add("gaming","Alienware m15 R7","85,000 ج.م",["Core i7-12700H", "32GB RAM", "RTX 3070 Ti"],"Alienware m15 R7");
-
     add("phone","Samsung Galaxy S23 Ultra","48,000 ج.م",["Snapdragon 8 Gen 2", "12GB RAM", "كاميرا 200MP"],"Samsung Galaxy S23 Ultra");
     add("phone","Samsung Galaxy A54 5G","16,500 ج.م",["Exynos 1380", "8GB RAM", "شاشة 120Hz"],"Samsung Galaxy A54");
     add("phone","iPhone 14 Pro Max","62,000 ج.م",["A16 Bionic", "6GB RAM", "Dynamic Island"],"iPhone 14 Pro Max");
@@ -277,118 +350,278 @@
     add("phone","Samsung Galaxy Tab S9","38,000 ج.م",["Snapdragon 8 Gen 2", "شاشة AMOLED", "مقاوم للماء"],"Samsung Galaxy Tab S9");
     add("phone","iPad 10th Generation","22,000 ج.م",["A14 Bionic", "Liquid Retina", "USB-C"],"iPad 10th Generation");
     add("phone","Lenovo Tab P11","8,500 ج.م",["Helio G99", "4GB RAM", "شاشة 2K"],"Lenovo Tab P11");
-
     add("accessory","سماعة جيمنج محيطية 7.1 RGB Headset","1,250 ج.م",["صوت محيطي 7.1", "مايك عازل للضوضاء", "RGB"],"Gaming Headset 7.1");
     add("accessory","باور بنك Anker Fast Charging 20,000mAh","1,800 ج.م",["سعة 20000mAh", "شحن سريع PD", "يدعم اللابتوب"],"Anker Powerbank 20000");
     add("accessory","وصلة كابل شاحن Type-C مضفر سريع 100W","350 ج.م",["طول 2 متر قماش مضفر", "Fast Charge"],"Type C Cable 100W");
     add("accessory","لوجيتك G102","650 ج.م",["8000 DPI", "إضاءة RGB LIGHTSYNC"],"Logitech G102");
     add("accessory","هارد SSD خارجي Samsung T7 1TB","3,600 ج.م",["سرعة 1050MB/s", "USB 3.2"],"Samsung T7 1TB");
 
+    // منتج بـ ASIN حقيقي (رابط مباشر)
+    add("accessory","سماعة بلوتوث لاسلكية Over-Ear","360 ج.م",["بلوتوث لاسلكية", "تصميم Over-Ear"],"Bluetooth Headphone","B0H8WSDJDM");
+
+    // ===== الحالة =====
     let currentCat = 'all';
+    let maxBudget = 0;
+    const compareIds = new Set();
 
     function renderProducts(items) {
       const grid = document.getElementById('grid');
       document.getElementById('countResults').textContent = `النتائج المعروضة: ${items.length} منتج`;
-      if (!items.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">لا توجد منتجات مطابقة</div>'; return; }
+      if (!items.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">لا توجد منتجات مطابقة</div>';
+        return;
+      }
       grid.innerHTML = items.map(p => `
         <div class="lux-card">
           <div>
             <div class="lux-img-box">
-              <img class="lux-img" src="${p.imageUrl || fallbackSvg(p.title)}" alt="${p.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=fallbackSvg('${p.title}')">
+              <img class="lux-img" src="${escapeHtml(p.imageUrl || fallbackSvg(p.title))}" alt="${escapeHtml(p.title)}" loading="lazy" referrerpolicy="no-referrer" data-title="${escapeHtml(p.title)}" onerror="this.onerror=null;this.src=fallbackSvg(this.dataset.title)">
             </div>
-            <div class="lux-title">${p.title}</div>
-            <div class="lux-rating"><i class="fa-solid fa-star"></i><span>4.8</span></div>
-            <ul class="lux-specs">${p.specs.map(s => `<li>• ${s}</li>`).join('')}</ul>
+            <div class="lux-title">${escapeHtml(p.title)}</div>
+            <ul class="lux-specs">${p.specs.map(s => `<li>• ${escapeHtml(s)}</li>`).join('')}</ul>
+            <label class="cmp-label"><input type="checkbox" data-cid="${p.id}" ${compareIds.has(p.id) ? 'checked' : ''}> قارن</label>
           </div>
           <div class="lux-price-box">
-            <div class="lux-price">${p.price}</div>
-            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="btn-lux-buy" onclick="trackClick(${p.cleanPrice})"><i class="fa-brands fa-amazon"></i> شراء من أمازون</a>
+            <div class="lux-price">${escapeHtml(p.price)}</div>
+            <div class="lux-price-note">سعر تقريبي — تأكد منه على أمازون</div>
+            <a href="${escapeHtml(p.amazonUrl)}" target="_blank" rel="sponsored noopener noreferrer" class="btn-lux-buy" data-pid="${p.id}"><i class="fa-brands fa-amazon"></i> ${p.direct ? 'شراء من أمازون' : 'شوف على أمازون'}</a>
           </div>
         </div>
       `).join('');
     }
 
-    function applyFilter() {
+    function getFiltered() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
-      const selectCat = document.getElementById('catSelect').value;
-      if(selectCat !== 'all') currentCat = selectCat;
-      renderProducts(products.filter(p => 
+      return products.filter(p =>
         (currentCat === 'all' || p.category === currentCat) &&
-        (p.title.toLowerCase().includes(q) || p.specs.join(' ').toLowerCase().includes(q))
-      ));
+        (!maxBudget || p.cleanPrice <= maxBudget) &&
+        (!q || p.title.toLowerCase().includes(q) || p.specs.join(' ').toLowerCase().includes(q))
+      );
     }
 
-    function setCategory(cat, el) {
+    function applyFilter() { renderProducts(getFiltered()); }
+
+    function syncCategoryUI() {
+      document.getElementById('catSelect').value = currentCat;
+      document.querySelectorAll('#navSub a').forEach(a => a.classList.toggle('active', a.dataset.cat === currentCat));
+      document.querySelectorAll('#radioGroup input').forEach(r => r.checked = (r.value === currentCat));
+    }
+
+    function setCategory(cat) {
       currentCat = cat;
-      document.getElementById('catSelect').value = cat;
+      syncCategoryUI();
       applyFilter();
     }
-
-    function trackClick(price) {
-      let commission = Math.floor(price * 0.03);
-      estimatedProfit += commission;
-      document.getElementById('profitCounter').textContent = estimatedProfit + ' ج.م';
-      showToast("تم تسجيل النقرة وحساب عمولة الأفلييت بنجاح! 💰");
-    }
-
-    function openModal() { document.getElementById('inventoryModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('inventoryModal').style.display = 'none'; }
-    function applyDiscount() {
-      const val = parseInt(document.getElementById('discountInput').value);
-      if(isNaN(val) || val <= 0) { showToast("أدخل نسبة تخفيض صحيحة"); return; }
-      products.forEach(p => {
-        p.cleanPrice = Math.floor(p.cleanPrice * (1 - val / 100));
-        p.price = p.cleanPrice.toLocaleString() + ' ج.م';
-      });
-      renderProducts(products);
-      closeModal();
-      showToast(`تم تطبيق خصم ${val}% على كافة منتجات المعرض لحظياً! 📉`);
-    }
-
-    function triggerFlashSale() {
-      products.forEach(p => {
-        p.cleanPrice = Math.floor(p.cleanPrice * 0.9);
-        p.price = p.cleanPrice.toLocaleString() + ' ج.م (فلاش)';
-      });
-      renderProducts(products);
-      showToast("⚡ تم تفعيل عروض الفلاش وحرق الأسعار لكافة الأجهزة!");
-    }
-
-    function toggleChat() {
-      const win = document.getElementById('chatWindow');
-      win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
-    }
-    function sendMsg() {
-      const input = document.getElementById('userInput');
-      const text = input.value.trim();
-      if(!text) return;
-      const body = document.getElementById('chatBody');
-      body.innerHTML += `<div class="chat-msg user">${text}</div>`;
-      input.value = '';
-      setTimeout(() => {
-        let reply = "أهلاً يا حمودي! جهازي المقترح ليك هو Dell Precision 5520 أو Lenovo Legion 5 Pro، اتفضل اتصفحهم في المعرض فوق! 🚀";
-        if(text.includes('موبايل')) reply = "أفضل موبايل متاح حالياً هو Samsung Galaxy S23 Ultra أو iPhone 14 Pro Max!";
-        body.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
-        body.scrollTop = body.scrollHeight;
-      }, 500);
-    }
-    function handleKey(e) { if(e.key === 'Enter') sendMsg(); }
 
     function filterByBudget() {
       const max = parseInt(document.getElementById('maxBudget').value);
       if (isNaN(max) || max <= 0) { showToast("أدخل ميزانية صحيحة"); return; }
-      const matched = products.filter(p => p.cleanPrice <= max);
-      renderProducts(matched);
-      showToast(`تم عرض ${matched.length} جهاز يناسب ميزانيتك`);
+      maxBudget = max;
+      applyFilter();
+      showToast(`تم عرض ${getFiltered().length} منتج ضمن ميزانيتك`);
     }
+
+    function resetFilters() {
+      maxBudget = 0; currentCat = 'all';
+      document.getElementById('maxBudget').value = '';
+      document.getElementById('searchInput').value = '';
+      syncCategoryUI();
+      applyFilter();
+    }
+
+    // ===== مساعد البحث (بسيط: كلمات مفتاحية + ميزانية، من المنتجات الموجودة فقط) =====
+    function toggleChat() {
+      const win = document.getElementById('chatWindow');
+      win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function addMsg(kind, node) {
+      const body = document.getElementById('chatBody');
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + kind;
+      if (typeof node === 'string') div.textContent = node; else div.appendChild(node);
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function sendMsg() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addMsg('user', text);
+      input.value = '';
+
+      const lower = text.toLowerCase();
+      const budgetMatch = text.replace(/,/g, '').match(/\d{3,}/);
+      const budget = budgetMatch ? parseInt(budgetMatch[0]) : 0;
+
+      let cat = 'all';
+      if (/موبايل|تليفون|هاتف|ايفون|آيفون|تابلت|phone|iphone/.test(lower)) cat = 'phone';
+      else if (/جيمنج|جيمينج|العاب|ألعاب|gaming/.test(lower)) cat = 'gaming';
+      else if (/اكسسوار|إكسسوار|سماعة|ماوس|كابل|شاحن|هارد|باور/.test(lower)) cat = 'accessory';
+      else if (/لابتوب|لاب توب|ورك|laptop|workstation/.test(lower)) cat = 'workstation';
+
+      const words = lower.split(/\s+/).filter(w => w.length > 2 && !/^\d+$/.test(w));
+      let results = products.filter(p => (cat === 'all' || p.category === cat) && (!budget || p.cleanPrice <= budget));
+      const byWord = results.filter(p => words.some(w => (p.title + ' ' + p.specs.join(' ')).toLowerCase().includes(w)));
+      if (byWord.length) results = byWord;
+      results = results.sort((a, b) => b.cleanPrice - a.cleanPrice).slice(0, 3);
+
+      setTimeout(() => {
+        if (!results.length) {
+          addMsg('bot', 'مالقيتش منتج مناسب بالمواصفات دي. جرّب ترفع الميزانية شوية أو غيّر نوع الجهاز.');
+          return;
+        }
+        const wrap = document.createElement('div');
+        wrap.appendChild(document.createTextNode('دي أنسب ترشيحات من المتاح عندنا:'));
+        results.forEach(p => {
+          const row = document.createElement('div');
+          const a = document.createElement('a');
+          a.href = p.amazonUrl; a.target = '_blank'; a.rel = 'sponsored noopener noreferrer';
+          a.textContent = p.title;
+          a.addEventListener('click', () => track('amazon_click', { item_name: p.title, item_category: p.category, price: p.cleanPrice, source: 'chat' }));
+          row.appendChild(a);
+          row.appendChild(document.createTextNode(' — ' + p.price + ' (تقريبي)'));
+          wrap.appendChild(row);
+        });
+        addMsg('bot', wrap);
+      }, 300);
+    }
+    function handleKey(e) { if (e.key === 'Enter') sendMsg(); }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
-      t.innerText = msg; t.classList.add('show');
+      t.textContent = msg; t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 2500);
     }
 
+    // ===== تنبيه لو الأسعار قديمة =====
+    function checkStale() {
+      const d = new Date(LAST_UPDATED + 'T00:00:00');
+      if (isNaN(d.getTime())) return;
+      const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+      if (days > 14) {
+        const el = document.getElementById('staleNotice');
+        el.textContent = `تنبيه: آخر تحديث للأسعار كان من ${days} يوم، فممكن تكون اتغيرت كتير. راجع السعر على أمازون قبل الشراء.`;
+        el.style.display = 'block';
+      }
+    }
+
+    // ===== مقارنة المنتجات =====
+    function updateCmpBar() {
+      document.getElementById('cmpBar').style.display = compareIds.size ? 'flex' : 'none';
+      document.getElementById('cmpCount').textContent = `تم اختيار ${compareIds.size} من 3`;
+    }
+    function openCompare() {
+      if (compareIds.size < 2) { showToast('اختار منتجين على الأقل للمقارنة'); return; }
+      const items = [...compareIds].map(id => products.find(p => p.id === id)).filter(Boolean);
+      const row = (label, fn) => `<tr><th>${label}</th>${items.map(p => `<td>${fn(p)}</td>`).join('')}</tr>`;
+      document.getElementById('cmpBody').innerHTML = `<div style="overflow-x:auto"><table class="cmp-table">
+        ${row('المنتج', p => `<strong>${escapeHtml(p.title)}</strong>`)}
+        ${row('السعر', p => `${escapeHtml(p.price)}<br><small style="color:var(--text-muted)">تقريبي</small>`)}
+        ${row('المواصفات', p => `<ul>${p.specs.map(x => `<li>• ${escapeHtml(x)}</li>`).join('')}</ul>`)}
+        ${row('الشراء', p => `<a href="${escapeHtml(p.amazonUrl)}" target="_blank" rel="sponsored noopener noreferrer" data-pid="${p.id}">${p.direct ? 'شراء من أمازون' : 'شوف على أمازون'}</a>`)}
+      </table></div>`;
+      document.getElementById('cmpModal').style.display = 'flex';
+      track('compare', { items: items.map(p => p.title).join(' | ') });
+    }
+    function closeCompare() { document.getElementById('cmpModal').style.display = 'none'; }
+    function clearCompare() { compareIds.clear(); updateCmpBar(); applyFilter(); }
+
+    // ===== ترشيحات حسب الميزانية (ترتيب آلي من المواصفات المكتوبة فقط، مش تقييم) =====
+    const GUIDES = [
+      { id: 'work',  label: 'لابتوب شغل لحد 25,000 ج.م',   cat: 'workstation', budget: 25000, rank: 'ws',
+        note: 'الترتيب بالرام ثم مساحة التخزين المكتوبين في المواصفات. المعالج وعمر الجهاز راجعهم بنفسك قبل الشراء.' },
+      { id: 'game',  label: 'لابتوب جيمنج لحد 35,000 ج.م', cat: 'gaming',      budget: 35000, rank: 'gpu',
+        note: 'ترتيب تقريبي حسب رقم كارت الشاشة ثم الرام. شوف مراجعات الجهاز نفسه قبل ما تقرر.' },
+      { id: 'phone', label: 'موبايل لحد 20,000 ج.م',        cat: 'phone',       budget: 20000, rank: 'ram', exclude: /Tab|iPad/i,
+        note: 'الترتيب بالرام ثم الأرخص. الكاميرا والشاشة والبطارية قارنهم بنفسك.' }
+    ];
+    const specText = p => p.specs.join(' ');
+    const ramOf = p => { const m = specText(p).match(/(\d+)\s*GB RAM/i); return m ? parseInt(m[1]) : 0; };
+    const storageOf = p => { const m = specText(p).match(/(\d+)\s*(GB|TB)\s*SSD/i); return m ? parseInt(m[1]) * (m[2].toUpperCase() === 'TB' ? 1024 : 1) : 0; };
+    const gpuOf = p => { const m = specText(p).match(/RTX\s*(\d{4})(\s*Ti)?/i); return m ? parseInt(m[1]) * 10 + (m[2] ? 5 : 0) : 0; };
+
+    function guidePicks(g) {
+      const list = products.filter(p => p.category === g.cat && p.cleanPrice <= g.budget && !(g.exclude && g.exclude.test(p.title)));
+      list.sort((a, b) => {
+        if (g.rank === 'ws')  return (ramOf(b) - ramOf(a)) || (storageOf(b) - storageOf(a)) || (a.cleanPrice - b.cleanPrice);
+        if (g.rank === 'gpu') return (gpuOf(b) - gpuOf(a)) || (ramOf(b) - ramOf(a)) || (a.cleanPrice - b.cleanPrice);
+        return (ramOf(b) - ramOf(a)) || (a.cleanPrice - b.cleanPrice);
+      });
+      return list.slice(0, 3);
+    }
+
+    function renderGuideTabs() {
+      document.getElementById('guideTabs').innerHTML = GUIDES.map(g => `<button data-gid="${g.id}">${escapeHtml(g.label)}</button>`).join('');
+    }
+
+    function showGuide(id) {
+      const g = GUIDES.find(x => x.id === id);
+      if (!g) return;
+      document.querySelectorAll('#guideTabs button').forEach(b => b.classList.toggle('active', b.dataset.gid === id));
+      document.getElementById('guideSub').textContent = g.note;
+      const picks = guidePicks(g);
+      document.getElementById('guidePicks').innerHTML = picks.length
+        ? picks.map(p => `<div class="guide-pick">
+            <div><div class="nm">${escapeHtml(p.title)}</div><div class="sp">${escapeHtml(p.specs.join(' • '))}</div></div>
+            <div><strong style="color:var(--primary-cyan)">${escapeHtml(p.price)}</strong> <small style="color:var(--text-muted)">(تقريبي)</small><br>
+            <a href="${escapeHtml(p.amazonUrl)}" target="_blank" rel="sponsored noopener noreferrer" data-pid="${p.id}">${p.direct ? 'شراء من أمازون' : 'شوف على أمازون'} ←</a></div>
+          </div>`).join('')
+        : '<div class="sp" style="color:var(--text-muted)">لا توجد منتجات ضمن الميزانية دي حاليًا.</div>';
+      track('guide_view', { guide: g.label });
+    }
+
+    // ===== تشغيل =====
+    document.getElementById('lastUpdated').textContent = LAST_UPDATED;
+    document.querySelectorAll('#navSub a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); setCategory(a.dataset.cat); }));
+    document.querySelectorAll('#radioGroup input').forEach(r => r.addEventListener('change', () => setCategory(r.value)));
     renderProducts(products);
+    checkStale();
+    renderGuideTabs();
+    showGuide(GUIDES[0].id);
+
+    document.getElementById('grid').addEventListener('click', e => {
+      const a = e.target.closest('.btn-lux-buy');
+      if (!a) return;
+      const p = products.find(x => String(x.id) === a.dataset.pid);
+      if (p) track('amazon_click', { item_name: p.title, item_category: p.category, price: p.cleanPrice, direct_link: p.direct, source: 'grid' });
+    });
+
+    document.getElementById('grid').addEventListener('change', e => {
+      const cb = e.target.closest('input[data-cid]');
+      if (!cb) return;
+      const id = Number(cb.dataset.cid);
+      if (cb.checked) {
+        if (compareIds.size >= 3) { cb.checked = false; showToast('تقدر تقارن 3 منتجات بحد أقصى'); return; }
+        compareIds.add(id);
+      } else {
+        compareIds.delete(id);
+      }
+      updateCmpBar();
+    });
+
+    document.getElementById('guideTabs').addEventListener('click', e => {
+      const b = e.target.closest('button[data-gid]');
+      if (b) showGuide(b.dataset.gid);
+    });
+
+    ['guidePicks', 'cmpBody'].forEach(boxId => {
+      document.getElementById(boxId).addEventListener('click', e => {
+        const a = e.target.closest('a[data-pid]');
+        if (!a) return;
+        const p = products.find(x => String(x.id) === a.dataset.pid);
+        if (p) track('amazon_click', { item_name: p.title, item_category: p.category, price: p.cleanPrice, direct_link: p.direct, source: boxId === 'guidePicks' ? 'guide' : 'compare' });
+      });
+    });
+
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', e => {
+      clearTimeout(searchTimer);
+      const term = e.target.value.trim();
+      if (term.length < 2) return;
+      searchTimer = setTimeout(() => track('search', { search_term: term }), 1200);
+    });
   </script>
 </body>
 </html>
